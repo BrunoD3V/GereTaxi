@@ -1,0 +1,65 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextProcesso"
+        android:hint="@string/processo" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonIniciaServico"
+        android:text="@string/iniciar_servi_o"
+        android:onClick="onClickIniciaServico"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/terminar_servi_o"
+        android:id="@+id/buttonTerminaServico"
+        android:onClick="onClickTerminaServico" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mostrar_dist_ncia"
+        android:id="@+id/buttonMostraDistancia"
+        android:onClick="onClickDistancia" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mostra_servi_o"
+        android:id="@+id/buttonMostraServico"
+        android:onClick="onClickbuttonMostraServico" />
+
+    <FrameLayout android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            tools:context=".MapsActivity" />
+
+        <ProgressBar
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"
+            android:id="@+id/progress_bar"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="top|center"
+            android:visibility="invisible"
+            style="?android:attr/progressBarStyleHorizontal"/>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GereTaxi</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="processo">processo</string>
+    <string name="iniciar_servi_o">Iniciar Serviço</string>
+    <string name="terminar_servi_o">Terminar Serviço</string>
+    <string name="mostrar_dist_ncia">Mostrar Distância</string>
+    <string name="mostra_servi_o">Mostrar Serviço</string>
 </resources>
