@@ -17,5 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
-        android:onClick="onClickIniciarServico" />
+        android:onClick="onClickIniciarServico"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:textColor="#ffffff" />
 </RelativeLayout>
