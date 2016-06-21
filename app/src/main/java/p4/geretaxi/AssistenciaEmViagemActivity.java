@@ -53,7 +53,6 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             toast.show();
             return;
         }
-
         gpsHandler.initGPS(processo,this);
         terminar.setVisibility(View.VISIBLE);
     }
@@ -62,28 +61,29 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler(this);
         String processo = editTextProcesso.getText().toString();
-        mCapturedLocations = servicoHandler.mostraServico("xxx");
-        System.out.println(mCapturedLocations.get(10).toString());
-        if (mCapturedLocations.size() == 0){
-            Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MenuActivity.class);
+        if(helper.isNetworkAvailable(this)){
+            mCapturedLocations = servicoHandler.mostraServico("xxx");
+            if (mCapturedLocations.size() == 0){
+                Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+            }
+
+            ArrayList<Double> lats = new ArrayList<>();
+
+            ArrayList<Double> lngs = new ArrayList<>();
+
+            for (int i = 0; i < mCapturedLocations.size(); i++) {
+                lats.add(i,mCapturedLocations.get(i).lat);
+                lngs.add(i,mCapturedLocations.get(i).lng);
+            }
+            Intent intent = new Intent(this, MapsActivity2.class);
+            intent.putExtra("lat",lats);
+            intent.putExtra("lng", lngs);
             startActivity(intent);
         }
-
-        ArrayList<Double> lats = new ArrayList<>();
-
-        ArrayList<Double> lngs = new ArrayList<>();
-
-        for (int i = 0; i < mCapturedLocations.size(); i++) {
-            lats.add(i,mCapturedLocations.get(i).lat);
-            lngs.add(i,mCapturedLocations.get(i).lng);
+        else {
+            helper.displayPromptEnableWifi(this);
         }
-
-
-
-        Intent intent = new Intent(this, MapsActivity2.class);
-        intent.putExtra("lat",lats);
-        intent.putExtra("lng", lngs);
-        startActivity(intent);
     }
 }

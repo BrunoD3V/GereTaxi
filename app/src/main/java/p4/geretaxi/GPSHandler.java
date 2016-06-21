@@ -87,7 +87,6 @@ public class GPSHandler {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
-                                // Sent user to GPS settings screen
                                 final ComponentName toLaunch = new ComponentName(
                                         "com.android.settings",
                                         "com.android.settings.SecuritySettings");

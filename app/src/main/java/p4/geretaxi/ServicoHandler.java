@@ -117,14 +117,9 @@ public class ServicoHandler {
             String destination = mCapturedLocations.get(0).toString();
             System.out.println(origin);
             String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
-            if (isNetworkAvailable()) {
-                execute(origin, destination);
-            } else {
-                displayPromptEnableWifi();
-                if(isNetworkAvailable())
-                    execute(origin,destination);
 
-            }
+            execute(origin, destination);
+
 
             myHandler = new Handler(){
                 @Override
@@ -154,43 +149,4 @@ public class ServicoHandler {
      return mCapturedLocations;
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    public void displayPromptEnableWifi() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
-
-        final WifiManager wifiMan;
-        wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
-        // set title
-        alertDialogBuilder.setTitle("Definições de Wifi");
-
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("Pretende ligar a rede WiFi??")
-                .setCancelable(false)
-                .setPositiveButton("Sim",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        //enable wifi
-                        wifiMan.setWifiEnabled(true);
-                    }
-                })
-                .setNegativeButton("Não",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        //disable wifi
-                        wifiMan.setWifiEnabled(false);
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-    }
 }
