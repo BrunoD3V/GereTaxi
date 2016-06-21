@@ -1,11 +1,18 @@
 package p4.geretaxi;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.Xml;
 import android.widget.Toast;
 
@@ -24,9 +31,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-/**
- * Created by belchior on 21/06/2016.
- */
 public class ServicoHandler {
 
 
@@ -121,12 +125,9 @@ public class ServicoHandler {
             if (isNetworkAvailable()) {
                 execute(origin, destination);
             } else {
-                Toast.makeText(context,"Active a conexão á internet",Toast.LENGTH_SHORT).show();
-
-                return mCapturedLocations;
+                displayPromptEnableWifi();
+                return mostraServico(processo);
             }
-
-
 
             myHandler = new Handler(){
                 @Override
@@ -152,21 +153,50 @@ public class ServicoHandler {
                     }
                 }
             };
-
         } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
-
         }
 
      return mCapturedLocations;
-
-
     }
+
     private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    public void displayPromptEnableWifi() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        final WifiManager wifiMan;
+        wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+        // set title
+        alertDialogBuilder.setTitle("Wifi Settings");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Do you want to enable WIFI ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        //enable wifi
+                        wifiMan.setWifiEnabled(true);
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        //disable wifi
+                        wifiMan.setWifiEnabled(false);
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
 }

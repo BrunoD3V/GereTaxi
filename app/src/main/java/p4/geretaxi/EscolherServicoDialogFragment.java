@@ -7,9 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-/**
- * Created by belchior on 21/06/2016.
- */
 public class EscolherServicoDialogFragment extends DialogFragment {
 
 

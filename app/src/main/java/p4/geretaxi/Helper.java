@@ -7,9 +7,6 @@ import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
 
-/**
- * Created by belchior on 21/06/2016.
- */
 public class Helper {
 
     public boolean isEmpty(EditText editText){
@@ -19,7 +16,6 @@ public class Helper {
     public String getDate()
     {
         long date = System.currentTimeMillis();
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String data = sdf.format(date);
         return data;
@@ -28,7 +24,6 @@ public class Helper {
     public String getTime()
     {
         long date = System.currentTimeMillis();
-
         SimpleDateFormat sdf = new SimpleDateFormat("k:mm");
         String hora = sdf.format(date);
         return hora;
@@ -39,6 +34,4 @@ public class Helper {
         Boolean result = eraser.eraser(processo);
         return result;
     }
-
-
 }

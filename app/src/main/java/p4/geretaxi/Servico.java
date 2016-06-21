@@ -11,9 +11,6 @@ TO SET DATA:
     String Data = sdf.format(date);
 */
 
-/**
- * Created by KittenRoullete on 03-May-16.
- */
 public class Servico {
 
     private int Id;

@@ -1,8 +1,5 @@
 package p4.geretaxi;
 
-/**
- * Created by KittenRoullete on 03-May-16.
- */
 public class Cliente {
 
     private int Id;
