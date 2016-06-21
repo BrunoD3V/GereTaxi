@@ -42,7 +42,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps2);
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -107,23 +107,18 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         int offset = 0;
         while (offset < mCapturedLocations.size()) {
-            // Calculate which points to include in this request. We can't exceed the APIs
-            // maximum and we want to ensure some overlap so the API can infer a good location for
-            // the first few points in each request.
+
             if (offset > 0) {
-                offset -= PAGINATION_OVERLAP;   // Rewind to include some previous points
+                offset -= PAGINATION_OVERLAP;
             }
             int lowerBound = offset;
             int upperBound = Math.min(offset + PAGE_SIZE_LIMIT, mCapturedLocations.size());
 
-            // Grab the data we need for this page.
+
             com.google.maps.model.LatLng[] page = mCapturedLocations
                     .subList(lowerBound, upperBound)
                     .toArray(new com.google.maps.model.LatLng[upperBound - lowerBound]);
 
-            // Perform the request. Because we have interpolate=true, we will get extra data points
-            // between our originally requested path. To ensure we can concatenate these points, we
-            // only start adding once we've hit the first new point (i.e. skip the overlap).
             SnappedPoint[] points = RoadsApi.snapToRoads(context, true, page).await();
             boolean passedOverlap = false;
             for (SnappedPoint point : points) {
@@ -137,7 +132,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
             offset = upperBound;
         }
-
         return snappedPoints;
     }
 
@@ -153,7 +147,5 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
     }
 }

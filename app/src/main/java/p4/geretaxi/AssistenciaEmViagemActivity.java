@@ -82,7 +82,6 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
             startActivity(intent);
-
         }
         else {
             helper.displayPromptEnableWifi(this);
