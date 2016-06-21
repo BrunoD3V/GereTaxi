@@ -226,7 +226,7 @@ public class XMLHandler {
     public List<LatLng> parseDirections(XmlPullParser parser, String data) throws XmlPullParserException, IOException {
         List<LatLng> latLngs = new ArrayList<>();   // List<> as we need subList for paging later
         String points;
-        System.out.println(data);
+
 
         InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
         parser.setInput(new InputStreamReader(inputStream));
@@ -240,7 +240,7 @@ public class XMLHandler {
                     if(parser.getName().equals("points")){
                         parser.next();
                         points = parser.getText();
-                        System.out.println(points);
+
                         latLngs = decodePolyLine(points);
                     }
                 }

@@ -63,7 +63,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler(this);
         String processo = editTextProcesso.getText().toString();
-        mCapturedLocations = servicoHandler.mostraServico("xxx");
+        mCapturedLocations = servicoHandler.mostraServico("teste");
         System.out.println(mCapturedLocations.get(10).toString());
         if (mCapturedLocations.size() == 0){
             Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
