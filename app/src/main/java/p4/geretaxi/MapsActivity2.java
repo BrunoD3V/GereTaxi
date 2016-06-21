@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.GeoApiContext;
 import com.google.maps.RoadsApi;
+import com.google.maps.model.LatLng;
 import com.google.maps.model.SnappedPoint;
 
 import java.util.ArrayList;
@@ -47,8 +48,14 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
+        ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
+        ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
 
-        mCapturedLocations = (List<com.google.maps.model.LatLng>) getIntent().getSerializableExtra("pontos capturados");
+        mCapturedLocations = new ArrayList<>();
+        for (int i = 0; i < lats.size(); i++) {
+            LatLng e = new LatLng(lats.get(i), lngs.get(i));
+            mCapturedLocations.add(i,e);
+        }
 
         mTaskSnapToRoads.execute();
     }

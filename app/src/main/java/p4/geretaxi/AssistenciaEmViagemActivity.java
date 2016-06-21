@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.google.maps.model.LatLng;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssistenciaEmViagemActivity extends AppCompatActivity {
@@ -63,14 +63,28 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler(this);
         String processo = editTextProcesso.getText().toString();
-        mCapturedLocations = servicoHandler.mostraServico(processo);
+        mCapturedLocations = servicoHandler.mostraServico("xxx");
+        System.out.println(mCapturedLocations.get(10).toString());
         if (mCapturedLocations.size() == 0){
             Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         }
+
+        ArrayList<Double> lats = new ArrayList<>();
+
+        ArrayList<Double> lngs = new ArrayList<>();
+
+        for (int i = 0; i < mCapturedLocations.size(); i++) {
+            lats.add(i,mCapturedLocations.get(i).lat);
+            lngs.add(i,mCapturedLocations.get(i).lng);
+        }
+
+
+
         Intent intent = new Intent(this, MapsActivity2.class);
-        intent.putExtra("pontos capturados",(Serializable) mCapturedLocations);
+        intent.putExtra("lat",lats);
+        intent.putExtra("lng", lngs);
         startActivity(intent);
     }
 }

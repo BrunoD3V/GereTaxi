@@ -51,6 +51,7 @@ public class ServicoHandler {
         protected String doInBackground(String... params) {
             String link = params[0];
             try {
+                System.out.println("Está no background da async task directions");
                 URL url = new URL(link);
                 InputStream is = url.openConnection().getInputStream();
                 StringBuffer buffer = new StringBuffer();
