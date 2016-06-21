@@ -6,4 +6,10 @@
     <string name="terminar_servi_o">Terminar Serviço</string>
     <string name="mostrar_dist_ncia">Mostrar Distância</string>
     <string name="mostra_servi_o">Mostrar Serviço</string>
+    <string name="iniciar_servico">Iniciar Serviço</string>
+    <string name="escolhe_tipo_servico">Escolha o tipo de Serviço</string>
+    <string name="terminar_servico">terminar_servico</string>
+    <string name="terminar">Terminar</string>
+    <string name="title_activity_maps2">Map</string>
+
 </resources>

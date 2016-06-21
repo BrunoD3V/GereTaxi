@@ -123,6 +123,59 @@ public class XMLHandler {
         return result;
     }
 
+    public boolean writeAssitenciaEmViagem(AssistenciaEmViagem assistenciaEmViagem, String processo) {
+        boolean result = false;
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "TaxiApp" + "servicos.xml");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+            xmlSerializer.setOutput(writer);
+            if (file.length() == 0) {
+                xmlSerializer.startDocument("UTF-8", true);
+                xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                xmlSerializer.startTag(null, "servico");
+                xmlSerializer.startTag(null , "processo");
+                xmlSerializer.text(processo);
+                xmlSerializer.endTag(null, "processo");
+                xmlSerializer.startTag(null, "data");
+                xmlSerializer.text(assistenciaEmViagem.getData());
+                xmlSerializer.endTag(null, "data");
+                xmlSerializer.startTag(null, "hora-de-inicio");
+                xmlSerializer.text(assistenciaEmViagem.getHoraDeInicio());
+                xmlSerializer.endTag(null, "hora-de-inicio");
+                xmlSerializer.endTag(null, "servico");
+                xmlSerializer.endDocument();
+
+            } else {
+                xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                xmlSerializer.startTag(null, "servico");
+                xmlSerializer.startTag(null , "processo");
+                xmlSerializer.text(processo);
+                xmlSerializer.endTag(null, "processo");
+                xmlSerializer.startTag(null, "data");
+                xmlSerializer.text(assistenciaEmViagem.getData());
+                xmlSerializer.endTag(null, "data");
+                xmlSerializer.startTag(null, "hora-de-inicio");
+                xmlSerializer.text(assistenciaEmViagem.getHoraDeInicio());
+                xmlSerializer.endTag(null, "hora-de-inicio");
+                xmlSerializer.endTag(null, "servico");
+                xmlSerializer.endDocument();
+                xmlSerializer.flush();
+            }
+            xmlSerializer.flush();
+            String dataWrite = writer.toString();
+            fileOutputStream.write(dataWrite.getBytes());
+            fileOutputStream.close();
+            result = true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean eraser(String s) {
 
         boolean result = false;

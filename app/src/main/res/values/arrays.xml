@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="servico_tipo_array">
+        <item>Assitência em Viagem</item>
+        <item>Acidente de Trabalho</item>
+        <item>Particular</item>
+    </string-array>
+
+
+
+
+</resources>
