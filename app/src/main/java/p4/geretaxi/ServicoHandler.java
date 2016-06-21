@@ -1,16 +1,9 @@
 package p4.geretaxi;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Message;
+import android.os.StrictMode;
 import android.util.Xml;
-import android.widget.Toast;
 
 import com.google.maps.model.LatLng;
 
@@ -42,10 +35,15 @@ public class ServicoHandler {
     Handler myHandler;
 
     public ServicoHandler(Context c) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
         context = c;
     }
 
-    private class DownloadRawData extends AsyncTask<String, Void, String> {
+
+
+    /* private class DownloadRawData extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -102,8 +100,34 @@ public class ServicoHandler {
 
         return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
     }
+*/
+    private List<LatLng> getDirections(String origin, String destination) {
+        try {
+            String urlOrigin = URLEncoder.encode(origin, "utf-8");
+            String urlDestination = URLEncoder.encode(destination, "utf-8");
+            String link = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
+            URL url = new URL(link);
+            InputStream is = url.openConnection().getInputStream();
+            StringBuffer buffer = new StringBuffer();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line + "\n");
+            }
+            XMLHandler parser = new XMLHandler();
+            return parser.parseDirections(Xml.newPullParser(), buffer.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return routes;
+    }
 
     public List<LatLng> mostraServico(String processo) {
         try {
@@ -117,32 +141,32 @@ public class ServicoHandler {
             System.out.println(origin);
             String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
 
-            execute(origin, destination);
+            routes = getDirections(origin, destination);
 
-            myHandler = new Handler(){
+            /*myHandler = new Handler(){
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
-                        case 0:
+                        case 0:*/
 
                             mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
 
-                    }
+                    /*}
                 }
-            };
+            };*/
             routes = null;
-            execute(termino, origin);
-            myHandler = new Handler(){
+            routes = getDirections(termino, origin);
+           /* myHandler = new Handler(){
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
-                        case 0:
+                        case 0:*/
                             mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
-                            System.out.println(routes.get(routes.size()-1).toString());
 
+/*
                     }
                 }
-            };
+            };*/
         } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
