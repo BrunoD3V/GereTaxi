@@ -22,9 +22,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by belchior on 13/06/2016.
- */
 public class XMLHandler {
     private String text;
 

@@ -1,5 +1,6 @@
 package p4.geretaxi;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,9 +13,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
 
-/**
- * Created by belchior on 21/06/2016.
- */
 public class GPSHandler {
 
     private LocationManager lManager;
@@ -26,7 +24,7 @@ public class GPSHandler {
         context = c;
     }
 
-    public void initGPS(final String processo) {
+    public void initGPS(final String processo, final Activity activity) {
         final XMLHandler writer = new XMLHandler();
         lManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if(lManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
@@ -36,7 +34,7 @@ public class GPSHandler {
         }
         else
         {
-            //displayPromptForEnablingGPS(context.this);
+            displayPromptForEnablingGPS(activity);
         }
 
         lListener = new LocationListener() {
@@ -61,7 +59,7 @@ public class GPSHandler {
 
             @Override
             public void onProviderDisabled(String provider) {
-                //displayPromptForEnablingGPS(MainActivity.this);
+
             }
         };
 
@@ -80,7 +78,7 @@ public class GPSHandler {
         }
     }
 
-    public void displayPromptForEnablingGPS(Context context)
+    public void displayPromptForEnablingGPS(final Activity activity)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("O Sensor de GPS está desativado. Deseja ativar?")
@@ -98,8 +96,7 @@ public class GPSHandler {
                                 intent.setComponent(toLaunch);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 dialog.dismiss();
-                                dialog.cancel();
-                                //startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
+                                activity.startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
                             }
                         })
                 .setNegativeButton("Não",

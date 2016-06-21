@@ -54,7 +54,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             return;
         }
 
-        gpsHandler.initGPS(processo);
+        gpsHandler.initGPS(processo,this);
         terminar.setVisibility(View.VISIBLE);
 
     }
