@@ -15,18 +15,12 @@ public class EscolherServicoDialogFragment extends DialogFragment {
 
     }
 
-
-
-
     public Dialog onCreateDialog(Bundle savedInstanceSate) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.escolhe_tipo_servico).setItems(R.array.servico_tipo_array, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-
-
-               switch (i) {
+                switch (i) {
                     case 0:
                         System.out.println(i);
                         Intent intent = new Intent(getActivity(),AssistenciaEmViagemActivity.class);

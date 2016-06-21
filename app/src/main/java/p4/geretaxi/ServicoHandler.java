@@ -1,18 +1,14 @@
 package p4.geretaxi;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.util.Xml;
 import android.widget.Toast;
 
@@ -126,7 +122,9 @@ public class ServicoHandler {
                 execute(origin, destination);
             } else {
                 displayPromptEnableWifi();
-                return mostraServico(processo);
+                if(isNetworkAvailable())
+                    execute(origin,destination);
+
             }
 
             myHandler = new Handler(){
@@ -174,19 +172,19 @@ public class ServicoHandler {
         wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
         // set title
-        alertDialogBuilder.setTitle("Wifi Settings");
+        alertDialogBuilder.setTitle("Definições de Wifi");
 
         // set dialog message
         alertDialogBuilder
-                .setMessage("Do you want to enable WIFI ?")
+                .setMessage("Pretende ligar a rede WiFi??")
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                .setPositiveButton("Sim",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         //enable wifi
                         wifiMan.setWifiEnabled(true);
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                .setNegativeButton("Não",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         //disable wifi
                         wifiMan.setWifiEnabled(false);
