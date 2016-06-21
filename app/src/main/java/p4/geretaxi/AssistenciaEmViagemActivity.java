@@ -61,8 +61,9 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler(this);
         String processo = editTextProcesso.getText().toString();
+
         if(helper.isNetworkAvailable(this)){
-            mCapturedLocations = servicoHandler.mostraServico("xxx");
+            mCapturedLocations = servicoHandler.mostraServico("teste");
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
@@ -81,6 +82,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
             startActivity(intent);
+
         }
         else {
             helper.displayPromptEnableWifi(this);

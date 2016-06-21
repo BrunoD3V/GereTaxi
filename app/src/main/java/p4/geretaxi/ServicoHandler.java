@@ -1,18 +1,14 @@
 package p4.geretaxi;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.util.Xml;
 import android.widget.Toast;
 
@@ -55,7 +51,6 @@ public class ServicoHandler {
         protected String doInBackground(String... params) {
             String link = params[0];
             try {
-                System.out.println("Está no background da async task directions");
                 URL url = new URL(link);
                 InputStream is = url.openConnection().getInputStream();
                 StringBuffer buffer = new StringBuffer();
@@ -85,6 +80,8 @@ public class ServicoHandler {
                     return;
                 }
                 routes=parser.parseDirections(Xml.newPullParser(),res);
+                System.out.println(routes.get(0).toString());
+                System.out.println(routes.get(routes.size()-1).toString());
                 myHandler.sendEmptyMessage(0);
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
@@ -106,6 +103,8 @@ public class ServicoHandler {
         return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
     }
 
+
+
     public List<LatLng> mostraServico(String processo) {
         try {
             XMLHandler parser = new XMLHandler();
@@ -120,25 +119,27 @@ public class ServicoHandler {
 
             execute(origin, destination);
 
-
             myHandler = new Handler(){
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case 0:
+
                             mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
 
                     }
                 }
             };
             routes = null;
-            execute(origin, termino);
+            execute(termino, origin);
             myHandler = new Handler(){
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case 0:
                             mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
+                            System.out.println(routes.get(routes.size()-1).toString());
+
                     }
                 }
             };
