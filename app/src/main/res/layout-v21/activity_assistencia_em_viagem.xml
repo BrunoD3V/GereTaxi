@@ -29,12 +29,12 @@
         android:layout_below="@+id/editTextProcesso"
         android:layout_marginTop="81dp"
         android:onClick="onClickIniciar"
-        android:backgroundTint="@android:color/holo_green_dark"
         android:textColor="#ffffff"
         android:layout_alignRight="@+id/buttonTermina"
         android:layout_alignEnd="@+id/buttonTermina"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:color/holo_green_dark" />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,10 +43,10 @@
         android:id="@+id/buttonTermina"
         android:layout_alignBottom="@+id/buttonIniciar"
         android:onClick="onClickTerminar"
-        android:backgroundTint="@android:color/holo_red_dark"
         android:textColor="#ffffff"
         android:layout_alignRight="@+id/editTextProcesso"
         android:layout_alignEnd="@+id/editTextProcesso"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:color/holo_red_dark" />
 </RelativeLayout>

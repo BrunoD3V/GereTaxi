@@ -21,6 +21,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
     EditText editTextProcesso;
     Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
+    AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,6 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             return;
         }
         String processo = editTextProcesso.getText().toString();
-        AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
         assistenciaEmViagem.setData(helper.getDate());
         assistenciaEmViagem.setHoraDeInicio(helper.getTime());
         XMLHandler writer = new XMLHandler();
@@ -81,6 +82,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
+
             startActivity(intent);
         }
         else {

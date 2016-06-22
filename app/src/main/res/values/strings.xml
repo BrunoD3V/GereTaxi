@@ -12,6 +12,7 @@
     <string name="terminar">Terminar</string>
     <string name="title_activity_maps2">Map</string>
     <string name="rejeitar_servi_o">Rejeitar Serviço</string>
+    <string name="aceitar_servi_o">Aceitar Serviço</string>
 
 
 </resources>

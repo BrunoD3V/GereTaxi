@@ -48,29 +48,30 @@ public class Helper {
     public void displayPromptEnableWifi(final Context context) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 context);
-        // set title
-        alertDialogBuilder.setTitle("Definições de Wifi");
 
-        // set dialog message
+        alertDialogBuilder.setTitle("Definições de conexão.");
         alertDialogBuilder
-                .setMessage("Pretende ligar a rede WiFi??")
+                .setMessage("Deverá conectar-se a uma rede para concluir o serviço.")
                 .setCancelable(false)
-                .setPositiveButton("Sim",new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ativar Wi-Fi",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         Intent i = new Intent(Settings.ACTION_WIFI_SETTINGS);
                         context.startActivity(i);
                     }
+                }).setNegativeButton("Ativar 3G", new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog,int id) {
+                            Intent i = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                            context.startActivity(i);
+                        }
                 })
-                .setNegativeButton("Não",new DialogInterface.OnClickListener() {
+                .setNeutralButton("Não",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         dialog.cancel();
                     }
                 });
 
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
         alertDialog.show();
     }
+
 }
