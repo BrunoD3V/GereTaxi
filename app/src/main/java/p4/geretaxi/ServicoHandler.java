@@ -26,7 +26,6 @@ import java.util.List;
 
 public class ServicoHandler {
 
-
     private static final double LATPTAXI = 41.484205;
     private static final double LNGPTAXI = -7.183378;
     private static Context context;
@@ -42,8 +41,6 @@ public class ServicoHandler {
     List<SnappedPoint> mSnappedPoints;
     List<LatLng> routes;
 
-
-
     public ServicoHandler(Context c) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
@@ -51,12 +48,14 @@ public class ServicoHandler {
         context = c;
     }
 
+
     public ServicoHandler() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
 
     }
+
 
     private List<LatLng> getDirections(String origin, String destination) {
         try {
