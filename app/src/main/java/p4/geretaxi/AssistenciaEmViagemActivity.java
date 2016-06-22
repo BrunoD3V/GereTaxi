@@ -23,6 +23,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
     GPSHandler gpsHandler = new GPSHandler(this);
     AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
         editTextProcesso = (EditText) findViewById(R.id.editTextProcesso);
+
     }
 
     public void onClickIniciar(View v) {
@@ -64,7 +67,9 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         String processo = editTextProcesso.getText().toString();
 
         if(helper.isNetworkAvailable(this)){
-            mCapturedLocations = servicoHandler.mostraServico("teste");
+
+            mCapturedLocations = servicoHandler.mergeCapture("teste");
+
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
