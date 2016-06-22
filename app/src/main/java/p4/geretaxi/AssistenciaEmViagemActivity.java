@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.maps.GeoApiContext;
 import com.google.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
     List<LatLng> mCapturedLocations;
-
+    private GeoApiContext mContext;
     Button terminar;
     EditText editTextProcesso;
     Helper helper= new Helper();
@@ -32,6 +33,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
         editTextProcesso = (EditText) findViewById(R.id.editTextProcesso);
+        mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
 
     }
 
@@ -45,8 +47,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         String processo = editTextProcesso.getText().toString();
         assistenciaEmViagem.setData(helper.getDate());
         assistenciaEmViagem.setHoraDeInicio(helper.getTime());
-        XMLHandler writer = new XMLHandler();
-        writer.writeServicoContratado(assistenciaEmViagem,processo);
+
 
         boolean result=helper.inicializarDados(processo);
         if (result == true) {
@@ -61,20 +62,28 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         terminar.setVisibility(View.VISIBLE);
     }
 
-    public void onClickTerminar(View v) {
+    public void onClickTerminar(View v) throws Exception {
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler(this);
         String processo = editTextProcesso.getText().toString();
 
         if(helper.isNetworkAvailable(this)){
 
-            mCapturedLocations = servicoHandler.mergeCapture("teste");
+            mCapturedLocations = servicoHandler.mergeCapture("lisboa");
 
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
             }
+
+            mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
+            double distance = servicoHandler.getDistance();
+            System.out.println("Distancia");
+            System.out.println(distance);
+            assistenciaEmViagem.setDistancia(distance);
+            boolean portagens = servicoHandler.getPortagens();
+
 
             ArrayList<Double> lats = new ArrayList<>();
 
@@ -87,6 +96,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
+            intent.putExtra("tipo", "Viagem");
+            intent.putExtra("servico", assistenciaEmViagem);
 
             startActivity(intent);
         }

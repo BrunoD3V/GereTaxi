@@ -75,7 +75,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager lManager;
     private LocationListener lListener = null;
 
-    ServicoContratado servicoContratado;
+    //ServicoContratado servicoContratado;
 
     private EditText editTextProcesso;
 
@@ -227,11 +227,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         String processo = editTextProcesso.getText().toString();
-        servicoContratado = new ServicoContratado();
-        servicoContratado.setData(getDate());
-        servicoContratado.setHoraDeInicio(getTime());
-        XMLHandler writer = new XMLHandler();
-        writer.writeServicoContratado(servicoContratado, processo);
+
 
 
         boolean result=inicializarDados(processo);

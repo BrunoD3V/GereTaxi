@@ -1,6 +1,8 @@
 package p4.geretaxi;
 
-public class AssistenciaEmViagem extends Servico {
+import java.io.Serializable;
+
+public class AssistenciaEmViagem extends Servico implements Serializable {
 
     private String NumProcesso;
     private int IdCompanhia;

@@ -15,19 +15,16 @@ import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private  String tipo;
-    private AssistenciaEmViagem assistenciaEmViagem;
-    private ServicoParticular servicoParticular;
-    private AcidentesDeTrabalho acidentesDeTrabalho;
+
     List<LatLng> mCapturedLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps2);
+        setContentView(R.layout.activity_maps3);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
