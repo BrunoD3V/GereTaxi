@@ -150,7 +150,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         protected void onPostExecute(String res) {
             XMLHandler parser = new XMLHandler();
             try {
-                if(res.isEmpty()){
+                if(res==null){
                     Toast.makeText(getApplicationContext(),"erro na direction Api", Toast.LENGTH_SHORT).show();
                     return;
                 }
