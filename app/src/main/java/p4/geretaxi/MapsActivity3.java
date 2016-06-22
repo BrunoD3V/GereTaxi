@@ -15,11 +15,12 @@ import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagem.Communicator{
 
     private GoogleMap mMap;
 
     List<LatLng> mCapturedLocations;
+    AssistenciaEmViagem assistenciaEmViagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,11 @@ public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallbac
 
         mMap.addPolyline(new PolylineOptions().add(mapPoints).color(Color.BLUE));
         mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 0));
+
+    }
+
+    @Override
+    public void onDialogMessage(String portagem) {
 
     }
 }
