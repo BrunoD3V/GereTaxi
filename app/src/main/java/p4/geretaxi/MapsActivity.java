@@ -304,14 +304,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 }
             };
+
             routes = null;
-            execute(origin, termino);
+            execute(termino, origin);
             myHandler = new Handler(){
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case 0:
-                            mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
+                            mCapturedLocations= ListUtils.union(routes, mCapturedLocations);
                     }
                 }
             };
