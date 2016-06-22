@@ -47,8 +47,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         String processo = editTextProcesso.getText().toString();
         assistenciaEmViagem.setData(helper.getDate());
         assistenciaEmViagem.setHoraDeInicio(helper.getTime());
-        XMLHandler writer = new XMLHandler();
-        writer.writeServicoContratado(assistenciaEmViagem,processo);
+
 
         boolean result=helper.inicializarDados(processo);
         if (result == true) {
@@ -81,6 +80,9 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance(mCapturedLocations);
 
+            assistenciaEmViagem.setDistancia(distance);
+
+
             ArrayList<Double> lats = new ArrayList<>();
 
             ArrayList<Double> lngs = new ArrayList<>();
@@ -89,9 +91,11 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
                 lats.add(i,mCapturedLocations.get(i).lat);
                 lngs.add(i,mCapturedLocations.get(i).lng);
             }
-            Intent intent = new Intent(this, MapsActivity3.class);
+            Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
+            intent.putExtra("tipo", "Viagem");
+            intent.putExtra("servico", assistenciaEmViagem);
 
             startActivity(intent);
         }
