@@ -69,7 +69,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
         if(helper.isNetworkAvailable(this)){
 
-            mCapturedLocations = servicoHandler.mergeCapture("teste");
+            mCapturedLocations = servicoHandler.mergeCapture("lisboa");
 
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -79,7 +79,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance(mCapturedLocations);
-
+            System.out.println("Distancia");
+            System.out.println(distance);
             assistenciaEmViagem.setDistancia(distance);
 
 

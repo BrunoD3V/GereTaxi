@@ -67,7 +67,7 @@ public class XMLHandler {
         return result;
     }
 
-    public boolean writeServicoContratado(ServicoContratado servicoContratado, String processo) {
+   /* public boolean writeServicoContratado(ServicoContratado servicoContratado, String processo) {
         boolean result = false;
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "TaxiApp" + "servicos.xml");
         try {
@@ -118,7 +118,7 @@ public class XMLHandler {
             e.printStackTrace();
         }
         return result;
-    }
+    }*/
 
     public boolean writeAssitenciaEmViagem(AssistenciaEmViagem assistenciaEmViagem, String processo) {
         boolean result = false;
@@ -219,6 +219,29 @@ public class XMLHandler {
         return latLngs;
     }
 
+    //public Double parseDistancia()
+    public boolean getPortagem(XmlPullParser parser, String data) throws IOException, XmlPullParserException {
+
+        String text;
+        InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
+        parser.setInput(new InputStreamReader(inputStream));
+        parser.nextTag();
+
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
+            if (parser.getEventType() == XmlPullParser.START_TAG) {
+                if (parser.getName().equals("html_instructions")) {
+                    parser.next();
+                    text = parser.getText();
+                    if (text.contains("portagem") || text.contains("toll")){
+                        return true;
+                    }
+                }
+            }
+
+
+        }
+        return false;
+    }
 
     public List<LatLng> parseDirections(XmlPullParser parser, String data) throws XmlPullParserException, IOException {
         List<LatLng> latLngs = new ArrayList<>();   // List<> as we need subList for paging later

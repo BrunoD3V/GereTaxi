@@ -3,6 +3,7 @@ package p4.geretaxi;
 import android.content.Context;
 import android.os.StrictMode;
 import android.util.Xml;
+import android.widget.Toast;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.RoadsApi;
@@ -37,6 +38,8 @@ public class ServicoHandler {
 
     private static final int PAGINATION_OVERLAP = 5;
 
+    Boolean portagens;
+
     List<LatLng> mCapturedLocations;
     List<SnappedPoint> mSnappedPoints;
     List<LatLng> routes;
@@ -57,6 +60,11 @@ public class ServicoHandler {
     }
 
 
+    public Double getDistance(String data) {
+        double distance = 0.0;
+        return distance;
+    }
+
     private List<LatLng> getDirections(String origin, String destination) {
         try {
             String urlOrigin = URLEncoder.encode(origin, "utf-8");
@@ -72,6 +80,8 @@ public class ServicoHandler {
                 buffer.append(line + "\n");
             }
             XMLHandler parser = new XMLHandler();
+            portagens =parser.getPortagem(Xml.newPullParser(), buffer.toString());
+            Toast.makeText(context, portagens.toString(),Toast.LENGTH_SHORT).show();
             return parser.parseDirections(Xml.newPullParser(), buffer.toString());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -94,16 +104,16 @@ public class ServicoHandler {
             LatLng ptaxis = new LatLng(LATPTAXI, LNGPTAXI);
             String origin = ptaxis.toString();
             String destination = mCapturedLocations.get(0).toString();
-            System.out.println(origin);
             String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
 
             routes = getDirections(origin, destination);
-
+            double distance = getDistance(routes);
             mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
 
             routes = null;
             routes = getDirections(termino, origin);
-
+            System.out.println("Distancia routes 2");
+            System.out.println(distance);
             mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
 
         } catch (XmlPullParserException | IOException e) {
@@ -124,7 +134,8 @@ public class ServicoHandler {
     public Double getDistance( List<LatLng> latLngs) {
 
         double distance = 0.0;
-        latLngs = getVisitedPlaces();
+
+
         for(int i = 0;i < latLngs.size()-1; i++) {
             com.google.android.gms.maps.model.LatLng to =
                     new com.google.android.gms.maps.model.LatLng(latLngs.get(i+1).lat, latLngs.get(i+1).lng);

@@ -42,7 +42,7 @@ public class AcidenteDeTabalhoActivity extends AppCompatActivity {
         assistenciaEmViagem.setData(helper.getDate());
         assistenciaEmViagem.setHoraDeInicio(helper.getTime());
         XMLHandler writer = new XMLHandler();
-        writer.writeServicoContratado(assistenciaEmViagem,processo);
+        writer.writeAssitenciaEmViagem(assistenciaEmViagem,processo);
 
         boolean result=helper.inicializarDados(processo);
         if (result == true) {

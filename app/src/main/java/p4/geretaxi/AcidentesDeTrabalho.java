@@ -1,6 +1,8 @@
 package p4.geretaxi;
 
-public class AcidentesDeTrabalho extends ServicoContratado {
+public class AcidentesDeTrabalho extends Servico {
+
+    private String NumProcesso;
 
     private float HorasDeEspera;
 
