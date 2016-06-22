@@ -42,4 +42,5 @@
         android:layout_alignRight="@+id/buttonIniciar"
         android:layout_alignEnd="@+id/buttonIniciar"
         android:onClick="onClickTerminar" />
+
 </RelativeLayout>

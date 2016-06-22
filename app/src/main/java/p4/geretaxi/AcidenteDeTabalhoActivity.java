@@ -63,7 +63,7 @@ public class AcidenteDeTabalhoActivity extends AppCompatActivity {
         String processo = editTextProcesso.getText().toString();
 
         if(helper.isNetworkAvailable(this)){
-            mCapturedLocations = servicoHandler.mostraServico("teste");
+            mCapturedLocations = servicoHandler.mergeCapture("teste");
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);

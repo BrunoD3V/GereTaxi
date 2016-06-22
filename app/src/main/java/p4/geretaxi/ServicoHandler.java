@@ -71,7 +71,7 @@ public class ServicoHandler {
         return null;
     }
 
-    public List<LatLng> mostraServico(String processo) {
+    public List<LatLng> mergeCapture(String processo) {
         try {
             XMLHandler parser = new XMLHandler();
             mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), processo);
