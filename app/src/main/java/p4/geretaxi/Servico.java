@@ -3,17 +3,10 @@ import com.google.maps.model.LatLng;
 
 import java.util.List;
 
-/*
-TO SET DATA:
-
-    long date = System.currentTimeMillis();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd - MM - yyyy , k:mm");
-    String Data = sdf.format(date);
-*/
-
 public class Servico {
 
     private int Id;
+    private int IdCliente;
     private Double Distancia;
     private int NumPassageiros;
     private float CustoPortagens;
@@ -21,7 +14,6 @@ public class Servico {
     private String Destino;
     private String Data;
     private String HoraDeInicio;
-    private int IdCliente;
     private List<LatLng> Trajeto;
 
     public float getCustoPortagens() {

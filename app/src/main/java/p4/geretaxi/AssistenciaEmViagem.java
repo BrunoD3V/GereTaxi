@@ -1,6 +1,6 @@
 package p4.geretaxi;
 
-public class AssistenciaEmViagem extends ServicoContratado {
+public class AssistenciaEmViagem extends Servico {
 
     private String NumProcesso;
     private int IdCompanhia;

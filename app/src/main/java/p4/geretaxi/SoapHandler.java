@@ -27,6 +27,47 @@ public class SoapHandler {
         METHOD_NAME = methodName;
         SOAP_ACTION = "http://p4.app.com/"+METHOD_NAME;
     }
+
+    public String getIP() {
+        return IP;
+    }
+
+    public static void setIP(String IP) {
+        SoapHandler.IP = IP;
+    }
+
+    public String getMethodName() {
+        return METHOD_NAME;
+    }
+
+    public static void setMethodName(String methodName) {
+        METHOD_NAME = methodName;
+    }
+
+    public String getNAMESPACE() {
+        return NAMESPACE;
+    }
+
+    public static void setNAMESPACE(String NAMESPACE) {
+        SoapHandler.NAMESPACE = NAMESPACE;
+    }
+
+    public String getSoapAction() {
+        return SOAP_ACTION;
+    }
+
+    public static void setSoapAction(String soapAction) {
+        SOAP_ACTION = soapAction;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public static void setURL(String URL) {
+        SoapHandler.URL = URL;
+    }
+
     /*
     public void onClickEnviarInsert(View v)
     {
