@@ -7,6 +7,8 @@ import android.util.Xml;
 import com.google.maps.model.LatLng;
 
 import org.apache.commons.io.IOUtils;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
@@ -21,6 +23,11 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 public class XMLHandler {
     private String text;
@@ -219,7 +226,20 @@ public class XMLHandler {
         return latLngs;
     }
 
-    //public Double parseDistancia()
+    public double parseDistance(String data) throws IOException, XPathExpressionException {
+        Double distance = 0.0;
+        XPathFactory factory = XPathFactory.newInstance();
+        XPath xPath = factory.newXPath();
+        InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
+        InputSource inputXML = new InputSource(inputStream);
+
+        NodeList nodes = (NodeList) xPath.evaluate("/DirectionsResponse/route/leg/distance/value", inputXML, XPathConstants.NODESET);
+        distance=Double.parseDouble(nodes.item(0).getTextContent());
+
+
+
+        return distance;
+    }
     public boolean getPortagem(XmlPullParser parser, String data) throws IOException, XmlPullParserException {
 
         String text;

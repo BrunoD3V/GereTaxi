@@ -25,6 +25,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.xpath.XPathExpressionException;
+
 public class ServicoHandler {
 
     private static final double LATPTAXI = 41.484205;
@@ -38,7 +40,9 @@ public class ServicoHandler {
 
     private static final int PAGINATION_OVERLAP = 5;
 
-    Boolean portagens;
+    Boolean portagens = false;
+
+    double distance;
 
     List<LatLng> mCapturedLocations;
     List<SnappedPoint> mSnappedPoints;
@@ -60,9 +64,14 @@ public class ServicoHandler {
     }
 
 
-    public Double getDistance(String data) {
-        double distance = 0.0;
+    public double getDistance() {
+        distance = distance/1000.0;
+        distance = Math.round(distance*10.0)/10.0;
         return distance;
+    }
+
+    public Boolean getPortagens() {
+        return portagens;
     }
 
     private List<LatLng> getDirections(String origin, String destination) {
@@ -82,6 +91,7 @@ public class ServicoHandler {
             XMLHandler parser = new XMLHandler();
             portagens =parser.getPortagem(Xml.newPullParser(), buffer.toString());
             Toast.makeText(context, portagens.toString(),Toast.LENGTH_SHORT).show();
+            distance = parser.parseDistance(buffer.toString());
             return parser.parseDirections(Xml.newPullParser(), buffer.toString());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -91,15 +101,18 @@ public class ServicoHandler {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     public List<LatLng> mergeCapture(String processo) {
         try {
+            distance = 0.0;
             XMLHandler parser = new XMLHandler();
             mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), processo);
-
+            double dis = getDistance(mCapturedLocations);
 
             LatLng ptaxis = new LatLng(LATPTAXI, LNGPTAXI);
             String origin = ptaxis.toString();
@@ -107,13 +120,14 @@ public class ServicoHandler {
             String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
 
             routes = getDirections(origin, destination);
-            double distance = getDistance(routes);
+            dis += distance;
             mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
 
             routes = null;
             routes = getDirections(termino, origin);
-            System.out.println("Distancia routes 2");
-            System.out.println(distance);
+            dis += distance;
+            distance = dis;
+            System.out.println(dis);
             mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
 
         } catch (XmlPullParserException | IOException e) {

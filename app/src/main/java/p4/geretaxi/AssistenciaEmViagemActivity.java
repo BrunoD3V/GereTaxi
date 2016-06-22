@@ -78,10 +78,11 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             }
 
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
-            double distance = servicoHandler.getDistance(mCapturedLocations);
+            double distance = servicoHandler.getDistance();
             System.out.println("Distancia");
             System.out.println(distance);
             assistenciaEmViagem.setDistancia(distance);
+            boolean portagens = servicoHandler.getPortagens();
 
 
             ArrayList<Double> lats = new ArrayList<>();
