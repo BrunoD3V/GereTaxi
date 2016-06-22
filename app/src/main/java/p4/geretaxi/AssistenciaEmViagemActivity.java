@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.maps.GeoApiContext;
 import com.google.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
     List<LatLng> mCapturedLocations;
-
+    private GeoApiContext mContext;
     Button terminar;
     EditText editTextProcesso;
     Helper helper= new Helper();
@@ -32,6 +33,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
         editTextProcesso = (EditText) findViewById(R.id.editTextProcesso);
+        mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
 
     }
 
@@ -61,7 +63,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         terminar.setVisibility(View.VISIBLE);
     }
 
-    public void onClickTerminar(View v) {
+    public void onClickTerminar(View v) throws Exception {
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler(this);
         String processo = editTextProcesso.getText().toString();
@@ -76,6 +78,9 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+            mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
+            double distance = servicoHandler.getDistance(mCapturedLocations);
+
             ArrayList<Double> lats = new ArrayList<>();
 
             ArrayList<Double> lngs = new ArrayList<>();
@@ -84,7 +89,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
                 lats.add(i,mCapturedLocations.get(i).lat);
                 lngs.add(i,mCapturedLocations.get(i).lng);
             }
-            Intent intent = new Intent(this, MapsActivity2.class);
+            Intent intent = new Intent(this, MapsActivity3.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
 
