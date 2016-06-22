@@ -93,7 +93,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
         if(helper.isNetworkAvailable(this)){
 
-            mCapturedLocations = servicoHandler.mergeCapture(processo);
+            mCapturedLocations = servicoHandler.mergeCapture("lisboa");
 
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -123,6 +123,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             intent.putExtra("lng", lngs);
             intent.putExtra("tipo", "Viagem");
             intent.putExtra("servico", assistenciaEmViagem);
+            intent.putExtra("portagem", portagens);
 
             startActivity(intent);
         }
