@@ -3,6 +3,7 @@ package p4.geretaxi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
     private GeoApiContext mContext;
     Button terminar;
     EditText editTextProcesso;
+    EditText editTextSeguradora;
+    EditText editTextPassageiros;
     Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
     AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
@@ -33,6 +36,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
         editTextProcesso = (EditText) findViewById(R.id.editTextProcesso);
+        editTextSeguradora =(EditText) findViewById(R.id.editTextSeguradora);
+        editTextPassageiros = (EditText) findViewById(R.id.editTextPassageiros);
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
 
     }
@@ -44,9 +49,28 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             toast.show();
             return;
         }
+
+        if (helper.isEmpty(editTextSeguradora)) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir a seguradora", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
+        if (helper.isEmpty(editTextPassageiros)) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir o número de passageiros", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        editTextProcesso.setEnabled(false);
+        editTextSeguradora.setEnabled(false);
+        editTextPassageiros.setEnabled(false);
+
         String processo = editTextProcesso.getText().toString();
+        assistenciaEmViagem.setNumProcesso(processo);
         assistenciaEmViagem.setData(helper.getDate());
         assistenciaEmViagem.setHoraDeInicio(helper.getTime());
+        assistenciaEmViagem.setCompanhia(editTextSeguradora.getText().toString());
+        assistenciaEmViagem.setNumPassageiros(Integer.parseInt(editTextPassageiros.getText().toString()));
 
 
         boolean result=helper.inicializarDados(processo);
@@ -69,7 +93,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
         if(helper.isNetworkAvailable(this)){
 
-            mCapturedLocations = servicoHandler.mergeCapture("lisboa");
+            mCapturedLocations = servicoHandler.mergeCapture(processo);
 
             if (mCapturedLocations.size() == 0){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -83,6 +107,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             System.out.println(distance);
             assistenciaEmViagem.setDistancia(distance);
             boolean portagens = servicoHandler.getPortagens();
+
 
 
             ArrayList<Double> lats = new ArrayList<>();
@@ -103,6 +128,12 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         }
         else {
             helper.displayPromptEnableWifi(this);
+            XMLHandler handler = new XMLHandler();
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "lisboa");
+
+            assistenciaEmViagem.setOrigem(mCapturedLocations.get(0).toString());
+            assistenciaEmViagem.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
+            handler.writeAssitenciaEmViagem(assistenciaEmViagem);
         }
     }
 }

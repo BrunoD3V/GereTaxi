@@ -6,6 +6,15 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
 
     private String NumProcesso;
     private int IdCompanhia;
+    private String Companhia;
+
+    public String getCompanhia() {
+        return Companhia;
+    }
+
+    public void setCompanhia(String companhia) {
+        Companhia = companhia;
+    }
 
     public int getIdCompanhia() {
         return IdCompanhia;
@@ -37,5 +46,15 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
     @Override
     public void setDistancia(Double distancia) {
         super.setDistancia(distancia);
+    }
+
+    @Override
+    public void setNumPassageiros(int numPassageiros) {
+        super.setNumPassageiros(numPassageiros);
+    }
+
+    @Override
+    public int getNumPassageiros() {
+        return super.getNumPassageiros();
     }
 }

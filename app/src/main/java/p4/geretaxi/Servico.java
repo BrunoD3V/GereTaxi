@@ -8,7 +8,7 @@ public class Servico {
     private int Id;
     private int IdCliente;
     private Double Distancia;
-    private int NumPassageiros;
+    private Integer NumPassageiros;
     private float CustoPortagens;
     private String Origem;
     private String Destino;

@@ -33,7 +33,7 @@ public class EscolherServicoDialogFragment extends DialogFragment {
                         break;
                     case 2:
                         System.out.println(i);
-                        intent = new Intent(getActivity(),MapsActivity.class);
+                        intent = new Intent(getActivity(),ParticularActivity.class);
                         startActivity(intent);
                         break;
                     default:

@@ -127,7 +127,7 @@ public class ServicoHandler {
             routes = getDirections(termino, origin);
             dis += distance;
             distance = dis;
-            System.out.println(dis);
+
             mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
 
         } catch (XmlPullParserException | IOException e) {

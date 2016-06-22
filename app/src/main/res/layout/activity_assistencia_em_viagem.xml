@@ -26,21 +26,43 @@
         android:layout_height="wrap_content"
         android:text="@string/iniciar_servico"
         android:id="@+id/buttonIniciar"
-        android:layout_below="@+id/editTextProcesso"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
-        android:onClick="onClickIniciar" />
+        android:onClick="onClickIniciar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/terminar"
         android:id="@+id/buttonTermina"
-        android:layout_alignBottom="@+id/buttonIniciar"
-        android:layout_alignLeft="@+id/buttonIniciar"
-        android:layout_alignStart="@+id/buttonIniciar"
+        android:onClick="onClickTerminar"
+        android:layout_alignTop="@+id/buttonIniciar"
         android:layout_alignRight="@+id/buttonIniciar"
         android:layout_alignEnd="@+id/buttonIniciar"
-        android:onClick="onClickTerminar" />
+        android:layout_alignLeft="@+id/buttonIniciar"
+        android:layout_alignStart="@+id/buttonIniciar" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextSeguradora"
+        android:layout_below="@+id/editTextProcesso"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextProcesso"
+        android:layout_alignEnd="@+id/editTextProcesso"
+        android:inputType="text"
+        android:hint="@string/seguradora" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPassageiros"
+        android:layout_below="@+id/editTextSeguradora"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="@string/n_mero_de_passageiros" />
 
 </RelativeLayout>

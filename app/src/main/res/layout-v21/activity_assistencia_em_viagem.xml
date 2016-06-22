@@ -49,4 +49,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@android:color/holo_red_dark" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextSeguradora"
+        android:inputType="text"
+        android:hint="@string/seguradora"
+        android:layout_below="@+id/editTextProcesso"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextProcesso"
+        android:layout_alignEnd="@+id/editTextProcesso" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPassageiros"
+        android:hint="@string/n_mero_de_passageiros"
+        android:layout_above="@+id/buttonTermina"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextSeguradora"
+        android:layout_alignEnd="@+id/editTextSeguradora" />
 </RelativeLayout>
