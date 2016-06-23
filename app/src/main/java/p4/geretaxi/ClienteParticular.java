@@ -1,6 +1,8 @@
 package p4.geretaxi;
 
 
-public class ClienteParticular {
+import java.io.Serializable;
+
+public class ClienteParticular implements Serializable{
 
 }

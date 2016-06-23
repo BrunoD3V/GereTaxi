@@ -1,5 +1,6 @@
 package p4.geretaxi;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +19,8 @@ import java.util.List;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator {
 
+
+
     private GoogleMap mMap;
 
     private AssistenciaEmViagem assistenciaEmViagem;
@@ -35,11 +38,30 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        tipo = getIntent().getExtras().getString("tipo");
+
+        tipo = getIntent().getExtras().getString(Constants.TIPO_SERVICO);
+        switch (tipo) {
+            case Constants.VIAGEM:
+                assistenciaEmViagem = (AssistenciaEmViagem) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+                System.out.println("MAPS ACTIVITY");
+                System.out.println(assistenciaEmViagem.toString());
+                break;
+            case Constants.ACIDENTE:
+                acidentesDeTrabalho = (AcidentesDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+                break;
+            case Constants.PARTICULAR:
+                servicoParticular = (ServicoParticular) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+                break;
+            default:
+                break;
+        }
         portagens = getIntent().getBooleanExtra("portagem", false);
-        assistenciaEmViagem = (AssistenciaEmViagem) getIntent().getSerializableExtra("servico");
+
+
+
         ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
         ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
+
 
 
         mCapturedLocations = new ArrayList<>();
@@ -78,8 +100,28 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             android.app.FragmentManager manager = getFragmentManager();
             DialogCustoPortagemFragment dialogCustoPortagemFragment = new DialogCustoPortagemFragment();
             dialogCustoPortagemFragment.show(manager, "DialogPortagens");
+        }
+
+        Intent intent = new Intent(this, MostraServicoActivity.class);
+        switch (tipo) {
+            case Constants.VIAGEM:
+                intent.putExtra("ser",assistenciaEmViagem);
+                intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);
+                break;
+            case Constants.ACIDENTE:
+                intent.putExtra("ser",acidentesDeTrabalho);
+                intent.putExtra(Constants.TIPO_SERVICO, Constants.ACIDENTE);
+                break;
+            case Constants.PARTICULAR:
+                intent.putExtra("ser",servicoParticular);
+                intent.putExtra(Constants.TIPO_SERVICO, Constants.PARTICULAR);
+                break;
+            default:
+                break;
 
         }
+        startActivity(intent);
+
 
     }
 
@@ -91,13 +133,13 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     public void onDialogMessage(String portagem) {
 
         switch (tipo) {
-            case "Viagem":
+            case Constants.VIAGEM:
                 assistenciaEmViagem.setCustoPortagens(Float.parseFloat(portagem));
                 break;
-            case "Acidente":
+            case Constants.ACIDENTE:
                 acidentesDeTrabalho.setCustoPortagens(Float.parseFloat(portagem));
                 break;
-            case "Particular":
+            case Constants.PARTICULAR:
                 servicoParticular.setCustoPortagens(Float.parseFloat(portagem));
                 break;
             default:

@@ -1,9 +1,10 @@
 package p4.geretaxi;
 import com.google.maps.model.LatLng;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Servico {
+public class Servico implements Serializable{
 
     private int Id;
     private int IdCliente;
@@ -44,7 +45,7 @@ public class Servico {
         return IdCliente;
     }
 
-    public int getNumPassageiros() {
+    public Integer getNumPassageiros() {
         return NumPassageiros;
     }
 

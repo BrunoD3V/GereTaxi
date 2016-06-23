@@ -1,7 +1,9 @@
 package p4.geretaxi;
 
 
-public class AcidentesDeTrabalho extends Servico {
+import java.io.Serializable;
+
+public class AcidentesDeTrabalho extends Servico implements Serializable{
 
     private String NumProcesso;
     private float HorasDeEspera;

@@ -54,7 +54,7 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
     }
 
     @Override
-    public int getNumPassageiros() {
+    public Integer getNumPassageiros() {
         return super.getNumPassageiros();
     }
 
