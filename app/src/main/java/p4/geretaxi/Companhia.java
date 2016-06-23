@@ -1,5 +1,7 @@
 package p4.geretaxi;
 
 
-public class Companhia {
+import java.io.Serializable;
+
+public class Companhia implements Serializable{
 }

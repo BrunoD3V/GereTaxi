@@ -26,7 +26,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
     EditText editTextPassageiros;
     Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
-    AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
+    private AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
 
 
 
@@ -127,11 +127,13 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
                 lats.add(i,mCapturedLocations.get(i).lat);
                 lngs.add(i,mCapturedLocations.get(i).lng);
             }
+
+
             Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
-            intent.putExtra("tipo", "Viagem");
-            intent.putExtra("servico", assistenciaEmViagem);
+            intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);
+            intent.putExtra(Constants.INTENT_SERVICO, assistenciaEmViagem);
             intent.putExtra("portagem", portagens);
 
             startActivity(intent);

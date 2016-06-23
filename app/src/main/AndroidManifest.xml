@@ -49,7 +49,7 @@
         <activity
             android:name=".MapsActivity3"
             android:label="@string/title_activity_maps3" />
-        <activity android:name=".MostaServicoActivity"></activity>
+        <activity android:name=".MostraServicoActivity"></activity>
     </application>
 
 </manifest>
