@@ -7,110 +7,146 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Vector;
 
-/**
- * Created by KittenRoullete on 22-Jun-16.
- */
 public class GereAcidentesDeTrabalho {
 
     SoapHandler soapHandler;
-    
-    public Boolean inserirAcidentesDeTrabalho(AcidentesDeTrabalho acidentesDeTrabalho) throws IOException, XmlPullParserException {
 
-        final String METHOD_NAME = "inserirAcidentesDeTrabalho";
-        soapHandler = new SoapHandler(METHOD_NAME);
+    public boolean inserirAcidenteDeTrabalho(AcidentesDeTrabalho acidente){
 
-        AcidentesDeTrabalho accDeTrabalho = acidentesDeTrabalho;
+        soapHandler = new SoapHandler("inserirAcidenteDeTrabalho");
+        SoapObject inserirAcidenteDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
 
-        SoapObject request = new SoapObject(soapHandler.getNAMESPACE(), METHOD_NAME);
+        SoapObject soapAcidente = new SoapObject(soapHandler.getNAMESPACE(),"acidente");
 
-        PropertyInfo HorasDeEspera = new PropertyInfo();
-        HorasDeEspera.setType(Float.class);
-        HorasDeEspera.setName("HorasDeEspera");
-        HorasDeEspera.setValue(accDeTrabalho.getHorasDeEspera());
-        
-        PropertyInfo NumProcesso = new PropertyInfo();
-        NumProcesso.type = PropertyInfo.STRING_CLASS;
-        NumProcesso.setName("NumProcesso");
-        NumProcesso.setValue(accDeTrabalho.getNumProcesso());
+        soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
+        soapAcidente.addProperty("data", acidente.getData());
+        soapAcidente.addProperty("distancia", acidente.getDistancia());
+        soapAcidente.addProperty("horaDeInicio", acidente.getHoraDeInicio());
+        soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
+        soapAcidente.addProperty("id", acidente.getId());
+        soapAcidente.addProperty("idCliente", acidente.getIdCliente());
+        soapAcidente.addProperty("numPassageiros", acidente.getNumPassageiros());
+        soapAcidente.addProperty("origem", acidente.getOrigem());
+        soapAcidente.addProperty("trajeto", acidente.getTrajeto());
+        soapAcidente.addProperty("horasDeEspera", acidente.getHorasDeEspera());
+        soapAcidente.addProperty("numProcesso", acidente.getNumProcesso());
 
-        PropertyInfo IdCliente = new PropertyInfo();
-        IdCliente.type = PropertyInfo.INTEGER_CLASS;
-        IdCliente.setName("IdCliente");
-        IdCliente.setValue(accDeTrabalho.getIdCliente());
-
-        PropertyInfo Origem = new PropertyInfo();
-        Origem.type = PropertyInfo.STRING_CLASS;
-        Origem.setName("Origem");
-        Origem.setValue(accDeTrabalho.getOrigem());
-
-        PropertyInfo Destino = new PropertyInfo();
-        Destino.type = PropertyInfo.STRING_CLASS;
-        Destino.setName("Destino");
-        Destino.setValue(accDeTrabalho.getDestino());
-
-        PropertyInfo Distancia = new PropertyInfo();
-        Distancia.setType(Double.class);
-        Distancia.setName("Distancia");
-        Distancia.setValue(accDeTrabalho.getDistancia());
-
-        PropertyInfo HoraDeInicio = new PropertyInfo();
-        HoraDeInicio.type = PropertyInfo.STRING_CLASS;
-        HoraDeInicio.setName("HoraDeInicio");
-        HoraDeInicio.setValue(accDeTrabalho.getHoraDeInicio());
-
-        PropertyInfo Data = new PropertyInfo();
-        Data.type = PropertyInfo.STRING_CLASS;
-        Data.setName("Data");
-        Data.setValue(accDeTrabalho.getData());
-
-        PropertyInfo NumPassageiros = new PropertyInfo();
-        NumPassageiros.type = PropertyInfo.INTEGER_CLASS;
-        NumPassageiros.setName("NumPassageiros");
-        NumPassageiros.setValue(accDeTrabalho.getNumPassageiros());
-
-        PropertyInfo CustoPortagens = new PropertyInfo();
-        CustoPortagens.setType(Float.class);
-        CustoPortagens.setName("CustoPortagens");
-        CustoPortagens.setValue(accDeTrabalho.getCustoPortagens());
-
-        request.addProperty(NumProcesso);
-        request.addProperty(IdCliente);
-        request.addProperty(Origem);
-        request.addProperty(Destino);
-        request.addProperty(Distancia);
-        request.addProperty(HoraDeInicio);
-        request.addProperty(Data);
-        request.addProperty(NumPassageiros);
-        request.addProperty(CustoPortagens);
-        request.addProperty(HorasDeEspera);
-
+        inserirAcidenteDeTrabalho.addSoapObject(soapAcidente);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-        envelope.setOutputSoapObject(request);
+        envelope.setOutputSoapObject(inserirAcidenteDeTrabalho);
 
         envelope.implicitTypes = true;
 
         HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
-        try {
 
-            http.call("uri:" + METHOD_NAME, envelope);
+        try {
+            http.call("uri:" + soapHandler.getMethodName(), envelope);
 
             SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
             return Boolean.parseBoolean(response.toString());
-
         } catch (IOException e) {
-
             e.printStackTrace();
             return false;
-
         } catch (XmlPullParserException e) {
             e.printStackTrace();
+            return false;
         }
-        return true;
+    }
+
+    public boolean excluirAcidentesDeTrabalho(AcidentesDeTrabalho acidente){
+        soapHandler = new SoapHandler("excluirAcidenteDeTrabalho");
+        SoapObject excluirAcidenteDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
+
+        SoapObject soapAcidente = new SoapObject(soapHandler.getNAMESPACE(),"acidente");
+
+        soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
+        soapAcidente.addProperty("data", acidente.getData());
+        soapAcidente.addProperty("distancia", acidente.getDistancia());
+        soapAcidente.addProperty("horaDeInicio", acidente.getHoraDeInicio());
+        soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
+        soapAcidente.addProperty("id", acidente.getId());
+        soapAcidente.addProperty("idCliente", acidente.getIdCliente());
+        soapAcidente.addProperty("numPassageiros", acidente.getNumPassageiros());
+        soapAcidente.addProperty("origem", acidente.getOrigem());
+        soapAcidente.addProperty("trajeto", acidente.getTrajeto());
+        soapAcidente.addProperty("horasDeEspera", acidente.getHorasDeEspera());
+        soapAcidente.addProperty("numProcesso", acidente.getNumProcesso());
+
+        excluirAcidenteDeTrabalho.addSoapObject(soapAcidente);
+
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+        envelope.setOutputSoapObject(excluirAcidenteDeTrabalho);
+
+        envelope.implicitTypes = true;
+
+        HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
+
+        try {
+            http.call("uri:" + soapHandler.getMethodName(), envelope);
+
+            SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+
+            return Boolean.parseBoolean(response.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean excluirAcidentesDeTrabalho(String numProcesso){
+        return excluirAcidentesDeTrabalho(new AcidentesDeTrabalho(numProcesso));
+    }
+
+    public ArrayList<AcidentesDeTrabalho> listarAcidentesDeTrabalho(){
+        ArrayList<AcidentesDeTrabalho> lista = new ArrayList<>();
+
+        soapHandler = new SoapHandler("excluirAcidenteDeTrabalho");
+        SoapObject listarAcidentesDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
+
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+        envelope.setOutputSoapObject(listarAcidentesDeTrabalho);
+
+        envelope.implicitTypes = true;
+
+        HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
+
+        try {
+            http.call("urn:" + soapHandler.getMethodName(), envelope);
+            Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+
+            for (SoapObject soapObject: response) {
+                AcidentesDeTrabalho acidenteDeTrabalho = new AcidentesDeTrabalho();
+
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+        return lista;
+    }
+
+    public AcidentesDeTrabalho pesquisarAcidentesDeTrabalho(String numProcesso){
+        AcidentesDeTrabalho acidente = null;
+
+        return acidente;
     }
 }

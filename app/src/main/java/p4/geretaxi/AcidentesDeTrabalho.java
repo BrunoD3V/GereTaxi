@@ -6,6 +6,10 @@ public class AcidentesDeTrabalho extends Servico {
     private String NumProcesso;
     private float HorasDeEspera;
 
+    public AcidentesDeTrabalho(String numProcesso) {
+        NumProcesso = numProcesso;
+    }
+
     public float getHorasDeEspera() {
         return HorasDeEspera;
     }

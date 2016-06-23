@@ -94,7 +94,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
         if(helper.isNetworkAvailable(this)){
             XMLHandler parser = new XMLHandler();
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "teste");
             if (mCapturedLocations == null || mCapturedLocations.size()<2){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
@@ -139,7 +139,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         else {
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "lisboa");
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "teste");
 
             assistenciaEmViagem.setOrigem(mCapturedLocations.get(0).toString());
             assistenciaEmViagem.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
