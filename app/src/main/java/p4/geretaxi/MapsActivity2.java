@@ -1,5 +1,6 @@
 package p4.geretaxi;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator {
+
+    
 
     private GoogleMap mMap;
 
@@ -40,6 +43,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         assistenciaEmViagem = (AssistenciaEmViagem) getIntent().getSerializableExtra("servico");
         ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
         ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
+
 
 
         mCapturedLocations = new ArrayList<>();
@@ -78,8 +82,27 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             android.app.FragmentManager manager = getFragmentManager();
             DialogCustoPortagemFragment dialogCustoPortagemFragment = new DialogCustoPortagemFragment();
             dialogCustoPortagemFragment.show(manager, "DialogPortagens");
+        }
+
+        Intent intent = new Intent(this, MostaServicoActivity.class);
+        switch (tipo) {
+            case "Viagem":
+                intent.putExtra("ser",assistenciaEmViagem);
+                intent.putExtra("tipo", "Viagem");
+                break;
+            case "Acidente":
+                intent.putExtra("ser",acidentesDeTrabalho);
+                intent.putExtra("tipo", "Acidente");
+                break;
+            case "Particular":
+                intent.putExtra("ser",servicoParticular);
+                intent.putExtra("tipo", "Particular");
+                break;
+            default:
+                break;
 
         }
+
 
     }
 

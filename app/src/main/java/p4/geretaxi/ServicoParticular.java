@@ -1,6 +1,8 @@
 package p4.geretaxi;
 
-public class ServicoParticular extends Servico {
+import java.io.Serializable;
+
+public class ServicoParticular extends Servico implements Serializable{
 
     private float HorasDeEspera;
 
