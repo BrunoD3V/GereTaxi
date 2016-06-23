@@ -201,30 +201,41 @@ public class XMLHandler {
     }
 
     public List<LatLng> loadGpxData(XmlPullParser parser, String processo)
-            throws XmlPullParserException, IOException {
+    {
 
 
         List<LatLng> latLngs = new ArrayList<>();
         File file = new File(Environment.getExternalStorageDirectory(), processo+".xml");
-        FileInputStream fileInputStream = new FileInputStream(file);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
 
-        parser.setInput(new InputStreamReader(fileInputStream));
-        parser.nextTag();
+            parser.setInput(new InputStreamReader(fileInputStream));
+            parser.nextTag();
 
-        while (parser.next() != XmlPullParser.END_DOCUMENT) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() != XmlPullParser.START_TAG) {
+                    continue;
+                }
+
+                if (parser.getName().equals("wpt")) {
+                    // Save the discovered lat/lon attributes in each <wpt>
+                    latLngs.add(new LatLng(
+                            Double.valueOf(parser.getAttributeValue(null, "lat")),
+                            Double.valueOf(parser.getAttributeValue(null, "lon"))));
+                }
+                // Otherwise, skip irrelevant data
             }
 
-            if (parser.getName().equals("wpt")) {
-                // Save the discovered lat/lon attributes in each <wpt>
-                latLngs.add(new LatLng(
-                        Double.valueOf(parser.getAttributeValue(null, "lat")),
-                        Double.valueOf(parser.getAttributeValue(null, "lon"))));
-            }
-            // Otherwise, skip irrelevant data
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            return null;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-
         return latLngs;
     }
 

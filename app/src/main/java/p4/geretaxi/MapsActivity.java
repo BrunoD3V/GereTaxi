@@ -313,7 +313,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             };
 
-        } catch (XmlPullParserException | IOException e) {
+        } catch ( IOException e) {
             e.printStackTrace();
             toastException(e);
         }

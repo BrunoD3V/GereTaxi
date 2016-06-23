@@ -15,7 +15,7 @@ import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagem.Communicator{
+public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator{
 
     private GoogleMap mMap;
 

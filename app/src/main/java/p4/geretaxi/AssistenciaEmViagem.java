@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class AssistenciaEmViagem extends Servico implements Serializable {
 
-    private String NumProcesso;
+    private String numProcesso;
     private int IdCompanhia;
     private String Companhia;
 
@@ -21,7 +21,7 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
     }
 
     public String getNumProcesso() {
-        return NumProcesso;
+        return numProcesso;
     }
 
     public void setIdCompanhia(int idCompanhia) {
@@ -29,7 +29,7 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
     }
 
     public void setNumProcesso(String numProcesso) {
-        NumProcesso = numProcesso;
+        this.numProcesso = numProcesso;
     }
 
     @Override
@@ -56,5 +56,13 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
     @Override
     public int getNumPassageiros() {
         return super.getNumPassageiros();
+    }
+
+    @Override
+    public String toString() {
+        return "Processo :" + numProcesso + "\n" + "Companhia :" + Companhia + "\n" + "Data :"
+                + getData() + "\n" + "Hora :" + getHoraDeInicio() + "\n" + "Local de carga: "
+                + getOrigem() + "\n" + "Local de destino: " + getDestino() + "\n" + "Distância percorrida: "
+                + getDistancia() + "\n" + "Número de passageiros: " + getNumPassageiros() + "\n";
     }
 }

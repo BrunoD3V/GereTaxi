@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.maps.GeoApiContext;
+import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -88,25 +89,33 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
     public void onClickTerminar(View v) throws Exception {
         gpsHandler.listenerClose();
-        ServicoHandler servicoHandler = new ServicoHandler(this);
+        ServicoHandler servicoHandler = new ServicoHandler();
         String processo = editTextProcesso.getText().toString();
 
         if(helper.isNetworkAvailable(this)){
-
-            mCapturedLocations = servicoHandler.mergeCapture("lisboa");
-
-            if (mCapturedLocations.size() == 0){
+            XMLHandler parser = new XMLHandler();
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
+            if (mCapturedLocations == null || mCapturedLocations.size()<2){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
             }
 
+            GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
+            GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size()-1));
+            assistenciaEmViagem.setDestino(destino.formattedAddress);
+            assistenciaEmViagem.setOrigem(origem.formattedAddress);
+            mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
+
+
+
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance();
-            System.out.println("Distancia");
-            System.out.println(distance);
+
             assistenciaEmViagem.setDistancia(distance);
             boolean portagens = servicoHandler.getPortagens();
+
+            System.out.println(assistenciaEmViagem.toString());
 
 
 

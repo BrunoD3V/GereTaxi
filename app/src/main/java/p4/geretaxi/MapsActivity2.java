@@ -16,7 +16,7 @@ import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagem.Communicator {
+public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator {
 
     private GoogleMap mMap;
 
@@ -76,10 +76,14 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         if (portagens) {
             android.app.FragmentManager manager = getFragmentManager();
-            DialogCustoPortagem dialogCustoPortagem = new DialogCustoPortagem();
-            dialogCustoPortagem.show(manager, "DialogPortagens");
+            DialogCustoPortagemFragment dialogCustoPortagemFragment = new DialogCustoPortagemFragment();
+            dialogCustoPortagemFragment.show(manager, "DialogPortagens");
 
         }
+
+    }
+
+    public void onClickRejeitarServico(View v) {
 
     }
 

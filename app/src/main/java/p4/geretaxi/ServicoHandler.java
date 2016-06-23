@@ -3,11 +3,12 @@ package p4.geretaxi;
 import android.content.Context;
 import android.os.StrictMode;
 import android.util.Xml;
-import android.widget.Toast;
 
 import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
 import com.google.maps.RoadsApi;
 import com.google.maps.android.SphericalUtil;
+import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.SnappedPoint;
 
@@ -48,12 +49,7 @@ public class ServicoHandler {
     List<SnappedPoint> mSnappedPoints;
     List<LatLng> routes;
 
-    public ServicoHandler(Context c) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-        StrictMode.setThreadPolicy(policy);
-        context = c;
-    }
 
 
     public ServicoHandler() {
@@ -90,7 +86,7 @@ public class ServicoHandler {
             }
             XMLHandler parser = new XMLHandler();
             portagens =parser.getPortagem(Xml.newPullParser(), buffer.toString());
-            Toast.makeText(context, portagens.toString(),Toast.LENGTH_SHORT).show();
+
             distance = parser.parseDistance(buffer.toString());
             return parser.parseDirections(Xml.newPullParser(), buffer.toString());
         } catch (UnsupportedEncodingException e) {
@@ -107,32 +103,30 @@ public class ServicoHandler {
         return null;
     }
 
-    public List<LatLng> mergeCapture(String processo) {
-        try {
-            distance = 0.0;
-            XMLHandler parser = new XMLHandler();
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), processo);
-            double dis = getDistance(mCapturedLocations);
+    public List<LatLng> mergeCapture(List<LatLng> capturedLocations) {
 
-            LatLng ptaxis = new LatLng(LATPTAXI, LNGPTAXI);
-            String origin = ptaxis.toString();
-            String destination = mCapturedLocations.get(0).toString();
-            String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
+        distance = 0.0;
 
-            routes = getDirections(origin, destination);
-            dis += distance;
-            mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
+        mCapturedLocations = capturedLocations;
+        double dis = getDistance(mCapturedLocations);
 
-            routes = null;
-            routes = getDirections(termino, origin);
-            dis += distance;
-            distance = dis;
+        LatLng ptaxis = new LatLng(LATPTAXI, LNGPTAXI);
+        String origin = ptaxis.toString();
+        String destination = mCapturedLocations.get(0).toString();
+        String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
 
-            mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
+        routes = getDirections(origin, destination);
+        dis += distance;
+        mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
 
-        } catch (XmlPullParserException | IOException e) {
-            e.printStackTrace();
-        }
+        routes = null;
+        routes = getDirections(termino, origin);
+        dis += distance;
+        distance = dis;
+
+        mCapturedLocations= ListUtils.union(mCapturedLocations, routes);
+
+
 
      return mCapturedLocations;
     }
@@ -164,6 +158,8 @@ public class ServicoHandler {
         distance = Math.round(distance*10.0)/10.0;
         return distance;
     }
+
+
 
     private List<LatLng> getVisitedPlaces() {
 
@@ -215,5 +211,14 @@ public class ServicoHandler {
         }
 
         return snappedPoints;
+    }
+
+    public GeocodingResult reverseGeocodeSnappedPoint(GeoApiContext context, LatLng point) throws Exception {
+        GeocodingResult[] results = GeocodingApi.reverseGeocode(context, point).await();
+
+        if (results.length > 0) {
+            return results[0];
+        }
+        return null;
     }
 }

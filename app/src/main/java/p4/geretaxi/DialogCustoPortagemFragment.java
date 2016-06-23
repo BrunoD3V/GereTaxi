@@ -13,7 +13,7 @@ import android.widget.EditText;
 /**
  * Created by belchior on 22/06/2016.
  */
-public class DialogCustoPortagem extends DialogFragment implements View.OnClickListener {
+public class DialogCustoPortagemFragment extends DialogFragment implements View.OnClickListener {
 
     Button yes, no;
     EditText editTextPortagem;
@@ -35,7 +35,7 @@ public class DialogCustoPortagem extends DialogFragment implements View.OnClickL
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         editTextPortagem = (EditText) view.findViewById(R.id.editTextCusto);
-        System.out.println("CARAGO");
+
 
         return view;
     }
