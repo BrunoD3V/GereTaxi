@@ -13,11 +13,11 @@ public class Constants {
 
     public static final String INTENT_SERVICO = "servico";
 
-    public static final String PROCESSO = "Processo :";
+    public static final String PROCESSO = "Processo: ";
 
-    public static final String COMPANHIA = "Companhia :";
+    public static final String COMPANHIA = "Companhia: ";
 
-    public static final String DATA = "Data :";
+    public static final String DATA = "Data: ";
 
     public static final String HORA = "Hora de chegada: ";
 
@@ -29,5 +29,5 @@ public class Constants {
 
     public static final String KMS = " kms";
 
-    public static final String PASSAGEIROS = "Número de passageiros";
+    public static final String PASSAGEIROS = "Número de passageiros: ";
 }

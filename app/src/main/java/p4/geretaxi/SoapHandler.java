@@ -6,11 +6,11 @@ public class SoapHandler {
     private static String URL;
     private static String METHOD_NAME;
     private static String SOAP_ACTION;
-    private static String IP = "192.168.1.5";
+    private static String IP = "192.168.1.3";
 
     public SoapHandler(String methodName){
-        NAMESPACE = "http://GereTaxiPackage";
-        URL = "http://"+IP+"/GereTaxi/WSGereTaxi";
+        NAMESPACE = "http://GereTaxiPackage/";
+        URL = "http://"+IP+":8080/GereTaxi/WSGereTaxi";
         METHOD_NAME = methodName;
         SOAP_ACTION = NAMESPACE+METHOD_NAME;
     }
@@ -54,6 +54,4 @@ public class SoapHandler {
     public static void setURL(String URL) {
         SoapHandler.URL = URL;
     }
-
-
 }

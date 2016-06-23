@@ -1,8 +1,10 @@
 package p4.geretaxi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -57,9 +59,6 @@ public class MostraServicoActivity extends AppCompatActivity {
         }
         adapter = new ArrayAdapter<String>(this, R.layout.item_list, listItems);
         listViewMostraServico.setAdapter(adapter);
-
-
-
     }
 
     public void onClickSubmeterServico(View v) {
