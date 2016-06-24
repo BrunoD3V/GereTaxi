@@ -48,7 +48,7 @@ public class DialogCustoPortagemFragment extends DialogFragment implements View.
                 this.dismiss();
                 break;
             case R.id.btn_no:
-                communicator.onDialogMessage("0");
+                communicator.onDialogMessage("0.0");
                 this.dismiss();
                 break;
             default:

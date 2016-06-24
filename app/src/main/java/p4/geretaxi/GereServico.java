@@ -131,6 +131,7 @@ public class GereServico {
             Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
             for (SoapObject soapObject: response) {
+
                 Servico servico = new Servico();
 
                 servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
@@ -140,11 +141,11 @@ public class GereServico {
                 servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
                 servico.setOrigem(soapObject.getProperty("origem").toString());
                 servico.setDestino(soapObject.getProperty("destino").toString());
-                servico.setHorasDeEspera(Float.parseFloat(soapObject.getProperty("horasDeEspera").toString()));
+                servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
                 servico.setProcesso(soapObject.getProperty("processo").toString());
                 servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
                 servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                servico.setCustoPortagens(Float.parseFloat(soapObject.getProperty("custoPortagens").toString()));
+                servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
 
 
                 System.out.println(servico.getProcesso());
@@ -190,11 +191,11 @@ public class GereServico {
             servico.setHoraDeInicio(response.getProperty("horaDeInicio").toString());
             servico.setOrigem(response.getProperty("origem").toString());
             servico.setDestino(response.getProperty("destino").toString());
-            servico.setHorasDeEspera(Float.parseFloat(response.getProperty("horasDeEspera").toString()));
+            servico.setHorasDeEspera(Double.parseDouble(response.getProperty("horasDeEspera").toString()));
             servico.setProcesso(response.getProperty("processo").toString());
             servico.setDistancia(Double.parseDouble(response.getProperty("distancia").toString()));
             servico.setNumPassageiros(Integer.parseInt(response.getProperty("numPassageiros").toString()));
-            servico.setCustoPortagens(Float.parseFloat(response.getProperty("custoPortagens").toString()));
+            servico.setCustoPortagens(Double.parseDouble(response.getProperty("custoPortagens").toString()));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -203,7 +204,6 @@ public class GereServico {
             e.printStackTrace();
             return null;
         }
-
 
         return servico;
     }

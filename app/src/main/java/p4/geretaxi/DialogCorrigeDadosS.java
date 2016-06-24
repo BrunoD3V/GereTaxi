@@ -87,7 +87,7 @@ public class DialogCorrigeDadosS extends DialogFragment implements View.OnClickL
                                this.dismiss();
                            } else {
                                if (Double.parseDouble(editTextCorrige.getText().toString()) <= 0) {
-                                   Toast.makeText(getActivity(), Constants.D_VALIDA, Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(getActivity(), Constants.N_POSITIVO, Toast.LENGTH_SHORT).show();
                                    this.dismiss();
                                }else {
                                    communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);

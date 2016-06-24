@@ -15,7 +15,7 @@ public class Constants {
 
     public static final String PROCESSO = "Processo: ";
 
-
+    public static final String NOME_CLIENTE = "Cliente :";
 
     public static final String DATA = "Data: ";
 
@@ -35,5 +35,9 @@ public class Constants {
 
     public static final String N_VALIDO = "Insira um número válido";
 
-    public static final String D_VALIDA = "Insira uma distância válida";
+    public static final String N_POSITIVO = "O valor tem que ser positivo";
+
+    public static final String ESPERA = "Horas de espera: ";
+
+    public static final String PORTAGENS = "Custo portagens: ";
 }
