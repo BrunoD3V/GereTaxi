@@ -14,6 +14,7 @@ public class AcidentesDeTrabalho extends Servico implements Serializable{
         NumProcesso = numProcesso;
     }
 
+
     public AcidentesDeTrabalho() {
     }
 
@@ -23,6 +24,7 @@ public class AcidentesDeTrabalho extends Servico implements Serializable{
 
     public void setCompanhia(String companhia) {
         Companhia = companhia;
+
     }
 
     public float getHorasDeEspera() {
@@ -39,5 +41,13 @@ public class AcidentesDeTrabalho extends Servico implements Serializable{
 
     public void setNumProcesso(String numProcesso) {
         NumProcesso = numProcesso;
+    }
+
+    @Override
+    public String toString() {
+        return "Processo :" + NumProcesso + "\n" + "Data :"
+                + getData() + "\n" + "Hora :" + getHoraDeInicio() + "\n" + "Local de carga: "
+                + getOrigem() + "\n" + "Local de destino: " + getDestino() + "\n" + "Distância percorrida: "
+                + getDistancia() + "\n" + "Número de passageiros: " + getNumPassageiros() + "\n";
     }
 }

@@ -131,7 +131,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             }
 
 
-            Intent intent = new Intent(this, MapsActivity2.class);
+            Intent intent = new Intent(this, ParticularActivity.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
             intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);

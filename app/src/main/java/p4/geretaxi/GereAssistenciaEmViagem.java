@@ -14,99 +14,49 @@ public class GereAssistenciaEmViagem {
 
     SoapHandler soapHandler;
 
-    public Boolean inserirAssistenciaEmViagem(AssistenciaEmViagem assistenciaEmViagem) throws IOException, XmlPullParserException
-    {
-        final String METHOD_NAME = "inserirAssistenciaEmViagem";
+    public boolean inserirAssistenciaEmViagem(AssistenciaEmViagem acidente){
 
-        soapHandler = new SoapHandler(METHOD_NAME);
+        soapHandler = new SoapHandler("inserirAssistenciaEmViagem");
+        SoapObject inserirAssistenciaEmViagem = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
 
-        AssistenciaEmViagem assEmViagem = assistenciaEmViagem;
+        SoapObject soapAcidente = new SoapObject(soapHandler.getNAMESPACE(),"assEmViagem");
 
-        SoapObject request = new SoapObject(soapHandler.getNAMESPACE(), METHOD_NAME);
+        //soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
+        //soapAcidente.addProperty("data", acidente.getData());
+        //soapAcidente.addProperty("distancia", acidente.getDistancia());
+        //soapAcidente.addProperty("horaDeInicio", acidente.getHoraDeInicio());
+        //soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
+        soapAcidente.addProperty("id", 0);
+        soapAcidente.addProperty("idCliente", 1);
+        //soapAcidente.addProperty("numPassageiros", acidente.getNumPassageiros());
+        //soapAcidente.addProperty("origem", acidente.getOrigem());
+       // soapAcidente.addProperty("trajeto", acidente.getTrajeto());
+        soapAcidente.addProperty("numProcesso", acidente.getNumProcesso());
 
-        PropertyInfo NumProcesso = new PropertyInfo();
-        NumProcesso.type = PropertyInfo.STRING_CLASS;
-        NumProcesso.setName("NumProcesso");
-        NumProcesso.setValue(assEmViagem.getNumProcesso());
-
-        PropertyInfo IdCompanhia = new PropertyInfo();
-        IdCompanhia.type = PropertyInfo.INTEGER_CLASS;
-        IdCompanhia.setName("IdCompanhia");
-        IdCompanhia.setValue(assEmViagem.getIdCompanhia());
-
-        PropertyInfo Origem = new PropertyInfo();
-        Origem.type = PropertyInfo.STRING_CLASS;
-        Origem.setName("Origem");
-        Origem.setValue(assEmViagem.getOrigem());
-
-        PropertyInfo Destino = new PropertyInfo();
-        Destino.type = PropertyInfo.STRING_CLASS;
-        Destino.setName("Destino");
-        Destino.setValue(assEmViagem.getDestino());
-
-        PropertyInfo Distancia = new PropertyInfo();
-        Distancia.setType(Double.class);
-        Distancia.setName("Distancia");
-        Distancia.setValue(assEmViagem.getDistancia());
-
-        PropertyInfo HoraDeInicio = new PropertyInfo();
-        HoraDeInicio.type = PropertyInfo.STRING_CLASS;
-        HoraDeInicio.setName("HoraDeInicio");
-        HoraDeInicio.setValue(assEmViagem.getHoraDeInicio());
-
-        PropertyInfo Data = new PropertyInfo();
-        Data.type = PropertyInfo.STRING_CLASS;
-        Data.setName("Data");
-        Data.setValue(assEmViagem.getData());
-
-        PropertyInfo NumPassageiros = new PropertyInfo();
-        NumPassageiros.type = PropertyInfo.INTEGER_CLASS;
-        NumPassageiros.setName("NumPassageiros");
-        NumPassageiros.setValue(assEmViagem.getNumPassageiros());
-
-        PropertyInfo CustoPortagens = new PropertyInfo();
-        CustoPortagens.setType(Float.class);
-        CustoPortagens.setName("CustoPortagens");
-        CustoPortagens.setValue(assEmViagem.getCustoPortagens());
-
-        request.addProperty(NumProcesso);
-        request.addProperty(IdCompanhia);
-        request.addProperty(Origem);
-        request.addProperty(Destino);
-        request.addProperty(Distancia);
-        request.addProperty(HoraDeInicio);
-        request.addProperty(Data);
-        request.addProperty(NumPassageiros);
-        request.addProperty(CustoPortagens);
-
+        inserirAssistenciaEmViagem.addSoapObject(soapAcidente);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-        envelope.setOutputSoapObject(request);
+        envelope.setOutputSoapObject(inserirAssistenciaEmViagem);
 
         envelope.implicitTypes = true;
 
-        HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
-        try {
+        HttpTransportSE http = new HttpTransportSE(soapHandler.getURL().toString());
 
-            http.call("uri:" + METHOD_NAME, envelope);
+        System.out.println(soapHandler.getURL().toString());
+        try {
+            http.call(soapHandler.getSoapAction(), envelope);
 
             SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
             return Boolean.parseBoolean(response.toString());
-
         } catch (IOException e) {
-
             e.printStackTrace();
             return false;
-
         } catch (XmlPullParserException e) {
             e.printStackTrace();
+            return false;
         }
-        return true;
     }
-
-
-
 
 }

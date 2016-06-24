@@ -5,8 +5,16 @@ import java.io.Serializable;
 public class AssistenciaEmViagem extends Servico implements Serializable {
 
     private String numProcesso;
-    private int IdCompanhia;
     private String Companhia;
+
+    public AssistenciaEmViagem(String companhia, String numProcesso) {
+        Companhia = companhia;
+        this.numProcesso = numProcesso;
+    }
+
+    public AssistenciaEmViagem(){
+
+    }
 
     public String getCompanhia() {
         return Companhia;
@@ -16,16 +24,8 @@ public class AssistenciaEmViagem extends Servico implements Serializable {
         Companhia = companhia;
     }
 
-    public int getIdCompanhia() {
-        return IdCompanhia;
-    }
-
     public String getNumProcesso() {
         return numProcesso;
-    }
-
-    public void setIdCompanhia(int idCompanhia) {
-        IdCompanhia = idCompanhia;
     }
 
     public void setNumProcesso(String numProcesso) {

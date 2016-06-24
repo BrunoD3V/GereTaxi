@@ -62,6 +62,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         adapter = new ArrayAdapter<String>(this, R.layout.item_list, listItems);
         listViewMostraServico.setAdapter(adapter);
 
+
         listViewMostraServico.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -73,6 +74,8 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                     }
                 }
         );
+
+
 
 
 
