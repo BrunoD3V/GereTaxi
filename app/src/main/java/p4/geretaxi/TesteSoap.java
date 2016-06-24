@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class TesteSoap extends AppCompatActivity {
 
     ArrayList<Servico> lista;
+    Boolean resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,16 +17,27 @@ public class TesteSoap extends AppCompatActivity {
         setContentView(R.layout.activity_teste_soap);
 
 
-        Listar();
+      inserirServico();
+
     }
 
-    public void Listar(){
+    public void ListarServicos(){
 
         new Thread(new Runnable() {
             public void run() {
                 GereServico manager = new GereServico();
                  lista = manager.listarServico();
                 Log.d("Listagem:", lista.toString());
+            }
+        }).start();
+    }
+
+    public void inserirServico(){
+        new Thread(new Runnable() {
+            public void run() {
+                GereServico manager = new GereServico();
+                resultado = manager.inserirServico(new Servico());
+                Log.d("Resposta:", resultado.toString());
             }
         }).start();
     }

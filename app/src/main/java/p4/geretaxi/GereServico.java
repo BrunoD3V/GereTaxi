@@ -6,7 +6,6 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -136,7 +135,7 @@ public class GereServico {
 
                 servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
                 servico.setProcesso(soapObject.getProperty("processo").toString());
-                servico.setIdCliente(Integer.parseInt(soapObject.getProperty("idCliente").toString()));
+                servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
                 servico.setData(soapObject.getProperty("data").toString());
                 servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
                 servico.setOrigem(soapObject.getProperty("origem").toString());
@@ -186,7 +185,7 @@ public class GereServico {
 
             servico.setId(Integer.parseInt(response.getProperty("id").toString()));
             servico.setProcesso(response.getProperty("processo").toString());
-            servico.setIdCliente(Integer.parseInt(response.getProperty("idCliente").toString()));
+            servico.setNomeCliente(response.getProperty("nomeCliente").toString());
             servico.setData(response.getProperty("data").toString());
             servico.setHoraDeInicio(response.getProperty("horaDeInicio").toString());
             servico.setOrigem(response.getProperty("origem").toString());

@@ -8,7 +8,6 @@ public class Servico implements Serializable{
 
     private String tipo;
     private int id;
-    private int idCliente;
     private String nomeCliente;
     private String processo;
     private Double distancia;
@@ -97,14 +96,6 @@ public class Servico implements Serializable{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public String getNomeCliente() {
