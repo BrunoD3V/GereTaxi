@@ -40,4 +40,10 @@ public class Constants {
     public static final String ESPERA = "Horas de espera: ";
 
     public static final String PORTAGENS = "Custo portagens: ";
+
+    public static final String WPT = "wpt";
+
+    public static final String LAT = "lat";
+
+    public static final String LON = "lon";
 }

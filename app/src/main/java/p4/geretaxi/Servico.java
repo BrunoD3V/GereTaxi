@@ -142,7 +142,7 @@ public class Servico implements Serializable{
     public String toString() {
         return Constants.PROCESSO + processo + "\n" + Constants.NOME_CLIENTE + nomeCliente + "\n"
                 + Constants.DATA + data + "\n" + Constants.HORA + horaDeInicio + "\n" +
-                Constants.ORIGEM + origem + "\n" + Constants.DESTINO + distancia + "\n" +
+                Constants.ORIGEM + origem + "\n" + Constants.DESTINO + destino + "\n" +
                 Constants.PASSAGEIROS + numPassageiros + "\n" + Constants.ESPERA + horasDeEspera + "\n" +
                 Constants.PORTAGENS + custoPortagens + "\n" + Constants.DISTANCIA + distancia + Constants.KMS;
     }

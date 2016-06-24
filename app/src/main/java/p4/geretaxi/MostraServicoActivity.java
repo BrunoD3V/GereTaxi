@@ -77,8 +77,12 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
     public void onClickSubmeterServico(View v) {
             //TODO
+
+
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+
+
     }
 
     @Override
