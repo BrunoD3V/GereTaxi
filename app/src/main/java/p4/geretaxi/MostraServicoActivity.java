@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -81,8 +82,20 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+        inserirServico();
 
 
+    }
+
+    public void inserirServico(){
+        new Thread(new Runnable() {
+            public void run() {
+                Boolean resultado;
+                GereServico manager = new GereServico();
+                resultado = manager.inserirServico(servico);
+                Log.d("Resposta:", resultado.toString());
+            }
+        }).start();
     }
 
     @Override

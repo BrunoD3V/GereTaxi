@@ -21,12 +21,12 @@ public class GereServico {
 
         SoapObject soapServico = new SoapObject(soapHandler.getNAMESPACE(),"servico");
 
-        soapServico.addProperty("custoPortagens", servico.getCustoPortagens());
+        soapServico.addProperty("custoPortagens",String.valueOf(servico.getCustoPortagens()));
         soapServico.addProperty("data", servico.getData());
         soapServico.addProperty("destino", servico.getDestino());
-        soapServico.addProperty("distancia", servico.getDistancia());
+        soapServico.addProperty("distancia",String.valueOf(servico.getDistancia()));
         soapServico.addProperty("horaDeInicio", servico.getHoraDeInicio());
-        soapServico.addProperty("horasDeEsoera", servico.getHorasDeEspera());
+        soapServico.addProperty("horasDeEspera", String.valueOf(servico.getHorasDeEspera()));
         soapServico.addProperty("id", servico.getId());
         soapServico.addProperty("nomeCliente", servico.getNomeCliente());
         soapServico.addProperty("numPassageiros", servico.getNumPassageiros());
@@ -40,6 +40,8 @@ public class GereServico {
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
         envelope.setOutputSoapObject(inserirServico);
+
+
 
         envelope.implicitTypes = true;
 

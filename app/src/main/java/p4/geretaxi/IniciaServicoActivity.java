@@ -24,6 +24,8 @@ public class IniciaServicoActivity extends AppCompatActivity {
     EditText editTextProcesso;
     EditText editTextSeguradora;
     EditText editTextPassageiros;
+
+
    // Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
     private Servico servico = new Servico();
@@ -62,6 +64,11 @@ public class IniciaServicoActivity extends AppCompatActivity {
             toast.show();
             return;
         }
+        int i = Integer.parseInt(editTextPassageiros.getText().toString());
+        if (i < 1 || i > 8) {
+            Toast.makeText(getApplicationContext(), Constants.N_PASSAGEIROS_VALIDO, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         editTextProcesso.setEnabled(false);
@@ -73,7 +80,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
         servico.setData(Helper.getDate());
         servico.setHoraDeInicio(Helper.getTime());
         servico.setNomeCliente(editTextSeguradora.getText().toString());
-        servico.setNumPassageiros(Integer.parseInt(editTextPassageiros.getText().toString()));
+        servico.setNumPassageiros(i);
 
 
         boolean result=Helper.inicializarDados(processo);
