@@ -126,7 +126,7 @@ public class GereAcidentesDeTrabalho {
 
         System.out.println("MethodName: " + soapHandler.getMethodName().toString());
         try {
-            http.call("uri:"+soapHandler.getSoapAction(), envelope);
+            http.call(soapHandler.getSoapAction(), envelope);
             Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
             for (SoapObject soapObject: response) {
