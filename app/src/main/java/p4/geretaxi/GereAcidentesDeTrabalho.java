@@ -1,7 +1,5 @@
 package p4.geretaxi;
 
-import android.util.Log;
-
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -17,7 +15,7 @@ public class GereAcidentesDeTrabalho {
 
     SoapHandler soapHandler;
 
-   public boolean inserirAcidenteDeTrabalho(AcidentesDeTrabalho acidente){
+   public boolean inserirAcidenteDeTrabalho(AcidenteDeTrabalho acidente){
 
         soapHandler = new SoapHandler("inserirAcidenteDeTrabalho");
         SoapObject inserirAcidenteDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
@@ -62,7 +60,7 @@ public class GereAcidentesDeTrabalho {
         }
     }
 
-    public boolean excluirAcidentesDeTrabalho(AcidentesDeTrabalho acidente){
+    public boolean excluirAcidentesDeTrabalho(AcidenteDeTrabalho acidente){
         soapHandler = new SoapHandler("excluirAcidenteDeTrabalho");
         SoapObject excluirAcidenteDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
 
@@ -107,11 +105,11 @@ public class GereAcidentesDeTrabalho {
     }
 
     public boolean excluirAcidentesDeTrabalho(String numProcesso){
-        return excluirAcidentesDeTrabalho(new AcidentesDeTrabalho(numProcesso));
+        return excluirAcidentesDeTrabalho(new AcidenteDeTrabalho(numProcesso));
     }
 
-    public ArrayList<AcidentesDeTrabalho> listarAcidentesDeTrabalho(){
-        ArrayList<AcidentesDeTrabalho> lista = new ArrayList<>();
+    public ArrayList<AcidenteDeTrabalho> listarAcidentesDeTrabalho(){
+        ArrayList<AcidenteDeTrabalho> lista = new ArrayList<>();
 
         soapHandler = new SoapHandler("listarAcidentesDeTrabalho");
         SoapObject listarAcidentesDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
@@ -130,7 +128,7 @@ public class GereAcidentesDeTrabalho {
             Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
             for (SoapObject soapObject: response) {
-                AcidentesDeTrabalho acidenteDeTrabalho = new AcidentesDeTrabalho();
+                AcidenteDeTrabalho acidenteDeTrabalho = new AcidenteDeTrabalho();
 
                 acidenteDeTrabalho.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
                 acidenteDeTrabalho.setIdCliente(Integer.parseInt(soapObject.getProperty("idCliente").toString()));
@@ -160,8 +158,8 @@ public class GereAcidentesDeTrabalho {
         return lista;
     }
 
-    public AcidentesDeTrabalho pesquisarAcidentesDeTrabalho(String numProcesso){
-        AcidentesDeTrabalho acidente = null;
+    public AcidenteDeTrabalho pesquisarAcidentesDeTrabalho(String numProcesso){
+        AcidenteDeTrabalho acidente = null;
 
         return acidente;
     }

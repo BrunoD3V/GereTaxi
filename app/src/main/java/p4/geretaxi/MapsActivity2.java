@@ -25,7 +25,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
     private AssistenciaEmViagem assistenciaEmViagem;
     private ServicoParticular servicoParticular;
-    private AcidentesDeTrabalho acidentesDeTrabalho;
+    private AcidenteDeTrabalho acidenteDeTrabalho;
     private String tipo;
     private boolean portagens;
     List<LatLng> mCapturedLocations;
@@ -47,7 +47,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 System.out.println(assistenciaEmViagem.toString());
                 break;
             case Constants.ACIDENTE:
-                acidentesDeTrabalho = (AcidentesDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+                acidenteDeTrabalho = (AcidenteDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
                 break;
             case Constants.PARTICULAR:
                 servicoParticular = (ServicoParticular) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
@@ -109,7 +109,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);
                 break;
             case Constants.ACIDENTE:
-                intent.putExtra("ser",acidentesDeTrabalho);
+                intent.putExtra("ser", acidenteDeTrabalho);
                 intent.putExtra(Constants.TIPO_SERVICO, Constants.ACIDENTE);
                 break;
             case Constants.PARTICULAR:
@@ -137,7 +137,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 assistenciaEmViagem.setCustoPortagens(Float.parseFloat(portagem));
                 break;
             case Constants.ACIDENTE:
-                acidentesDeTrabalho.setCustoPortagens(Float.parseFloat(portagem));
+                acidenteDeTrabalho.setCustoPortagens(Float.parseFloat(portagem));
                 break;
             case Constants.PARTICULAR:
                 servicoParticular.setCustoPortagens(Float.parseFloat(portagem));

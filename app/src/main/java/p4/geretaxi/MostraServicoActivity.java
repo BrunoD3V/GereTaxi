@@ -17,7 +17,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     TextView textViewMostraServico;
     ListView listViewMostraServico;
     private AssistenciaEmViagem assistenciaEmViagem;
-    private AcidentesDeTrabalho acidentesDeTrabalho;
+    private AcidenteDeTrabalho acidenteDeTrabalho;
     private ServicoParticular servicoParticular;
 
     ArrayList<String> listItems = new ArrayList<>();
@@ -51,7 +51,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                         String.valueOf(assistenciaEmViagem.getDistancia() + Constants.KMS));
                 break;
             case Constants.ACIDENTE:
-                acidentesDeTrabalho = (AcidentesDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+                acidenteDeTrabalho = (AcidenteDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
                 break;
             case Constants.PARTICULAR:
                 servicoParticular = (ServicoParticular) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
@@ -123,28 +123,28 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
             case Constants.ACIDENTE:
                 switch (num) {
                     case 0:
-                        acidentesDeTrabalho.setNumProcesso(dados);
+                        acidenteDeTrabalho.setNumProcesso(dados);
                         break;
                     case 1:
-                        acidentesDeTrabalho.setCompanhia(dados);
+                        acidenteDeTrabalho.setCompanhia(dados);
                         break;
                     case 2:
-                        acidentesDeTrabalho.setData(dados);
+                        acidenteDeTrabalho.setData(dados);
                         break;
                     case 3:
-                        acidentesDeTrabalho.setHoraDeInicio(dados);
+                        acidenteDeTrabalho.setHoraDeInicio(dados);
                         break;
                     case 4:
-                        acidentesDeTrabalho.setOrigem(dados);
+                        acidenteDeTrabalho.setOrigem(dados);
                         break;
                     case 5:
-                        acidentesDeTrabalho.setDestino(dados);
+                        acidenteDeTrabalho.setDestino(dados);
                         break;
                     case 6:
-                        acidentesDeTrabalho.setNumPassageiros(Integer.parseInt(dados));
+                        acidenteDeTrabalho.setNumPassageiros(Integer.parseInt(dados));
                         break;
                     case 7:
-                        acidentesDeTrabalho.setDistancia(Double.parseDouble(dados));
+                        acidenteDeTrabalho.setDistancia(Double.parseDouble(dados));
                         break;
                     default:
                         break;

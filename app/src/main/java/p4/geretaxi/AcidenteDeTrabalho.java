@@ -3,19 +3,19 @@ package p4.geretaxi;
 
 import java.io.Serializable;
 
-public class AcidentesDeTrabalho extends Servico implements Serializable{
+public class AcidenteDeTrabalho extends Servico implements Serializable{
 
     private String NumProcesso;
     private float HorasDeEspera;
     private String Companhia;
 
 
-    public AcidentesDeTrabalho(String numProcesso) {
+    public AcidenteDeTrabalho(String numProcesso) {
         NumProcesso = numProcesso;
     }
 
 
-    public AcidentesDeTrabalho() {
+    public AcidenteDeTrabalho() {
     }
 
     public String getCompanhia() {
