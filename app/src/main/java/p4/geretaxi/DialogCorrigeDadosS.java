@@ -69,7 +69,7 @@ public class DialogCorrigeDadosS extends DialogFragment implements View.OnClickL
                            communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);
                        } else {
                            if (!Helper.doubleTryParse(editTextCorrige.getText().toString())) {
-                               Toast.makeText(getActivity(), "Inisra um número válido", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(getActivity(), "Insira um número válido", Toast.LENGTH_SHORT).show();
                                this.dismiss();
                            }
                            communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);

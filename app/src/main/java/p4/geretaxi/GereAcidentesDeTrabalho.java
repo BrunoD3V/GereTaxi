@@ -124,9 +124,10 @@ public class GereAcidentesDeTrabalho {
 
         HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
 
-        System.out.println("MethodName: " + soapHandler.getMethodName().toString());
+        System.out.println("MethodName: " + soapHandler.getMethodName());
         try {
             http.call(soapHandler.getSoapAction(), envelope);
+
             Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
             for (SoapObject soapObject: response) {
