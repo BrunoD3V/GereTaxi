@@ -40,7 +40,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".AssistenciaEmViagemActivity" />
+        <activity android:name=".IniciaServicoActivity" />
         <activity android:name=".AcidenteDeTabalhoActivity" />
         <activity android:name=".ParticularActivity" />
         <activity

@@ -15,7 +15,7 @@ public class Constants {
 
     public static final String PROCESSO = "Processo: ";
 
-    public static final String COMPANHIA = "Companhia: ";
+
 
     public static final String DATA = "Data: ";
 
@@ -30,4 +30,10 @@ public class Constants {
     public static final String KMS = " kms";
 
     public static final String PASSAGEIROS = "Número de passageiros: ";
+
+    public static final String  N_PASSAGEIROS_VALIDO = "Insira um número válido de passageiros";
+
+    public static final String N_VALIDO = "Insira um número válido";
+
+    public static final String D_VALIDA = "Insira uma distância válida";
 }

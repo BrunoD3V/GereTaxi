@@ -23,7 +23,7 @@ public class EscolherServicoDialogFragment extends DialogFragment {
                 switch (i) {
                     case 0:
                         System.out.println(i);
-                        Intent intent = new Intent(getActivity(),AssistenciaEmViagemActivity.class);
+                        Intent intent = new Intent(getActivity(),IniciaServicoActivity.class);
                         startActivity(intent);
                         break;
                     case 1:

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Servico implements Serializable{
 
+    private String tipo;
     private int id;
     private int idCliente;
     private String nomeCliente;
@@ -20,22 +21,22 @@ public class Servico implements Serializable{
     private float horasDeEspera;
     private List<LatLng> trajeto;
 
-    public String getProcesso() {
-        return processo;
+
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setProcesso(String processo) {
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Servico(String processo) {
         this.processo = processo;
     }
 
-    public float getHorasDeEspera() {
-        return horasDeEspera;
-    }
+    public Servico(){
 
-    public void setHorasDeEspera(float horasDeEspera) {
-        this.horasDeEspera = horasDeEspera;
     }
-
     public float getCustoPortagens() {
         return custoPortagens;
     }
@@ -76,6 +77,14 @@ public class Servico implements Serializable{
         this.horaDeInicio = horaDeInicio;
     }
 
+    public float getHorasDeEspera() {
+        return horasDeEspera;
+    }
+
+    public void setHorasDeEspera(float horasDeEspera) {
+        this.horasDeEspera = horasDeEspera;
+    }
+
     public int getId() {
         return id;
     }
@@ -114,6 +123,14 @@ public class Servico implements Serializable{
 
     public void setOrigem(String origem) {
         this.origem = origem;
+    }
+
+    public String getProcesso() {
+        return processo;
+    }
+
+    public void setProcesso(String processo) {
+        this.processo = processo;
     }
 
     public List<LatLng> getTrajeto() {
