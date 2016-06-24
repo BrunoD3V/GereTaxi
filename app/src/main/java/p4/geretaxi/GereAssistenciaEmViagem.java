@@ -23,7 +23,7 @@ public class GereAssistenciaEmViagem {
 
         //soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
         //soapAcidente.addProperty("data", acidente.getData());
-        //soapAcidente.addProperty("distancia", acidente.getDistancia());
+        //soapAcidente.addProperty("distancia", acidente.getdistancia());
         //soapAcidente.addProperty("horaDeInicio", acidente.getHoraDeInicio());
         //soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
         soapAcidente.addProperty("id", 0);
@@ -31,7 +31,7 @@ public class GereAssistenciaEmViagem {
         //soapAcidente.addProperty("numPassageiros", acidente.getNumPassageiros());
         //soapAcidente.addProperty("origem", acidente.getOrigem());
        // soapAcidente.addProperty("trajeto", acidente.getTrajeto());
-        soapAcidente.addProperty("numProcesso", acidente.getNumProcesso());
+        soapAcidente.addProperty("processo", acidente.getprocesso());
 
         inserirAssistenciaEmViagem.addSoapObject(soapAcidente);
 

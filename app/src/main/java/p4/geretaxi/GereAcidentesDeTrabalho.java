@@ -24,16 +24,16 @@ public class GereAcidentesDeTrabalho {
 
         soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
         soapAcidente.addProperty("data", acidente.getData());
-        soapAcidente.addProperty("distancia", acidente.getDistancia());
+        soapAcidente.addProperty("distancia", acidente.getdistancia());
         soapAcidente.addProperty("horaDeInicio", acidente.getHoraDeInicio());
         soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
         soapAcidente.addProperty("id", acidente.getId());
-        soapAcidente.addProperty("idCliente", acidente.getIdCliente());
+        soapAcidente.addProperty("idCliente", acidente.getidCliente());
         soapAcidente.addProperty("numPassageiros", acidente.getNumPassageiros());
         soapAcidente.addProperty("origem", acidente.getOrigem());
         soapAcidente.addProperty("trajeto", acidente.getTrajeto());
         soapAcidente.addProperty("horasDeEspera", acidente.getHorasDeEspera());
-        soapAcidente.addProperty("numProcesso", acidente.getNumProcesso());
+        soapAcidente.addProperty("processo", acidente.getprocesso());
 
         inserirAcidenteDeTrabalho.addSoapObject(soapAcidente);
 
@@ -68,16 +68,16 @@ public class GereAcidentesDeTrabalho {
 
         soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
         soapAcidente.addProperty("data", acidente.getData());
-        soapAcidente.addProperty("distancia", acidente.getDistancia());
+        soapAcidente.addProperty("distancia", acidente.getdistancia());
         soapAcidente.addProperty("horaDeInicio", acidente.getHoraDeInicio());
         soapAcidente.addProperty("custoPortagens", acidente.getCustoPortagens());
         soapAcidente.addProperty("id", acidente.getId());
-        soapAcidente.addProperty("idCliente", acidente.getIdCliente());
+        soapAcidente.addProperty("idCliente", acidente.getidCliente());
         soapAcidente.addProperty("numPassageiros", acidente.getNumPassageiros());
         soapAcidente.addProperty("origem", acidente.getOrigem());
         soapAcidente.addProperty("trajeto", acidente.getTrajeto());
         soapAcidente.addProperty("horasDeEspera", acidente.getHorasDeEspera());
-        soapAcidente.addProperty("numProcesso", acidente.getNumProcesso());
+        soapAcidente.addProperty("processo", acidente.getprocesso());
 
         excluirAcidenteDeTrabalho.addSoapObject(soapAcidente);
 
@@ -104,8 +104,8 @@ public class GereAcidentesDeTrabalho {
         }
     }
 
-    public boolean excluirAcidentesDeTrabalho(String numProcesso){
-        return excluirAcidentesDeTrabalho(new AcidenteDeTrabalho(numProcesso));
+    public boolean excluirAcidentesDeTrabalho(String processo){
+        return excluirAcidentesDeTrabalho(new AcidenteDeTrabalho(processo));
     }
 
     public ArrayList<AcidenteDeTrabalho> listarAcidentesDeTrabalho(){
@@ -132,19 +132,19 @@ public class GereAcidentesDeTrabalho {
                 AcidenteDeTrabalho acidenteDeTrabalho = new AcidenteDeTrabalho();
 
                 acidenteDeTrabalho.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                acidenteDeTrabalho.setIdCliente(Integer.parseInt(soapObject.getProperty("idCliente").toString()));
+                acidenteDeTrabalho.setidCliente(Integer.parseInt(soapObject.getProperty("idCliente").toString()));
                 acidenteDeTrabalho.setData(soapObject.getProperty("data").toString());
                 acidenteDeTrabalho.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
                 acidenteDeTrabalho.setOrigem(soapObject.getProperty("origem").toString());
                 acidenteDeTrabalho.setDestino(soapObject.getProperty("destino").toString());
                 acidenteDeTrabalho.setHorasDeEspera(Float.parseFloat(soapObject.getProperty("horasDeEspera").toString()));
-                acidenteDeTrabalho.setNumProcesso(soapObject.getProperty("numProcesso").toString());
-                acidenteDeTrabalho.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                acidenteDeTrabalho.setprocesso(soapObject.getProperty("processo").toString());
+                acidenteDeTrabalho.setdistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
                 acidenteDeTrabalho.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
                 acidenteDeTrabalho.setCustoPortagens(Float.parseFloat(soapObject.getProperty("custoPortagens").toString()));
 
 
-                System.out.println(acidenteDeTrabalho.getNumProcesso());
+                System.out.println(acidenteDeTrabalho.getprocesso());
                 lista.add(acidenteDeTrabalho);
             }
 
@@ -159,7 +159,7 @@ public class GereAcidentesDeTrabalho {
         return lista;
     }
 
-    public AcidenteDeTrabalho pesquisarAcidentesDeTrabalho(String numProcesso){
+    public AcidenteDeTrabalho pesquisarAcidentesDeTrabalho(String processo){
         AcidenteDeTrabalho acidente = null;
 
         return acidente;

@@ -67,12 +67,34 @@ public class DialogCorrigeDadosS extends DialogFragment implements View.OnClickL
                    if (!Helper.isEmpty(editTextCorrige)) {
                        if (mNum<6) {
                            communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);
-                       } else {
-                           if (!Helper.doubleTryParse(editTextCorrige.getText().toString())) {
-                               Toast.makeText(getActivity(), "Insira um número válido", Toast.LENGTH_SHORT).show();
-                               this.dismiss();
+                       } else if (mNum == 6){
+                           if (Helper.intergerTryParse(editTextCorrige.getText().toString())){
+                               int i = Integer.parseInt(editTextCorrige.getText().toString());
+                               if (i < 1 || i > 8){
+                                   Toast.makeText(getActivity(), Constants.N_PASSAGEIROS_VALIDO, Toast.LENGTH_SHORT).show();
+                                   this.dismiss();
+                               } else {
+                                   communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);
+                               }
+                           }else {
+                               Toast.makeText(getActivity(), Constants.N_VALIDO, Toast.LENGTH_SHORT).show();
                            }
-                           communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);
+
+                       } else {
+
+                           if (!Helper.doubleTryParse(editTextCorrige.getText().toString())) {
+                               Toast.makeText(getActivity(), Constants.N_VALIDO, Toast.LENGTH_SHORT).show();
+                               this.dismiss();
+                           } else {
+                               if (Double.parseDouble(editTextCorrige.getText().toString()) <= 0) {
+                                   Toast.makeText(getActivity(), Constants.D_VALIDA, Toast.LENGTH_SHORT).show();
+                                   this.dismiss();
+                               }else {
+                                   communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);
+                               }
+
+                           }
+
 
                        }
                    }

@@ -6,9 +6,11 @@ import java.util.List;
 
 public class Servico implements Serializable{
 
-    private int Id;
-    private int IdCliente;
-    private Double Distancia;
+    private int id;
+    private int idCliente;
+    private String nomeCliente;
+    private String Processo;
+    private Double distancia;
     private Integer NumPassageiros;
     private float CustoPortagens;
     private String Origem;
@@ -30,7 +32,7 @@ public class Servico implements Serializable{
     }
 
     public Double getDistancia() {
-        return Distancia;
+        return distancia;
     }
 
     public String getHoraDeInicio() {
@@ -38,11 +40,11 @@ public class Servico implements Serializable{
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
-    public int getIdCliente() {
-        return IdCliente;
+    public int getidCliente() {
+        return idCliente;
     }
 
     public Integer getNumPassageiros() {
@@ -70,7 +72,7 @@ public class Servico implements Serializable{
     }
 
     public void setDistancia(Double distancia) {
-        Distancia = distancia;
+        distancia = distancia;
     }
 
     public void setHoraDeInicio(String horaDeInicio) {
@@ -78,11 +80,11 @@ public class Servico implements Serializable{
     }
 
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 
-    public void setIdCliente(int idCliente) {
-        IdCliente = idCliente;
+    public void setidCliente(int idCliente) {
+        idCliente = idCliente;
     }
 
     public void setNumPassageiros(int numPassageiros) {

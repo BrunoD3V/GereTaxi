@@ -17,7 +17,7 @@ public class Helper {
         return editText.getText().toString().trim().length() == 0;
     }
 
-    public String getDate()
+    public static String getDate()
     {
         long date = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -43,7 +43,7 @@ public class Helper {
         }
     }
 
-    public String getTime()
+    public static String getTime()
     {
         long date = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("k:mm");
@@ -51,19 +51,19 @@ public class Helper {
         return hora;
     }
 
-    public boolean inicializarDados(String processo) {
+    public  static boolean inicializarDados(String processo) {
         XMLHandler eraser = new XMLHandler();
         Boolean result = eraser.eraser(processo);
         return result;
     }
 
-    public boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void displayPromptEnableWifi(final Context context) {
+    public static void displayPromptEnableWifi(final Context context) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 context);
 

@@ -90,7 +90,7 @@ public class XMLHandler {
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
                 xmlSerializer.startTag(null , "processo");
-                xmlSerializer.text(assistenciaEmViagem.getNumProcesso());
+                xmlSerializer.text(assistenciaEmViagem.getprocesso());
                 xmlSerializer.endTag(null, "processo");
                 xmlSerializer.startTag(null, "data");
                 xmlSerializer.text(assistenciaEmViagem.getData());
@@ -114,12 +114,12 @@ public class XMLHandler {
                 xmlSerializer.endDocument();
 
             } else {
-                if (verificaProcesso(Xml.newPullParser(), assistenciaEmViagem.getNumProcesso()))
+                if (verificaProcesso(Xml.newPullParser(), assistenciaEmViagem.getprocesso()))
                     return false;
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
                 xmlSerializer.startTag(null , "processo");
-                xmlSerializer.text(assistenciaEmViagem.getNumProcesso());
+                xmlSerializer.text(assistenciaEmViagem.getprocesso());
                 xmlSerializer.endTag(null, "processo");
                 xmlSerializer.startTag(null, "data");
                 xmlSerializer.text(assistenciaEmViagem.getData());

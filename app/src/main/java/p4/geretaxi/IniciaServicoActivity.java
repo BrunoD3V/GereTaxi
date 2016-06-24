@@ -16,7 +16,7 @@ import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssistenciaEmViagemActivity extends AppCompatActivity {
+public class IniciaServicoActivity extends AppCompatActivity {
 
     List<LatLng> mCapturedLocations;
     private GeoApiContext mContext;
@@ -24,7 +24,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
     EditText editTextProcesso;
     EditText editTextSeguradora;
     EditText editTextPassageiros;
-    Helper helper= new Helper();
+   // Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
     private AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
 
@@ -69,14 +69,14 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         editTextPassageiros.setEnabled(false);
 
         String processo = editTextProcesso.getText().toString();
-        assistenciaEmViagem.setNumProcesso(processo);
-        assistenciaEmViagem.setData(helper.getDate());
-        assistenciaEmViagem.setHoraDeInicio(helper.getTime());
+        assistenciaEmViagem.setprocesso(processo);
+        assistenciaEmViagem.setData(Helper.getDate());
+        assistenciaEmViagem.setHoraDeInicio(Helper.getTime());
         assistenciaEmViagem.setCompanhia(editTextSeguradora.getText().toString());
         assistenciaEmViagem.setNumPassageiros(Integer.parseInt(editTextPassageiros.getText().toString()));
 
 
-        boolean result=helper.inicializarDados(processo);
+        boolean result=Helper.inicializarDados(processo);
         if (result) {
             Toast toast = Toast.makeText(getApplicationContext(), "Serviço Inicializado",Toast.LENGTH_SHORT);
             toast.show();
@@ -94,11 +94,11 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         ServicoHandler servicoHandler = new ServicoHandler();
         String processo = editTextProcesso.getText().toString();
 
-        if(helper.isNetworkAvailable(this)){
+        if(Helper.isNetworkAvailable(this)){
             XMLHandler parser = new XMLHandler();
 
        //     if (parser.loadGpxData(Xml.newPullParser(), processo) != null)
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "teste");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "WD40");
 
             if (mCapturedLocations.size()<2){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -118,7 +118,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance();
 
-            assistenciaEmViagem.setDistancia(distance);
+            assistenciaEmViagem.setdistancia(distance);
             boolean portagens = servicoHandler.getPortagens();
 
             System.out.println(assistenciaEmViagem.toString());
@@ -144,9 +144,9 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            helper.displayPromptEnableWifi(this);
+            Helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "teste");
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "WD40");
 
             assistenciaEmViagem.setOrigem(mCapturedLocations.get(0).toString());
             assistenciaEmViagem.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
