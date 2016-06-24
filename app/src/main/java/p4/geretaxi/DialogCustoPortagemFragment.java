@@ -44,7 +44,6 @@ public class DialogCustoPortagemFragment extends DialogFragment implements View.
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_yes:
-                System.out.println(editTextPortagem.getText().toString());
                 communicator.onDialogMessage(editTextPortagem.getText().toString());
                 this.dismiss();
                 break;

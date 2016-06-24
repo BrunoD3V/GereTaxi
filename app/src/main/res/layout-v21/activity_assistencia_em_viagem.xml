@@ -71,5 +71,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/editTextSeguradora"
-        android:layout_alignEnd="@+id/editTextSeguradora" />
+        android:layout_alignEnd="@+id/editTextSeguradora"
+        android:inputType="number" />
 </RelativeLayout>

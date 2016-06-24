@@ -45,23 +45,25 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
     public void onClickIniciar(View v) {
 
-        if (helper.isEmpty(editTextProcesso)){
+        if (Helper.isEmpty(editTextProcesso)){
             Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir o processo", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
 
-        if (helper.isEmpty(editTextSeguradora)) {
+        if (Helper.isEmpty(editTextSeguradora)) {
             Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir a seguradora", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
 
-        if (helper.isEmpty(editTextPassageiros)) {
+        if (Helper.isEmpty(editTextPassageiros)) {
             Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir o número de passageiros", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
+
+
         editTextProcesso.setEnabled(false);
         editTextSeguradora.setEnabled(false);
         editTextPassageiros.setEnabled(false);
@@ -75,7 +77,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
 
         boolean result=helper.inicializarDados(processo);
-        if (result == true) {
+        if (result) {
             Toast toast = Toast.makeText(getApplicationContext(), "Serviço Inicializado",Toast.LENGTH_SHORT);
             toast.show();
         } else {

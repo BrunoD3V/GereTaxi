@@ -20,9 +20,12 @@
     <string name="cancelar">Cancelar</string>
     <string name="ok">Ok</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="submeter">Submeter</string>
+    <string name="corriga_os_dados">Corriga os dados</string>
+    <string name="assistencia_em_viagem">Assistência em viagem</string>
+    <string name="insira_um_numero">Insira um número</string>
+    <string name="insira_um_valor_valido">Insira um valor válido</string>
 
 
 </resources>

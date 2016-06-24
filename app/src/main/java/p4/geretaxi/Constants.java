@@ -29,5 +29,5 @@ public class Constants {
 
     public static final String KMS = " kms";
 
-    public static final String PASSAGEIROS = "Número de passageiros";
+    public static final String PASSAGEIROS = "Número de passageiros: ";
 }
