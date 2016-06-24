@@ -138,11 +138,11 @@ public class GereServico {
                 Servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
                 Servico.setOrigem(soapObject.getProperty("origem").toString());
                 Servico.setDestino(soapObject.getProperty("destino").toString());
-                Servico.setHorasDeEspera(Float.parseFloat(soapObject.getProperty("horasDeEspera").toString()));
+                Servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
                 Servico.setProcesso(soapObject.getProperty("processo").toString());
                 Servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
                 Servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                Servico.setCustoPortagens(Float.parseFloat(soapObject.getProperty("custoPortagens").toString()));
+                Servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
 
 
                 System.out.println(Servico.getProcesso());

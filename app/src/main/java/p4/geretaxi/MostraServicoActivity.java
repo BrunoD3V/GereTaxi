@@ -16,9 +16,9 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
     TextView textViewMostraServico;
     ListView listViewMostraServico;
-    private AssistenciaEmViagem assistenciaEmViagem;
-    private AcidenteDeTrabalho acidenteDeTrabalho;
-    private ServicoParticular servicoParticular;
+    private Servico servico;
+
+
 
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
@@ -57,32 +57,21 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     public void populateListView() {
 
         adapter = new ArrayAdapter<String>(this, R.layout.item_list, listItems);
-        switch (tipo) {
-            case Constants.VIAGEM:
-                textViewMostraServico.setText(R.string.assistencia_em_viagem);
-                assistenciaEmViagem = (AssistenciaEmViagem) getIntent().getSerializableExtra("ser");
 
-                listItems.add(Constants.PROCESSO + assistenciaEmViagem.getprocesso());
-                listItems.add(Constants.COMPANHIA + assistenciaEmViagem.getCompanhia());
-                listItems.add(Constants.DATA + assistenciaEmViagem.getData());
-                listItems.add(Constants.HORA + assistenciaEmViagem.getHoraDeInicio());
-                listItems.add(Constants.ORIGEM + assistenciaEmViagem.getOrigem());
-                listItems.add(Constants.DESTINO + assistenciaEmViagem.getDestino());
-                listItems.add(Constants.PASSAGEIROS + assistenciaEmViagem.getNumPassageiros().toString());
+                textViewMostraServico.setText(R.string.assistencia_em_viagem);
+                servico = (Servico) getIntent().getSerializableExtra("ser");
+
+                listItems.add(Constants.PROCESSO + servico.getProcesso());
+                listItems.add(Constants.NOME_CLIENTE + servico.getNomeCliente());
+                listItems.add(Constants.DATA + servico.getData());
+                listItems.add(Constants.HORA + servico.getHoraDeInicio());
+                listItems.add(Constants.ORIGEM + servico.getOrigem());
+                listItems.add(Constants.DESTINO + servico.getDestino());
+                listItems.add(Constants.PASSAGEIROS + servico.getNumPassageiros().toString());
+                listItems.add(Constants.PORTAGENS + servico.getCustoPortagens().toString());
+                listItems.add(Constants.ESPERA + servico.getHorasDeEspera());
                 listItems.add(Constants.DISTANCIA +
-                        String.valueOf(assistenciaEmViagem.getDistancia() + Constants.KMS));
-                break;
-            case Constants.ACIDENTE:
-                acidenteDeTrabalho = (AcidenteDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
-                //TODO preencher objeto
-                break;
-            case Constants.PARTICULAR:
-                servicoParticular = (ServicoParticular) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
-                //TODO preencher objeto
-                break;
-            default:
-                break;
-        }
+                        String.valueOf(servico.getDistancia() + Constants.KMS));
 
     }
 
@@ -94,76 +83,47 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
     @Override
     public void onDialogMessage(String dados, int num) {
-        switch (tipo) {
-            case Constants.VIAGEM:
-                switch (num) {
-                    case 0:
-                        assistenciaEmViagem.setprocesso(dados);
-                        break;
-                    case 1:
-                        assistenciaEmViagem.setCompanhia(dados);
-                        break;
-                    case 2:
-                        assistenciaEmViagem.setData(dados);
-                        break;
-                    case 3:
-                        assistenciaEmViagem.setHoraDeInicio(dados);
-                        break;
-                    case 4:
-                        assistenciaEmViagem.setOrigem(dados);
-                        break;
-                    case 5:
-                        assistenciaEmViagem.setDestino(dados);
-                        break;
-                    case 6:
-                        assistenciaEmViagem.setNumPassageiros(Integer.parseInt(dados));
-                        break;
-                    case 7:
-                        assistenciaEmViagem.setdistancia(Double.parseDouble(dados));
-                        break;
-                    default:
-                        break;
-                }
+
+        switch (num) {
+            case 0:
+                servico.setProcesso(dados);
                 break;
-            case Constants.ACIDENTE:
-                switch (num) {
-                    case 0:
-                        acidenteDeTrabalho.setprocesso(dados);
-                        break;
-                    case 1:
-                        acidenteDeTrabalho.setCompanhia(dados);
-                        break;
-                    case 2:
-                        acidenteDeTrabalho.setData(dados);
-                        break;
-                    case 3:
-                        acidenteDeTrabalho.setHoraDeInicio(dados);
-                        break;
-                    case 4:
-                        acidenteDeTrabalho.setOrigem(dados);
-                        break;
-                    case 5:
-                        acidenteDeTrabalho.setDestino(dados);
-                        break;
-                    case 6:
-                        acidenteDeTrabalho.setNumPassageiros(Integer.parseInt(dados));
-                        break;
-                    case 7:
-                        acidenteDeTrabalho.setDistancia(Double.parseDouble(dados));
-                        break;
-                    default:
-                        break;
-                }
+            case 1:
+                servico.setNomeCliente(dados);
                 break;
-            case Constants.PARTICULAR:
-               //TODO
+            case 2:
+                servico.setData(dados);
+                break;
+            case 3:
+                servico.setHoraDeInicio(dados);
+                break;
+            case 4:
+                servico.setOrigem(dados);
+                break;
+            case 5:
+                servico.setDestino(dados);
+                break;
+            case 6:
+                servico.setNumPassageiros(Integer.parseInt(dados));
+                break;
+            case 7:
+                servico.setCustoPortagens(Double.parseDouble(dados));
+                break;
+            case 8:
+                servico.setHorasDeEspera(Double.parseDouble(dados));
+                break;
+            case 9:
+                servico.setDistancia(Double.parseDouble(dados));
                 break;
             default:
                 break;
-
         }
+
         listItems.clear();
+
+
         populateListView();
+        //porque só mostra às vezes?
         adapter.notifyDataSetChanged();
     }
 }

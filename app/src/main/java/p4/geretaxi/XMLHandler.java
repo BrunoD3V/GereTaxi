@@ -76,7 +76,7 @@ public class XMLHandler {
 
 
 
-    public boolean writeAssitenciaEmViagem(AssistenciaEmViagem assistenciaEmViagem) {
+    public boolean writeAssitenciaEmViagem(Servico servico) {
         boolean result = false;
         File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
         try {
@@ -90,54 +90,54 @@ public class XMLHandler {
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
                 xmlSerializer.startTag(null , "processo");
-                xmlSerializer.text(assistenciaEmViagem.getprocesso());
+                xmlSerializer.text(servico.getProcesso());
                 xmlSerializer.endTag(null, "processo");
                 xmlSerializer.startTag(null, "data");
-                xmlSerializer.text(assistenciaEmViagem.getData());
+                xmlSerializer.text(servico.getData());
                 xmlSerializer.endTag(null, "data");
                 xmlSerializer.startTag(null, "hora-de-inicio");
-                xmlSerializer.text(assistenciaEmViagem.getHoraDeInicio());
+                xmlSerializer.text(servico.getHoraDeInicio());
                 xmlSerializer.endTag(null, "hora-de-inicio");
-                xmlSerializer.startTag(null, "companhia");
-                xmlSerializer.text(assistenciaEmViagem.getCompanhia());
-                xmlSerializer.endTag(null, "companhia");
+                xmlSerializer.startTag(null, "nome-cliente");
+                xmlSerializer.text(servico.getNomeCliente());
+                xmlSerializer.endTag(null, "nome-cliente");
                 xmlSerializer.startTag(null, "numero-passageiros");
-                xmlSerializer.text(String.valueOf(assistenciaEmViagem.getNumPassageiros()));
+                xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
                 xmlSerializer.endTag(null, "numero-passageiros");
                 xmlSerializer.startTag(null, "origem");
-                xmlSerializer.text(assistenciaEmViagem.getOrigem());
+                xmlSerializer.text(servico.getOrigem());
                 xmlSerializer.endTag(null,"origem");
                 xmlSerializer.startTag(null, "destino");
-                xmlSerializer.text(assistenciaEmViagem.getDestino());
+                xmlSerializer.text(servico.getDestino());
                 xmlSerializer.endTag(null, "destino");
                 xmlSerializer.endTag(null, "servico");
                 xmlSerializer.endDocument();
 
             } else {
-                if (verificaProcesso(Xml.newPullParser(), assistenciaEmViagem.getprocesso()))
+                if (verificaProcesso(Xml.newPullParser(), servico.getProcesso()))
                     return false;
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
                 xmlSerializer.startTag(null , "processo");
-                xmlSerializer.text(assistenciaEmViagem.getprocesso());
+                xmlSerializer.text(servico.getProcesso());
                 xmlSerializer.endTag(null, "processo");
                 xmlSerializer.startTag(null, "data");
-                xmlSerializer.text(assistenciaEmViagem.getData());
+                xmlSerializer.text(servico.getData());
                 xmlSerializer.endTag(null, "data");
                 xmlSerializer.startTag(null, "hora-de-inicio");
-                xmlSerializer.text(assistenciaEmViagem.getHoraDeInicio());
+                xmlSerializer.text(servico.getHoraDeInicio());
                 xmlSerializer.endTag(null, "hora-de-inicio");
-                xmlSerializer.startTag(null, "companhia");
-                xmlSerializer.text(assistenciaEmViagem.getCompanhia());
-                xmlSerializer.endTag(null, "companhia");
+                xmlSerializer.startTag(null, "nome-cliente");
+                xmlSerializer.text(servico.getNomeCliente());
+                xmlSerializer.endTag(null, "nome-cliente");
                 xmlSerializer.startTag(null, "numero-passageiros");
-                xmlSerializer.text(String.valueOf(assistenciaEmViagem.getNumPassageiros()));
+                xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
                 xmlSerializer.endTag(null, "numero-passageiros");
                 xmlSerializer.startTag(null, "origem");
-                xmlSerializer.text(assistenciaEmViagem.getOrigem());
+                xmlSerializer.text(servico.getOrigem());
                 xmlSerializer.endTag(null,"origem");
                 xmlSerializer.startTag(null, "destino");
-                xmlSerializer.text(assistenciaEmViagem.getDestino());
+                xmlSerializer.text(servico.getDestino());
                 xmlSerializer.endTag(null, "destino");
                 xmlSerializer.endTag(null, "servico");
                 xmlSerializer.endDocument();

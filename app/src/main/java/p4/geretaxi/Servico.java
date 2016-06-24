@@ -13,12 +13,12 @@ public class Servico implements Serializable{
     private String processo;
     private Double distancia;
     private Integer numPassageiros;
-    private float custoPortagens;
+    private Double custoPortagens;
     private String origem;
     private String destino;
     private String data;
     private String horaDeInicio;
-    private float horasDeEspera;
+    private Double horasDeEspera;
     private List<LatLng> trajeto;
 
 
@@ -31,18 +31,31 @@ public class Servico implements Serializable{
     }
 
     public Servico(String processo) {
+
         this.processo = processo;
+        this.horasDeEspera = 0.0;
+        this.custoPortagens = 0.0;
     }
 
     public Servico(){
-
+        this.horasDeEspera = 0.0;
+        this.custoPortagens = 0.0;
     }
-    public float getCustoPortagens() {
+
+    public Double getCustoPortagens() {
         return custoPortagens;
     }
 
-    public void setCustoPortagens(float custoPortagens) {
+    public void setCustoPortagens(Double custoPortagens) {
         this.custoPortagens = custoPortagens;
+    }
+
+    public Double getHorasDeEspera() {
+        return horasDeEspera;
+    }
+
+    public void setHorasDeEspera(Double horasDeEspera) {
+        this.horasDeEspera = horasDeEspera;
     }
 
     public String getData() {
@@ -77,13 +90,6 @@ public class Servico implements Serializable{
         this.horaDeInicio = horaDeInicio;
     }
 
-    public float getHorasDeEspera() {
-        return horasDeEspera;
-    }
-
-    public void setHorasDeEspera(float horasDeEspera) {
-        this.horasDeEspera = horasDeEspera;
-    }
 
     public int getId() {
         return id;
@@ -139,5 +145,14 @@ public class Servico implements Serializable{
 
     public void setTrajeto(List<LatLng> trajeto) {
         this.trajeto = trajeto;
+    }
+
+    @Override
+    public String toString() {
+        return Constants.PROCESSO + processo + "\n" + Constants.NOME_CLIENTE + nomeCliente + "\n"
+                + Constants.DATA + data + "\n" + Constants.HORA + horaDeInicio + "\n" +
+                Constants.ORIGEM + origem + "\n" + Constants.DESTINO + distancia + "\n" +
+                Constants.PASSAGEIROS + numPassageiros + "\n" + Constants.ESPERA + horasDeEspera + "\n" +
+                Constants.PORTAGENS + custoPortagens + "\n" + Constants.DISTANCIA + distancia + Constants.KMS;
     }
 }
