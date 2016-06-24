@@ -4,67 +4,67 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable{
 
-    private int Id;
-    private String Nome;
-    private String Morada;
-    private String CodigoPostal;
-    private String Email;
-    private int Contacto;
-    private int NIF;
+    private int id;
+    private String nome;
+    private String morada;
+    private String codigoPostal;
+    private String email;
+    private int contacto;
+    private int nif;
 
     public String getCodigoPostal() {
-        return CodigoPostal;
+        return codigoPostal;
     }
 
     public void setCodigoPostal(String codigoPostal) {
-        CodigoPostal = codigoPostal;
+        this.codigoPostal = codigoPostal;
     }
 
     public int getContacto() {
-        return Contacto;
+        return contacto;
     }
 
     public void setContacto(int contacto) {
-        Contacto = contacto;
+        this.contacto = contacto;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getMorada() {
-        return Morada;
+        return morada;
     }
 
     public void setMorada(String morada) {
-        Morada = morada;
+        this.morada = morada;
     }
 
-    public int getNIF() {
-        return NIF;
+    public int getNif() {
+        return nif;
     }
 
-    public void setNIF(int NIF) {
-        this.NIF = NIF;
+    public void setNif(int nif) {
+        this.nif = nif;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 }

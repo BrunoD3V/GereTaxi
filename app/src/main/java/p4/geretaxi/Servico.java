@@ -6,94 +6,121 @@ import java.util.List;
 
 public class Servico implements Serializable{
 
-    private int Id;
-    private int IdCliente;
-    private Double Distancia;
-    private Integer NumPassageiros;
-    private float CustoPortagens;
-    private String Origem;
-    private String Destino;
-    private String Data;
-    private String HoraDeInicio;
-    private List<LatLng> Trajeto;
+    private int id;
+    private int idCliente;
+    private String nomeCliente;
+    private String processo;
+    private Double distancia;
+    private Integer numPassageiros;
+    private float custoPortagens;
+    private String origem;
+    private String destino;
+    private String data;
+    private String horaDeInicio;
+    private float horasDeEspera;
+    private List<LatLng> trajeto;
+
+    public String getProcesso() {
+        return processo;
+    }
+
+    public void setProcesso(String processo) {
+        this.processo = processo;
+    }
+
+    public float getHorasDeEspera() {
+        return horasDeEspera;
+    }
+
+    public void setHorasDeEspera(float horasDeEspera) {
+        this.horasDeEspera = horasDeEspera;
+    }
 
     public float getCustoPortagens() {
-        return CustoPortagens;
-    }
-
-    public String getData() {
-        return Data;
-    }
-
-    public String getDestino() {
-        return Destino;
-    }
-
-    public Double getDistancia() {
-        return Distancia;
-    }
-
-    public String getHoraDeInicio() {
-        return HoraDeInicio;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public int getIdCliente() {
-        return IdCliente;
-    }
-
-    public Integer getNumPassageiros() {
-        return NumPassageiros;
-    }
-
-    public String getOrigem() {
-        return Origem;
-    }
-
-    public List<LatLng> getTrajeto() {
-        return Trajeto;
+        return custoPortagens;
     }
 
     public void setCustoPortagens(float custoPortagens) {
-        CustoPortagens = custoPortagens;
+        this.custoPortagens = custoPortagens;
+    }
+
+    public String getData() {
+        return data;
     }
 
     public void setData(String data) {
-        Data = data;
+        this.data = data;
+    }
+
+    public String getDestino() {
+        return destino;
     }
 
     public void setDestino(String destino) {
-        Destino = destino;
+        this.destino = destino;
+    }
+
+    public Double getDistancia() {
+        return distancia;
     }
 
     public void setDistancia(Double distancia) {
-        Distancia = distancia;
+        this.distancia = distancia;
+    }
+
+    public String getHoraDeInicio() {
+        return horaDeInicio;
     }
 
     public void setHoraDeInicio(String horaDeInicio) {
-        HoraDeInicio = horaDeInicio;
+        this.horaDeInicio = horaDeInicio;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
     }
 
     public void setIdCliente(int idCliente) {
-        IdCliente = idCliente;
+        this.idCliente = idCliente;
     }
 
-    public void setNumPassageiros(int numPassageiros) {
-        NumPassageiros = numPassageiros;
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public Integer getNumPassageiros() {
+        return numPassageiros;
+    }
+
+    public void setNumPassageiros(Integer numPassageiros) {
+        this.numPassageiros = numPassageiros;
+    }
+
+    public String getOrigem() {
+        return origem;
     }
 
     public void setOrigem(String origem) {
-        Origem = origem;
+        this.origem = origem;
+    }
+
+    public List<LatLng> getTrajeto() {
+        return trajeto;
     }
 
     public void setTrajeto(List<LatLng> trajeto) {
-        Trajeto = trajeto;
+        this.trajeto = trajeto;
     }
 }

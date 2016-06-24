@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class TesteSoap extends AppCompatActivity {
 
-    AcidentesDeTrabalho acidente;
-    ArrayList<AcidentesDeTrabalho> lista;
+    Servico;
+    ArrayList<Servico> lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class TesteSoap extends AppCompatActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                GereAcidentesDeTrabalho manager = new GereAcidentesDeTrabalho();
+                GereServico manager = new GereServico();
                  lista = manager.listarAcidentesDeTrabalho();
                 Log.d("Listagem:", lista.toString());
             }
