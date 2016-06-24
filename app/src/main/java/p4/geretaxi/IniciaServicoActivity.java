@@ -150,7 +150,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
             servico.setOrigem(mCapturedLocations.get(0).toString());
             servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
-            handler.writeAssitenciaEmViagem(servico);
+            handler.writeServico(servico);
         }
     }
 }
