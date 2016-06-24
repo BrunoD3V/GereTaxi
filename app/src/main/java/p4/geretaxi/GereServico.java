@@ -24,17 +24,17 @@ public class GereServico {
 
         soapServico.addProperty("custoPortagens", servico.getCustoPortagens());
         soapServico.addProperty("data", servico.getData());
+        soapServico.addProperty("destino", servico.getDestino());
         soapServico.addProperty("distancia", servico.getDistancia());
         soapServico.addProperty("horaDeInicio", servico.getHoraDeInicio());
-        soapServico.addProperty("custoPortagens", servico.getCustoPortagens());
+        soapServico.addProperty("horasDeEsoera", servico.getHorasDeEspera());
         soapServico.addProperty("id", servico.getId());
-        soapServico.addProperty("idCliente", servico.getIdCliente());
+        soapServico.addProperty("nomeCliente", servico.getNomeCliente());
         soapServico.addProperty("numPassageiros", servico.getNumPassageiros());
         soapServico.addProperty("origem", servico.getOrigem());
-        soapServico.addProperty("trajeto", servico.getTrajeto());
-        soapServico.addProperty("horasDeEspera", servico.getHorasDeEspera());
         soapServico.addProperty("processo", servico.getProcesso());
-
+        soapServico.addProperty("tipo", servico.getTipo());
+        soapServico.addProperty("trajeto", servico.getTrajeto());
 
         inserirServico.addSoapObject(soapServico);
 
@@ -69,16 +69,17 @@ public class GereServico {
 
         soapServico.addProperty("custoPortagens", servico.getCustoPortagens());
         soapServico.addProperty("data", servico.getData());
+        soapServico.addProperty("destino", servico.getDestino());
         soapServico.addProperty("distancia", servico.getDistancia());
         soapServico.addProperty("horaDeInicio", servico.getHoraDeInicio());
-        soapServico.addProperty("custoPortagens", servico.getCustoPortagens());
+        soapServico.addProperty("horasDeEsoera", servico.getHorasDeEspera());
         soapServico.addProperty("id", servico.getId());
-        soapServico.addProperty("idCliente", servico.getIdCliente());
+        soapServico.addProperty("nomeCliente", servico.getNomeCliente());
         soapServico.addProperty("numPassageiros", servico.getNumPassageiros());
         soapServico.addProperty("origem", servico.getOrigem());
-        soapServico.addProperty("trajeto", servico.getTrajeto());
-        soapServico.addProperty("horasDeEspera", servico.getHorasDeEspera());
         soapServico.addProperty("processo", servico.getProcesso());
+        soapServico.addProperty("tipo", servico.getTipo());
+        soapServico.addProperty("trajeto", servico.getTrajeto());
 
         excluirServico.addSoapObject(soapServico);
 
@@ -91,7 +92,7 @@ public class GereServico {
         HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
 
         try {
-            http.call("uri:" + soapHandler.getMethodName(), envelope);
+            http.call(soapHandler.getSoapAction(), envelope);
 
             SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
@@ -130,23 +131,24 @@ public class GereServico {
             Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
             for (SoapObject soapObject: response) {
-                Servico Servico = new Servico();
+                Servico servico = new Servico();
 
-                Servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                Servico.setIdCliente(Integer.parseInt(soapObject.getProperty("idCliente").toString()));
-                Servico.setData(soapObject.getProperty("data").toString());
-                Servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
-                Servico.setOrigem(soapObject.getProperty("origem").toString());
-                Servico.setDestino(soapObject.getProperty("destino").toString());
-                Servico.setHorasDeEspera(Float.parseFloat(soapObject.getProperty("horasDeEspera").toString()));
-                Servico.setProcesso(soapObject.getProperty("processo").toString());
-                Servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
-                Servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                Servico.setCustoPortagens(Float.parseFloat(soapObject.getProperty("custoPortagens").toString()));
+                servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                servico.setProcesso(soapObject.getProperty("processo").toString());
+                servico.setIdCliente(Integer.parseInt(soapObject.getProperty("idCliente").toString()));
+                servico.setData(soapObject.getProperty("data").toString());
+                servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
+                servico.setOrigem(soapObject.getProperty("origem").toString());
+                servico.setDestino(soapObject.getProperty("destino").toString());
+                servico.setHorasDeEspera(Float.parseFloat(soapObject.getProperty("horasDeEspera").toString()));
+                servico.setProcesso(soapObject.getProperty("processo").toString());
+                servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
+                servico.setCustoPortagens(Float.parseFloat(soapObject.getProperty("custoPortagens").toString()));
 
 
-                System.out.println(Servico.getProcesso());
-                lista.add(Servico);
+                System.out.println(servico.getProcesso());
+                lista.add(servico);
             }
 
         } catch (IOException e) {
@@ -161,7 +163,47 @@ public class GereServico {
     }
 
     public Servico pesquisarServico(String processo){
-        Servico servico = null;
+
+        Servico servico = new Servico();
+        soapHandler = new SoapHandler("pesquisarServico");
+        SoapObject pesquisarServico = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
+        pesquisarServico.addProperty("processo", processo);
+
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+        envelope.setOutputSoapObject(pesquisarServico);
+
+        envelope.implicitTypes = true;
+
+        HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
+
+        System.out.println("MethodName: " + soapHandler.getMethodName());
+        try {
+            http.call(soapHandler.getSoapAction(), envelope);
+
+            SoapObject response = (SoapObject) envelope.getResponse();
+
+            servico.setId(Integer.parseInt(response.getProperty("id").toString()));
+            servico.setProcesso(response.getProperty("processo").toString());
+            servico.setIdCliente(Integer.parseInt(response.getProperty("idCliente").toString()));
+            servico.setData(response.getProperty("data").toString());
+            servico.setHoraDeInicio(response.getProperty("horaDeInicio").toString());
+            servico.setOrigem(response.getProperty("origem").toString());
+            servico.setDestino(response.getProperty("destino").toString());
+            servico.setHorasDeEspera(Float.parseFloat(response.getProperty("horasDeEspera").toString()));
+            servico.setProcesso(response.getProperty("processo").toString());
+            servico.setDistancia(Double.parseDouble(response.getProperty("distancia").toString()));
+            servico.setNumPassageiros(Integer.parseInt(response.getProperty("numPassageiros").toString()));
+            servico.setCustoPortagens(Float.parseFloat(response.getProperty("custoPortagens").toString()));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            return null;
+        }
+
 
         return servico;
     }

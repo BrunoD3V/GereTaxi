@@ -11,6 +11,23 @@ public class Cliente implements Serializable{
     private String email;
     private int contacto;
     private int nif;
+    private String tipo;
+
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
+    public Cliente() {
+    }
 
     public String getCodigoPostal() {
         return codigoPostal;

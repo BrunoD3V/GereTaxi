@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class TesteSoap extends AppCompatActivity {
 
-    Servico acidente;
     ArrayList<Servico> lista;
 
     @Override
