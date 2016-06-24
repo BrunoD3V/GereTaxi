@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 
 public class Helper {
 
-    public boolean isEmpty(EditText editText){
+    public static boolean isEmpty(EditText editText){
         return editText.getText().toString().trim().length() == 0;
     }
 
@@ -23,6 +23,24 @@ public class Helper {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String data = sdf.format(date);
         return data;
+    }
+
+    public static boolean doubleTryParse(String text) {
+        try {
+            Double.parseDouble(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean intergerTryParse(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public String getTime()

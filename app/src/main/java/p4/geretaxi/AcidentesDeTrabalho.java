@@ -7,12 +7,23 @@ public class AcidentesDeTrabalho extends Servico implements Serializable{
 
     private String NumProcesso;
     private float HorasDeEspera;
+    private String Companhia;
+
 
     public AcidentesDeTrabalho(String numProcesso) {
         NumProcesso = numProcesso;
     }
 
-    public AcidentesDeTrabalho(){
+
+    public AcidentesDeTrabalho() {
+    }
+
+    public String getCompanhia() {
+        return Companhia;
+    }
+
+    public void setCompanhia(String companhia) {
+        Companhia = companhia;
 
     }
 

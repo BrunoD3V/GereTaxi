@@ -3,12 +3,12 @@ package p4.geretaxi;
 import android.util.Log;
 
 import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -17,7 +17,7 @@ public class GereAcidentesDeTrabalho {
 
     SoapHandler soapHandler;
 
-    public boolean inserirAcidenteDeTrabalho(AcidentesDeTrabalho acidente){
+   public boolean inserirAcidenteDeTrabalho(AcidentesDeTrabalho acidente){
 
         soapHandler = new SoapHandler("inserirAcidenteDeTrabalho");
         SoapObject inserirAcidenteDeTrabalho = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
