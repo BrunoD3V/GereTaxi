@@ -96,11 +96,15 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
         if(helper.isNetworkAvailable(this)){
             XMLHandler parser = new XMLHandler();
+
+       //     if (parser.loadGpxData(Xml.newPullParser(), processo) != null)
             mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "teste");
-            if (mCapturedLocations == null || mCapturedLocations.size()<2){  //nunca executa este método
+
+            if (mCapturedLocations.size()<2){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
+                return;
             }
 
             GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
@@ -130,8 +134,7 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
                 lngs.add(i,mCapturedLocations.get(i).lng);
             }
 
-
-            Intent intent = new Intent(this, ParticularActivity.class);
+            Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
             intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);

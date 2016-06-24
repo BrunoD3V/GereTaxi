@@ -6,7 +6,7 @@ public class SoapHandler {
     private static String URL;
     private static String METHOD_NAME;
     private static String SOAP_ACTION;
-    private static String IP = "192.168.1.3";
+    private static String IP = "172.17.2.175";
 
     public SoapHandler(String methodName){
         NAMESPACE = "http://GereTaxiPackage/";

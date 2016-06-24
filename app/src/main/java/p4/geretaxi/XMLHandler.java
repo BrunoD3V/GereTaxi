@@ -228,13 +228,14 @@ public class XMLHandler {
 
         } catch (XmlPullParserException e) {
             e.printStackTrace();
-            return null;
+            System.out.println("NULLLLLLL");
+           // return null;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return null;
+           // return null;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+           // return null;
         }
         return latLngs;
     }
