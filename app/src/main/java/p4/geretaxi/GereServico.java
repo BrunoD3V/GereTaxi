@@ -21,6 +21,7 @@ public class GereServico {
 
         SoapObject insert = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
 
+
         SoapObject sServico = new SoapObject(soapHandler.getNAMESPACE(),"servico");
 
         sServico.addProperty("custoPortagens", String.valueOf(servico.getCustoPortagens()));
@@ -36,9 +37,7 @@ public class GereServico {
         sServico.addProperty("processo", servico.getProcesso());
         sServico.addProperty("tipo", "tipo");
         sServico.addProperty("trajeto", "olaa");
-
-
-
+        
         insert.addSoapObject(sServico);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -46,6 +45,8 @@ public class GereServico {
         envelope.setOutputSoapObject(insert);
 
         System.out.println(sServico.toString());
+
+
 
         envelope.implicitTypes = true;
 

@@ -80,6 +80,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+
     }
 
     public void inserirServico() {
