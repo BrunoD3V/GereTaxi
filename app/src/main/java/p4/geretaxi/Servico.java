@@ -29,6 +29,22 @@ public class Servico implements Serializable{
         this.tipo = tipo;
     }
 
+    public Servico(Double custoPortagens, String data, String destino, Double distancia, String horaDeInicio, Double horasDeEspera, int id, String nomeCliente, Integer numPassageiros, String origem, String processo, String tipo) {
+        this.custoPortagens = custoPortagens;
+        this.data = data;
+        this.destino = destino;
+        this.distancia = distancia;
+        this.horaDeInicio = horaDeInicio;
+        this.horasDeEspera = horasDeEspera;
+        this.id = id;
+        this.nomeCliente = nomeCliente;
+        this.numPassageiros = numPassageiros;
+        this.origem = origem;
+        this.processo = processo;
+        this.tipo = tipo;
+        this.trajeto = null;
+    }
+
     public Servico(String processo) {
 
         this.processo = processo;

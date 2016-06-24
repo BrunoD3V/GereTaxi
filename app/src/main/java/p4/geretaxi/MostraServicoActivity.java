@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,7 +57,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
     public void populateListView() {
 
-        adapter = new ArrayAdapter<String>(this, R.layout.item_list, listItems);
+        adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
 
                 textViewMostraServico.setText(R.string.assistencia_em_viagem);
                 servico = (Servico) getIntent().getSerializableExtra("ser");
@@ -70,19 +71,26 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 listItems.add(Constants.PASSAGEIROS + servico.getNumPassageiros().toString());
                 listItems.add(Constants.PORTAGENS + servico.getCustoPortagens().toString());
                 listItems.add(Constants.ESPERA + servico.getHorasDeEspera());
-                listItems.add(Constants.DISTANCIA +
-                        String.valueOf(servico.getDistancia() + Constants.KMS));
+                listItems.add(Constants.DISTANCIA + String.valueOf(servico.getDistancia() + Constants.KMS));
 
     }
 
     public void onClickSubmeterServico(View v) {
-            //TODO
-
+        inserirServico();
 
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+    }
 
-
+    public void inserirServico() {
+        new Thread(new Runnable() {
+            public void run() {
+                GereServico manager = new GereServico();
+                Boolean resultado = manager.inserirServico(servico);
+                Log.d("Objeto:", servico.toString());
+                Log.d("Resposta:", resultado.toString());
+            }
+        }).start();
     }
 
     @Override

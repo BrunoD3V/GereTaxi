@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TesteSoap extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class TesteSoap extends AppCompatActivity {
         setContentView(R.layout.activity_teste_soap);
 
 
-      inserirServico();
+      ListarServicos();
 
     }
 
@@ -36,7 +37,7 @@ public class TesteSoap extends AppCompatActivity {
         new Thread(new Runnable() {
             public void run() {
                 GereServico manager = new GereServico();
-                resultado = manager.inserirServico(new Servico());
+                //resultado = manager.inserirServico());
                 Log.d("Resposta:", resultado.toString());
             }
         }).start();

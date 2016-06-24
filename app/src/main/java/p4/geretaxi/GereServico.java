@@ -1,6 +1,7 @@
 package p4.geretaxi;
 
 import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.MarshalFloat;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -17,29 +18,34 @@ public class GereServico {
     public boolean inserirServico(Servico servico){
 
         soapHandler = new SoapHandler("inserirServico");
-        SoapObject inserirServico = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
 
-        SoapObject soapServico = new SoapObject(soapHandler.getNAMESPACE(),"servico");
+        SoapObject insert = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
 
-        soapServico.addProperty("custoPortagens", servico.getCustoPortagens());
-        soapServico.addProperty("data", servico.getData());
-        soapServico.addProperty("destino", servico.getDestino());
-        soapServico.addProperty("distancia", servico.getDistancia());
-        soapServico.addProperty("horaDeInicio", servico.getHoraDeInicio());
-        soapServico.addProperty("horasDeEsoera", servico.getHorasDeEspera());
-        soapServico.addProperty("id", servico.getId());
-        soapServico.addProperty("nomeCliente", servico.getNomeCliente());
-        soapServico.addProperty("numPassageiros", servico.getNumPassageiros());
-        soapServico.addProperty("origem", servico.getOrigem());
-        soapServico.addProperty("processo", servico.getProcesso());
-        soapServico.addProperty("tipo", servico.getTipo());
-        soapServico.addProperty("trajeto", servico.getTrajeto());
+        SoapObject sServico = new SoapObject(soapHandler.getNAMESPACE(),"servico");
 
-        inserirServico.addSoapObject(soapServico);
+        sServico.addProperty("custoPortagens", String.valueOf(servico.getCustoPortagens()));
+        sServico.addProperty("data", servico.getData());
+        sServico.addProperty("destino", servico.getDestino());
+        sServico.addProperty("distancia", String.valueOf(servico.getDistancia()));
+        sServico.addProperty("horaDeInicio", servico.getHoraDeInicio());
+        sServico.addProperty("horasDeEspera", String.valueOf(servico.getHorasDeEspera()));
+        sServico.addProperty("id", servico.getId());
+        sServico.addProperty("nomeCliente", servico.getNomeCliente());
+        sServico.addProperty("numPassageiros", servico.getNumPassageiros());
+        sServico.addProperty("origem", servico.getOrigem());
+        sServico.addProperty("processo", servico.getProcesso());
+        sServico.addProperty("tipo", "tipo");
+        sServico.addProperty("trajeto", "olaa");
+
+
+
+        insert.addSoapObject(sServico);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-        envelope.setOutputSoapObject(inserirServico);
+        envelope.setOutputSoapObject(insert);
+
+        System.out.println(sServico.toString());
 
         envelope.implicitTypes = true;
 
@@ -48,7 +54,7 @@ public class GereServico {
         try {
             http.call(soapHandler.getSoapAction(), envelope);
 
-            SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+            SoapObject response = (SoapObject) envelope.getResponse();
 
             return Boolean.parseBoolean(response.toString());
         } catch (IOException e) {
