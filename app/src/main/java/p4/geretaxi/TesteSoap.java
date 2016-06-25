@@ -26,9 +26,9 @@ public class TesteSoap extends AppCompatActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                GereServico manager = new GereServico();
-                 lista = manager.listarServico();
-                Log.d("Listagem:", lista.toString());
+               // GereServico manager = new GereServico();
+                // lista = manager.listarServico();
+               // Log.d("Listagem:", lista.toString());
             }
         }).start();
     }

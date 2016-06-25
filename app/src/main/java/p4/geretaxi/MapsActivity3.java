@@ -74,7 +74,7 @@ public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onDialogMessage(String portagem) {
+    public void onDialogMessage(String portagem, int confirm) {
 
     }
 }

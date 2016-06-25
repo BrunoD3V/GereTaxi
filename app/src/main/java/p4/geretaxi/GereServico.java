@@ -1,9 +1,13 @@
 package p4.geretaxi;
 
+import android.util.Log;
+
 import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -13,16 +17,16 @@ import java.util.Vector;
 
 public class GereServico {
 
-    SoapHandler soapHandler;
+    private static String NAMESPACE = "http://GereTaxiPackage/";
+    private static String URL = "http://192.168.1.5:8080/GereTaxi/WSGereTaxi?xsd=1";
+    private static String  METHOD_NAME = "inserirServico";
+    private static String SOAP_ACTION = "http://GereTaxiPackage/inserirServico" ;
 
     public boolean inserirServico(Servico servico){
 
-        soapHandler = new SoapHandler("inserirServico");
+        SoapObject insert = new SoapObject(NAMESPACE,METHOD_NAME);
 
-        SoapObject insert = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
-
-
-        SoapObject sServico = new SoapObject(soapHandler.getNAMESPACE(),"servico");
+        SoapObject sServico = new SoapObject(NAMESPACE,"servico");
 
         sServico.addProperty("custoPortagens", String.valueOf(servico.getCustoPortagens()));
         sServico.addProperty("data", servico.getData());
@@ -38,35 +42,44 @@ public class GereServico {
         sServico.addProperty("tipo", "tipo");
         sServico.addProperty("trajeto", "olaa");
 
-        insert.addSoapObject(sServico);
+
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+
+        insert.addSoapObject(sServico);
 
         envelope.setOutputSoapObject(insert);
 
         System.out.println(sServico.toString());
 
 
+        HttpTransportSE http = new HttpTransportSE(URL);
 
-        envelope.implicitTypes = true;
+        http.debug = true;
 
-        HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
 
         try {
-            http.call(soapHandler.getSoapAction(), envelope);
+            http.call(SOAP_ACTION, envelope);
 
-            SoapObject response = (SoapObject) envelope.getResponse();
+            SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
             return Boolean.parseBoolean(response.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+
         } catch (XmlPullParserException e) {
             e.printStackTrace();
-            return false;
+        } catch (HttpResponseException e) {
+            e.printStackTrace();
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
+        return false;
 
+
+    }
+/*
     public boolean excluirServico(Servico servico){
         soapHandler = new SoapHandler("excluirServico");
         SoapObject excluirServico = new SoapObject(soapHandler.getNAMESPACE(),soapHandler.getMethodName());
@@ -92,13 +105,15 @@ public class GereServico {
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
         envelope.setOutputSoapObject(excluirServico);
-
+        
         envelope.implicitTypes = true;
 
         HttpTransportSE http = new HttpTransportSE(soapHandler.getURL());
 
+
         try {
             http.call(soapHandler.getSoapAction(), envelope);
+
 
             SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
@@ -216,5 +231,5 @@ public class GereServico {
 
     public boolean meteID(String id) {
         return false;
-    }
+    }*/
 }

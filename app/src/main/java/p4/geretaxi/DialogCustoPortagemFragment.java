@@ -36,7 +36,6 @@ public class DialogCustoPortagemFragment extends DialogFragment implements View.
         no.setOnClickListener(this);
         editTextPortagem = (EditText) view.findViewById(R.id.editTextCusto);
 
-
         return view;
     }
 
@@ -44,11 +43,11 @@ public class DialogCustoPortagemFragment extends DialogFragment implements View.
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_yes:
-                communicator.onDialogMessage(editTextPortagem.getText().toString());
+                communicator.onDialogMessage(editTextPortagem.getText().toString(),1);
                 this.dismiss();
                 break;
             case R.id.btn_no:
-                communicator.onDialogMessage("0.0");
+                communicator.onDialogMessage("0.0",0);
                 this.dismiss();
                 break;
             default:
@@ -57,7 +56,7 @@ public class DialogCustoPortagemFragment extends DialogFragment implements View.
         dismiss();
     }
     interface Communicator {
-        public void onDialogMessage(String portagem);
+        public void onDialogMessage(String portagem, int confirm);
     }
 
 

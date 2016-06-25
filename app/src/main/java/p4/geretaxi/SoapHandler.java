@@ -2,10 +2,10 @@ package p4.geretaxi;
 
 public class SoapHandler {
 
-    private static String NAMESPACE;
+    private String NAMESPACE;
     private static String URL;
-    private static String METHOD_NAME;
-    private static String SOAP_ACTION;
+    private String METHOD_NAME;
+    private String SOAP_ACTION;
     private static String SERVER_IP = "192.168.1.5";
 
     public SoapHandler(String methodName){
@@ -27,7 +27,7 @@ public class SoapHandler {
         return METHOD_NAME;
     }
 
-    public static void setMethodName(String methodName) {
+    public void setMethodName(String methodName) {
         METHOD_NAME = methodName;
     }
 

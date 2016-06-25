@@ -52,7 +52,8 @@
             android:label="@string/title_activity_maps3" />
         <activity android:name=".MostraServicoActivity" />
         <activity android:name=".TesteSoap" />
-        <activity android:name=".StorePreferencesActivity"></activity>
+        <activity android:name=".StorePreferencesActivity" />
+        <activity android:name=".FormularioDeServico"></activity>
     </application>
 
 </manifest>

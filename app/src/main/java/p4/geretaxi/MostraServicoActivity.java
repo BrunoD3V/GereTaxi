@@ -95,7 +95,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         inserirServico();
 
         Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
+        //startActivity(intent);
 
     }
 
@@ -108,6 +108,12 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 Log.d("Resposta:", resultado.toString());
             }
         }).start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

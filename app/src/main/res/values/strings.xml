@@ -8,21 +8,21 @@
     <string name="mostra_servi_o">Mostrar Serviço</string>
     <string name="iniciar_servico">Iniciar Serviço</string>
     <string name="escolhe_tipo_servico">Escolha o tipo de Serviço</string>
-    <string name="terminar_servico">terminar_servico</string>
+    <string name="terminar_servico">Terminar_Servico</string>
     <string name="terminar">Terminar</string>
     <string name="title_activity_maps2">Map</string>
     <string name="rejeitar_servi_o">Rejeitar Serviço</string>
     <string name="aceitar_servi_o">Aceitar Serviço</string>
     <string name="title_activity_maps3">Map</string>
-    <string name="seguradora">Seguradora</string>
-    <string name="n_mero_de_passageiros">Número de passageiros</string>
-    <string name="introduza_o_valor_das_portagens">Introduza o valor das portagens</string>
+    <string name="seguradora">Cliente</string>
+    <string name="n_mero_de_passageiros">Número de Passageiros</string>
+    <string name="introduza_o_valor_das_portagens">Introduza o valor das Portagens</string>
     <string name="cancelar">Cancelar</string>
-    <string name="ok">Ok</string>
+    <string name="ok">Confirmar</string>
 
 
     <string name="submeter">Submeter</string>
-    <string name="corriga_os_dados">Corriga os dados</string>
+    <string name="corriga_os_dados">Corrija os dados</string>
     <string name="assistencia_em_viagem">Assistência em viagem</string>
     <string name="insira_um_numero">Insira um número</string>
     <string name="insira_um_valor_valido">Insira um valor válido</string>
@@ -37,7 +37,6 @@
     <string name="confirme_password">Confirme Password</string>
     <string name="detetar_localiza_o">Detetar Localização</string>
     <string name="submeter1sttime">Submeter</string>
-
 
 
 </resources>

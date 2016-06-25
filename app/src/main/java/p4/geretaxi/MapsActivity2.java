@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,13 +21,8 @@ import java.util.List;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator {
 
-
-
     private GoogleMap mMap;
-
     private Servico servico;
-
-
     private String tipo;
     private boolean portagens;
     List<LatLng> mCapturedLocations;
@@ -46,6 +42,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         buttonAceitar = (Button) findViewById(R.id.buttonAceitar);
         buttonInserePortagens = (Button) findViewById(R.id.buttonInserePortagens);
 
+        portagens = getIntent().getBooleanExtra("portagem", false);
+
         if (portagens) {
             buttonInserePortagens.setVisibility(View.VISIBLE);
             buttonAceitar.setVisibility(View.INVISIBLE);
@@ -54,30 +52,19 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             buttonAceitar.setVisibility(View.VISIBLE);
         }
 
-
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
 
         System.out.println("MAPA");
         System.out.println(servico.getTipo());
 
-
-        portagens = getIntent().getBooleanExtra("portagem", false);
-
-
-
         ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
         ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
-
-
 
         mCapturedLocations = new ArrayList<>();
         for (int i = 0; i < lats.size(); i++) {
             LatLng e = new LatLng(lats.get(i), lngs.get(i));
             mCapturedLocations.add(i,e);
         }
-
-
-
     }
 
     @Override
@@ -104,10 +91,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         android.app.FragmentManager manager = getFragmentManager();
         DialogCustoPortagemFragment dialogCustoPortagemFragment = new DialogCustoPortagemFragment();
         dialogCustoPortagemFragment.show(manager, "DialogPortagens");
-        buttonAceitar.setVisibility(View.VISIBLE);
-        buttonInserePortagens.setVisibility(View.INVISIBLE);
-
-
     }
 
     public void onClickAceitarServico(View v) {
@@ -120,22 +103,31 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         XMLHandler writer = new XMLHandler();
 
         writer.writeTrajecto(mCapturedLocations, servico.getProcesso());
-
-
     }
 
     public void onClickRejeitarServico(View v) {
-
+        Intent intent = new Intent(this, MostraServicoActivity.class);
+        startActivity(intent);
     }
 
     @Override
-    public void onDialogMessage(String portagem) {
-
+    public void onDialogMessage(String portagem, int confirm) {
         servico.setCustoPortagens(Double.parseDouble(portagem));
+        int DialogResponse = confirm;
 
+        switch (confirm) {
+            case 0:
+                Toast.makeText(getApplicationContext(),"Por favor insira o custo das Portagens.", Toast.LENGTH_LONG).show();
+                break;
+            case 1:
+                buttonAceitar.setVisibility(View.VISIBLE);
+                buttonInserePortagens.setVisibility(View.INVISIBLE);
+
+                break;
+            default:
+                break;
+        }
 
 
     }
-
-
 }

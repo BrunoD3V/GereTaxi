@@ -108,7 +108,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             XMLHandler parser = new XMLHandler();
 
        //     if (parser.loadGpxData(Xml.newPullParser(), processo) != null)
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "teste");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
 
             if (mCapturedLocations.size()<1){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -156,7 +156,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
         else {
             Helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "teste");
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "comPortagem");
 
             servico.setOrigem(mCapturedLocations.get(0).toString());
             servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());

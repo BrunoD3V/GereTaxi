@@ -61,15 +61,15 @@
         android:background="@android:color/holo_green_dark" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/inserir_portagens"
         android:id="@+id/buttonInserePortagens"
+        android:onClick="onClickPortagens"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/buttonRejeitar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/buttonRejeitar"
-        android:onClick="onClickPortagens" />
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_blue_light" />
 
 </RelativeLayout>

@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-
-        ListarServicos();
     }
 
     public void onClickMain(View v) {
@@ -54,14 +52,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void ListarServicos(){
 
-        new Thread(new Runnable() {
-            public void run() {
-                GereServico manager = new GereServico();
-                lista = manager.listarServico();
-                Log.d("Listagem:", lista.toString());
-            }
-        }).start();
-    }
 }

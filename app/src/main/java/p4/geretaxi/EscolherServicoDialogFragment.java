@@ -9,8 +9,6 @@ import android.os.Bundle;
 
 public class EscolherServicoDialogFragment extends DialogFragment {
 
-
-
     public EscolherServicoDialogFragment(){
 
     }
@@ -52,6 +50,4 @@ public class EscolherServicoDialogFragment extends DialogFragment {
         EscolherServicoDialogFragment f = new EscolherServicoDialogFragment();
         return f;
     }
-
-
 }
