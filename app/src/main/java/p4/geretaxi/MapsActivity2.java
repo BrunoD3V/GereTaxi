@@ -46,6 +46,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         buttonAceitar = (Button) findViewById(R.id.buttonAceitar);
         buttonInserePortagens = (Button) findViewById(R.id.buttonInserePortagens);
 
+        portagens = getIntent().getBooleanExtra("portagem", false);
+
         if (portagens) {
             buttonInserePortagens.setVisibility(View.VISIBLE);
             buttonAceitar.setVisibility(View.INVISIBLE);
@@ -61,7 +63,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         System.out.println(servico.getTipo());
 
 
-        portagens = getIntent().getBooleanExtra("portagem", false);
+
 
 
 

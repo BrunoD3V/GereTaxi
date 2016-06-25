@@ -1,11 +1,16 @@
 package p4.geretaxi;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import se.simbio.encryption.Encryption;
+
 public class StorePreferencesActivity extends AppCompatActivity {
+
+    public static final String FRAGTAG = "BasicAndroidKeyStoreFragment";
+
 
     EditText edtEmail;
     EditText edtPassword;
@@ -27,10 +32,16 @@ public class StorePreferencesActivity extends AppCompatActivity {
 
     public void onClickDetetar(View v) {
 
+
     }
 
     public void onClickSubmeter(View v) {
 
-        Shared
+        Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+        String encrypted = encryption.encryptOrNull(edtPassword.getText().toString());
+        String decrypted = encryption.decryptOrNull(encrypted);
+
+
+
     }
 }
