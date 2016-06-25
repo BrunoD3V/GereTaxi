@@ -106,7 +106,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     }
 
     public void onClickRejeitarServico(View v) {
-        Intent intent = new Intent(this, MostraServicoActivity.class);
+        Intent intent = new Intent(this, FormularioDeServico.class);
         startActivity(intent);
     }
 
