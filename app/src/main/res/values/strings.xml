@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GereTaxi</string>
     <string name="title_activity_maps">Map</string>
-    <string name="processo">processo</string>
+    <string name="processo">Nº Processo</string>
     <string name="iniciar_servi_o">Iniciar Serviço</string>
     <string name="terminar_servi_o">Terminar Serviço</string>
     <string name="mostrar_dist_ncia">Mostrar Distância</string>
@@ -28,8 +28,16 @@
     <string name="insira_um_valor_valido">Insira um valor válido</string>
     <string name="inserir_portagens">Inserir Portagens</string>
     <string name="aceitar_servico">Aceitar Serviço</string>
+
     <string name="acidente_de_trabalho">Acidente de Trabalho</string>
     <string name="particular">Serviço Particular</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirme_password">Confirme Password</string>
+    <string name="detetar_localiza_o">Detetar Localização</string>
+    <string name="submeter1sttime">Submeter</string>
+
 
 
 </resources>

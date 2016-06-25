@@ -9,4 +9,116 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="p4.geretaxi.StorePreferencesActivity">
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/edtEmail"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/email"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/edtPassword"
+        android:layout_below="@+id/edtEmail"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/password"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/edtConfirmPassword"
+        android:layout_below="@+id/edtPassword"
+        android:layout_alignLeft="@+id/edtPassword"
+        android:layout_alignStart="@+id/edtPassword"
+        android:hint="@string/confirme_password"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Coordenadas Praça de Taxis"
+        android:id="@+id/txtPracaTaxis"
+        android:layout_below="@+id/edtConfirmPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Guarde a Localização automaticamente se estiver na Praça de Taxis"
+        android:id="@+id/txtInfoPraca"
+        android:layout_below="@+id/txtPracaTaxis"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detetar_localiza_o"
+        android:id="@+id/btnDetetarLocalização"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_blue_dark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="OU"
+        android:id="@+id/txtOu"
+        android:layout_below="@+id/btnDetetarLocalização"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Insira as Coordenadas da Praça de Taxis"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/txtOu"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtLatitude"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:hint="Latitude"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtLongitude"
+        android:layout_below="@+id/edtLatitude"
+        android:layout_centerHorizontal="true"
+        android:hint="Longitude"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/submeter1sttime"
+        android:id="@+id/btnSubmeterInfo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_green_dark" />
+
 </RelativeLayout>

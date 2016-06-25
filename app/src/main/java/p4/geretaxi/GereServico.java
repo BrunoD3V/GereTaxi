@@ -37,7 +37,7 @@ public class GereServico {
         sServico.addProperty("processo", servico.getProcesso());
         sServico.addProperty("tipo", "tipo");
         sServico.addProperty("trajeto", "olaa");
-        
+
         insert.addSoapObject(sServico);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
