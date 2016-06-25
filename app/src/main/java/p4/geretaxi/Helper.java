@@ -137,9 +137,11 @@ public class Helper {
                 .getDefaultSharedPreferences(MyApplication.getAppContext());
         AppStart appStart = AppStart.NORMAL;
         try {
-            pInfo = MyApplication.getAppContext().getPackageManager().getPackageInfo(MyApplication.getAppContext().getPackageName(), 0);
+
+            pInfo = MyApplication.getAppContext().getPackageManager().getPackageInfo(MyApplication.getAppContext().getApplicationContext().getPackageName(), 0);
             int lastVersionCode = sharedPreferences
                     .getInt(LAST_APP_VERSION, -1);
+
             int currentVersionCode = pInfo.versionCode;
             appStart = checkAppStart(currentVersionCode, lastVersionCode);
             // Update version in preferences
