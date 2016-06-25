@@ -54,9 +54,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
 
-        System.out.println("MAPA");
-        System.out.println(servico.getTipo());
-
         ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
         ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
 
@@ -114,7 +111,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     public void onDialogMessage(String portagem, int confirm) {
         servico.setCustoPortagens(Double.parseDouble(portagem));
         int DialogResponse = confirm;
-
         switch (confirm) {
             case 0:
                 Toast.makeText(getApplicationContext(),"Por favor insira o custo das Portagens.", Toast.LENGTH_LONG).show();
@@ -122,12 +118,9 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             case 1:
                 buttonAceitar.setVisibility(View.VISIBLE);
                 buttonInserePortagens.setVisibility(View.INVISIBLE);
-
                 break;
             default:
                 break;
         }
-
-
     }
 }
