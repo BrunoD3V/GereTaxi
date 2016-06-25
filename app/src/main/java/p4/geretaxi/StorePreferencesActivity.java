@@ -26,8 +26,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtConfirmPassword = (EditText) findViewById(R.id.edtConfirmPassword);
-        edtLatitude = (EditText) findViewById(R.id.edtLatitude);
-        edtLongitude = (EditText) findViewById(R.id.edtLongitude);
+
     }
 
     public void onClickDetetar(View v) {
