@@ -43,6 +43,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
         editTextPassageiros = (EditText) findViewById(R.id.editTextPassageiros);
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
 
+
+        servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+        System.out.println(servico.getTipo());
     }
 
     public void onClickIniciar(View v) {

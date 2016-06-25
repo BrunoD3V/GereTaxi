@@ -1,12 +1,12 @@
 package p4.geretaxi;
 
 import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.MarshalFloat;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -212,5 +212,9 @@ public class GereServico {
         }
 
         return servico;
+    }
+
+    public boolean meteID(String id) {
+        return false;
     }
 }

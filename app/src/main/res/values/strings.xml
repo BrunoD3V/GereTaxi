@@ -28,6 +28,8 @@
     <string name="insira_um_valor_valido">Insira um valor válido</string>
     <string name="inserir_portagens">Inserir Portagens</string>
     <string name="aceitar_servico">Aceitar Serviço</string>
+    <string name="acidente_de_trabalho">Acidente de Trabalho</string>
+    <string name="particular">Serviço Particular</string>
 
 
 </resources>

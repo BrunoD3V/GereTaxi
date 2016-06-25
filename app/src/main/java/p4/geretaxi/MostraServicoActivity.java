@@ -34,8 +34,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
         listViewMostraServico = (ListView) findViewById(R.id.listViewMostraServico);
         textViewMostraServico = (TextView) findViewById(R.id.textViewMostraServico);
-        tipo = getIntent().getExtras().getString(Constants.TIPO_SERVICO);
-
+        servico = (Servico)getIntent().getSerializableExtra("ser");
 
 
 
@@ -59,19 +58,36 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
         adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
 
+        System.out.println("MOSTRA");
+        System.out.println(servico.getTipo());
+        switch (servico.getTipo()) {
+            case Constants.VIAGEM:
                 textViewMostraServico.setText(R.string.assistencia_em_viagem);
-                servico = (Servico) getIntent().getSerializableExtra("ser");
+                break;
+            case Constants.ACIDENTE:
+                textViewMostraServico.setText(R.string.acidente_de_trabalho);
+                break;
+            case Constants.PARTICULAR:
+                textViewMostraServico.setText(R.string.particular);
+                break;
+            default:
+                break;
 
-                listItems.add(Constants.PROCESSO + servico.getProcesso());
-                listItems.add(Constants.NOME_CLIENTE + servico.getNomeCliente());
-                listItems.add(Constants.DATA + servico.getData());
-                listItems.add(Constants.HORA + servico.getHoraDeInicio());
-                listItems.add(Constants.ORIGEM + servico.getOrigem());
-                listItems.add(Constants.DESTINO + servico.getDestino());
-                listItems.add(Constants.PASSAGEIROS + servico.getNumPassageiros().toString());
-                listItems.add(Constants.PORTAGENS + servico.getCustoPortagens().toString());
-                listItems.add(Constants.ESPERA + servico.getHorasDeEspera());
-                listItems.add(Constants.DISTANCIA + String.valueOf(servico.getDistancia() + Constants.KMS));
+        }
+
+
+        servico = (Servico) getIntent().getSerializableExtra("ser");
+
+        listItems.add(Constants.PROCESSO + servico.getProcesso());
+        listItems.add(Constants.NOME_CLIENTE + servico.getNomeCliente());
+        listItems.add(Constants.DATA + servico.getData());
+        listItems.add(Constants.HORA + servico.getHoraDeInicio());
+        listItems.add(Constants.ORIGEM + servico.getOrigem());
+        listItems.add(Constants.DESTINO + servico.getDestino());
+        listItems.add(Constants.PASSAGEIROS + servico.getNumPassageiros().toString());
+        listItems.add(Constants.PORTAGENS + servico.getCustoPortagens().toString());
+        listItems.add(Constants.ESPERA + servico.getHorasDeEspera());
+        listItems.add(Constants.DISTANCIA + String.valueOf(servico.getDistancia() + Constants.KMS));
 
     }
 

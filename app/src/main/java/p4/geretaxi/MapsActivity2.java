@@ -57,8 +57,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
 
-
-
+        System.out.println("MAPA");
+        System.out.println(servico.getTipo());
 
 
         portagens = getIntent().getBooleanExtra("portagem", false);
@@ -114,7 +114,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         Intent intent = new Intent(this, MostraServicoActivity.class);
         intent.putExtra("ser",servico);
-        intent.putExtra(Constants.TIPO_SERVICO, servico.getTipo());
+
         startActivity(intent);
 
         XMLHandler writer = new XMLHandler();

@@ -12,7 +12,7 @@ public class SoapHandler {
         NAMESPACE = "http://GereTaxiPackage/";
         URL = "http://"+SERVER_IP+":8080/GereTaxi/WSGereTaxi";
         METHOD_NAME = methodName;
-        SOAP_ACTION = "http://GereTaxiPackage/inserirServico";
+        SOAP_ACTION = NAMESPACE + METHOD_NAME;
     }
 
     public String getIP() {

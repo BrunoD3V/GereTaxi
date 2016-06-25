@@ -5,9 +5,9 @@ package p4.geretaxi;
  */
 public class Constants {
 
-    public static final String ACIDENTE = "Acidente";
-    public static final String VIAGEM = "Viagem";
-    public static final String PARTICULAR = "Particular";
+    public static final String ACIDENTE = "Acidente de Trabalho";
+    public static final String VIAGEM = " Assistência em Viagem";
+    public static final String PARTICULAR = "Serviço Particular";
 
     public static final String TIPO_SERVICO = "tipo";
 
