@@ -1,12 +1,11 @@
 package p4.geretaxi;
 
-/**
- * Created by belchior on 23/06/2016.
- */
 public class Constants {
 
     public static final String ACIDENTE = "Acidente de Trabalho";
+
     public static final String VIAGEM = " Assistência em Viagem";
+
     public static final String PARTICULAR = "Serviço Particular";
 
     public static final String TIPO_SERVICO = "Tipo: ";
@@ -61,9 +60,8 @@ public class Constants {
 
     public static final String IP = "192.168.1.5";
 
-    public static final String TRAJECTO = "Trajecto";
+    public static final String TRAJECTO = "Trajecto: ";
 
     public static final String PONTO_XML = ".xml";
-
-
+    
 }

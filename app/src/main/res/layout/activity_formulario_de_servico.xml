@@ -25,7 +25,7 @@
         android:layout_below="@+id/txtServico"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Processo"
+        android:hint="Processo *"
         android:layout_alignRight="@+id/edtCliente"
         android:layout_alignEnd="@+id/edtCliente" />
 
@@ -36,7 +36,7 @@
         android:layout_below="@+id/edtProcesso"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Cliente"
+        android:hint="Cliente *"
         android:layout_toStartOf="@+id/btnHoraDeInicio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Data"
+        android:text="Data *"
         android:id="@+id/txtDataDisplay"
         android:layout_below="@+id/edtCliente"
         android:layout_alignParentLeft="true"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nº de Passageiros"
+        android:text="Nº de Passageiros *"
         android:id="@+id/txtNumPassageiros"
         android:layout_above="@+id/btnData"
         android:layout_below="@+id/edtCliente"
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Hora de Inicio"
+        android:text="Hora de Inicio *"
         android:id="@+id/txtHoraDisplay"
         android:layout_below="@+id/btnData"
         android:layout_alignParentLeft="true"
@@ -115,7 +115,7 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:id="@+id/edtOrigem"
-        android:hint="Origem"
+        android:hint="Origem *"
         android:layout_below="@+id/btnHoraDeInicio"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -126,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edtDestino"
-        android:hint="Destino"
+        android:hint="Destino *"
         android:layout_below="@+id/btnHoraDeInicio"
         android:layout_alignRight="@+id/numberPicker"
         android:layout_alignEnd="@+id/numberPicker"
@@ -144,7 +144,7 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/edtDestino"
         android:layout_toLeftOf="@+id/edtDestino"
-        android:hint="Custos de Portagens" />
+        android:hint="Custos de Portagens " />
 
     <EditText
         android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
         android:layout_alignTop="@+id/edtCustoPortagens"
         android:layout_toRightOf="@+id/edtCustoPortagens"
         android:layout_toEndOf="@+id/edtCustoPortagens"
-        android:hint="Distancia Percorrida" />
+        android:hint="Distancia (Km) *" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -178,13 +178,13 @@
         android:layout_toRightOf="@+id/edtHorasDeEspera"
         android:layout_alignRight="@+id/edtDistancia"
         android:layout_alignEnd="@+id/edtDistancia"
-        android:hint="Trajeto" />
+        android:hint="Trajeto *" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Tipo de Serviço"
+        android:text="Tipo de Serviço *"
         android:id="@+id/txtTipoDeServico"
         android:layout_below="@+id/edtHorasDeEspera"
         android:layout_alignParentLeft="true"

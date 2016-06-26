@@ -13,12 +13,10 @@ public class StorePreferencesActivity extends AppCompatActivity {
 
     public static final String FRAGTAG = "BasicAndroidKeyStoreFragment";
 
-
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
-    EditText edtLatitude;
-    EditText edtLongitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +26,6 @@ public class StorePreferencesActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtConfirmPassword = (EditText) findViewById(R.id.edtConfirmPassword);
-
-
-
-
-
-
-
-
-
     }
 
     public void onClickbtnSubmeterInfo(View v) {
