@@ -9,13 +9,16 @@ import android.widget.Toast;
 
 import se.simbio.encryption.Encryption;
 
+
 public class StorePreferencesActivity extends AppCompatActivity {
 
-    public static final String FRAGTAG = "BasicAndroidKeyStoreFragment";
+
 
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
+
+
 
 
     @Override
@@ -46,31 +49,52 @@ public class StorePreferencesActivity extends AppCompatActivity {
 
         String encrypted = encryption.encryptOrNull(pass);
         SharedPreference sharedPreference = new SharedPreference();
-
+        GereBD bd = new GereBD();
         if (Helper.isNetworkAvailable(getApplicationContext())){
-            if(true) {//TODO fazer o registo no webservice
+            switch (bd.checkLogin(email, encrypted)) {
+                case -2 :
+                        registoOffline(email, encrypted);
+                    break;
+                case -1:
+                    int res = bd.registarMotorista(email, encrypted);
+                    if (res == -1){
+                        Toast.makeText(getApplicationContext(), "Erro no registo", Toast.LENGTH_LONG).show();
+                        return;
+                    }
 
+                    sharedPreference.save(getApplicationContext(),email, Constants.EMAIL);
+                    sharedPreference.save(getApplicationContext(), encrypted, Constants.PASS);
 
-                sharedPreference.save(getApplicationContext(),email, Constants.EMAIL);
-                sharedPreference.save(getApplicationContext(), encrypted, Constants.PASS);
-                System.out.println(encrypted);
+                   // sharedPreference.save(getApplicationContext(),);
+                    System.out.println(encrypted);
+                    break;
+            }
+            if(bd.checkLogin(email, encrypted)== -1) {//TODO fazer o registo no webservice
+
             }else {
+                if (true){
+
+                }
 
             }
         } else  {
-            sharedPreference.save(getApplicationContext(),email, Constants.EMAIL);
-            sharedPreference.save(getApplicationContext(), encrypted, Constants.PASS);
-            sharedPreference.save(getApplicationContext(), Constants.REGISTO_SEM_NET, Constants.REGISTO_SEM_NET);
+
 
         }
 
-        if(sharedPreference.findValue(getApplicationContext(), Constants.EMAIL)) {
-            System.out.println("GRAVA CARAGO");
-        }
+
         Intent intent = new Intent(this, MainActivity.class );
         startActivity(intent);
 
 
 
+    }
+
+    private void registoOffline(String email, String password) {
+
+        SharedPreference sharedPreference = new SharedPreference();
+        sharedPreference.save(getApplicationContext(),email, Constants.EMAIL);
+        sharedPreference.save(getApplicationContext(),password, Constants.PASS);
+        sharedPreference.save(getApplicationContext(),Constants.TRUE , Constants.REGISTO_SEM_NET);
     }
 }

@@ -244,6 +244,35 @@ public class XMLHandler {
        return false;
     }
 
+    public String trajectoToString(List<LatLng> locations) {
+        String trajecto=Constants.STRING_VAZIA;
+
+
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+
+        try {
+            xmlSerializer.setOutput(writer);
+
+            xmlSerializer.startDocument("UTF-8", true);
+            xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            for (LatLng p: locations) {
+                xmlSerializer.startTag(null, Constants.WPT);
+                xmlSerializer.attribute(null,Constants.LAT, String.valueOf(p.lat));
+                xmlSerializer.attribute(null, Constants.LON, String.valueOf(p.lng));
+                xmlSerializer.endTag(null, Constants.WPT);
+
+            }
+            xmlSerializer.endDocument();
+            xmlSerializer.flush();
+            trajecto = writer.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return trajecto;
+    }
+
     public boolean verificaProcesso(XmlPullParser parser, String processo) {
         boolean result = false;
         File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
