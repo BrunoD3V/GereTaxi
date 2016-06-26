@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -238,12 +239,12 @@ public class XMLHandler {
         String result = null;
 
         File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJECTO + processo + Constants.PONTO_XML);
-        /*try {
+        try {
             FileInputStream fIS = new FileInputStream(file);
 
-            InputStream is = file.
+            InputStream is = fIS;
             StringBuffer buffer = new StringBuffer();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(file));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -253,7 +254,7 @@ public class XMLHandler {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
         return result;
 
     }
