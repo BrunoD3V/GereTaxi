@@ -73,4 +73,6 @@ public class Constants {
 
     public static final String FALSE = "falso";
 
+    public static final String ID_MOTORISTA = "ID_MOTORISTA";
+
 }

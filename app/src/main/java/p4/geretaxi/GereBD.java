@@ -107,6 +107,10 @@ public class GereBD {
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
+                envelope.implicitTypes = true;
+
+                envelope.setOutputSoapObject(request);
+
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
