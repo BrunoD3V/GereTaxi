@@ -101,23 +101,6 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         startActivity(intent);
     }
 
-    public void inserirServico() {
-        new Thread(new Runnable() {
-            public void run() {
-                GereBD manager = new GereBD();
-                Boolean resultado = manager.inserirServico(servico);
-                Log.d("Objeto:", servico.toString());
-                Log.d("Resposta:", resultado.toString());
-            }
-        }).start();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void onDialogMessage(String dados, int num) {
 

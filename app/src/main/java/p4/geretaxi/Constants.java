@@ -63,5 +63,5 @@ public class Constants {
     public static final String TRAJECTO = "Trajecto: ";
 
     public static final String PONTO_XML = ".xml";
-    
+
 }
