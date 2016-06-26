@@ -1,16 +1,14 @@
 package p4.geretaxi;
 
 import org.ksoap2.SoapEnvelope;
-import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -22,6 +20,7 @@ public class GereBD {
     private static String SOAP_ACTION = NAMESPACE+METHOD_NAME;
     private Boolean result;
     private int loginID;
+    private int res;
     Servico servicoGlobal;
     Cliente clienteGlobal;
 
@@ -30,6 +29,7 @@ public class GereBD {
     }
 
     public int registarMotorista(final String email, final String password){
+        loginID = -2;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -81,6 +81,52 @@ public class GereBD {
         }
 
         return loginID;
+    }
+
+    public int checkLogin(final String email, final String password) {
+        res = -2;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("checkLogin");
+
+                SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+
+                PropertyInfo em = new PropertyInfo();
+                em.type = PropertyInfo.STRING_CLASS;
+                em.setName("email");
+                em.setValue(email);
+
+                PropertyInfo pass = new PropertyInfo();
+                pass.type = PropertyInfo.STRING_CLASS;
+                pass.setName("password");
+                em.setValue(password);
+
+                request.addProperty(em);
+                request.addProperty(pass);
+
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+                HttpTransportSE http = new HttpTransportSE(URL);
+
+                try {
+                    http.call(SOAP_ACTION, envelope);
+                    SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                    res = Integer.parseInt(response.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 /*
     public boolean inserirServico(final Servico servico){

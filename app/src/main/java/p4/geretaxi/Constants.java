@@ -66,6 +66,11 @@ public class Constants {
 
 
     public static final String STRING_VAZIA = "";
-    
+
+    public static final String REGISTO_EXISTE = "Esse utilizador já existe";
+
+    public static final String TRUE = "verdadeiro";
+
+    public static final String FALSE = "falso";
 
 }
