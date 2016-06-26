@@ -1,8 +1,6 @@
 package p4.geretaxi;
-import com.google.maps.model.LatLng;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Servico implements Serializable{
 
@@ -19,17 +17,12 @@ public class Servico implements Serializable{
     private String horaDeInicio;
     private Double horasDeEspera;
     private String trajeto;
-
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    private int idMotorista;
+    SharedPreference sharedPreference;
 
     public Servico(Double custoPortagens, String data, String destino, Double distancia, String horaDeInicio, Double horasDeEspera, int id, String nomeCliente, Integer numPassageiros, String origem, String processo, String tipo) {
+        sharedPreference= new SharedPreference();
+
         this.custoPortagens = custoPortagens;
         this.data = data;
         this.destino = destino;
@@ -43,18 +36,37 @@ public class Servico implements Serializable{
         this.processo = processo;
         this.tipo = tipo;
         this.trajeto = null;
+        this.idMotorista = sharedPreference.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA);
     }
-
     public Servico(String processo) {
-
+        sharedPreference= new SharedPreference();
         this.processo = processo;
         this.horasDeEspera = 0.0;
         this.custoPortagens = 0.0;
+        this.idMotorista = sharedPreference.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA);
     }
 
     public Servico(){
+        sharedPreference= new SharedPreference();
         this.horasDeEspera = 0.0;
         this.custoPortagens = 0.0;
+        this.idMotorista = sharedPreference.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA);
+    }
+
+    public int getIdMotorista() {
+        return idMotorista;
+    }
+
+    public void setIdMotorista(int idMotorista) {
+        this.idMotorista = idMotorista;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Double getCustoPortagens() {
