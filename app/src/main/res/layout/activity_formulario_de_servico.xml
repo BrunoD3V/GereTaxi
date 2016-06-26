@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -19,21 +19,194 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/edtProcesso"
         android:layout_below="@+id/txtServico"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Processo" />
+        android:hint="Processo"
+        android:layout_alignRight="@+id/edtCliente"
+        android:layout_alignEnd="@+id/edtCliente" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edtCliente"
+        android:layout_below="@+id/edtProcesso"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:hint="Cliente"
-        android:layout_below="@+id/txtServico"
+        android:layout_toStartOf="@+id/btnHoraDeInicio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Data"
+        android:id="@+id/txtDataDisplay"
+        android:layout_below="@+id/edtCliente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPicker"
+        android:layout_below="@+id/txtNumPassageiros"
+        android:layout_above="@+id/edtOrigem"
+        android:layout_toRightOf="@+id/btnData"
+        android:layout_alignRight="@+id/txtNumPassageiros"
+        android:layout_alignEnd="@+id/txtNumPassageiros" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nº de Passageiros"
+        android:id="@+id/txtNumPassageiros"
+        android:layout_above="@+id/btnData"
+        android:layout_below="@+id/edtCliente"
+        android:layout_alignRight="@+id/edtCliente"
+        android:layout_alignEnd="@+id/edtCliente"
+        android:layout_toRightOf="@+id/btnData"
+        android:layout_toEndOf="@+id/btnData" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="20dp"
+        android:text="Inserir Data"
+        android:id="@+id/btnData"
+        android:onClick="onClickDatePicker"
+        android:textColor="#ffffff"
+        android:background="#47a3ad"
+        android:layout_below="@+id/txtDataDisplay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Hora de Inicio"
+        android:id="@+id/txtHoraDisplay"
+        android:layout_below="@+id/btnData"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="188dp"
+        android:layout_height="20dp"
+        android:text="Inserir Hora de Inicio"
+        android:id="@+id/btnHoraDeInicio"
+        android:onClick="onClickTimePicker"
+        android:textColor="#ffffff"
+        android:background="@color/common_signin_btn_default_background"
+        android:layout_below="@+id/txtHoraDisplay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnData"
+        android:layout_alignEnd="@+id/btnData" />
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtOrigem"
+        android:hint="Origem"
+        android:layout_below="@+id/btnHoraDeInicio"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnHoraDeInicio"
+        android:layout_alignEnd="@+id/btnHoraDeInicio" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtDestino"
+        android:hint="Destino"
+        android:layout_below="@+id/btnHoraDeInicio"
+        android:layout_alignRight="@+id/numberPicker"
+        android:layout_alignEnd="@+id/numberPicker"
+        android:layout_toRightOf="@+id/btnHoraDeInicio"
+        android:layout_toEndOf="@+id/btnHoraDeInicio" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/edtCustoPortagens"
+        android:layout_below="@+id/edtDestino"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/edtDestino"
+        android:layout_toLeftOf="@+id/edtDestino"
+        android:hint="Custos de Portagens" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/edtDistancia"
+        android:layout_alignTop="@+id/edtCustoPortagens"
+        android:layout_toRightOf="@+id/edtCustoPortagens"
+        android:layout_toEndOf="@+id/edtCustoPortagens"
+        android:hint="Distancia Percorrida" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/edtHorasDeEspera"
+        android:layout_below="@+id/edtCustoPortagens"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/edtDistancia"
+        android:layout_toStartOf="@+id/edtDistancia"
+        android:hint="Horas de Espera" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtTrajeto"
+        android:layout_below="@+id/edtCustoPortagens"
+        android:layout_toRightOf="@+id/edtHorasDeEspera"
+        android:layout_alignRight="@+id/edtDistancia"
+        android:layout_alignEnd="@+id/edtDistancia"
+        android:hint="Trajeto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tipo de Serviço"
+        android:id="@+id/txtTipoDeServico"
+        android:layout_below="@+id/edtHorasDeEspera"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/txtTipoDeServico"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Inserir Serviço"
+        android:id="@+id/btnInserirServico"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_blue_dark"
+        android:onClick="onClickInserirServico" />
 
 </RelativeLayout>

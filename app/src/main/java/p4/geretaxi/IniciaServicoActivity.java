@@ -109,7 +109,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
        //     if (parser.loadGpxData(Xml.newPullParser(), processo) != null)
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "lisboa");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
 
             if (mCapturedLocations.size()<1){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();

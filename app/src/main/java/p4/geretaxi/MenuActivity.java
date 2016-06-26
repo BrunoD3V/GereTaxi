@@ -14,7 +14,6 @@ public class MenuActivity extends AppCompatActivity {
 
     public void onClickIniciarServico(View v) {
         EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();
-
         dialogFragment.show(this.getFragmentManager(), "EscolheServico");
     }
 

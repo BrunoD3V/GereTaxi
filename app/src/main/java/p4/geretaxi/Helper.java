@@ -30,6 +30,14 @@ public class Helper {
         return data;
     }
 
+    public static String getTime()
+    {
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("k:mm");
+        String hora = sdf.format(date);
+        return hora;
+    }
+
     public static boolean doubleTryParse(String text) {
         try {
             Double.parseDouble(text);
@@ -46,14 +54,6 @@ public class Helper {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    public static String getTime()
-    {
-        long date = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("k:mm");
-        String hora = sdf.format(date);
-        return hora;
     }
 
     public  static boolean inicializarDados(String processo) {
