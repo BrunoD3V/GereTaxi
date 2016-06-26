@@ -90,7 +90,7 @@ public class GereBD {
             public void run() {
                 setMethodName("checkLogin");
 
-                SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+                SoapObject request = new SoapObject("http://GereTaxiPackage/","checkLogin");
 
                 PropertyInfo em = new PropertyInfo();
                 em.type = PropertyInfo.STRING_CLASS;
@@ -114,9 +114,11 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call("http://GereTaxiPackage/checkLogin", envelope);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+
                     res = Integer.parseInt(response.toString());
+                    System.out.println("RES DENTRO DA THREAD: " + res);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (XmlPullParserException e) {
