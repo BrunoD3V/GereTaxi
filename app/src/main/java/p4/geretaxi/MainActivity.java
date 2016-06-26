@@ -24,7 +24,10 @@ public class MainActivity extends AppCompatActivity {
         switch (helper.checkAppStart()) {
             case NORMAL:
                 Toast.makeText(getApplicationContext(), "XUPA NORMAL", Toast.LENGTH_SHORT).show();
-
+                /*
+                GereBD bd = new GereBD();
+                int res = bd.registarMotorista("zeca das cabras", "putas");
+                System.out.println(res);*/
                 break;
             case FIRST_TIME_VERSION:
                 Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
@@ -47,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         switch (helper.checkAppStart()) {
             case NORMAL:
                 Toast.makeText(getApplicationContext(), "XUPA NORMAL", Toast.LENGTH_SHORT).show();
-                GestaoBD gestaoBD = new GestaoBD();
-                boolean result = gestaoBD.insereProcesso("xupa");
-                System.out.println(String.valueOf(result));
                 Intent i = new Intent(this, StorePreferencesActivity.class);
                 startActivity(i);
                 break;
