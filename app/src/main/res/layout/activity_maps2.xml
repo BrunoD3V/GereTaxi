@@ -35,7 +35,7 @@
     </FrameLayout>
 
     <Button
-        android:layout_width="190dp"
+        android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:text="@string/rejeitar_servi_o"
         android:id="@+id/buttonRejeitar"
@@ -48,9 +48,9 @@
         android:background="@android:color/holo_red_dark" />
 
     <Button
-        android:layout_width="190dp"
+        android:layout_width="188dp"
         android:layout_height="wrap_content"
-        android:text="Aceitar Serviço"
+        android:text="@string/aceitar_servico"
         android:id="@+id/buttonAceitar"
         android:onClick="onClickAceitarServico"
         android:layout_alignParentBottom="true"
@@ -59,5 +59,17 @@
         android:backgroundTint="@android:color/holo_green_dark"
         android:textColor="#ffffff"
         android:background="@android:color/holo_green_dark" />
+
+    <Button
+        android:text="@string/inserir_portagens"
+        android:id="@+id/buttonInserePortagens"
+        android:onClick="onClickPortagens"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_blue_light" />
 
 </RelativeLayout>

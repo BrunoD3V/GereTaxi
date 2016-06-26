@@ -9,8 +9,6 @@ import android.os.Bundle;
 
 public class EscolherServicoDialogFragment extends DialogFragment {
 
-
-
     public EscolherServicoDialogFragment(){
 
     }
@@ -20,24 +18,21 @@ public class EscolherServicoDialogFragment extends DialogFragment {
         builder.setTitle(R.string.escolhe_tipo_servico).setItems(R.array.servico_tipo_array, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Servico servico = new Servico();
                 switch (i) {
                     case 0:
-                        System.out.println(i);
-                        Intent intent = new Intent(getActivity(),AssistenciaEmViagemActivity.class);
-                        startActivity(intent);
+                        servico.setTipo(Constants.VIAGEM);
+                        setIntent(servico);
                         break;
                     case 1:
-                        System.out.println(i);
-                        intent = new Intent(getActivity(), AcidenteDeTabalhoActivity.class);
-                        startActivity(intent);
+                        servico.setTipo(Constants.ACIDENTE);
+                        setIntent(servico);
                         break;
                     case 2:
-                        System.out.println(i);
-                        intent = new Intent(getActivity(),ParticularActivity.class);
-                        startActivity(intent);
+                        servico.setTipo(Constants.PARTICULAR);
+                        setIntent(servico);
                         break;
                     default:
-                        System.out.println(i);
                         break;
                 }
             }
@@ -45,10 +40,14 @@ public class EscolherServicoDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    private void setIntent(Servico servico){
+        Intent intent = new Intent(getActivity(),IniciaServicoActivity.class);
+        intent.putExtra(Constants.INTENT_SERVICO, servico);
+        startActivity(intent);
+    }
+
     public static EscolherServicoDialogFragment newInstance() {
         EscolherServicoDialogFragment f = new EscolherServicoDialogFragment();
         return f;
     }
-
-
 }

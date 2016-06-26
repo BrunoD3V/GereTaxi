@@ -76,7 +76,7 @@ public class XMLHandler {
 
 
 
-    public boolean writeAssitenciaEmViagem(AssistenciaEmViagem assistenciaEmViagem) {
+    public boolean writeServico(Servico servico) {
         boolean result = false;
         File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
         try {
@@ -90,54 +90,54 @@ public class XMLHandler {
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
                 xmlSerializer.startTag(null , "processo");
-                xmlSerializer.text(assistenciaEmViagem.getNumProcesso());
+                xmlSerializer.text(servico.getProcesso());
                 xmlSerializer.endTag(null, "processo");
                 xmlSerializer.startTag(null, "data");
-                xmlSerializer.text(assistenciaEmViagem.getData());
+                xmlSerializer.text(servico.getData());
                 xmlSerializer.endTag(null, "data");
                 xmlSerializer.startTag(null, "hora-de-inicio");
-                xmlSerializer.text(assistenciaEmViagem.getHoraDeInicio());
+                xmlSerializer.text(servico.getHoraDeInicio());
                 xmlSerializer.endTag(null, "hora-de-inicio");
-                xmlSerializer.startTag(null, "companhia");
-                xmlSerializer.text(assistenciaEmViagem.getCompanhia());
-                xmlSerializer.endTag(null, "companhia");
+                xmlSerializer.startTag(null, "nome-cliente");
+                xmlSerializer.text(servico.getNomeCliente());
+                xmlSerializer.endTag(null, "nome-cliente");
                 xmlSerializer.startTag(null, "numero-passageiros");
-                xmlSerializer.text(String.valueOf(assistenciaEmViagem.getNumPassageiros()));
+                xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
                 xmlSerializer.endTag(null, "numero-passageiros");
                 xmlSerializer.startTag(null, "origem");
-                xmlSerializer.text(assistenciaEmViagem.getOrigem());
+                xmlSerializer.text(servico.getOrigem());
                 xmlSerializer.endTag(null,"origem");
                 xmlSerializer.startTag(null, "destino");
-                xmlSerializer.text(assistenciaEmViagem.getDestino());
+                xmlSerializer.text(servico.getDestino());
                 xmlSerializer.endTag(null, "destino");
                 xmlSerializer.endTag(null, "servico");
                 xmlSerializer.endDocument();
 
             } else {
-                if (verificaProcesso(Xml.newPullParser(), assistenciaEmViagem.getNumProcesso()))
+                if (verificaProcesso(Xml.newPullParser(), servico.getProcesso()))
                     return false;
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
                 xmlSerializer.startTag(null , "processo");
-                xmlSerializer.text(assistenciaEmViagem.getNumProcesso());
+                xmlSerializer.text(servico.getProcesso());
                 xmlSerializer.endTag(null, "processo");
                 xmlSerializer.startTag(null, "data");
-                xmlSerializer.text(assistenciaEmViagem.getData());
+                xmlSerializer.text(servico.getData());
                 xmlSerializer.endTag(null, "data");
                 xmlSerializer.startTag(null, "hora-de-inicio");
-                xmlSerializer.text(assistenciaEmViagem.getHoraDeInicio());
+                xmlSerializer.text(servico.getHoraDeInicio());
                 xmlSerializer.endTag(null, "hora-de-inicio");
-                xmlSerializer.startTag(null, "companhia");
-                xmlSerializer.text(assistenciaEmViagem.getCompanhia());
-                xmlSerializer.endTag(null, "companhia");
+                xmlSerializer.startTag(null, "nome-cliente");
+                xmlSerializer.text(servico.getNomeCliente());
+                xmlSerializer.endTag(null, "nome-cliente");
                 xmlSerializer.startTag(null, "numero-passageiros");
-                xmlSerializer.text(String.valueOf(assistenciaEmViagem.getNumPassageiros()));
+                xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
                 xmlSerializer.endTag(null, "numero-passageiros");
                 xmlSerializer.startTag(null, "origem");
-                xmlSerializer.text(assistenciaEmViagem.getOrigem());
+                xmlSerializer.text(servico.getOrigem());
                 xmlSerializer.endTag(null,"origem");
                 xmlSerializer.startTag(null, "destino");
-                xmlSerializer.text(assistenciaEmViagem.getDestino());
+                xmlSerializer.text(servico.getDestino());
                 xmlSerializer.endTag(null, "destino");
                 xmlSerializer.endTag(null, "servico");
                 xmlSerializer.endDocument();
@@ -153,6 +153,39 @@ public class XMLHandler {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public boolean writeTrajecto (List<LatLng> locations, String processo) {
+
+        File file = new File(Environment.getExternalStorageDirectory(), "Trajecto" + processo + ".xml");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+
+            xmlSerializer.setOutput(writer);
+            xmlSerializer.startDocument("UTF-8", true);
+            xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            for (LatLng p: locations) {
+                xmlSerializer.startTag(null, Constants.WPT);
+                xmlSerializer.attribute(null,Constants.LAT, String.valueOf(p.lat));
+                xmlSerializer.attribute(null, Constants.LON, String.valueOf(p.lng));
+                xmlSerializer.endTag(null, Constants.WPT);
+
+            }
+            xmlSerializer.endDocument();
+            xmlSerializer.flush();
+            String dataWrite = writer.toString();
+            fileOutputStream.write(dataWrite.getBytes());
+            fileOutputStream.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       return false;
     }
 
     public boolean verificaProcesso(XmlPullParser parser, String processo) {
@@ -228,14 +261,13 @@ public class XMLHandler {
 
         } catch (XmlPullParserException e) {
             e.printStackTrace();
-            System.out.println("NULLLLLLL");
-           // return null;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-           // return null;
+
         } catch (IOException e) {
             e.printStackTrace();
-           // return null;
+
         }
         return latLngs;
     }

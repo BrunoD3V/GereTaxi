@@ -16,7 +16,7 @@ import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssistenciaEmViagemActivity extends AppCompatActivity {
+public class IniciaServicoActivity extends AppCompatActivity {
 
     List<LatLng> mCapturedLocations;
     private GeoApiContext mContext;
@@ -24,9 +24,11 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
     EditText editTextProcesso;
     EditText editTextSeguradora;
     EditText editTextPassageiros;
-    Helper helper= new Helper();
+
+
+   // Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
-    private AssistenciaEmViagem assistenciaEmViagem = new AssistenciaEmViagem();
+    private Servico servico = new Servico();
 
 
 
@@ -41,6 +43,9 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         editTextPassageiros = (EditText) findViewById(R.id.editTextPassageiros);
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
 
+
+        servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
+        System.out.println(servico.getTipo());
     }
 
     public void onClickIniciar(View v) {
@@ -62,6 +67,11 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             toast.show();
             return;
         }
+        int i = Integer.parseInt(editTextPassageiros.getText().toString());
+        if (i < 1 || i > 8) {
+            Toast.makeText(getApplicationContext(), Constants.N_PASSAGEIROS_VALIDO, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         editTextProcesso.setEnabled(false);
@@ -69,14 +79,14 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         editTextPassageiros.setEnabled(false);
 
         String processo = editTextProcesso.getText().toString();
-        assistenciaEmViagem.setNumProcesso(processo);
-        assistenciaEmViagem.setData(helper.getDate());
-        assistenciaEmViagem.setHoraDeInicio(helper.getTime());
-        assistenciaEmViagem.setCompanhia(editTextSeguradora.getText().toString());
-        assistenciaEmViagem.setNumPassageiros(Integer.parseInt(editTextPassageiros.getText().toString()));
+        servico.setProcesso(processo);
+        servico.setData(Helper.getDate());
+        servico.setHoraDeInicio(Helper.getTime());
+        servico.setNomeCliente(editTextSeguradora.getText().toString());
+        servico.setNumPassageiros(i);
 
 
-        boolean result=helper.inicializarDados(processo);
+        boolean result=Helper.inicializarDados(processo);
         if (result) {
             Toast toast = Toast.makeText(getApplicationContext(), "Serviço Inicializado",Toast.LENGTH_SHORT);
             toast.show();
@@ -94,13 +104,14 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
         ServicoHandler servicoHandler = new ServicoHandler();
         String processo = editTextProcesso.getText().toString();
 
-        if(helper.isNetworkAvailable(this)){
+        if(Helper.isNetworkAvailable(this)){
             XMLHandler parser = new XMLHandler();
 
        //     if (parser.loadGpxData(Xml.newPullParser(), processo) != null)
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "teste");
 
-            if (mCapturedLocations.size()<2){  //nunca executa este método
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
+
+            if (mCapturedLocations.size()<1){  //nunca executa este método
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
@@ -109,8 +120,8 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
 
             GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
             GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size()-1));
-            assistenciaEmViagem.setDestino(destino.formattedAddress);
-            assistenciaEmViagem.setOrigem(origem.formattedAddress);
+            servico.setDestino(destino.formattedAddress);
+            servico.setOrigem(origem.formattedAddress);
             mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
 
 
@@ -118,10 +129,10 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance();
 
-            assistenciaEmViagem.setDistancia(distance);
+            servico.setDistancia(distance);
             boolean portagens = servicoHandler.getPortagens();
 
-            System.out.println(assistenciaEmViagem.toString());
+            System.out.println(servico.toString());
 
 
 
@@ -138,19 +149,19 @@ public class AssistenciaEmViagemActivity extends AppCompatActivity {
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
             intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);
-            intent.putExtra(Constants.INTENT_SERVICO, assistenciaEmViagem);
+            intent.putExtra(Constants.INTENT_SERVICO, servico);
             intent.putExtra("portagem", portagens);
 
             startActivity(intent);
         }
         else {
-            helper.displayPromptEnableWifi(this);
+            Helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "teste");
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "comPortagem");
 
-            assistenciaEmViagem.setOrigem(mCapturedLocations.get(0).toString());
-            assistenciaEmViagem.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
-            handler.writeAssitenciaEmViagem(assistenciaEmViagem);
+            servico.setOrigem(mCapturedLocations.get(0).toString());
+            servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
+            handler.writeServico(servico);
         }
     }
 }

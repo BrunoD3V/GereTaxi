@@ -20,7 +20,7 @@ public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
 
     List<LatLng> mCapturedLocations;
-    AssistenciaEmViagem assistenciaEmViagem;
+    Servico servico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onDialogMessage(String portagem) {
+    public void onDialogMessage(String portagem, int confirm) {
 
     }
 }

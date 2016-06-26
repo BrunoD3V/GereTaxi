@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="120dp"
-    android:background="#3E80B4"
-    android:orientation="vertical" >
+    android:layout_height="150dp"
+    android:background="#fefeff"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/txt_dia"
@@ -12,8 +13,8 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:text="@string/introduza_o_valor_das_portagens"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
 
@@ -22,35 +23,42 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/editTextCusto"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textColor="@color/abc_input_method_navigation_guard"
+        android:hint="Valor das Portagens"
+        android:textAlignment="center" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="381dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#3E80B4"
-        android:orientation="horizontal" >
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_weight="0.27"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/btn_yes"
             android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@android:color/white"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_dark"
             android:clickable="true"
             android:text="@string/ok"
-            android:textColor="#5DBCD2"
-            android:textStyle="bold" />
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="0.49" />
 
         <Button
             android:id="@+id/btn_no"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:background="@android:color/white"
+            android:background="@android:color/holo_red_dark"
             android:clickable="true"
             android:text="@string/cancelar"
-            android:textColor="#5DBCD2"
-            android:textStyle="bold" />
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="0.57" />
     </LinearLayout>
 
 </LinearLayout>

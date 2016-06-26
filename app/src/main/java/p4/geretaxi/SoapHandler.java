@@ -2,32 +2,32 @@ package p4.geretaxi;
 
 public class SoapHandler {
 
-    private static String NAMESPACE;
+    private String NAMESPACE;
     private static String URL;
-    private static String METHOD_NAME;
-    private static String SOAP_ACTION;
-    private static String IP = "172.17.2.175";
+    private String METHOD_NAME;
+    private String SOAP_ACTION;
+    private static String SERVER_IP = "192.168.1.5";
 
     public SoapHandler(String methodName){
         NAMESPACE = "http://GereTaxiPackage/";
-        URL = "http://"+IP+":8080/GereTaxi/WSGereTaxi";
+        URL = "http://"+SERVER_IP+":8080/GereTaxi/WSGereTaxi";
         METHOD_NAME = methodName;
-        SOAP_ACTION = NAMESPACE+METHOD_NAME;
+        SOAP_ACTION = NAMESPACE + METHOD_NAME;
     }
 
     public String getIP() {
-        return IP;
+        return SERVER_IP;
     }
 
     public static void setIP(String IP) {
-        SoapHandler.IP = IP;
+        SoapHandler.SERVER_IP = IP;
     }
 
     public String getMethodName() {
         return METHOD_NAME;
     }
 
-    public static void setMethodName(String methodName) {
+    public void setMethodName(String methodName) {
         METHOD_NAME = methodName;
     }
 
@@ -35,23 +35,12 @@ public class SoapHandler {
         return NAMESPACE;
     }
 
-    public static void setNAMESPACE(String NAMESPACE) {
-        SoapHandler.NAMESPACE = NAMESPACE;
-    }
-
     public String getSoapAction() {
         return SOAP_ACTION;
-    }
-
-    public static void setSoapAction(String soapAction) {
-        SOAP_ACTION = soapAction;
     }
 
     public String getURL() {
         return URL;
     }
 
-    public static void setURL(String URL) {
-        SoapHandler.URL = URL;
-    }
 }

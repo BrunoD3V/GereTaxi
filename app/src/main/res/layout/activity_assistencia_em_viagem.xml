@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="p4.geretaxi.AssistenciaEmViagemActivity">
+    tools:context="p4.geretaxi.IniciaServicoActivity">
 
     <EditText
         android:layout_width="wrap_content"
@@ -19,7 +19,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:inputType="text"
-        android:hint="@string/processo" />
+        android:hint="@string/processo"
+        android:textAlignment="center" />
 
     <Button
         android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
         android:layout_alignRight="@+id/editTextProcesso"
         android:layout_alignEnd="@+id/editTextProcesso"
         android:inputType="text"
-        android:hint="@string/seguradora" />
+        android:hint="@string/seguradora"
+        android:textAlignment="center" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,6 +66,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="@string/n_mero_de_passageiros"
-        android:inputType="number" />
+        android:inputType="number"
+        android:textAlignment="center" />
 
 </RelativeLayout>

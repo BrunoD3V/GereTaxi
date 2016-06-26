@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,16 +21,14 @@ import java.util.List;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator {
 
-
-
     private GoogleMap mMap;
-
-    private AssistenciaEmViagem assistenciaEmViagem;
-    private ServicoParticular servicoParticular;
-    private AcidenteDeTrabalho acidenteDeTrabalho;
+    private Servico servico;
     private String tipo;
     private boolean portagens;
     List<LatLng> mCapturedLocations;
+
+    Button buttonAceitar;
+    Button buttonInserePortagens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +39,29 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        tipo = getIntent().getExtras().getString(Constants.TIPO_SERVICO);
-        switch (tipo) {
-            case Constants.VIAGEM:
-                assistenciaEmViagem = (AssistenciaEmViagem) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
-                System.out.println("MAPS ACTIVITY");
-                System.out.println(assistenciaEmViagem.toString());
-                break;
-            case Constants.ACIDENTE:
-                acidenteDeTrabalho = (AcidenteDeTrabalho) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
-                break;
-            case Constants.PARTICULAR:
-                servicoParticular = (ServicoParticular) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
-                break;
-            default:
-                break;
-        }
+        buttonAceitar = (Button) findViewById(R.id.buttonAceitar);
+        buttonInserePortagens = (Button) findViewById(R.id.buttonInserePortagens);
+
         portagens = getIntent().getBooleanExtra("portagem", false);
 
+        if (portagens) {
+            buttonInserePortagens.setVisibility(View.VISIBLE);
+            buttonAceitar.setVisibility(View.INVISIBLE);
+        } else {
+            buttonInserePortagens.setVisibility(View.INVISIBLE);
+            buttonAceitar.setVisibility(View.VISIBLE);
+        }
 
+        servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
 
         ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
         ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
-
-
 
         mCapturedLocations = new ArrayList<>();
         for (int i = 0; i < lats.size(); i++) {
             LatLng e = new LatLng(lats.get(i), lngs.get(i));
             mCapturedLocations.add(i,e);
         }
-
-
-
     }
 
     @Override
@@ -94,58 +84,43 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
     }
 
+    public void onClickPortagens(View v){
+        android.app.FragmentManager manager = getFragmentManager();
+        DialogCustoPortagemFragment dialogCustoPortagemFragment = new DialogCustoPortagemFragment();
+        dialogCustoPortagemFragment.show(manager, "DialogPortagens");
+    }
+
     public void onClickAceitarServico(View v) {
 
-        if (portagens) {
-            android.app.FragmentManager manager = getFragmentManager();
-            DialogCustoPortagemFragment dialogCustoPortagemFragment = new DialogCustoPortagemFragment();
-            dialogCustoPortagemFragment.show(manager, "DialogPortagens");
-        }
-
         Intent intent = new Intent(this, MostraServicoActivity.class);
-        switch (tipo) {
-            case Constants.VIAGEM:
-                intent.putExtra("ser",assistenciaEmViagem);
-                intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);
-                break;
-            case Constants.ACIDENTE:
-                intent.putExtra("ser", acidenteDeTrabalho);
-                intent.putExtra(Constants.TIPO_SERVICO, Constants.ACIDENTE);
-                break;
-            case Constants.PARTICULAR:
-                intent.putExtra("ser",servicoParticular);
-                intent.putExtra(Constants.TIPO_SERVICO, Constants.PARTICULAR);
-                break;
-            default:
-                break;
+        intent.putExtra("ser",servico);
 
-        }
         startActivity(intent);
 
+        XMLHandler writer = new XMLHandler();
 
+        writer.writeTrajecto(mCapturedLocations, servico.getProcesso());
     }
 
     public void onClickRejeitarServico(View v) {
-
+        Intent intent = new Intent(this, FormularioDeServico.class);
+        startActivity(intent);
     }
 
     @Override
-    public void onDialogMessage(String portagem) {
-
-        switch (tipo) {
-            case Constants.VIAGEM:
-                assistenciaEmViagem.setCustoPortagens(Float.parseFloat(portagem));
+    public void onDialogMessage(String portagem, int confirm) {
+        servico.setCustoPortagens(Double.parseDouble(portagem));
+        int DialogResponse = confirm;
+        switch (confirm) {
+            case 0:
+                Toast.makeText(getApplicationContext(),"Por favor insira o custo das Portagens.", Toast.LENGTH_LONG).show();
                 break;
-            case Constants.ACIDENTE:
-                acidenteDeTrabalho.setCustoPortagens(Float.parseFloat(portagem));
-                break;
-            case Constants.PARTICULAR:
-                servicoParticular.setCustoPortagens(Float.parseFloat(portagem));
+            case 1:
+                buttonAceitar.setVisibility(View.VISIBLE);
+                buttonInserePortagens.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;
-
         }
-
     }
 }
