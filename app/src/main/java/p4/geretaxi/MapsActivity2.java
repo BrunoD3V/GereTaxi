@@ -95,8 +95,9 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         XMLHandler writer = new XMLHandler();
 
-        writer.writeTrajecto(mCapturedLocations, servico.getProcesso());
-        
+
+        servico.setTrajeto(writer.trajectoToString(mCapturedLocations));
+
         Intent intent = new Intent(this, MostraServicoActivity.class);
         intent.putExtra("ser",servico);
 
