@@ -24,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
         switch (helper.checkAppStart()) {
             case NORMAL:
                 Toast.makeText(getApplicationContext(), "XUPA NORMAL", Toast.LENGTH_SHORT).show();
-                /*
+
                 GereBD bd = new GereBD();
-                int res = bd.registarMotorista("zeca das cabras", "putas");
-                System.out.println(res);*/
+                SharedPreference sharedPreference = new SharedPreference();
+                String email = sharedPreference.getValueString(this, Constants.EMAIL);
+                String pass = sharedPreference.getValueString(this, Constants.PASS);
+                int res = bd.checkLogin(email, pass);
+                System.out.println("PASS: " + pass);
+                System.out.println("USER "+email + " res " + res);
                 break;
             case FIRST_TIME_VERSION:
                 Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();

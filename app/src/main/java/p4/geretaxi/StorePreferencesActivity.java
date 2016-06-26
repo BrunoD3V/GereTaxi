@@ -43,12 +43,14 @@ public class StorePreferencesActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "As passwords têm que coincidir", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!passwordvalidation(pass)){
+        PasswordValidator passwordValidator = new PasswordValidator();
+       /* if (!passwordValidator.validate(pass)){
             Toast.makeText(getApplicationContext(), "A password tem que conter pelo menos 1 dígito, " +
                     "1 mínuscula, 1 maiuscula, 1 caracter especial, não pode ter espaços em branco " +
                     "e um mínimo de 8 caracteres", Toast.LENGTH_LONG).show();
             return;
-        }
+        }*/
+
 
         Encryption encryption = Encryption.getDefault(Constants.KEY, Constants.SALT, new byte[16]);
 
@@ -93,10 +95,6 @@ public class StorePreferencesActivity extends AppCompatActivity {
 
 
     }
-    private boolean passwordvalidation(String pass){
-        String pattern = "\\A(?=\\S*?[0-9])(?=\\S*?[a-z])(?=\\S*?[A-Z])(?=\\S*?[@#$%^&+=])\\S{8,}\\z";
-        return pass.matches(pattern);
 
-    }
 
 }
