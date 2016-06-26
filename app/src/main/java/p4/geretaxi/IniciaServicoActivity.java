@@ -155,9 +155,10 @@ public class IniciaServicoActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            Helper.displayPromptEnableWifi(this);
+            Helper helper = new Helper();
+            helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "comPortagem");
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "lisboa");
 
             servico.setOrigem(mCapturedLocations.get(0).toString());
             servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());

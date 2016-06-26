@@ -25,11 +25,22 @@ public class SharedPreference {
         editor = settings.edit(); //2
 
         editor.putString(key, text); //3
-
         editor.commit(); //4
     }
 
-    public String getValue(Context context, String key) {
+    public void save(Context context, int value, String Key){
+        SharedPreferences settings;
+        Editor editor;
+
+        //settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
+        editor = settings.edit(); //2
+
+        editor.putInt(Key, value);
+        editor.commit(); //4
+    }
+
+    public String getValueString(Context context, String key) {
         SharedPreferences settings;
         String text;
 
@@ -37,6 +48,16 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         text = settings.getString(key, null);
         return text;
+    }
+
+    public int getValueInt(Context context, String key) {
+        SharedPreferences settings;
+        int value;
+
+        //settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        value = settings.getInt(key, 0);
+        return value;
     }
 
     public boolean findValue(Context context, String key) {

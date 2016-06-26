@@ -1,6 +1,5 @@
 package p4.geretaxi;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -44,57 +43,60 @@ public class StorePreferencesActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "As passwords têm que coincidir", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!passwordvalidation(pass)){
+            Toast.makeText(getApplicationContext(), "A password tem que conter pelo menos 1 dígito, " +
+                    "1 mínuscula, 1 maiuscula, 1 caracter especial, não pode ter espaços em branco " +
+                    "e um mínimo de 8 caracteres", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         Encryption encryption = Encryption.getDefault(Constants.KEY, Constants.SALT, new byte[16]);
 
         String encrypted = encryption.encryptOrNull(pass);
         SharedPreference sharedPreference = new SharedPreference();
         GereBD bd = new GereBD();
-        if (Helper.isNetworkAvailable(getApplicationContext())){
+        if (Helper.isNetworkAvailable(getApplicationContext())) {
             switch (bd.checkLogin(email, encrypted)) {
-                case -2 :
-                        registoOffline(email, encrypted);
+                case -2:
+                    Toast.makeText(getApplicationContext(), "Erro no registo tente mais tarde", Toast.LENGTH_LONG).show();
+
                     break;
                 case -1:
                     int res = bd.registarMotorista(email, encrypted);
-                    if (res == -1){
-                        Toast.makeText(getApplicationContext(), "Erro no registo", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-
-                    sharedPreference.save(getApplicationContext(),email, Constants.EMAIL);
+                    sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
                     sharedPreference.save(getApplicationContext(), encrypted, Constants.PASS);
-
-                   // sharedPreference.save(getApplicationContext(),);
+                    sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
                     System.out.println(encrypted);
+
+                    break;
+                case 0:
+                    Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
+
+                    break;
+
+                case 1:
+                    Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
+
                     break;
             }
-            if(bd.checkLogin(email, encrypted)== -1) {//TODO fazer o registo no webservice
 
-            }else {
-                if (true){
-
-                }
-
-            }
-        } else  {
-
+        }
+        else {
+            //Toast.makeText(getApplicationContext(), "Necessita de net para fazer o registo", Toast.LENGTH_LONG).show();
+            Helper helper = new Helper();
+            helper.displayPromptEnableWifi(this);
 
         }
 
 
-        Intent intent = new Intent(this, MainActivity.class );
-        startActivity(intent);
 
 
 
     }
+    private boolean passwordvalidation(String pass){
+        String pattern = "\\A(?=\\S*?[0-9])(?=\\S*?[a-z])(?=\\S*?[A-Z])(?=\\S*?[@#$%^&+=])\\S{8,}\\z";
+        return pass.matches(pattern);
 
-    private void registoOffline(String email, String password) {
-
-        SharedPreference sharedPreference = new SharedPreference();
-        sharedPreference.save(getApplicationContext(),email, Constants.EMAIL);
-        sharedPreference.save(getApplicationContext(),password, Constants.PASS);
-        sharedPreference.save(getApplicationContext(),Constants.TRUE , Constants.REGISTO_SEM_NET);
     }
+
 }

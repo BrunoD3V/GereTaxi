@@ -68,7 +68,7 @@ public class Helper {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static void displayPromptEnableWifi(final Context context) {
+    public void displayPromptEnableWifi(final Context context) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 context);
 
