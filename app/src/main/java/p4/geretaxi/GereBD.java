@@ -84,7 +84,7 @@ public class GereBD {
     }
 
     public int checkLogin(final String email, final String password) {
-        res = -2;
+
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -23,21 +23,21 @@ public class MainActivity extends AppCompatActivity {
         Helper helper = new Helper();
         switch (helper.checkAppStart()) {
             case NORMAL:
-                Toast.makeText(getApplicationContext(), "XUPA NORMAL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " NORMAL", Toast.LENGTH_SHORT).show();
 
                 GereBD bd = new GereBD();
                 SharedPreference sharedPreference = new SharedPreference();
                 String email = sharedPreference.getValueString(this, Constants.EMAIL);
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
-                int res = bd.checkLogin(email, pass);
+                int res = bd.checkLogin("bruno", pass);
                 System.out.println("PASS: " + pass);
                 System.out.println("USER "+email + " res " + res);
                 break;
             case FIRST_TIME_VERSION:
-                Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
                 break;
             case FIRST_TIME:
-                Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, StorePreferencesActivity.class);
                 startActivity(i);
                 break;
@@ -53,15 +53,15 @@ public class MainActivity extends AppCompatActivity {
         Helper helper = new Helper();
         switch (helper.checkAppStart()) {
             case NORMAL:
-                Toast.makeText(getApplicationContext(), "XUPA NORMAL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " NORMAL", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, StorePreferencesActivity.class);
                 startActivity(i);
                 break;
             case FIRST_TIME_VERSION:
-                Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
                 break;
             case FIRST_TIME:
-                Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
