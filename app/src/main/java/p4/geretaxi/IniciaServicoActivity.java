@@ -107,11 +107,11 @@ public class IniciaServicoActivity extends AppCompatActivity {
         if(Helper.isNetworkAvailable(this)){
             XMLHandler parser = new XMLHandler();
 
-       //     if (parser.loadGpxData(Xml.newPullParser(), processo) != null)
+
 
             mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
 
-            if (mCapturedLocations.size()<1){  //nunca executa este método
+            if (mCapturedLocations.size()<1){
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);

@@ -34,7 +34,7 @@ public class XMLHandler {
 
     public boolean writeGPSCoordinates(Location location, String Processo) {
         boolean result = false;
-        File file = new File(Environment.getExternalStorageDirectory(), Processo+".xml");
+        File file = new File(Environment.getExternalStorageDirectory(), Processo+Constants.PONTO_XML);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file, true);
             XmlSerializer xmlSerializer = Xml.newSerializer();
@@ -212,7 +212,7 @@ public class XMLHandler {
 
     public boolean writeTrajecto (List<LatLng> locations, String processo) {
 
-        File file = new File(Environment.getExternalStorageDirectory(), "Trajecto" + processo + ".xml");
+        File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJECTO + processo + Constants.PONTO_XML);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             XmlSerializer xmlSerializer = Xml.newSerializer();
@@ -273,7 +273,7 @@ public class XMLHandler {
     public boolean eraser(String s) {
 
         boolean result = false;
-        File file =new File(Environment.getExternalStorageDirectory(),s+".xml");
+        File file =new File(Environment.getExternalStorageDirectory(),s+Constants.PONTO_XML);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             fileOutputStream.write("<?xml version='1.0' standalone='yes' ?>".getBytes());
@@ -288,12 +288,37 @@ public class XMLHandler {
         return result;
     }
 
+    public String escreveTrajecto(String processo) {
+
+        String result = null;
+
+        File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJECTO + processo + Constants.PONTO_XML);
+        /*try {
+            FileInputStream fIS = new FileInputStream(file);
+
+            InputStream is = file.
+            StringBuffer buffer = new StringBuffer();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(file));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line + "\n");
+        }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        return result;
+
+    }
+
     public List<LatLng> loadGpxData(XmlPullParser parser, String processo)
     {
 
 
         List<LatLng> latLngs = new ArrayList<>();
-        File file = new File(Environment.getExternalStorageDirectory(), processo+".xml");
+        File file = new File(Environment.getExternalStorageDirectory(), processo+Constants.PONTO_XML);
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
 
