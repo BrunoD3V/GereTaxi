@@ -3,7 +3,6 @@ package p4.geretaxi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,7 +20,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Helper helper = new Helper();
+        switch (helper.checkAppStart()) {
+            case NORMAL:
+                Toast.makeText(getApplicationContext(), "XUPA NORMAL", Toast.LENGTH_SHORT).show();
 
+                break;
+            case FIRST_TIME_VERSION:
+                Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
+                break;
+            case FIRST_TIME:
+                Toast.makeText(getApplicationContext(), "XUPA PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, StorePreferencesActivity.class);
+                startActivity(i);
+                break;
+            default:
+                break;
+        }
 
 
 
