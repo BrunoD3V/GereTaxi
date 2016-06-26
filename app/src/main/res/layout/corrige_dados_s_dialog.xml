@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="120dp"
-    android:background="#3E80B4"
+    android:layout_height="150dp"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
     <TextView
@@ -12,8 +12,8 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:text="@string/corriga_os_dados"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
 
@@ -28,28 +28,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#3E80B4"
+        android:background="#ffffff"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/btn_yes"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@android:color/white"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_dark"
             android:clickable="true"
             android:text="@string/ok"
-            android:textColor="#5DBCD2"
+            android:textColor="#ffffff"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_no"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:background="@android:color/white"
+            android:background="@android:color/holo_red_dark"
             android:clickable="true"
             android:text="@string/cancelar"
-            android:textColor="#5DBCD2"
+            android:textColor="#ffffff"
             android:textStyle="bold" />
     </LinearLayout>
 
