@@ -1,6 +1,7 @@
 package p4.geretaxi;
 
 import android.content.Context;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Xml;
 
@@ -16,6 +17,8 @@ import org.apache.commons.collections4.ListUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -102,6 +105,8 @@ public class ServicoHandler {
         }
         return null;
     }
+
+
 
     public List<LatLng> mergeCapture(List<LatLng> capturedLocations) {
 

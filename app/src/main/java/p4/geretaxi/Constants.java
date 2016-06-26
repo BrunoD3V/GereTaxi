@@ -59,5 +59,11 @@ public class Constants {
 
     public static final String REGISTO_SEM_NET= "no net";
 
+    public static final String IP = "192.168.1.5";
+
+    public static final String TRAJECTO = "Trajecto";
+
+    public static final String PONTO_XML = ".xml";
+
 
 }
