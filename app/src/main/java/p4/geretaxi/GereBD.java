@@ -22,6 +22,7 @@ public class GereBD {
     private int loginID;
     private int res;
     ArrayList<Servico> lista = new ArrayList<>();
+    ArrayList<Cliente> listaClientes = new ArrayList<>();
     Servico servicoGlobal;
     Cliente clienteGlobal;
 
@@ -106,14 +107,17 @@ public class GereBD {
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-                envelope.implicitTypes = true;
-
                 envelope.setOutputSoapObject(request);
+
+                envelope.implicitTypes = true;
 
                 HttpTransportSE http = new HttpTransportSE(URL);
 
+                http.debug = true;
+
                 try {
                     http.call(SOAP_ACTION, envelope);
+                    System.out.println(http.requestDump);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                     res = Integer.parseInt(response.toString());
                 } catch (IOException e) {
@@ -123,7 +127,6 @@ public class GereBD {
                 }
             }
         }).start();
-
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -200,6 +203,11 @@ public class GereBD {
                 trajeto.setName("trajeto");
                 trajeto.setValue(servico.getTrajeto());
 
+                PropertyInfo idMotorista = new PropertyInfo();
+                idMotorista.type = PropertyInfo.INTEGER_CLASS;
+                idMotorista.setName("idMotorista");
+                idMotorista.setValue(servico.getIdMotorista());
+
                 request.addProperty(processo);
                 request.addProperty(custoPortagens);
                 request.addProperty(data);
@@ -212,9 +220,9 @@ public class GereBD {
                 request.addProperty(origem);
                 request.addProperty(tipo);
                 request.addProperty(trajeto);
+                request.addProperty(idMotorista);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-
 
                 envelope.setOutputSoapObject(request);
 
@@ -325,21 +333,15 @@ public class GereBD {
                         servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
                         servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
                         servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
+                        servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
 
-
-                        System.out.println(servico.getProcesso());
                         lista.add(servico);
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
-
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
-
                 }
-
-
             }
         }).start();
         try {
@@ -415,7 +417,7 @@ public class GereBD {
             @Override
             public void run() {
                 setMethodName("inserirCliente");
-                SoapObject inserirCliente = new SoapObject(NAMESPACE,METHOD_NAME);
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
 
                 PropertyInfo nome = new PropertyInfo();
                 nome.type = PropertyInfo.STRING_CLASS;
@@ -427,11 +429,48 @@ public class GereBD {
                 morada.setName("morada");
                 morada.setValue(cliente.getMorada());
 
+                PropertyInfo codigoPostal = new PropertyInfo();
+                codigoPostal.type = PropertyInfo.INTEGER_CLASS;
+                codigoPostal.setName("codigoPostal");
+                codigoPostal.setValue(cliente.getCodigoPostal());
 
+                PropertyInfo nif = new PropertyInfo();
+                nif.type = PropertyInfo.INTEGER_CLASS;
+                nif.setName("nif");
+                nif.setValue(cliente.getNif());
+
+                PropertyInfo contacto = new PropertyInfo();
+                contacto.type = PropertyInfo.INTEGER_CLASS;
+                contacto.setName("contacto");
+                contacto.setValue(cliente.getContacto());
+
+                PropertyInfo email = new PropertyInfo();
+                email.type = PropertyInfo.STRING_CLASS;
+                email.setName("email");
+                email.setValue(cliente.getEmail());
+
+                PropertyInfo tipo = new PropertyInfo();
+                tipo.type = PropertyInfo.STRING_CLASS;
+                tipo.setName("tipo");
+                tipo.setValue(cliente.getTipo());
+
+                PropertyInfo idMotorista = new PropertyInfo();
+                idMotorista.type = PropertyInfo.INTEGER_CLASS;
+                idMotorista.setName("idMotorista");
+                idMotorista.setValue(cliente.getIdMotorista());
+
+                request.addProperty(nif);
+                request.addProperty(nome);
+                request.addProperty(morada);
+                request.addProperty(codigoPostal);
+                request.addProperty(contacto);
+                request.addProperty(email);
+                request.addProperty(tipo);
+                request.addProperty(idMotorista);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-                envelope.setOutputSoapObject(inserirCliente);
+                envelope.setOutputSoapObject(request);
 
                 envelope.implicitTypes = true;
 
@@ -462,104 +501,155 @@ public class GereBD {
 
     }
 
+    public boolean excluirCliente(final String nomeCliente){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("excluirCliente");
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
 
+                PropertyInfo nome = new PropertyInfo();
+                nome.type = PropertyInfo.STRING_CLASS;
+                nome.setName("nome");
+                nome.setValue(nomeCliente);
 
-    public boolean excluirCliente(String nomeCliente){
-        this.setMethodName("excluirCliente");
+                request.addProperty(nome);
 
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
+                envelope.setOutputSoapObject(request);
 
-        return true;
+                envelope.implicitTypes = true;
+
+                HttpTransportSE http = new HttpTransportSE(URL);
+
+                try {
+                    http.call(SOAP_ACTION,envelope);
+
+                    SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                    result = Boolean.parseBoolean(response.toString());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    result = false;
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                    result = false;
+                }
+            }
+        }).start();
+
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public ArrayList<Cliente> listarClientes(){
 
-        this.setMethodName("listarClientes");
-        ArrayList<Cliente> lista = new ArrayList<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("listarClientes");
 
+                SoapObject listarClientes = new SoapObject(NAMESPACE,METHOD_NAME);
 
-        SoapObject listarClientes = new SoapObject(NAMESPACE,METHOD_NAME);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.setOutputSoapObject(listarClientes);
 
-        envelope.setOutputSoapObject(listarClientes);
+                envelope.implicitTypes = true;
 
-        envelope.implicitTypes = true;
+                HttpTransportSE http = new HttpTransportSE(URL);
 
-        HttpTransportSE http = new HttpTransportSE(URL);
+                System.out.println("MethodName: " + METHOD_NAME);
+                try {
+                    http.call(SOAP_ACTION, envelope);
 
-        System.out.println("MethodName: " + METHOD_NAME);
-        try {
-            http.call(SOAP_ACTION, envelope);
+                    Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
-            Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+                    for (SoapObject soapObject: response) {
+                        Cliente cliente =  new Cliente();
 
-            for (SoapObject soapObject: response) {
-                Cliente cliente =  new Cliente();
+                        cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                        cliente.setNome(soapObject.getProperty("nome").toString());
+                        cliente.setMorada(soapObject.getProperty("morada").toString());
+                        cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
+                        cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
+                        cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
+                        cliente.setEmail(soapObject.getProperty("email").toString());
+                        cliente.setTipo(soapObject.getProperty("tipo").toString());
 
-                cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                cliente.setNome(soapObject.getProperty("nome").toString());
-                cliente.setMorada(soapObject.getProperty("morada").toString());
-                cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
-                cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
-                cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
-                cliente.setEmail(soapObject.getProperty("email").toString());
-                cliente.setTipo(soapObject.getProperty("tipo").toString());
+                        listaClientes.add(cliente);
+                    }
 
-                lista.add(cliente);
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
             }
-
-        } catch (IOException e) {
+        }).start();
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-            return null;
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            return null;
         }
 
-        return lista;
+
+
+        return listaClientes;
     }
 
     public Cliente pesquisarCliente(int id){
 
-        this.setMethodName("pesquisarCliente");
-        Cliente cliente= null;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("pesquisarCliente");
 
-        SoapObject pesquisarCliente = new SoapObject(NAMESPACE,METHOD_NAME);
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
 
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-        envelope.setOutputSoapObject(pesquisarCliente);
+                envelope.setOutputSoapObject(request);
 
-        envelope.implicitTypes = true;
+                envelope.implicitTypes = true;
 
-        HttpTransportSE http = new HttpTransportSE(URL);
+                HttpTransportSE http = new HttpTransportSE(URL);
 
-        System.out.println("MethodName: " + METHOD_NAME);
-        try {
-            http.call(SOAP_ACTION, envelope);
+                try {
+                    http.call(SOAP_ACTION, envelope);
 
-            SoapObject response = (SoapObject) envelope.getResponse();
+                    SoapObject response = (SoapObject) envelope.getResponse();
 
-            cliente.setId(Integer.parseInt(response.getProperty("id").toString()));
-            cliente.setNome(response.getProperty("nome").toString());
-            cliente.setMorada(response.getProperty("morada").toString());
-            cliente.setCodigoPostal(response.getProperty("codigoPostal").toString());
-            cliente.setNif(Integer.parseInt(response.getProperty("nif").toString()));
-            cliente.setContacto(Integer.parseInt(response.getProperty("contacto").toString()));
-            cliente.setEmail(response.getProperty("email").toString());
-            cliente.setTipo(response.getProperty("tipo").toString());
+                    clienteGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
+                    clienteGlobal.setNome(response.getProperty("nome").toString());
+                    clienteGlobal.setMorada(response.getProperty("morada").toString());
+                    clienteGlobal.setCodigoPostal(response.getProperty("codigoPostal").toString());
+                    clienteGlobal.setNif(Integer.parseInt(response.getProperty("nif").toString()));
+                    clienteGlobal.setContacto(Integer.parseInt(response.getProperty("contacto").toString()));
+                    clienteGlobal.setEmail(response.getProperty("email").toString());
+                    clienteGlobal.setTipo(response.getProperty("tipo").toString());
 
-        }
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
 
-        catch (IOException e) {
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-            return null;
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            return null;
         }
-
-        return cliente;
+        return clienteGlobal;
     }
 }
