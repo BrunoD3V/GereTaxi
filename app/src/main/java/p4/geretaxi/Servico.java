@@ -18,7 +18,7 @@ public class Servico implements Serializable{
     private String data;
     private String horaDeInicio;
     private Double horasDeEspera;
-    private List<LatLng> trajeto;
+    private String trajeto;
 
 
     public String getTipo() {
@@ -146,11 +146,11 @@ public class Servico implements Serializable{
         this.processo = processo;
     }
 
-    public List<LatLng> getTrajeto() {
+    public String getTrajeto() {
         return trajeto;
     }
 
-    public void setTrajeto(List<LatLng> trajeto) {
+    public void setTrajeto(String trajeto) {
         this.trajeto = trajeto;
     }
 
@@ -160,6 +160,7 @@ public class Servico implements Serializable{
                 + Constants.DATA + data + "\n" + Constants.HORA + horaDeInicio + "\n" +
                 Constants.ORIGEM + origem + "\n" + Constants.DESTINO + destino + "\n" +
                 Constants.PASSAGEIROS + numPassageiros + "\n" + Constants.ESPERA + horasDeEspera + "\n" +
-                Constants.PORTAGENS + custoPortagens + "\n" + Constants.DISTANCIA + distancia + Constants.KMS;
+                Constants.PORTAGENS + custoPortagens + " €\n" + Constants.DISTANCIA + distancia +
+                Constants.KMS + "\n" +Constants.TIPO_SERVICO + tipo;
     }
 }
