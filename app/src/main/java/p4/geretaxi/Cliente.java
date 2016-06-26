@@ -12,7 +12,22 @@ public class Cliente implements Serializable{
     private int contacto;
     private int nif;
     private String tipo;
+    private int idMotorista;
 
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
+    public Cliente() {
+    }
+
+    public int getIdMotorista() {
+        return idMotorista;
+    }
+
+    public void setIdMotorista(int idMotorista) {
+        this.idMotorista = idMotorista;
+    }
 
     public String getTipo() {
         return tipo;
@@ -20,13 +35,6 @@ public class Cliente implements Serializable{
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Cliente(String nome) {
-        this.nome = nome;
-    }
-
-    public Cliente() {
     }
 
     public String getCodigoPostal() {

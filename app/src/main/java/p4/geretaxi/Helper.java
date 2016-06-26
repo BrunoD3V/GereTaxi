@@ -96,21 +96,7 @@ public class Helper {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-    /**
-     * Distinguishes different kinds of app starts: <li>
-     * <ul>
-     * First start ever ({@link #FIRST_TIME})
-     * </ul>
-     * <ul>
-     * First start in this version ({@link #FIRST_TIME_VERSION})
-     * </ul>
-     * <ul>
-     * Normal app start ({@link #NORMAL})
-     * </ul>
-     *
-     * @author schnatterer
-     *
-     */
+
     public enum AppStart {
         FIRST_TIME, FIRST_TIME_VERSION, NORMAL;
     }
