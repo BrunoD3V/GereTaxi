@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TesteSoap extends AppCompatActivity {
 
@@ -18,25 +17,12 @@ public class TesteSoap extends AppCompatActivity {
         setContentView(R.layout.activity_teste_soap);
 
 
-      ListarServicos();
-
-    }
-
-    public void ListarServicos(){
-
-        new Thread(new Runnable() {
-            public void run() {
-               // GereServico manager = new GereServico();
-                // lista = manager.listarServico();
-               // Log.d("Listagem:", lista.toString());
-            }
-        }).start();
     }
 
     public void inserirServico(){
         new Thread(new Runnable() {
             public void run() {
-                GereServico manager = new GereServico();
+                GereBD manager = new GereBD();
                 //resultado = manager.inserirServico());
                 Log.d("Resposta:", resultado.toString());
             }

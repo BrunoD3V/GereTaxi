@@ -18,14 +18,10 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     TextView textViewMostraServico;
     ListView listViewMostraServico;
     private Servico servico;
-
-
+    Helper helper = new Helper();
 
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
-
-    private String tipo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +31,6 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         listViewMostraServico = (ListView) findViewById(R.id.listViewMostraServico);
         textViewMostraServico = (TextView) findViewById(R.id.textViewMostraServico);
         servico = (Servico)getIntent().getSerializableExtra("ser");
-
-
 
         populateListView();
 
@@ -92,17 +86,25 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     }
 
     public void onClickSubmeterServico(View v) {
-        inserirServico();
+
+        if(helper.isNetworkAvailable(getApplicationContext())){
+            //TODO: INSERIR NO WEBSERVICE
+            System.out.println("TO DO: INSERIR NO WEBSERVICE");
+        }
+        else{
+            XMLHandler xmlHandler = new XMLHandler();
+            xmlHandler.writeServico(servico);
+            System.out.println("SEM INTERNET: ESCREVE NO FICHEIRO DE SERVIÇOS LOCAL");
+        }
 
         Intent intent = new Intent(this, MenuActivity.class);
-        //startActivity(intent);
-
+        startActivity(intent);
     }
 
     public void inserirServico() {
         new Thread(new Runnable() {
             public void run() {
-                GereServico manager = new GereServico();
+                GereBD manager = new GereBD();
                 Boolean resultado = manager.inserirServico(servico);
                 Log.d("Objeto:", servico.toString());
                 Log.d("Resposta:", resultado.toString());
