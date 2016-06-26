@@ -49,5 +49,15 @@ public class Constants {
 
     public static final String LOG = "Algo";
 
+    public static final String EMAIL = "Email";
+
+    public static final String PASS = "Pass";
+
+    public static final String KEY = "SLB";
+
+    public static final String SALT = "Minas de Argozelo";
+
+    public static final String REGISTO_SEM_NET= "no net";
+
 
 }
