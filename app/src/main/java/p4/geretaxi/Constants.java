@@ -9,7 +9,7 @@ public class Constants {
     public static final String VIAGEM = " Assistência em Viagem";
     public static final String PARTICULAR = "Serviço Particular";
 
-    public static final String TIPO_SERVICO = "tipo";
+    public static final String TIPO_SERVICO = "Tipo: ";
 
     public static final String INTENT_SERVICO = "servico";
 
@@ -31,7 +31,7 @@ public class Constants {
 
     public static final String PASSAGEIROS = "Número de passageiros: ";
 
-    public static final String  N_PASSAGEIROS_VALIDO = "Insira um número válido de passageiros";
+    public static final String N_PASSAGEIROS_VALIDO = "Insira um número válido de passageiros";
 
     public static final String N_VALIDO = "Insira um número válido";
 
