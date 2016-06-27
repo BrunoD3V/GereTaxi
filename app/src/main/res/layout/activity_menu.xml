@@ -18,7 +18,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
         android:onClick="onClickIniciarServico"
-        android:backgroundTint="@android:color/holo_orange_dark"
         android:textColor="#ffffff"
-        android:background="@android:color/holo_orange_dark" />
+        android:background="@color/colorPrimaryDark" />
 </RelativeLayout>

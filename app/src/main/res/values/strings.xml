@@ -37,6 +37,40 @@
     <string name="confirme_password">Confirme Password</string>
     <string name="detetar_localiza_o">Detetar Localização</string>
     <string name="submeter1sttime">Submeter</string>
+    <string name="cliente">Cliente *</string>
+    <string name="inser_o_manual_de_servi_o">Inserção Manual de Serviço</string>
+    <string name="processoform">Processo *</string>
+    <string name="data">Data *</string>
+    <string name="n_de_passageiros">Nº de Passageiros *</string>
+    <string name="inserir_data">Inserir Data</string>
+    <string name="hora_de_inicio">Hora de Inicio *</string>
+    <string name="inserir_hora_de_inicio">Inserir Hora de Inicio</string>
+    <string name="origem">Origem *</string>
+    <string name="destino">Destino *</string>
+    <string name="custos_de_portagens">Custos de Portagens</string>
+    <string name="distancia_km">Distancia (Km) *</string>
+    <string name="horas_de_espera">Horas de Espera</string>
+    <string name="trajeto">Trajeto *</string>
+    <string name="tipo_de_servi_o">Tipo de Serviço *</string>
+    <string name="inserir_servi_o">Inserir Serviço</string>
+    <string name="email_login">Email (Login)</string>
+    <string name="passwordlogin">Password</string>
+    <string name="login">Login</string>
+    <string name="ou_registe_aqui">ou Registe-se AQUI</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="defini_es_de_conta">Definições de Conta</string>
+    <string name="coordenadas_da_pra_a_de_t_xis">Coordenadas da Praça de Táxis</string>
+    <string name="infoPracaDeTaxis">Deverá introduzir as coordenadas da Praça de Táxis manualmente ou utilizar a Localização Automática</string>
+    <string name="procurar">Procurar</string>
+    <string name="sat_lite">Satélite</string>
+    <string name="morada">Insira um Endereço</string>
+    <string name="obter_localiza_o_autom_tica">Guardar Localização</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="procurarss">Procurar</string>
+    <string name="sat_litess">Satélite</string>
+    <string name="moradass">Insira um Endereço</string>
+    <string name="obter_localiza_o_autom_ssstica">Guardar Localização</string>
 
 
 </resources>

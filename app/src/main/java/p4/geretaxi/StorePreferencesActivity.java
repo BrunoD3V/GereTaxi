@@ -40,12 +40,12 @@ public class StorePreferencesActivity extends AppCompatActivity {
             return;
         }
         PasswordValidator passwordValidator = new PasswordValidator();
-       /* if (!passwordValidator.validate(pass)){
+        if (!passwordValidator.validate(pass)){
             Toast.makeText(getApplicationContext(), "A password tem que conter pelo menos 1 dígito, " +
                     "1 mínuscula, 1 maiuscula, 1 caracter especial, não pode ter espaços em branco " +
                     "e um mínimo de 8 caracteres", Toast.LENGTH_LONG).show();
             return;
-        }*/
+        }
 
         Encryption encryption = Encryption.getDefault(Constants.KEY, Constants.SALT, new byte[16]);
 
@@ -65,16 +65,20 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
                     sharedPreference.save(getApplicationContext(), encrypted.trim(), Constants.PASS);
                     sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
-                    //TODO: ENCAMINHAR PARA COORDENADAS FRAGMENT
-                    InserirCoordenadasPTaxiAFragment inserirCoordenadasPTaxiAFragment = new InserirCoordenadasPTaxiAFragment().newInstance();
-                    inserirCoordenadasPTaxiAFragment.;
+                    //TODO: ENCAMINHAR PARA COORDENADAS
+                    Intent i = new Intent(getApplicationContext(), CoordenadasActivity.class);
+                    startActivity(i);
                     break;
                 case 0:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
+                    Intent i2 = new Intent(getApplicationContext(), CoordenadasActivity.class);
+                    startActivity(i2);
                     break;
 
                 case 1:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
+                    Intent i3 = new Intent(getApplicationContext(), CoordenadasActivity.class);
+                    startActivity(i3);
                     break;
             }
         }

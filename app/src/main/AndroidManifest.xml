@@ -54,7 +54,8 @@
         <activity android:name=".TesteSoap" />
         <activity android:name=".StorePreferencesActivity" />
         <activity android:name=".FormularioDeServico" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CoordenadasActivity"></activity>
     </application>
 
 </manifest>

@@ -78,10 +78,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             bounds.include(mapPoints[i]);
             i += 1;
         }
-
         mMap.addPolyline(new PolylineOptions().add(mapPoints).color(Color.BLUE));
         mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 0));
-
     }
 
     public void onClickPortagens(View v){

@@ -37,7 +37,7 @@
         android:onClick="onClickSubmeterServico"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@android:color/holo_green_dark"
+        android:background="@color/colorPrimaryDark"
         android:textColor="#ffffff" />
 
 </RelativeLayout>

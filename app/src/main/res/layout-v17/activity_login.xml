@@ -34,13 +34,13 @@
         android:layout_alignRight="@+id/edtEmailLogin"
         android:layout_alignEnd="@+id/edtEmailLogin"
         android:textAlignment="center"
-        android:hint="Password" />
+        android:hint="@string/passwordlogin" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/btnLogin"
         android:background="@color/colorPrimaryDark"
         android:textColor="#ffffff"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="ou Registe AQUI"
+        android:text="@string/ou_registe_aqui"
         android:id="@+id/txtOuRegiste"
         android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"

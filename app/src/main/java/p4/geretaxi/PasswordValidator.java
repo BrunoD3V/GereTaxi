@@ -25,8 +25,8 @@ public class PasswordValidator{
      */
     public boolean validate(final String password){ //porque?
 
-        matcher = pattern.matcher(password);
-        return matcher.find();
+        matcher = pattern.matcher(password.trim());
+        return matcher.matches();
 
     }
 }

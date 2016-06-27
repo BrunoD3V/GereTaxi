@@ -41,7 +41,7 @@
             android:id="@+id/btn_yes"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_dark"
+            android:background="@color/colorPrimaryDark"
             android:clickable="true"
             android:text="@string/ok"
             android:textColor="#ffffff"
