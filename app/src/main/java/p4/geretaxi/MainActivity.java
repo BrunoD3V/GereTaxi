@@ -67,13 +67,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-
     }
 
     public void onClickMain(View v) {
         Intent i = new Intent(this, MenuActivity.class);
         startActivity(i);
     }
-
-
 }
