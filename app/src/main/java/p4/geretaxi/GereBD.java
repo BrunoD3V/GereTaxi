@@ -140,7 +140,7 @@ public class GereBD {
     }
 
     public boolean inserirServico(final Servico servico){
-
+        result = false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -241,7 +241,7 @@ public class GereBD {
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 }
-                result = false;
+
             }
         }).start();
         try {

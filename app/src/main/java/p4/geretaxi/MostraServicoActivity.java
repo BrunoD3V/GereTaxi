@@ -87,8 +87,11 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     public void onClickSubmeterServico(View v) {
 
         if(helper.isNetworkAvailable(getApplicationContext())){
-            //TODO: INSERIR NO WEBSERVICE
-            System.out.println("TO DO: INSERIR NO WEBSERVICE");
+            SharedPreference sharedPreference = new SharedPreference();
+            servico.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+            GereBD gereBD = new GereBD();
+            boolean res = gereBD.inserirServico(servico);
+            System.out.println("TO DO: INSERIR NO WEBSERVICE" + res);
         }
         else{
             XMLHandler xmlHandler = new XMLHandler();
