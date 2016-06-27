@@ -213,7 +213,7 @@ public class XMLHandler {
 
     public boolean writeTrajecto (List<LatLng> locations, String processo) {
 
-        File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJECTO + processo + Constants.PONTO_XML);
+        File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJETO + processo + Constants.PONTO_XML);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             XmlSerializer xmlSerializer = Xml.newSerializer();
@@ -322,7 +322,7 @@ public class XMLHandler {
 
         String result = null;
 
-        File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJECTO + processo + Constants.PONTO_XML);
+        File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJETO + processo + Constants.PONTO_XML);
         try {
             FileInputStream fIS = new FileInputStream(file);
 

@@ -19,8 +19,6 @@
     <string name="introduza_o_valor_das_portagens">Introduza o valor das Portagens</string>
     <string name="cancelar">Cancelar</string>
     <string name="ok">Confirmar</string>
-
-
     <string name="submeter">Submeter</string>
     <string name="corriga_os_dados">Corrija os dados</string>
     <string name="assistencia_em_viagem">Assistência em viagem</string>
@@ -28,10 +26,8 @@
     <string name="insira_um_valor_valido">Insira um valor válido</string>
     <string name="inserir_portagens">Inserir Portagens</string>
     <string name="aceitar_servico">Aceitar Serviço</string>
-
     <string name="acidente_de_trabalho">Acidente de Trabalho</string>
     <string name="particular">Serviço Particular</string>
-
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirme_password">Confirme Password</string>
@@ -71,6 +67,5 @@
     <string name="sat_litess">Satélite</string>
     <string name="moradass">Insira um Endereço</string>
     <string name="obter_localiza_o_autom_ssstica">Guardar Localização</string>
-
 
 </resources>

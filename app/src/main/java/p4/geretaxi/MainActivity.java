@@ -27,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
                 GereBD bd = new GereBD();
                 SharedPreference sharedPreference = new SharedPreference();
+
                 String email = sharedPreference.getValueString(this, Constants.EMAIL);
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
 
                 int res = bd.checkLogin(email, pass.trim());
+                System.out.println("RES = " + res);
                 if(res == 1) {
                     Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);

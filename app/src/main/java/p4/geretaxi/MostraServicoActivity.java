@@ -1,7 +1,9 @@
 package p4.geretaxi;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -99,7 +101,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 xmlHandler.writeServico(servico);
             }else {
                 Toast.makeText(getApplicationContext(), "Serviço inserido com sucesso", Toast.LENGTH_SHORT).show();
-
+                enviaMail.execute();
             }
             System.out.println("TO DO: INSERIR NO WEBSERVICE" + res);
         }
@@ -158,4 +160,34 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         //porque só mostra às vezes?
         adapter.notifyDataSetChanged();
     }
+
+    AsyncTask<Void, Void, Boolean> enviaMail =
+            new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    boolean result = false;
+                    Mail mail = new Mail();
+                    String[] toArr = {mail.get_from()};
+                    mail.set_to(toArr);
+                    mail.set_subject(servico.getProcesso());
+                    mail.set_body(servico.toString());
+
+                    try {
+                        mail.addAttachment(Environment.getExternalStorageDirectory() + "/" + Constants.TRAJETO +
+                                servico.getProcesso() + Constants.PONTO_XML);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        result = mail.send();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                   return result;
+                }
+            };
+
 }

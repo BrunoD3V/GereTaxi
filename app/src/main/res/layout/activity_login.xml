@@ -9,53 +9,53 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="p4.geretaxi.LoginActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edtEmailLogin"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="@string/email_login"
-        android:textAlignment="center"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextLoginMail"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/email_login"
+            android:textAlignment="center" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/edtPasswordLogin"
-        android:layout_below="@+id/edtEmailLogin"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/edtEmailLogin"
-        android:layout_alignEnd="@+id/edtEmailLogin"
-        android:textAlignment="center"
-        android:hint="Password" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editTextPassLogin"
+            android:layout_below="@+id/editTextLoginMail"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/editTextLoginMail"
+            android:layout_alignEnd="@+id/editTextLoginMail"
+            android:textAlignment="center"
+            android:hint="@string/password" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/btnLogin"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/edtPasswordLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:id="@+id/btnLogin"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/editTextPassLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:onClick="onClickbtnLogin" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="ou Registe AQUI"
-        android:id="@+id/txtOuRegiste"
-        android:layout_below="@+id/btnLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:onClick="onClickRegistarActivity" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/ou_registe_aqui"
+            android:id="@+id/txtOuRegiste"
+            android:layout_below="@+id/btnLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:onClick="onClickRegistarActivity" />
 </RelativeLayout>

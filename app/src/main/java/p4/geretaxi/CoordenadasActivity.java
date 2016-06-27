@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -29,7 +27,7 @@ public class CoordenadasActivity extends FragmentActivity{
     Button btnSateliteMap;
     private GoogleMap mMap;
     LocationListener lListener;
-    LocationManager lManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
+    LocationManager lManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class CoordenadasActivity extends FragmentActivity{
         setContentView(R.layout.activity_coordenadas);
         btnSateliteMap = (Button) findViewById(R.id.btnSateliteMap);
         setUpMapIfNeeded();
+        lManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
 
     @Override
