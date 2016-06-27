@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -89,8 +90,17 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         if(helper.isNetworkAvailable(getApplicationContext())){
             SharedPreference sharedPreference = new SharedPreference();
             servico.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+            System.out.println(servico.getTrajeto());
             GereBD gereBD = new GereBD();
             boolean res = gereBD.inserirServico(servico);
+            if (!res){
+                Toast.makeText(getApplicationContext(), "Erro na inserção", Toast.LENGTH_SHORT).show();
+                XMLHandler xmlHandler = new XMLHandler();
+                xmlHandler.writeServico(servico);
+            }else {
+                Toast.makeText(getApplicationContext(), "Serviço inserido com sucesso", Toast.LENGTH_SHORT).show();
+
+            }
             System.out.println("TO DO: INSERIR NO WEBSERVICE" + res);
         }
         else{
