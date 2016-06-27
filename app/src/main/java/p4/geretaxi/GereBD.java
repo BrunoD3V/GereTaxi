@@ -100,9 +100,9 @@ public class GereBD {
                 PropertyInfo pass = new PropertyInfo();
                 pass.type = PropertyInfo.STRING_CLASS;
                 pass.setName("password");
-                em.setValue(password);
+                pass.setValue(password);
 
-                request.addProperty(em);
+                request.addProperty(pass);
                 request.addProperty(pass);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
