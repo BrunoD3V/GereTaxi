@@ -1,5 +1,6 @@
 package p4.geretaxi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -64,9 +65,9 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
                     sharedPreference.save(getApplicationContext(), encrypted.trim(), Constants.PASS);
                     sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
-                   
-
-
+                    //TODO: ENCAMINHAR PARA COORDENADAS FRAGMENT
+                    InserirCoordenadasPTaxiAFragment inserirCoordenadasPTaxiAFragment = new InserirCoordenadasPTaxiAFragment().newInstance();
+                    inserirCoordenadasPTaxiAFragment.;
                     break;
                 case 0:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();

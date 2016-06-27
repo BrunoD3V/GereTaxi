@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * Created by belchior on 22/06/2016.
- */
 public class DialogCustoPortagemFragment extends DialogFragment implements View.OnClickListener {
 
     Button yes, no;

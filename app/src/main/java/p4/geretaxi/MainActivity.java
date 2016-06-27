@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 }
-
-
-
-
                 break;
             case FIRST_TIME_VERSION:
                 Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();

@@ -12,9 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by belchior on 23/06/2016.
- */
 public class DialogCorrigeDadosS extends DialogFragment implements View.OnClickListener {
 
     Button yes, no;
