@@ -11,14 +11,9 @@ import se.simbio.encryption.Encryption;
 
 public class StorePreferencesActivity extends AppCompatActivity {
 
-
-
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +46,12 @@ public class StorePreferencesActivity extends AppCompatActivity {
             return;
         }*/
 
-
         Encryption encryption = Encryption.getDefault(Constants.KEY, Constants.SALT, new byte[16]);
 
         String encrypted = encryption.encryptOrNull(pass);
         SharedPreference sharedPreference = new SharedPreference();
         GereBD bd = new GereBD();
+
         if (Helper.isNetworkAvailable(getApplicationContext())) {
             switch (bd.checkLogin(email, encrypted)) {
                 case -2:
@@ -73,28 +68,17 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     break;
                 case 0:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
-
                     break;
 
                 case 1:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
-
                     break;
             }
-
         }
         else {
             //Toast.makeText(getApplicationContext(), "Necessita de net para fazer o registo", Toast.LENGTH_LONG).show();
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
-
         }
-
-
-
-
-
     }
-
-
 }

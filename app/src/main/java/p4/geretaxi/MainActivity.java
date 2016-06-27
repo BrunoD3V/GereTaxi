@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreference sharedPreference = new SharedPreference();
                 String email = sharedPreference.getValueString(this, Constants.EMAIL);
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
-                int res = bd.checkLogin(email, pass);
+                int res = bd.checkLogin(email, "16uFOV18ov58hVNDf9h/hg==");
+
+                //PORQUE NAO DÁ HASHED PASSWORDS?
                 System.out.println("PASS: " + pass);
                 System.out.println("USER "+email + " res " + res);
                 break;
@@ -44,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-
-
-
     }
 
     public void onClickMostraCenas(View v){
