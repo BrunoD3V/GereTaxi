@@ -7,7 +7,6 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -17,7 +16,7 @@ public class GereBD {
     private static String NAMESPACE = "http://GereTaxiPackage/";
     private static String URL = "http://"+Constants.IP+":8080/GereTaxi/WSGereTaxi?xsd=1";
     private static String METHOD_NAME;
-    private static String SOAP_ACTION = NAMESPACE+METHOD_NAME;
+
     private Boolean result;
     private int loginID;
     private int res;
@@ -61,7 +60,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                     loginID = Integer.valueOf(response.toString());
@@ -90,19 +89,22 @@ public class GereBD {
             public void run() {
                 setMethodName("checkLogin");
 
-                SoapObject request = new SoapObject("http://GereTaxiPackage/","checkLogin");
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
 
-                PropertyInfo em = new PropertyInfo();
-                em.type = PropertyInfo.STRING_CLASS;
-                em.setName("email");
-                em.setValue(email);
+                PropertyInfo mail = new PropertyInfo();
+                mail.type = PropertyInfo.STRING_CLASS;
+                mail.setName("email");
+                mail.setValue(email);
 
                 PropertyInfo pass = new PropertyInfo();
                 pass.type = PropertyInfo.STRING_CLASS;
                 pass.setName("password");
                 pass.setValue(password);
 
-                request.addProperty(pass);
+
+
+                request.addProperty(mail);
+
                 request.addProperty(pass);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -116,7 +118,7 @@ public class GereBD {
                 http.debug = true;
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
                     System.out.println(http.requestDump);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
@@ -231,7 +233,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                     result = Boolean.parseBoolean(response.toString());
                 } catch (IOException e) {
@@ -278,7 +280,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION,envelope);
+                    http.call(NAMESPACE+METHOD_NAME,envelope);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                     result = Boolean.parseBoolean(response.toString());
                 } catch (IOException e) {
@@ -315,7 +317,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
@@ -377,7 +379,7 @@ public class GereBD {
 
                 System.out.println("MethodName: " + METHOD_NAME);
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapObject response = (SoapObject) envelope.getResponse();
 
@@ -479,7 +481,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 
@@ -526,7 +528,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION,envelope);
+                    http.call(NAMESPACE+METHOD_NAME,envelope);
 
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                     result = Boolean.parseBoolean(response.toString());
@@ -569,7 +571,7 @@ public class GereBD {
 
                 System.out.println("MethodName: " + METHOD_NAME);
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
@@ -625,7 +627,7 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(SOAP_ACTION, envelope);
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapObject response = (SoapObject) envelope.getResponse();
 
