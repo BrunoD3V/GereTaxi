@@ -148,7 +148,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat",lats);
             intent.putExtra("lng", lngs);
-            intent.putExtra(Constants.TIPO_SERVICO, Constants.VIAGEM);
+
             intent.putExtra(Constants.INTENT_SERVICO, servico);
             intent.putExtra("portagem", portagens);
 
@@ -158,6 +158,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
+            handler.writeTrajecto(mCapturedLocations, processo);
             mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "lisboa");
 
             servico.setOrigem(mCapturedLocations.get(0).toString());
