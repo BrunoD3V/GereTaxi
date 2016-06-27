@@ -30,15 +30,18 @@ public class MainActivity extends AppCompatActivity {
                 String email = sharedPreference.getValueString(this, Constants.EMAIL);
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
 
-                int res = bd.checkLogin(email, pass);
+                int res = bd.checkLogin(email, pass.trim());
+                if(res == 1) {
+                    Intent intent = new Intent(this, MenuActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
 
 
 
 
-                //PORQUE NAO DÁ HASHED PASSWORDS?
-
-                System.out.println("PASS: " + pass);
-                System.out.println("USER "+email + " res " + res);
                 break;
             case FIRST_TIME_VERSION:
                 Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
