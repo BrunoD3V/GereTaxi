@@ -37,6 +37,9 @@
     <string name="confirme_password">Confirme Password</string>
     <string name="detetar_localiza_o">Detetar Localização</string>
     <string name="submeter1sttime">Submeter</string>
+    <string name="email_login">Email (Login)</string>
+    <string name="login">Login</string>
+    <string name="ou_registe_aqui">ou Registe AQUI</string>
 
 
 </resources>

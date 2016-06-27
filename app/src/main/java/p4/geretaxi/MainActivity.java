@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
 
                 int res = bd.checkLogin(email, pass.trim());
+                System.out.println("RES = " + res);
                 if(res == 1) {
                     Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);

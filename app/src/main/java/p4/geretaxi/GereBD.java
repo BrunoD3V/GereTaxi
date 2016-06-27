@@ -83,7 +83,7 @@ public class GereBD {
     }
 
     public int checkLogin(final String email, final String password) {
-
+        res = -2;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -138,6 +138,55 @@ public class GereBD {
         }
         return res;
     }
+
+    public int getMotoristaId(final String email) {
+        res = -2;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("getMotoristaId");
+
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo mail = new PropertyInfo();
+                mail.type = PropertyInfo.STRING_CLASS;
+                mail.setName("email");
+                mail.setValue(email);
+
+                request.addProperty(mail);
+
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+                envelope.setOutputSoapObject(request);
+
+                envelope.implicitTypes = true;
+
+                HttpTransportSE http = new HttpTransportSE(URL);
+
+                http.debug = true;
+
+                try {
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
+                    System.out.println(http.requestDump);
+                    SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+
+                    res = Integer.parseInt(response.toString());
+                    System.out.println("RES DENTRO DA THREAD: " + res);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 
     public boolean inserirServico(final Servico servico){
         result = false;

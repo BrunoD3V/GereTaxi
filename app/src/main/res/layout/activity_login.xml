@@ -12,13 +12,13 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editTextLoginMail"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Email (Login)"
+        android:hint="@string/email_login"
         android:textAlignment="center" />
 
     <EditText
@@ -26,32 +26,33 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
+        android:id="@+id/editTextPassLogin"
+        android:layout_below="@+id/editTextLoginMail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
+        android:layout_alignRight="@+id/editTextLoginMail"
+        android:layout_alignEnd="@+id/editTextLoginMail"
         android:textAlignment="center"
-        android:hint="Password" />
+        android:hint="@string/password" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/btnLogin"
         android:background="@color/colorPrimaryDark"
         android:textColor="#ffffff"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/editTextPassLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        android:onClick="onClickbtnLogin" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="ou Registe AQUI"
+        android:text="@string/ou_registe_aqui"
         android:id="@+id/txtOuRegiste"
         android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"

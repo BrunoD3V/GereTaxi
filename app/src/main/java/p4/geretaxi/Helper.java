@@ -155,4 +155,6 @@ public class Helper {
             return AppStart.NORMAL;
         }
     }
+
+
 }

@@ -1,13 +1,10 @@
 package p4.geretaxi;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import se.simbio.encryption.Encryption;
 
 
 public class StorePreferencesActivity extends AppCompatActivity {
@@ -40,16 +37,16 @@ public class StorePreferencesActivity extends AppCompatActivity {
             return;
         }
         PasswordValidator passwordValidator = new PasswordValidator();
-       /* if (!passwordValidator.validate(pass)){
+       if (!passwordValidator.validate(pass)){
             Toast.makeText(getApplicationContext(), "A password tem que conter pelo menos 1 dígito, " +
                     "1 mínuscula, 1 maiuscula, 1 caracter especial, não pode ter espaços em branco " +
                     "e um mínimo de 8 caracteres", Toast.LENGTH_LONG).show();
             return;
-        }*/
+        }
+        PasswordEncrypt passwordEncrypt = new PasswordEncrypt();
 
-        Encryption encryption = Encryption.getDefault(Constants.KEY, Constants.SALT, new byte[16]);
 
-        String encrypted = encryption.encryptOrNull(pass);
+        String encrypted = passwordEncrypt.getEncrypted(pass);
 
         SharedPreference sharedPreference = new SharedPreference();
         GereBD bd = new GereBD();
@@ -59,7 +56,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
                 case -2:
                     Toast.makeText(getApplicationContext(), "Erro no registo tente mais tarde", Toast.LENGTH_LONG).show();
 
-                    break;
+                    return;
                 case -1:
                     int res = bd.registarMotorista(email, encrypted);
                     sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
@@ -67,14 +64,16 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
                     //TODO: ENCAMINHAR PARA COORDENADAS FRAGMENT
                     InserirCoordenadasPTaxiAFragment inserirCoordenadasPTaxiAFragment = new InserirCoordenadasPTaxiAFragment().newInstance();
-                    inserirCoordenadasPTaxiAFragment.;
+                   // inserirCoordenadasPTaxiAFragment.;
                     break;
                 case 0:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
-                    break;
+                    return;
 
                 case 1:
                     Toast.makeText(getApplicationContext(), "Este utilizador já existe", Toast.LENGTH_LONG).show();
+                    return;
+                default:
                     break;
             }
         }

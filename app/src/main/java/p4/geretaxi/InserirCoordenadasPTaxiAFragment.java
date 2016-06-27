@@ -1,10 +1,8 @@
 package p4.geretaxi;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +20,8 @@ public class InserirCoordenadasPTaxiAFragment extends DialogFragment{
         setCancelable(false);
         btnGravarCoordenadas = (Button) view.findViewById(R.id.btnGravarCoordenadas);
         btnObterLocalizacao = (Button) view.findViewById(R.id.btnObterLocalizacao);
-        btnGravarCoordenadas.setOnClickListener(this);
-        btnObterLocalizacao.setOnClickListener(this);
+       // btnGravarCoordenadas.setOnClickListener(this);
+       // btnObterLocalizacao.setOnClickListener(this);
         
         return view;
     }

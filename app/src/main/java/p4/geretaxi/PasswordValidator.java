@@ -12,7 +12,7 @@ public class PasswordValidator{
     private Matcher matcher;
 
     private static final String PASSWORD_PATTERN =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!_?«»',.-])(?=\\S+$).{8,}$";
 
     public PasswordValidator(){
         pattern = Pattern.compile(PASSWORD_PATTERN);
@@ -26,7 +26,7 @@ public class PasswordValidator{
     public boolean validate(final String password){ //porque?
 
         matcher = pattern.matcher(password);
-        return matcher.find();
+        return matcher.matches();
 
     }
 }
