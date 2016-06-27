@@ -101,7 +101,10 @@ public class GereBD {
                 pass.setName("password");
                 pass.setValue(password);
 
+
+
                 request.addProperty(mail);
+
                 request.addProperty(pass);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -137,7 +140,7 @@ public class GereBD {
     }
 
     public boolean inserirServico(final Servico servico){
-
+        result = false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -238,7 +241,7 @@ public class GereBD {
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 }
-                result = false;
+
             }
         }).start();
         try {

@@ -54,11 +54,11 @@ public class Constants {
 
     public static final String KEY = "SLB";
 
-    public static final String SALT = "Minas de Argozelo";
+    public static final String SALT = "Minas";
 
     public static final String REGISTO_SEM_NET= "no net";
 
-    public static final String IP = "192.168.1.5";
+    public static final String IP = "192.168.2.227";
 
     public static final String TRAJECTO = "Trajecto: ";
 

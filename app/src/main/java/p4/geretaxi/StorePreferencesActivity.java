@@ -49,11 +49,12 @@ public class StorePreferencesActivity extends AppCompatActivity {
         Encryption encryption = Encryption.getDefault(Constants.KEY, Constants.SALT, new byte[16]);
 
         String encrypted = encryption.encryptOrNull(pass);
+
         SharedPreference sharedPreference = new SharedPreference();
         GereBD bd = new GereBD();
 
         if (Helper.isNetworkAvailable(getApplicationContext())) {
-            switch (bd.checkLogin(email, encrypted)) {
+            switch (bd.checkLogin(email, encrypted.trim())) {
                 case -2:
                     Toast.makeText(getApplicationContext(), "Erro no registo tente mais tarde", Toast.LENGTH_LONG).show();
 
@@ -61,9 +62,10 @@ public class StorePreferencesActivity extends AppCompatActivity {
                 case -1:
                     int res = bd.registarMotorista(email, encrypted);
                     sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
-                    sharedPreference.save(getApplicationContext(), encrypted, Constants.PASS);
+                    sharedPreference.save(getApplicationContext(), encrypted.trim(), Constants.PASS);
                     sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
-                    System.out.println(encrypted);
+                   
+
 
                     break;
                 case 0:
