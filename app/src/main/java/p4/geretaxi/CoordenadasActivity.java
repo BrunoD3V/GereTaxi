@@ -58,6 +58,7 @@ public class CoordenadasActivity extends FragmentActivity{
         location_tf = (EditText)findViewById(R.id.edtSearch);
         String location = location_tf.getText().toString();
         List<Address> addressList = null;
+        System.out.println(location);
         if(location != null || !location.equals("")){
             Geocoder geocoder = new Geocoder(this);
             try {
@@ -69,6 +70,8 @@ public class CoordenadasActivity extends FragmentActivity{
             latLng = new LatLng(address.getLatitude() , address.getLongitude());
             setUpMap(latLng);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }else{
+            Toast.makeText(getApplicationContext(),"Por favor introduza um Endereço válido", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -99,6 +102,7 @@ public class CoordenadasActivity extends FragmentActivity{
         mMap.setMyLocationEnabled(true);
         edtLongitude.setText(String.valueOf(newLocation.getLongitude()));
         edtLatitude.setText(String.valueOf(newLocation.getLatitude()));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }
     //POLYMORFED
     private void setUpMap(LatLng latLng){
@@ -107,6 +111,7 @@ public class CoordenadasActivity extends FragmentActivity{
         mMap.setMyLocationEnabled(true);
         edtLongitude.setText(String.valueOf(latLng.latitude));
         edtLatitude.setText(String.valueOf(latLng.longitude));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
     }
     public void getLocationForMap(final Activity activity) {
         lManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
