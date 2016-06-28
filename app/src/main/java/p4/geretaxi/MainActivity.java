@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
-
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Servico> lista;

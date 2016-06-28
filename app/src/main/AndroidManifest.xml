@@ -55,7 +55,10 @@
         <activity android:name=".StorePreferencesActivity" />
         <activity android:name=".FormularioDeServico" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".CoordenadasActivity"></activity>
+        <activity android:name=".CoordenadasActivity" />
+        <activity android:name=".GerirClientesActivity" />
+        <activity android:name=".ConsultarClientesActivity" />
+        <activity android:name=".InserirNovoClienteActivity"></activity>
     </application>
 
 </manifest>

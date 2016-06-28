@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable{
 
-    SharedPreference sharedPreference;
-
     private int id;
     private String nome;
     private String morada;
@@ -13,16 +11,22 @@ public class Cliente implements Serializable{
     private String email;
     private int contacto;
     private int nif;
-    private String tipo;
     private int idMotorista;
+    private String tipo;
 
     public Cliente(String nome) {
         this.nome = nome;
-        this.idMotorista = sharedPreference.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA);
     }
 
     public Cliente() {
-        this.idMotorista = sharedPreference.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA);
+        this.nome="";
+        this.morada="";
+        this.codigoPostal="";
+        this.email="";
+        this.contacto=0;
+        this.nif = 0;
+        this.idMotorista = 0;
+        this.tipo = "";
     }
 
     public int getIdMotorista() {

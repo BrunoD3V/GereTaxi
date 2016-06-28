@@ -138,6 +138,7 @@ public class FormularioDeServico extends AppCompatActivity{
             servico.setDistancia(Double.parseDouble(edtDistanciaPercorrida.getText().toString()));
             servico.setTrajeto(edtTrajeto.getText().toString());
             servico.setTipo(tipoServico);
+
             if(helper.isEmpty(edtHorasDeEspera))
                 servico.setHorasDeEspera(0.0);
             else

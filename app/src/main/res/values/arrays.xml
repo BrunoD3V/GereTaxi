@@ -5,4 +5,8 @@
         <item>Acidente de Trabalho</item>
         <item>Particular</item>
     </string-array>
+    <string-array name="tipo_cliente_array">
+        <item>Particular</item>
+        <item>Companhia</item>
+    </string-array>
 </resources>

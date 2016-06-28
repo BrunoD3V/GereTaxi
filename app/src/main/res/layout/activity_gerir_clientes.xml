@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="p4.geretaxi.GerirClientesActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Gestão de Clientes"
+        android:id="@+id/txtGestaoDeClientes"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inserir novo Cliente"
+        android:id="@+id/btnInserirCliente"
+        android:layout_below="@+id/txtGestaoDeClientes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClickInserirCliente"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimaryDark" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultar Lista de Clientes"
+        android:id="@+id/btnListarClientes"
+        android:layout_below="@+id/btnInserirCliente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnInserirCliente"
+        android:layout_alignEnd="@+id/btnInserirCliente"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onClickListarClientes"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultar Serviços por Cliente"
+        android:id="@+id/btnServicoPorCliente"
+        android:layout_below="@+id/btnListarClientes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnListarClientes"
+        android:layout_alignEnd="@+id/btnListarClientes"
+        android:textColor="#ffffff"
+        android:onClick="onClickServicoPorCliente"
+        android:background="@color/colorPrimaryDark" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Cliente"
+        android:id="@+id/btnEliminarCliente"
+        android:layout_below="@+id/btnServicoPorCliente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnServicoPorCliente"
+        android:layout_alignEnd="@+id/btnServicoPorCliente"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onClickEliminarCliente"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>
