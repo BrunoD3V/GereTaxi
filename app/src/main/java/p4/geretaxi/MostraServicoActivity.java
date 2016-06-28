@@ -55,8 +55,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
         adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
 
-        System.out.println("MOSTRA");
-        System.out.println(servico.getTipo());
+
         switch (servico.getTipo()) {
             case Constants.VIAGEM:
                 textViewMostraServico.setText(R.string.assistencia_em_viagem);
@@ -93,7 +92,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         if(helper.isNetworkAvailable(getApplicationContext())){
             SharedPreference sharedPreference = new SharedPreference();
             servico.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
-            System.out.println(servico.getTrajeto());
+
             GereBD gereBD = new GereBD();
             boolean res = gereBD.inserirServico(servico);
             if (!res){
@@ -104,12 +103,12 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 Toast.makeText(getApplicationContext(), "Serviço inserido com sucesso", Toast.LENGTH_SHORT).show();
                 enviaMail.execute();
             }
-            System.out.println("TO DO: INSERIR NO WEBSERVICE" + res);
+
         }
         else{
             XMLHandler xmlHandler = new XMLHandler();
             xmlHandler.writeServico(servico);
-            System.out.println("SEM INTERNET: ESCREVE NO FICHEIRO DE SERVIÇOS LOCAL");
+
         }
 
         Intent intent = new Intent(this, MenuActivity.class);
@@ -173,7 +172,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                     String[] toArr = {mail.get_from()};
                     mail.set_to(toArr);
                     mail.set_subject(servico.getProcesso());
-                    mail.set_body(servico.toString());
+                    mail.set_body(servico.toString() + "\n Mensagem enviada pela GereTaxiApp");
 
                     try {
                         mail.addAttachment(Environment.getExternalStorageDirectory() + "/" + Constants.TRAJETO +

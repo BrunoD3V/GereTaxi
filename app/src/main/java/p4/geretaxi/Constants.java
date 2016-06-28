@@ -76,4 +76,25 @@ public class Constants {
 
     public static final String ID_MOTORISTA = "ID_MOTORISTA";
 
+    public static final String CLIENTES = "clientes";
+
+    public static final String CLIENTE = "cliente";
+
+    public static final String NOME = "nome";
+
+    public static final String ID = "id";
+
+    public static final String MORADA = "morada";
+
+    public static final String CODIGO_POSTAL = "codigo-postal";
+
+    public static final String NIF = "nif";
+
+    public static final String CONTACTO = "contacto";
+
+    public static final String MAIL = "email";
+
+    public static final String TIPO = "tipo";
+
+
 }

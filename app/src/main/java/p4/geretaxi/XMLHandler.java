@@ -343,6 +343,86 @@ public class XMLHandler {
 
     }
 
+    public boolean writeCliente(Cliente cliente) {
+
+        boolean result = false;
+
+        File file = new File(Environment.getExternalStorageDirectory(), Constants.CLIENTES + Constants.PONTO_XML);
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            if (file.length() == 0) {
+                xmlSerializer.setOutput(writer);
+                xmlSerializer.startDocument("UTF-8", true);
+                xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                xmlSerializer.startTag(null, Constants.CLIENTE);
+                xmlSerializer.startTag(null, Constants.NOME);
+                xmlSerializer.text(cliente.getNome());
+                xmlSerializer.endTag(null, Constants.NOME);
+                xmlSerializer.startTag(null, Constants.MORADA);
+                xmlSerializer.text(cliente.getMorada());
+                xmlSerializer.endTag(null, Constants.MORADA);
+                xmlSerializer.startTag(null, Constants.CODIGO_POSTAL);
+                xmlSerializer.text(cliente.getCodigoPostal());
+                xmlSerializer.endTag(null, Constants.CODIGO_POSTAL);
+                xmlSerializer.startTag(null, Constants.NIF);
+                xmlSerializer.text(String.valueOf(cliente.getNif()));
+                xmlSerializer.endTag(null, Constants.NIF);
+                xmlSerializer.startTag(null,Constants.CONTACTO);
+                xmlSerializer.text(String.valueOf(cliente.getContacto()));
+                xmlSerializer.endTag(null, Constants.CONTACTO);
+                xmlSerializer.startTag(null, Constants.MAIL);
+                xmlSerializer.text(cliente.getEmail());
+                xmlSerializer.endTag(null, Constants.MAIL);
+                xmlSerializer.startTag(null, Constants.TIPO);
+                xmlSerializer.text(cliente.getTipo());
+                xmlSerializer.endTag(null, Constants.TIPO);
+                xmlSerializer.endTag(null, Constants.CLIENTE);
+                xmlSerializer.endDocument();
+            } else {
+                xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                xmlSerializer.startTag(null, Constants.CLIENTE);
+                xmlSerializer.startTag(null, Constants.NOME);
+                xmlSerializer.text(cliente.getNome());
+                xmlSerializer.endTag(null, Constants.NOME);
+                xmlSerializer.startTag(null, Constants.MORADA);
+                xmlSerializer.text(cliente.getMorada());
+                xmlSerializer.endTag(null, Constants.MORADA);
+                xmlSerializer.startTag(null, Constants.CODIGO_POSTAL);
+                xmlSerializer.text(cliente.getCodigoPostal());
+                xmlSerializer.endTag(null, Constants.CODIGO_POSTAL);
+                xmlSerializer.startTag(null, Constants.NIF);
+                xmlSerializer.text(String.valueOf(cliente.getNif()));
+                xmlSerializer.endTag(null, Constants.NIF);
+                xmlSerializer.startTag(null,Constants.CONTACTO);
+                xmlSerializer.text(String.valueOf(cliente.getContacto()));
+                xmlSerializer.endTag(null, Constants.CONTACTO);
+                xmlSerializer.startTag(null, Constants.MAIL);
+                xmlSerializer.text(cliente.getEmail());
+                xmlSerializer.endTag(null, Constants.MAIL);
+                xmlSerializer.startTag(null, Constants.TIPO);
+                xmlSerializer.text(cliente.getTipo());
+                xmlSerializer.endTag(null, Constants.TIPO);
+                xmlSerializer.endTag(null, Constants.CLIENTE);
+                xmlSerializer.endDocument();
+            }
+            xmlSerializer.flush();
+            String dataWrite = writer.toString();
+            fileOutputStream.write(dataWrite.getBytes());
+            fileOutputStream.close();
+           result = true;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
+
     public List<LatLng> loadGpxData(XmlPullParser parser, String processo)
     {
 
