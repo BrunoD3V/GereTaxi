@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -13,7 +14,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
-
+    TextView txtEfetuarLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,5 +85,10 @@ public class StorePreferencesActivity extends AppCompatActivity {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
         }
+    }
+
+    public void onClickLoginActivity(View v){
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);
     }
 }

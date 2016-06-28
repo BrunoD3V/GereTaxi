@@ -30,8 +30,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
     GPSHandler gpsHandler = new GPSHandler(this);
     private Servico servico = new Servico();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,8 +122,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
             servico.setOrigem(origem.formattedAddress);
             mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
 
-
-
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance();
 
@@ -133,8 +129,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
             boolean portagens = servicoHandler.getPortagens();
 
             System.out.println(servico.toString());
-
-
 
             ArrayList<Double> lats = new ArrayList<>();
 

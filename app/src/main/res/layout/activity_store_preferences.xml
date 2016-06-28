@@ -69,5 +69,16 @@
         android:layout_marginTop="26dp"
         android:onClick="onClickbtnSubmeterInfo" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtEfetuarLogin"
+        android:layout_below="@+id/btnSubmeterInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:onClick="onClickLoginActivity"
+        android:text="ou faça Login AQUI" />
+
 
 </RelativeLayout>

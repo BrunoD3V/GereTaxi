@@ -2,6 +2,7 @@ package p4.geretaxi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -21,21 +22,26 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-
 public class CoordenadasActivity extends FragmentActivity{
 
     Button btnSateliteMap;
     private GoogleMap mMap;
-    LocationListener lListener;
-    LocationManager lManager;
+    private LocationListener lListener;
+    private LocationManager lManager;
+    private GPSHandler handler;
+    private LatLng latLng;
+    EditText location_tf;
+    EditText edtLatitude;
+    EditText edtLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coordenadas);
+        handler = new GPSHandler(this);
         btnSateliteMap = (Button) findViewById(R.id.btnSateliteMap);
-        setUpMapIfNeeded();
         lManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        setUpMapIfNeeded();
     }
 
     @Override
@@ -46,7 +52,7 @@ public class CoordenadasActivity extends FragmentActivity{
 
     public void onSearch(View view)
     {
-        EditText location_tf = (EditText)findViewById(R.id.edtSearch);
+        location_tf = (EditText)findViewById(R.id.edtSearch);
         String location = location_tf.getText().toString();
         List<Address> addressList = null;
         if(location != null || !location.equals(""))
@@ -58,7 +64,7 @@ public class CoordenadasActivity extends FragmentActivity{
                 e.printStackTrace();
             }
             Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
+            latLng = new LatLng(address.getLatitude() , address.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng).title("Location"));
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
@@ -84,7 +90,7 @@ public class CoordenadasActivity extends FragmentActivity{
                 mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                             .getMap();
             }
-       initGPS(this);
+            getLocationForMap(this);
     }
 
     private void setUpMap(Location newLocation) {
@@ -94,14 +100,10 @@ public class CoordenadasActivity extends FragmentActivity{
         //TODO: MUDAR PARA LOCALIZAÇÃO ATUAL
     }
 
-    public void initGPS(final Activity activity) {
-
-        GPSHandler handler = new GPSHandler(getApplicationContext());
-
+    public void getLocationForMap(final Activity activity) {
         lManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         if(lManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
-
             Toast.makeText(getApplicationContext(),"A Obter a sua Localização atual.", Toast.LENGTH_LONG).show();
         }
         else
@@ -133,20 +135,20 @@ public class CoordenadasActivity extends FragmentActivity{
         };
 
         try {
-            lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, lListener);
+            lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000000, 10 , lListener);
         } catch (SecurityException se) {
         }
     }
 
-    public void listenerClose() {
-        if(lListener != null){
-            lManager.removeUpdates(lListener);
-        }
-    }
-
     public void onClickGuardarLocation(View v){
-        listenerClose();
-    }
+        handler.listenerClose();
+        SharedPreference sharedPreference = new SharedPreference();
+        sharedPreference.save(getApplicationContext(),String.valueOf(latLng.latitude), Constants.LAT);
+        sharedPreference.save(getApplicationContext(), String.valueOf(latLng.longitude), Constants.LON);
 
+
+        Intent i = new Intent(this, MenuActivity.class);
+        startActivity(i);
+    }
 
 }
