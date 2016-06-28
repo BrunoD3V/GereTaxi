@@ -37,6 +37,7 @@ public class SharedPreference {
         editor = settings.edit(); //2
 
         editor.putInt(Key, value);
+
         editor.commit(); //4
     }
 
