@@ -64,18 +64,21 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     public void onClickInserirNovoCliente(View v){
 
         if(helper.isNetworkAvailable(getApplicationContext())){
-            if(helper.isEmpty(edtNome) || helper.isEmpty(edtMorada) || helper.isEmpty(edtCodigoPostal) || helper.isEmpty(edtNif) || helper.isEmpty(edtContacto) || helper.isEmpty(edtEmail)){
+            if(helper.isEmpty(edtNome) || helper.isEmpty(edtMorada) || helper.isEmpty(edtNif) ){
                 Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
                 return;
             }else{
                 cliente.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
                 cliente.setNome(edtNome.getText().toString());
                 cliente.setMorada(edtMorada.getText().toString());
-                cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
                 cliente.setNif(Integer.parseInt(edtNif.getText().toString()));
-                cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
-                cliente.setEmail(edtEmail.getText().toString());
                 cliente.setTipo(tipoCliente);
+                if(!Helper.isEmpty(edtCodigoPostal))
+                    cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
+                else if(!Helper.isEmpty(edtContacto))
+                    cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
+                else if(!Helper.isEmpty(edtEmail))
+                    cliente.setEmail(edtEmail.getText().toString());
             }
             boolean res = gereBD.inserirCliente(cliente);
             if (!res){
@@ -83,6 +86,10 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
                 //TODO: ENCAMINHAR PARA LISTAGEM DE CLIENTES
+                /*
+                Intent int = new Intent(this, ConsultarClientesActivity.class);
+                startactivity(int);
+                 */
             }
         }else{
             XMLHandler xmlHandler = new XMLHandler();
