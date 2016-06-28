@@ -63,6 +63,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         XMLHandler xmlHandler = new XMLHandler();
 
         if(Helper.isNetworkAvailable(getApplicationContext())){
+
             if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
                 Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
                 return;
@@ -82,7 +83,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
 
             }
             boolean res = gereBD.inserirCliente(cliente);
-            System.out.println("RESULTADO = " + res);
+
             if (!res){
                 Toast.makeText(getApplicationContext(), "Não foi possivel inserir o Cliente.", Toast.LENGTH_SHORT).show();
             }else{
@@ -97,8 +98,9 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         }else{
 
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
-            xmlHandler.writenovoCliente(cliente);
-            //TODO: ESCREVER CLIENTE LOCALMENTE
+            if(!xmlHandler.writenovoCliente(cliente))
+                Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();;
+
         }
     }
 }

@@ -19,23 +19,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Helper helper = new Helper();
+        SharedPreference sharedPreference = new SharedPreference();
         switch (helper.checkAppStart()) {
             case NORMAL:
-                Toast.makeText(getApplicationContext(), " NORMAL", Toast.LENGTH_SHORT).show();
-                GereBD bd = new GereBD();
-                SharedPreference sharedPreference = new SharedPreference();
-                String email = sharedPreference.getValueString(this, Constants.EMAIL);
-                String pass = sharedPreference.getValueString(this, Constants.PASS);
+               if (Helper.isNetworkAvailable(this)) {
 
-                int res = bd.checkLogin(email, pass.trim());//TODO criar uma variavel global que define a sessão
-                System.out.println("RES = " + res);
-                if(res == 1) {
-                    Intent intent = new Intent(this, MenuActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
-                }
+
+                   boolean res = Helper.attemptLogin();
+
+                   if (res) {
+                       Intent intent = new Intent(this, MenuActivity.class);
+                       startActivity(intent);
+                       sharedPreference.save(this, Constants.TRUE, Constants.SESSION);
+                   } else {
+                       Intent intent = new Intent(this, LoginActivity.class);
+                       startActivity(intent);
+                   }
+               }else {
+                   sharedPreference.save(this, Constants.FALSE, Constants.SESSION);
+                   Toast.makeText(getApplicationContext(), "Está em modo offline, não terá acesso à maior parte das funcionalidades",
+                           Toast.LENGTH_SHORT).show();
+                   Intent intent = new Intent(this, MenuActivity.class);
+                   startActivity(intent);
+
+               }
                 break;
             case FIRST_TIME_VERSION:
                 Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();

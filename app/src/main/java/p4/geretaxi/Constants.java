@@ -96,5 +96,7 @@ public class Constants {
 
     public static final String TIPO = "tipo";
 
+    public static final String SESSION = "session";
+
 
 }
