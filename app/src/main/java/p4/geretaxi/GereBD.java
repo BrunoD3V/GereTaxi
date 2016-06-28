@@ -466,6 +466,7 @@ public class GereBD {
 
     public boolean inserirCliente(final Cliente cliente){
 
+        result = false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -666,6 +667,12 @@ public class GereBD {
                 setMethodName("pesquisarCliente");
 
                 SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+                PropertyInfo nome = new PropertyInfo();
+                nome.type = PropertyInfo.STRING_CLASS;
+                nome.setName("nome");
+                nome.setValue(nomeC);
+
+                request.addProperty(nome);
 
                 PropertyInfo nome = new PropertyInfo();
                 nome.type = PropertyInfo.STRING_CLASS;

@@ -59,6 +59,9 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     }
 
     public void onClickInserirNovoCliente(View v){
+
+        XMLHandler xmlHandler = new XMLHandler();
+
         if(Helper.isNetworkAvailable(getApplicationContext())){
             if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
                 Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
@@ -69,26 +72,32 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                 cliente.setMorada(edtMorada.getText().toString());
                 cliente.setNif(Integer.parseInt(edtNif.getText().toString()));
                 cliente.setTipo(tipoCliente);
+
                 if(!Helper.isEmpty(edtCodigoPostal))
                     cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
                 if(!Helper.isEmpty(edtContacto))
                     cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
                 if(!Helper.isEmpty(edtEmail))
                     cliente.setEmail(edtEmail.getText().toString());
+
             }
             boolean res = gereBD.inserirCliente(cliente);
+            System.out.println("RESULTADO = " + res);
             if (!res){
                 Toast.makeText(getApplicationContext(), "Não foi possivel inserir o Cliente.", Toast.LENGTH_SHORT).show();
             }else{
+                cliente = gereBD.pesquisarCliente(cliente.getNome());
+                if(!xmlHandler.writeClientes(cliente))
+                    Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this, ConsultarClientesActivity.class);
                 startActivity(intent);
             }
         }else{
-            XMLHandler xmlHandler = new XMLHandler();
+
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
-            xmlHandler.writeCliente(cliente);
+            xmlHandler.writenovoCliente(cliente);
             //TODO: ESCREVER CLIENTE LOCALMENTE
         }
     }
