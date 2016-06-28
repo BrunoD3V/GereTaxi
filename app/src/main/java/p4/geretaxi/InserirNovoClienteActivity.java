@@ -21,7 +21,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     EditText edtContacto;
     EditText edtEmail;
     GereBD gereBD;
-    Helper helper;
+
     private Cliente cliente;
     private SharedPreference sharedPreference;
     private Spinner spinner;
@@ -40,7 +40,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         edtContacto= (EditText)findViewById(R.id.edtContacto);
         edtEmail= (EditText)findViewById(R.id.edtEmail);
         gereBD = new GereBD();
-        helper = new Helper();
+
         cliente = new Cliente();
         sharedPreference= new SharedPreference();
         spinner = (Spinner) findViewById(R.id.spinnerTipoCliente);
@@ -62,9 +62,8 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     }
 
     public void onClickInserirNovoCliente(View v){
-
-        if(helper.isNetworkAvailable(getApplicationContext())){
-            if(helper.isEmpty(edtNome) || helper.isEmpty(edtMorada) || helper.isEmpty(edtNif) ){
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
                 Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
                 return;
             }else{
@@ -75,9 +74,9 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                 cliente.setTipo(tipoCliente);
                 if(!Helper.isEmpty(edtCodigoPostal))
                     cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
-                else if(!Helper.isEmpty(edtContacto))
+                if(!Helper.isEmpty(edtContacto))
                     cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
-                else if(!Helper.isEmpty(edtEmail))
+                if(!Helper.isEmpty(edtEmail))
                     cliente.setEmail(edtEmail.getText().toString());
             }
             boolean res = gereBD.inserirCliente(cliente);
@@ -94,6 +93,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         }else{
             XMLHandler xmlHandler = new XMLHandler();
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
+            xmlHandler.writeCliente(cliente);
             //TODO: ESCREVER CLIENTE LOCALMENTE
         }
     }

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 String email = sharedPreference.getValueString(this, Constants.EMAIL);
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
 
-                int res = bd.checkLogin(email, pass.trim());
+                int res = bd.checkLogin(email, pass.trim());//TODO criar uma variavel global que define a sessão
                 System.out.println("RES = " + res);
                 if(res == 1) {
                     Intent intent = new Intent(this, MenuActivity.class);
