@@ -674,13 +674,6 @@ public class GereBD {
 
                 request.addProperty(nome);
 
-                PropertyInfo nome = new PropertyInfo();
-                nome.type = PropertyInfo.STRING_CLASS;
-                nome.setName("nome");
-                nome.setValue(nomeC);
-                
-                request.addProperty(nome);
-
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
                 envelope.setOutputSoapObject(request);
