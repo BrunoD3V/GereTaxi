@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
                 int res = bd.checkLogin(email, pass.trim());
                 System.out.println("RES = " + res);
                 if(res == 1) {
-                    Intent intent = new Intent(this, MenuActivity.class);
+                    Intent intent = new Intent(this, CoordenadasActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(this, CoordenadasActivity.class);
+                    Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 }
                 break;

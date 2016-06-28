@@ -56,17 +56,20 @@ public class CoordenadasActivity extends FragmentActivity{
     public void onSearch(View view)
     {
         location_tf = (EditText)findViewById(R.id.edtSearch);
-        String location = location_tf.getText().toString();
-        List<Address> addressList = null;
-        if(location != null || !location.equals("")){
+        if(!helper.isEmpty(location_tf)) {
+
+
+            String location = location_tf.getText().toString();
+            List<Address> addressList = null;
+
             Geocoder geocoder = new Geocoder(this);
             try {
-                addressList = geocoder.getFromLocationName(location , 1);
-            }catch (IOException e) {
+                addressList = geocoder.getFromLocationName(location, 1);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             Address address = addressList.get(0);//TODO verificar se está preenchida primeiro
-            latLng = new LatLng(address.getLatitude() , address.getLongitude());
+            latLng = new LatLng(address.getLatitude(), address.getLongitude());
             setUpMap(latLng);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }

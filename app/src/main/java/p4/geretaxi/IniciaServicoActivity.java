@@ -131,7 +131,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
 
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Deu Bronca", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Erro tente outra vez", Toast.LENGTH_SHORT).show();
                 return;
             }
 
