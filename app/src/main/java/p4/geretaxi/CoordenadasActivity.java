@@ -33,13 +33,17 @@ public class CoordenadasActivity extends FragmentActivity{
     EditText location_tf;
     EditText edtLatitude;
     EditText edtLongitude;
+    private Helper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coordenadas);
         handler = new GPSHandler(this);
+        helper = new Helper();
         btnSateliteMap = (Button) findViewById(R.id.btnSateliteMap);
+        edtLatitude = (EditText) findViewById(R.id.edtLatitude);
+        edtLongitude = (EditText) findViewById(R.id.edtLongitude);
         lManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         setUpMapIfNeeded();
     }
@@ -49,23 +53,21 @@ public class CoordenadasActivity extends FragmentActivity{
         super.onResume();
         setUpMapIfNeeded();
     }
-
     public void onSearch(View view)
     {
         location_tf = (EditText)findViewById(R.id.edtSearch);
         String location = location_tf.getText().toString();
         List<Address> addressList = null;
-        if(location != null || !location.equals(""))
-        {
+        if(location != null || !location.equals("")){
             Geocoder geocoder = new Geocoder(this);
             try {
                 addressList = geocoder.getFromLocationName(location , 1);
-            } catch (IOException e) {
+            }catch (IOException e) {
                 e.printStackTrace();
             }
             Address address = addressList.get(0);
             latLng = new LatLng(address.getLatitude() , address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Location"));
+            setUpMap(latLng);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
     }
@@ -82,7 +84,6 @@ public class CoordenadasActivity extends FragmentActivity{
             btnSateliteMap.setText("Satélite");
         }
     }
-
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
             if (mMap == null) {
@@ -92,14 +93,21 @@ public class CoordenadasActivity extends FragmentActivity{
             }
             getLocationForMap(this);
     }
-
-    private void setUpMap(Location newLocation) {
+    private void setUpMap(Location newLocation){
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(new LatLng(newLocation.getLatitude(),newLocation.getLongitude())).title("MyLocation"));
         mMap.setMyLocationEnabled(true);
-        //TODO: MUDAR PARA LOCALIZAÇÃO ATUAL
+        edtLongitude.setText(String.valueOf(newLocation.getLongitude()));
+        edtLatitude.setText(String.valueOf(newLocation.getLatitude()));
     }
-
+    //POLYMORFED
+    private void setUpMap(LatLng latLng){
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude,latLng.longitude)).title("MyLocation"));
+        mMap.setMyLocationEnabled(true);
+        edtLongitude.setText(String.valueOf(latLng.latitude));
+        edtLatitude.setText(String.valueOf(latLng.longitude));
+    }
     public void getLocationForMap(final Activity activity) {
         lManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         if(lManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
@@ -143,12 +151,14 @@ public class CoordenadasActivity extends FragmentActivity{
     public void onClickGuardarLocation(View v){
         handler.listenerClose();
         SharedPreference sharedPreference = new SharedPreference();
-        sharedPreference.save(getApplicationContext(),String.valueOf(latLng.latitude), Constants.LAT);
-        sharedPreference.save(getApplicationContext(), String.valueOf(latLng.longitude), Constants.LON);
-
-
+        if(helper.isEmpty(edtLatitude) && helper.isEmpty(edtLongitude)){
+            sharedPreference.save(getApplicationContext(),String.valueOf(latLng.latitude), Constants.LAT);
+            sharedPreference.save(getApplicationContext(), String.valueOf(latLng.longitude), Constants.LON);
+        }else{
+            sharedPreference.save(getApplicationContext(),edtLatitude.getText().toString(), Constants.LAT);
+            sharedPreference.save(getApplicationContext(), edtLongitude.getText().toString(), Constants.LON);
+        }
         Intent i = new Intent(this, MenuActivity.class);
         startActivity(i);
     }
-
 }

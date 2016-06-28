@@ -155,10 +155,12 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
 
         listItems.clear();
 
-
-        populateListView();
         //porque só mostra às vezes?
         adapter.notifyDataSetChanged();
+        populateListView();
+
+
+
     }
 
     AsyncTask<Void, Void, Boolean> enviaMail =
