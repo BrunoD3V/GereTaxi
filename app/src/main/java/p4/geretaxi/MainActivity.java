@@ -24,10 +24,8 @@ public class MainActivity extends AppCompatActivity {
         switch (helper.checkAppStart()) {
             case NORMAL:
                 Toast.makeText(getApplicationContext(), " NORMAL", Toast.LENGTH_SHORT).show();
-
                 GereBD bd = new GereBD();
                 SharedPreference sharedPreference = new SharedPreference();
-
                 String email = sharedPreference.getValueString(this, Constants.EMAIL);
                 String pass = sharedPreference.getValueString(this, Constants.PASS);
 
