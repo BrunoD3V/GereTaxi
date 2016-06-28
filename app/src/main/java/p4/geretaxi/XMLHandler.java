@@ -347,7 +347,7 @@ public class XMLHandler {
 
         boolean result = false;
 
-        File file = new File(Environment.getExternalStorageDirectory(), Constants.CLIENTES + Constants.PONTO_XML);
+        File file = new File(Environment.getExternalStorageDirectory(), "novocliente.xml");
         XmlSerializer xmlSerializer = Xml.newSerializer();
         StringWriter writer = new StringWriter();
 

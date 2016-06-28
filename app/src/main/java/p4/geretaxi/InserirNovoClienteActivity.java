@@ -21,7 +21,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     EditText edtContacto;
     EditText edtEmail;
     GereBD gereBD;
-    Helper helper;
+
     private Cliente cliente;
     private SharedPreference sharedPreference;
     private Spinner spinner;
@@ -40,7 +40,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         edtContacto= (EditText)findViewById(R.id.edtContacto);
         edtEmail= (EditText)findViewById(R.id.edtEmail);
         gereBD = new GereBD();
-        helper = new Helper();
+
         cliente = new Cliente();
         sharedPreference= new SharedPreference();
         spinner = (Spinner) findViewById(R.id.spinnerTipoCliente);
@@ -63,8 +63,8 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
 
     public void onClickInserirNovoCliente(View v){
 
-        if(helper.isNetworkAvailable(getApplicationContext())){
-            if(helper.isEmpty(edtNome) || helper.isEmpty(edtMorada) || helper.isEmpty(edtCodigoPostal) || helper.isEmpty(edtNif) || helper.isEmpty(edtContacto) || helper.isEmpty(edtEmail)){
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtCodigoPostal) || Helper.isEmpty(edtNif) || Helper.isEmpty(edtContacto) || Helper.isEmpty(edtEmail)){
                 Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
                 return;
             }else{
@@ -87,6 +87,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         }else{
             XMLHandler xmlHandler = new XMLHandler();
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
+            xmlHandler.writeCliente(cliente);
             //TODO: ESCREVER CLIENTE LOCALMENTE
         }
     }
