@@ -14,7 +14,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
-    TextView txtEfetuarLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,6 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     "e um mínimo de 8 caracteres", Toast.LENGTH_LONG).show();
             return;
         }
-
         PasswordEncrypt passwordEncrypt = new PasswordEncrypt();
         String encrypted = passwordEncrypt.getEncrypted(pass);
 

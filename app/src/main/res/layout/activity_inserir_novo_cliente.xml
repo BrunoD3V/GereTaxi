@@ -19,7 +19,7 @@
         android:ems="10"
         android:id="@+id/edtNomeCliente"
         android:layout_marginTop="61dp"
-        android:hint="Nome Cliente/Companhia"
+        android:hint="Nome Cliente/Companhia (*)"
         android:layout_below="@+id/txtNovoCliente"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -32,7 +32,7 @@
         android:id="@+id/edtMorada"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Morada"
+        android:hint="Morada (*)"
         android:layout_below="@+id/edtNomeCliente"
         android:layout_alignParentLeft="true" />
 
@@ -54,7 +54,7 @@
         android:id="@+id/edtNif"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Número de Indetificação Fiscal (NIF)"
+        android:hint="Número de Indetificação Fiscal (NIF) (*)"
         android:layout_below="@+id/edtCodigoPostal"
         android:layout_alignParentLeft="true" />
 
@@ -104,4 +104,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Campo Obrigatório(*)"
+        android:id="@+id/txtInfo"
+        android:layout_below="@+id/txtNovoCliente"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="31dp" />
 </RelativeLayout>

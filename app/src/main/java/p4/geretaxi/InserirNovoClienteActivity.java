@@ -62,20 +62,26 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     }
 
     public void onClickInserirNovoCliente(View v){
+
         XMLHandler xmlHandler = new XMLHandler();
+
         if(Helper.isNetworkAvailable(getApplicationContext())){
-            if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtCodigoPostal) || Helper.isEmpty(edtNif) || Helper.isEmpty(edtContacto) || Helper.isEmpty(edtEmail)){
+            if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
                 Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
                 return;
             }else{
                 cliente.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
                 cliente.setNome(edtNome.getText().toString());
                 cliente.setMorada(edtMorada.getText().toString());
-                cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
                 cliente.setNif(Integer.parseInt(edtNif.getText().toString()));
-                cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
-                cliente.setEmail(edtEmail.getText().toString());
                 cliente.setTipo(tipoCliente);
+
+                if(!Helper.isEmpty(edtCodigoPostal))
+                    cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
+                if(!Helper.isEmpty(edtContacto))
+                    cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
+                if(!Helper.isEmpty(edtEmail))
+                    cliente.setEmail(edtEmail.getText().toString());
 
             }
             boolean res = gereBD.inserirCliente(cliente);
@@ -88,6 +94,10 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
                 //TODO: ENCAMINHAR PARA LISTAGEM DE CLIENTES
+                /*
+                Intent int = new Intent(this, ConsultarClientesActivity.class);
+                startactivity(int);
+                 */
             }
         }else{
 

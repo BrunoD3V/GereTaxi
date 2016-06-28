@@ -139,11 +139,11 @@ public class FormularioDeServico extends AppCompatActivity{
             servico.setTrajeto(edtTrajeto.getText().toString());
             servico.setTipo(tipoServico);
 
-            if(helper.isEmpty(edtHorasDeEspera))
+            if(Helper.isEmpty(edtHorasDeEspera))
                 servico.setHorasDeEspera(0.0);
             else
                 servico.setHorasDeEspera(Double.parseDouble(edtHorasDeEspera.getText().toString()));
-            if(helper.isEmpty(edtCustoPortagens))
+            if(Helper.isEmpty(edtCustoPortagens))
                 servico.setCustoPortagens(0.0);
             else
                 servico.setCustoPortagens(Double.parseDouble(edtCustoPortagens.getText().toString()));
