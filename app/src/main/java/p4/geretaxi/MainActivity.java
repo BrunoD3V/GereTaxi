@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(this, LoginActivity.class);
+                    Intent intent = new Intent(this, CoordenadasActivity.class);
                     startActivity(intent);
                 }
                 break;

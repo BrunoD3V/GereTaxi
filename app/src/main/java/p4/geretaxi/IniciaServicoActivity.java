@@ -110,7 +110,8 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
 
             try {
-                mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "lisboa");
+
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
 
                 if (mCapturedLocations.size() < 1) {
                     Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -118,19 +119,13 @@ public class IniciaServicoActivity extends AppCompatActivity {
                     startActivity(intent);
                     return;
                 }
-
-
                 GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
                 GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size() - 1));
                 servico.setDestino(destino.formattedAddress);
                 servico.setOrigem(origem.formattedAddress);
                 mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
-
-
                 mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
                 double distance = servicoHandler.getDistance();
-
-
                 servico.setDistancia(distance);
                 portagens = servicoHandler.getPortagens();
 
@@ -163,8 +158,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
             handler.writeTrajecto(mCapturedLocations, processo);
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), processo);
-
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "comPortagem");
             servico.setOrigem(mCapturedLocations.get(0).toString());
             servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
             handler.writeServico(servico);
