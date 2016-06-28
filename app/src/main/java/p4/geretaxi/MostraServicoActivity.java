@@ -191,7 +191,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                         servico.getProcesso() + Constants.PONTO_XML);
                     boolean deleted = file.delete();
                     System.out.println("Apaga o trajecto" + deleted);
-                    file = new File(Environment.getExternalStorageDirectory(), servico.getProcesso());
+                    file = new File(Environment.getExternalStorageDirectory(), servico.getProcesso()+Constants.PONTO_XML);
                     deleted = file.delete();
                     System.out.println("Apaga a captura" + deleted);
                 }
