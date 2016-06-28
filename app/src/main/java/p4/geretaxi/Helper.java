@@ -156,5 +156,16 @@ public class Helper {
         }
     }
 
+    public static boolean attemptLogin() {
+        SharedPreference sharedPreference = new SharedPreference();
+        GereBD bd = new GereBD();
+        String email = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.EMAIL);
+        String pass = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.PASS);
+
+        int res = bd.checkLogin(email, pass.trim());
+
+        return res == 1;
+    }
+
 
 }

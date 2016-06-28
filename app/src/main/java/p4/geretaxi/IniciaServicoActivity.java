@@ -106,49 +106,56 @@ public class IniciaServicoActivity extends AppCompatActivity {
         String processo = editTextProcesso.getText().toString();
 
         if(Helper.isNetworkAvailable(this)){
-            XMLHandler parser = new XMLHandler();
+            SharedPreference preference = new SharedPreference();
+            if(preference.getValueString(getApplicationContext(), Constants.SESSION).equals(Constants.FALSE)) {
+                boolean res = Helper.attemptLogin();
+                if (res) {
+                    preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
+                    XMLHandler parser = new XMLHandler();
+
+                    try {
+
+                        mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
+
+                        if (mCapturedLocations.size() < 1) {
+                            Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(this, MenuActivity.class);
+                            startActivity(intent);
+                            return;
+                        }
+                        GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
+                        GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size() - 1));
+                        servico.setDestino(destino.formattedAddress);
+                        servico.setOrigem(origem.formattedAddress);
+                        mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
+                        mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
+                        double distance = servicoHandler.getDistance();
+                        servico.setDistancia(distance);
+                        portagens = servicoHandler.getPortagens();
 
 
-            try {
-                mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "Erro tente outra vez", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                if (mCapturedLocations.size() < 1) {
-                    Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, MenuActivity.class);
-                    startActivity(intent);
-                    return;
+                    ArrayList<Double> lats = new ArrayList<>();
+
+                    ArrayList<Double> lngs = new ArrayList<>();
+
+                    for (int i = 0; i < mCapturedLocations.size(); i++) {
+                        lats.add(i, mCapturedLocations.get(i).lat);
+                        lngs.add(i, mCapturedLocations.get(i).lng);
+                    }
+
+                    Intent intent = new Intent(this, MapsActivity2.class);
+                    intent.putExtra("lat", lats);
+                    intent.putExtra("lng", lngs);
+
+                    intent.putExtra(Constants.INTENT_SERVICO, servico);
+                    intent.putExtra("portagem", portagens);
                 }
-                GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
-                GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size() - 1));
-                servico.setDestino(destino.formattedAddress);
-                servico.setOrigem(origem.formattedAddress);
-                mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
-                mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
-                double distance = servicoHandler.getDistance();
-                servico.setDistancia(distance);
-                portagens = servicoHandler.getPortagens();
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Erro tente outra vez", Toast.LENGTH_SHORT).show();
-                return;
             }
-
-            ArrayList<Double> lats = new ArrayList<>();
-
-            ArrayList<Double> lngs = new ArrayList<>();
-
-            for (int i = 0; i < mCapturedLocations.size(); i++) {
-                lats.add(i,mCapturedLocations.get(i).lat);
-                lngs.add(i,mCapturedLocations.get(i).lng);
-            }
-
-            Intent intent = new Intent(this, MapsActivity2.class);
-            intent.putExtra("lat",lats);
-            intent.putExtra("lng", lngs);
-
-            intent.putExtra(Constants.INTENT_SERVICO, servico);
-            intent.putExtra("portagem", portagens);
-
-            startActivity(intent);
         }
         else {
             Helper helper = new Helper();
@@ -161,6 +168,4 @@ public class IniciaServicoActivity extends AppCompatActivity {
             handler.writeServico(servico);
         }
     }
-
-
 }

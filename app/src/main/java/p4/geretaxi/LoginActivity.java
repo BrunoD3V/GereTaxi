@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
             GereBD bd = new GereBD();
             switch (bd.checkLogin(email, encrypted.trim())) {
                 case -2:
-                    Toast.makeText(getApplicationContext(), "Erro no registo tente mais tarde", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Ocorreu um erro tente mais tarde", Toast.LENGTH_LONG).show();
                     break;
                 case -1:
                     Toast.makeText(getApplicationContext(), "Utilizador inexistente", Toast.LENGTH_LONG).show();
@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                         sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
                         sharedPreference.save(getApplicationContext(), encrypted.trim(), Constants.PASS);
                         sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
+                        sharedPreference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
                         Intent intent = new Intent(this, MenuActivity.class);
                         startActivity(intent);
                     } else {
