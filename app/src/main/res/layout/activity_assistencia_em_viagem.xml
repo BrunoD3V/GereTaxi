@@ -28,8 +28,13 @@
         android:text="@string/iniciar_servico"
         android:id="@+id/buttonIniciar"
         android:onClick="onClickIniciar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editTextPassageiros"
+        android:layout_alignRight="@+id/editTextPassageiros"
+        android:layout_alignEnd="@+id/editTextPassageiros"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="wrap_content"
@@ -37,11 +42,13 @@
         android:text="@string/terminar"
         android:id="@+id/buttonTermina"
         android:onClick="onClickTerminar"
-        android:layout_alignTop="@+id/buttonIniciar"
+        android:layout_below="@+id/editTextPassageiros"
         android:layout_alignRight="@+id/buttonIniciar"
         android:layout_alignEnd="@+id/buttonIniciar"
-        android:layout_alignLeft="@+id/buttonIniciar"
-        android:layout_alignStart="@+id/buttonIniciar" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#e11616"
+        android:textColor="#ffffff" />
 
     <EditText
         android:layout_width="wrap_content"

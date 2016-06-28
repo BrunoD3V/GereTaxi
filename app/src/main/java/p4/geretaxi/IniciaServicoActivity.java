@@ -31,8 +31,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
     GPSHandler gpsHandler = new GPSHandler(this);
     private Servico servico = new Servico();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +110,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
 
             try {
-                mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), processo);
+                mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "lisboa");
 
                 if (mCapturedLocations.size() < 1) {
                     Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -120,6 +118,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
                     startActivity(intent);
                     return;
                 }
+
 
                 GeocodingResult origem = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(0));
                 GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size() - 1));
@@ -131,10 +130,10 @@ public class IniciaServicoActivity extends AppCompatActivity {
                 mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
                 double distance = servicoHandler.getDistance();
 
+
                 servico.setDistancia(distance);
                 portagens = servicoHandler.getPortagens();
 
-                System.out.println(servico.toString());
 
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Deu Bronca", Toast.LENGTH_SHORT).show();

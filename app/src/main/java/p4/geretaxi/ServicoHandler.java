@@ -1,7 +1,5 @@
 package p4.geretaxi;
 
-import android.content.Context;
-import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Xml;
 
@@ -17,8 +15,6 @@ import org.apache.commons.collections4.ListUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,15 +29,9 @@ import javax.xml.xpath.XPathExpressionException;
 
 public class ServicoHandler {
 
-    private static final double LATPTAXI = 41.484205;
-    private static final double LNGPTAXI = -7.183378;
-    private static Context context;
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/xml?";
     private static final String GOOGLE_API_KEY = "AIzaSyCmOQIe5TjVlSpu5tQJFdHP4amgpo8gJ1M";
-
-
     private static final int PAGE_SIZE_LIMIT = 100;
-
     private static final int PAGINATION_OVERLAP = 5;
 
     Boolean portagens = false;
@@ -52,17 +42,12 @@ public class ServicoHandler {
     List<SnappedPoint> mSnappedPoints;
     List<LatLng> routes;
 
-
-
-
     public ServicoHandler() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
 
     }
-
-
     public double getDistance() {
         distance = distance/1000.0;
         distance = Math.round(distance*10.0)/10.0;
@@ -106,8 +91,6 @@ public class ServicoHandler {
         return null;
     }
 
-
-
     public List<LatLng> mergeCapture(List<LatLng> capturedLocations) {
 
         distance = 0.0;
@@ -115,7 +98,10 @@ public class ServicoHandler {
         mCapturedLocations = capturedLocations;
         double dis = getDistance(mCapturedLocations);
 
-        LatLng ptaxis = new LatLng(LATPTAXI, LNGPTAXI);
+        SharedPreference sharedPreference = new SharedPreference();
+        Double latPTaxi = Double.parseDouble(sharedPreference.getValueString(MyApplication.getAppContext(),Constants.LAT));
+        Double lonPTaxi = Double.parseDouble(sharedPreference.getValueString(MyApplication.getAppContext(), Constants.LON));
+        LatLng ptaxis = new LatLng(latPTaxi, lonPTaxi);
         String origin = ptaxis.toString();
         String destination = mCapturedLocations.get(0).toString();
         String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
@@ -163,8 +149,6 @@ public class ServicoHandler {
         distance = Math.round(distance*10.0)/10.0;
         return distance;
     }
-
-
 
     private List<LatLng> getVisitedPlaces() {
 

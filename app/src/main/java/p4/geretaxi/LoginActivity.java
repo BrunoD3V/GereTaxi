@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
             switch (bd.checkLogin(email, encrypted.trim())) {
                 case -2:
                     Toast.makeText(getApplicationContext(), "Erro no registo tente mais tarde", Toast.LENGTH_LONG).show();
-
                     break;
                 case -1:
                     Toast.makeText(getApplicationContext(), "Utilizador inexistente", Toast.LENGTH_LONG).show();
@@ -61,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Erro, tente mais tarde", Toast.LENGTH_LONG).show();
                         return;
                     }
-
                     break;
             }
         }
