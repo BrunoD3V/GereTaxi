@@ -3,6 +3,7 @@ package p4.geretaxi;
 import android.location.Location;
 import android.os.Environment;
 import android.util.Xml;
+import android.widget.Toast;
 
 import com.google.maps.model.LatLng;
 
@@ -148,53 +149,53 @@ public class XMLHandler {
                     return false;
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "servico");
-                    xmlSerializer.startTag(null , "processo");
-                    xmlSerializer.text(servico.getProcesso());
-                    xmlSerializer.endTag(null, "processo");
+                xmlSerializer.startTag(null , "processo");
+                xmlSerializer.text(servico.getProcesso());
+                xmlSerializer.endTag(null, "processo");
 
-                    xmlSerializer.startTag(null, "nome-cliente");
-                    xmlSerializer.text(servico.getNomeCliente());
-                    xmlSerializer.endTag(null, "nome-cliente");
+                xmlSerializer.startTag(null, "nome-cliente");
+                xmlSerializer.text(servico.getNomeCliente());
+                xmlSerializer.endTag(null, "nome-cliente");
 
-                    xmlSerializer.startTag(null, "data");
-                    xmlSerializer.text(servico.getData());
-                    xmlSerializer.endTag(null, "data");
+                xmlSerializer.startTag(null, "data");
+                xmlSerializer.text(servico.getData());
+                xmlSerializer.endTag(null, "data");
 
-                    xmlSerializer.startTag(null, "hora-de-inicio");
-                    xmlSerializer.text(servico.getHoraDeInicio());
-                    xmlSerializer.endTag(null, "hora-de-inicio");
+                xmlSerializer.startTag(null, "hora-de-inicio");
+                xmlSerializer.text(servico.getHoraDeInicio());
+                xmlSerializer.endTag(null, "hora-de-inicio");
 
-                    xmlSerializer.startTag(null, "numero-passageiros");
-                    xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
-                    xmlSerializer.endTag(null, "numero-passageiros");
+                xmlSerializer.startTag(null, "numero-passageiros");
+                xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
+                xmlSerializer.endTag(null, "numero-passageiros");
 
-                    xmlSerializer.startTag(null, "origem");
-                    xmlSerializer.text(servico.getOrigem());
-                    xmlSerializer.endTag(null,"origem");
+                xmlSerializer.startTag(null, "origem");
+                xmlSerializer.text(servico.getOrigem());
+                xmlSerializer.endTag(null,"origem");
 
-                    xmlSerializer.startTag(null, "destino");
-                    xmlSerializer.text(servico.getDestino());
-                    xmlSerializer.endTag(null, "destino");
+                xmlSerializer.startTag(null, "destino");
+                xmlSerializer.text(servico.getDestino());
+                xmlSerializer.endTag(null, "destino");
 
-                    xmlSerializer.startTag(null, "custoPortagens");
-                    xmlSerializer.text(servico.getDestino());
-                    xmlSerializer.endTag(null, "custoPortagens");
+                xmlSerializer.startTag(null, "custoPortagens");
+                xmlSerializer.text(servico.getDestino());
+                xmlSerializer.endTag(null, "custoPortagens");
 
-                    xmlSerializer.startTag(null, "distancia");
-                    xmlSerializer.text(String.valueOf(servico.getDistancia()));
-                    xmlSerializer.endTag(null, "distancia");
+                xmlSerializer.startTag(null, "distancia");
+                xmlSerializer.text(String.valueOf(servico.getDistancia()));
+                xmlSerializer.endTag(null, "distancia");
 
-                    xmlSerializer.startTag(null, "horasDeEspera");
-                    xmlSerializer.text(String.valueOf(servico.getHorasDeEspera()));
-                    xmlSerializer.endTag(null, "horasDeEspera");
+                xmlSerializer.startTag(null, "horasDeEspera");
+                xmlSerializer.text(String.valueOf(servico.getHorasDeEspera()));
+                xmlSerializer.endTag(null, "horasDeEspera");
 
-                    xmlSerializer.startTag(null, "trajeto");
-                    xmlSerializer.text(servico.getTrajeto());
-                    xmlSerializer.endTag(null, "trajeto");
+                xmlSerializer.startTag(null, "trajeto");
+                xmlSerializer.text(servico.getTrajeto());
+                xmlSerializer.endTag(null, "trajeto");
 
-                    xmlSerializer.startTag(null, "tipoServico");
-                    xmlSerializer.text(servico.getTipo());
-                    xmlSerializer.endTag(null, "tipoServico");
+                xmlSerializer.startTag(null, "tipoServico");
+                xmlSerializer.text(servico.getTipo());
+                xmlSerializer.endTag(null, "tipoServico");
                 xmlSerializer.endTag(null, "servico");
                 xmlSerializer.endDocument();
             }
@@ -343,7 +344,7 @@ public class XMLHandler {
 
     }
 
-    public boolean writeCliente(Cliente cliente) {
+    public boolean writenovoCliente(Cliente cliente) {
 
         boolean result = false;
 
@@ -353,8 +354,9 @@ public class XMLHandler {
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            xmlSerializer.setOutput(writer);
             if (file.length() == 0) {
-                xmlSerializer.setOutput(writer);
+
                 xmlSerializer.startDocument("UTF-8", true);
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, Constants.CLIENTE);
@@ -382,31 +384,37 @@ public class XMLHandler {
                 xmlSerializer.endTag(null, Constants.CLIENTE);
                 xmlSerializer.endDocument();
             } else {
-                xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                xmlSerializer.startTag(null, Constants.CLIENTE);
-                xmlSerializer.startTag(null, Constants.NOME);
-                xmlSerializer.text(cliente.getNome());
-                xmlSerializer.endTag(null, Constants.NOME);
-                xmlSerializer.startTag(null, Constants.MORADA);
-                xmlSerializer.text(cliente.getMorada());
-                xmlSerializer.endTag(null, Constants.MORADA);
-                xmlSerializer.startTag(null, Constants.CODIGO_POSTAL);
-                xmlSerializer.text(cliente.getCodigoPostal());
-                xmlSerializer.endTag(null, Constants.CODIGO_POSTAL);
-                xmlSerializer.startTag(null, Constants.NIF);
-                xmlSerializer.text(String.valueOf(cliente.getNif()));
-                xmlSerializer.endTag(null, Constants.NIF);
-                xmlSerializer.startTag(null,Constants.CONTACTO);
-                xmlSerializer.text(String.valueOf(cliente.getContacto()));
-                xmlSerializer.endTag(null, Constants.CONTACTO);
-                xmlSerializer.startTag(null, Constants.MAIL);
-                xmlSerializer.text(cliente.getEmail());
-                xmlSerializer.endTag(null, Constants.MAIL);
-                xmlSerializer.startTag(null, Constants.TIPO);
-                xmlSerializer.text(cliente.getTipo());
-                xmlSerializer.endTag(null, Constants.TIPO);
-                xmlSerializer.endTag(null, Constants.CLIENTE);
-                xmlSerializer.endDocument();
+                if(!findCliente(Xml.newPullParser(), String.valueOf(cliente.getId()),"novocliente.xml")){
+                    xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                    xmlSerializer.startTag(null, Constants.CLIENTE);
+                    xmlSerializer.startTag(null, Constants.NOME);
+                    xmlSerializer.text(cliente.getNome());
+                    xmlSerializer.endTag(null, Constants.NOME);
+                    xmlSerializer.startTag(null, Constants.MORADA);
+                    xmlSerializer.text(cliente.getMorada());
+                    xmlSerializer.endTag(null, Constants.MORADA);
+                    xmlSerializer.startTag(null, Constants.CODIGO_POSTAL);
+                    xmlSerializer.text(cliente.getCodigoPostal());
+                    xmlSerializer.endTag(null, Constants.CODIGO_POSTAL);
+                    xmlSerializer.startTag(null, Constants.NIF);
+                    xmlSerializer.text(String.valueOf(cliente.getNif()));
+                    xmlSerializer.endTag(null, Constants.NIF);
+                    xmlSerializer.startTag(null,Constants.CONTACTO);
+                    xmlSerializer.text(String.valueOf(cliente.getContacto()));
+                    xmlSerializer.endTag(null, Constants.CONTACTO);
+                    xmlSerializer.startTag(null, Constants.MAIL);
+                    xmlSerializer.text(cliente.getEmail());
+                    xmlSerializer.endTag(null, Constants.MAIL);
+                    xmlSerializer.startTag(null, Constants.TIPO);
+                    xmlSerializer.text(cliente.getTipo());
+                    xmlSerializer.endTag(null, Constants.TIPO);
+                    xmlSerializer.endTag(null, Constants.CLIENTE);
+                    xmlSerializer.endDocument();
+                } else {
+                    Toast.makeText(MyApplication.getAppContext(), "Cliente já existe", Toast.LENGTH_SHORT).show();
+                    return result;
+                }
+
             }
             xmlSerializer.flush();
             String dataWrite = writer.toString();
@@ -417,6 +425,92 @@ public class XMLHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return result;
+    }
+
+    public boolean writeClientes(Cliente cliente) {
+        boolean result = false;
+
+        File file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+            xmlSerializer.setOutput(writer);
+            if (file.length() == 0){
+
+                xmlSerializer.startDocument("UTF-8", true);
+                xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                xmlSerializer.startTag(null, Constants.CLIENTE);
+                xmlSerializer.startTag(null, Constants.NOME);
+                xmlSerializer.text(cliente.getNome());
+                xmlSerializer.endTag(null, Constants.NOME);
+                xmlSerializer.startTag(null, Constants.ID);
+                xmlSerializer.text(String.valueOf(cliente.getId()));
+                xmlSerializer.endTag(null, Constants.ID);
+                xmlSerializer.endTag(null, Constants.CLIENTE);
+                xmlSerializer.endDocument();
+            } else {
+                if (!findCliente(Xml.newPullParser(),String.valueOf(cliente.getId()), Constants.CLIENTES +Constants.PONTO_XML)) {
+                    xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                    xmlSerializer.startTag(null, Constants.CLIENTE);
+                    xmlSerializer.startTag(null, Constants.NOME);
+                    xmlSerializer.text(cliente.getNome());
+                    xmlSerializer.endTag(null, Constants.NOME);
+                    xmlSerializer.startTag(null, Constants.ID);
+                    xmlSerializer.text(String.valueOf(cliente.getId()));
+                    xmlSerializer.endTag(null, Constants.ID);
+                    xmlSerializer.endTag(null, Constants.CLIENTE);
+                    xmlSerializer.endDocument();
+                } else {
+                    Toast.makeText(MyApplication.getAppContext(), "Cliente já existe", Toast.LENGTH_SHORT).show();
+                    return result;
+                }
+
+            }
+            xmlSerializer.flush();
+            String dataWriter = writer.toString();
+            fileOutputStream.write(dataWriter.getBytes());
+            fileOutputStream.close();
+            result = true;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public boolean findCliente(XmlPullParser parser, String id, String fileName) {
+        boolean result = false;
+
+        File file = new File(Environment.getExternalStorageDirectory(), fileName );
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            parser.setInput(new InputStreamReader(fileInputStream));
+            parser.nextTag();
+            while(parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() == XmlPullParser.START_TAG) {
+                    if(parser.getName().equals(Constants.ID)){
+                        parser.next();
+                        if(parser.getText().equals(id)){
+                           result = true;
+                        }
+
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         return result;
     }
