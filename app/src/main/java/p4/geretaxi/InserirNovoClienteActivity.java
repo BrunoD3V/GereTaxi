@@ -1,7 +1,6 @@
 package p4.geretaxi;
 
-
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 
 public class InserirNovoClienteActivity extends AppCompatActivity {
 
@@ -26,7 +24,6 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     private SharedPreference sharedPreference;
     private Spinner spinner;
     private String tipoCliente;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +81,9 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Não foi possivel inserir o Cliente.", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
-                //TODO: ENCAMINHAR PARA LISTAGEM DE CLIENTES
-                /*
-                Intent int = new Intent(this, ConsultarClientesActivity.class);
-                startactivity(int);
-                 */
+
+                Intent intent = new Intent(this, ConsultarClientesActivity.class);
+                startActivity(intent);
             }
         }else{
             XMLHandler xmlHandler = new XMLHandler();

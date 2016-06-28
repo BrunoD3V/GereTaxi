@@ -22,8 +22,8 @@ public class GereBD {
     private int res;
     ArrayList<Servico> lista = new ArrayList<>();
     ArrayList<Cliente> listaClientes = new ArrayList<>();
-    Servico servicoGlobal;
-    Cliente clienteGlobal;
+    Servico servicoGlobal = new Servico();
+    Cliente clienteGlobal = new Cliente();
 
     public static void setMethodName(String methodName) {
         METHOD_NAME = methodName;
@@ -658,7 +658,7 @@ public class GereBD {
         return listaClientes;
     }
 
-    public Cliente pesquisarCliente(int id){
+    public Cliente pesquisarCliente(final String nomeC){
 
         new Thread(new Runnable() {
             @Override
@@ -666,6 +666,13 @@ public class GereBD {
                 setMethodName("pesquisarCliente");
 
                 SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo nome = new PropertyInfo();
+                nome.type = PropertyInfo.STRING_CLASS;
+                nome.setName("nome");
+                nome.setValue(nomeC);
+                
+                request.addProperty(nome);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
@@ -688,7 +695,6 @@ public class GereBD {
                     clienteGlobal.setContacto(Integer.parseInt(response.getProperty("contacto").toString()));
                     clienteGlobal.setEmail(response.getProperty("email").toString());
                     clienteGlobal.setTipo(response.getProperty("tipo").toString());
-
                 }
                 catch (IOException e) {
                     e.printStackTrace();
