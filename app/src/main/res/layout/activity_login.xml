@@ -33,7 +33,8 @@
             android:layout_alignRight="@+id/editTextLoginMail"
             android:layout_alignEnd="@+id/editTextLoginMail"
             android:textAlignment="center"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:onClick="onClickbtnLogin" />
 
         <Button
             style="?android:attr/buttonStyleSmall"

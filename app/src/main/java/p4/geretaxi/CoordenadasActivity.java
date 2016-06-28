@@ -65,7 +65,7 @@ public class CoordenadasActivity extends FragmentActivity{
             }catch (IOException e) {
                 e.printStackTrace();
             }
-            Address address = addressList.get(0);
+            Address address = addressList.get(0);//TODO verificar se está preenchida primeiro
             latLng = new LatLng(address.getLatitude() , address.getLongitude());
             setUpMap(latLng);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));

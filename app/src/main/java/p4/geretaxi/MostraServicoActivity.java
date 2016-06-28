@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MostraServicoActivity extends AppCompatActivity implements DialogCorrigeDadosS.CommunicatorCorrige{
@@ -177,18 +178,22 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                     try {
                         mail.addAttachment(Environment.getExternalStorageDirectory() + "/" + Constants.TRAJETO +
                                 servico.getProcesso() + Constants.PONTO_XML);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         result = mail.send();
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-
-
                    return result;
+                }
+
+                protected void onPostExecute(Boolean result){
+                    File file = new File(Environment.getExternalStorageDirectory(), Constants.TRAJETO +
+                        servico.getProcesso() + Constants.PONTO_XML);
+                    boolean deleted = file.delete();
+                    System.out.println("Apaga o trajecto" + deleted);
+                    file = new File(Environment.getExternalStorageDirectory(), servico.getProcesso());
+                    deleted = file.delete();
+                    System.out.println("Apaga a captura" + deleted);
                 }
             };
 
