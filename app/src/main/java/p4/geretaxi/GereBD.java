@@ -625,22 +625,22 @@ public class GereBD {
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
+                    if(response != null) {
+                        for (SoapObject soapObject : response) {
+                            Cliente cliente = new Cliente();
 
-                    for (SoapObject soapObject: response) {
-                        Cliente cliente =  new Cliente();
+                            cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                            cliente.setNome(soapObject.getProperty("nome").toString());
+                            cliente.setMorada(soapObject.getProperty("morada").toString());
+                            cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
+                            cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
+                            cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
+                            cliente.setEmail(soapObject.getProperty("email").toString());
+                            cliente.setTipo(soapObject.getProperty("tipo").toString());
 
-                        cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                        cliente.setNome(soapObject.getProperty("nome").toString());
-                        cliente.setMorada(soapObject.getProperty("morada").toString());
-                        cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
-                        cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
-                        cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
-                        cliente.setEmail(soapObject.getProperty("email").toString());
-                        cliente.setTipo(soapObject.getProperty("tipo").toString());
-
-                        listaClientes.add(cliente);
+                            listaClientes.add(cliente);
+                        }
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
 
