@@ -115,7 +115,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
                     try {
 
-                        mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "teste");
+                        mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
 
                         if (mCapturedLocations.size() < 1) {
                             Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -154,12 +154,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
                     intent.putExtra(Constants.INTENT_SERVICO, servico);
                     intent.putExtra("portagem", portagens);
-
-                    startActivity(intent);
-                } else {
-                    Intent i = new Intent(this, LoginActivity.class);
-                    startActivity(i);
-
                 }
             }
         }
@@ -168,12 +162,10 @@ public class IniciaServicoActivity extends AppCompatActivity {
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
             handler.writeTrajecto(mCapturedLocations, processo);
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "comPortagem");
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "semPortagem");
             servico.setOrigem(mCapturedLocations.get(0).toString());
             servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
             handler.writeServico(servico);
         }
     }
-
-
 }
