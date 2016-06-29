@@ -90,6 +90,11 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     public void onClickSubmeterServico(View v) {
 
         if(helper.isNetworkAvailable(getApplicationContext())){
+            if (!Helper.isSessionEnabled()){
+               Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                return;
+            }
             SharedPreference sharedPreference = new SharedPreference();
             servico.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
 

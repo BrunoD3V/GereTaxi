@@ -22,24 +22,27 @@ public class MainActivity extends AppCompatActivity {
         SharedPreference sharedPreference = new SharedPreference();
         switch (helper.checkAppStart()) {
             case NORMAL:
-               if (Helper.isNetworkAvailable(this)) {
-                   boolean res = Helper.attemptLogin();
-                   if (res) {
-                       Intent intent = new Intent(this, MenuActivity.class);
-                       startActivity(intent);
-                       sharedPreference.save(this, Constants.TRUE, Constants.SESSION);
-                   } else {
-                       Intent intent = new Intent(this, LoginActivity.class);
-                       startActivity(intent);
-                   }
-               }else {
-                   sharedPreference.save(this, Constants.FALSE, Constants.SESSION);
-                   Toast.makeText(getApplicationContext(), "Está em modo offline, não terá acesso à maior parte das funcionalidades",
-                           Toast.LENGTH_SHORT).show();
-                   Intent intent = new Intent(this, MenuActivity.class);
-                   startActivity(intent);
 
-               }
+
+
+                boolean res = Helper.attemptLogin();
+
+                if (res) {
+                    Intent intent = new Intent(this, MenuActivity.class);
+                    startActivity(intent);
+
+                } else{
+                    if (Helper.isNetworkAvailable(getApplicationContext())){
+                        Intent intent = new Intent(this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "Está em modo offline, não terá acesso à maior parte das funcionalidades",
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, MenuActivity.class);
+                        startActivity(intent);
+                    }
+                }
                 break;
             case FIRST_TIME_VERSION:
                 Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
@@ -74,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickMain(View v) {
+        SharedPreference sharedPreference = new SharedPreference();
+
+        System.out.println("BOTA " + Helper.getExpirationDate());
+
         Intent i = new Intent(this, MenuActivity.class);
         startActivity(i);
     }

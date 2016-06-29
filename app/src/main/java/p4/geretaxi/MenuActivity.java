@@ -18,22 +18,17 @@ public class MenuActivity extends AppCompatActivity {
         btnGerirClientes = (Button) findViewById(R.id.btnGerirClientes);
         btnGerirClientes.setEnabled(false);
 
-        SharedPreference preference = new SharedPreference();
-        if(Helper.isNetworkAvailable(this)) {
 
-            if (preference.getValueString(getApplicationContext(), Constants.SESSION).equals(Constants.FALSE)) {
-                boolean res = Helper.attemptLogin();
-                if (res) {
-                    preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
-                    btnGerirClientes.setEnabled(true);
-                } else {
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
-                }
-            } else
-                btnGerirClientes.setEnabled(true);
+        if (Helper.isSessionEnabled()){
+            btnGerirClientes.setEnabled(true);
+        } else if (Helper.isNetworkAvailable(MyApplication.getAppContext())){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
+
+
     }
+
 
     public void onClickIniciarServico(View v) {
         EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();

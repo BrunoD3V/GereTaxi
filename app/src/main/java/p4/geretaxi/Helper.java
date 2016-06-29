@@ -14,7 +14,10 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.EditText;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Helper {
 
@@ -36,6 +39,29 @@ public class Helper {
         SimpleDateFormat sdf = new SimpleDateFormat("k:mm");
         String hora = sdf.format(date);
         return hora;
+    }
+
+    public static String getExpirationDate(){
+
+        String date = getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(date));
+            c.add(Calendar.DATE, 30);
+            System.out.println("BIBA");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sdf.format(c.getTime());
+    }
+
+    public static boolean isExpired(String expDate) {
+
+        GregorianCalendar now = new GregorianCalendar();
+
+
+        return now.after(expDate);
     }
 
     public static boolean doubleTryParse(String text) {
@@ -157,15 +183,41 @@ public class Helper {
     }
 
     public static boolean attemptLogin() {
+        boolean result = false;
+
         SharedPreference sharedPreference = new SharedPreference();
+
         GereBD bd = new GereBD();
         String email = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.EMAIL);
         String pass = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.PASS);
+        if(Helper.isNetworkAvailable(MyApplication.getAppContext())){
+            int res = bd.checkLogin(email, pass.trim());
+            if (res == 1) {
+                sharedPreference.save(MyApplication.getAppContext(), Constants.TRUE, Constants.SESSION);
+                sharedPreference.save(MyApplication.getAppContext(), getExpirationDate(), Constants.VALIDADE);
+                result = true;
+            } else {
+                sharedPreference.save(MyApplication.getAppContext(), Constants.FALSE, Constants.SESSION);
+            }
+        }else {
+            if (!isExpired(sharedPreference.getValueString(MyApplication.getAppContext(),Constants.VALIDADE))){
+                sharedPreference.save(MyApplication.getAppContext(), Constants.TRUE, Constants.SESSION);
+                result = true;
+            } else {
+                sharedPreference.save(MyApplication.getAppContext(), Constants.FALSE, Constants.SESSION);
+            }
+        }
 
-        int res = bd.checkLogin(email, pass.trim());
-
-        return res == 1;
+        return result;
     }
+
+    public static boolean isSessionEnabled(){
+        SharedPreference sharedPreference = new SharedPreference();
+        String res = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.SESSION);
+        return res.equalsIgnoreCase(Constants.TRUE);
+    }
+
+
 
 
 }

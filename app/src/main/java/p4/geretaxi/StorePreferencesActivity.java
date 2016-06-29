@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -65,7 +64,8 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     sharedPreference.save(getApplicationContext(), email, Constants.EMAIL);
                     sharedPreference.save(getApplicationContext(), encrypted.trim(), Constants.PASS);
                     sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
-                    //TODO: ENCAMINHAR PARA COORDENADAS
+                    sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
+
                     Intent i = new Intent(getApplicationContext(), CoordenadasActivity.class);
                     startActivity(i);
                     break;
