@@ -625,6 +625,7 @@ public class GereBD {
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
+
                     for (SoapObject soapObject: response) {
                         Cliente cliente =  new Cliente();
 

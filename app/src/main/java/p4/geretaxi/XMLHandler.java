@@ -446,21 +446,21 @@ public class XMLHandler {
                 xmlSerializer.startTag(null, Constants.NOME);
                 xmlSerializer.text(cliente.getNome());
                 xmlSerializer.endTag(null, Constants.NOME);
-                xmlSerializer.startTag(null, Constants.ID);
-                xmlSerializer.text(String.valueOf(cliente.getId()));
-                xmlSerializer.endTag(null, Constants.ID);
+                xmlSerializer.startTag(null, Constants.MAIL);
+                xmlSerializer.text(cliente.getEmail());
+                xmlSerializer.endTag(null, Constants.MAIL);
                 xmlSerializer.endTag(null, Constants.CLIENTE);
                 xmlSerializer.endDocument();
             } else {
-                if (!findCliente(Xml.newPullParser(),String.valueOf(cliente.getId()), Constants.CLIENTES +Constants.PONTO_XML)) {
+                if (!findClientebyMail(Xml.newPullParser(),cliente.getEmail(), Constants.CLIENTES +Constants.PONTO_XML)) {
                     xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                     xmlSerializer.startTag(null, Constants.CLIENTE);
                     xmlSerializer.startTag(null, Constants.NOME);
                     xmlSerializer.text(cliente.getNome());
                     xmlSerializer.endTag(null, Constants.NOME);
-                    xmlSerializer.startTag(null, Constants.ID);
-                    xmlSerializer.text(String.valueOf(cliente.getId()));
-                    xmlSerializer.endTag(null, Constants.ID);
+                    xmlSerializer.startTag(null, Constants.MAIL);
+                    xmlSerializer.text(cliente.getEmail());
+                    xmlSerializer.endTag(null, Constants.MAIL);
                     xmlSerializer.endTag(null, Constants.CLIENTE);
                     xmlSerializer.endDocument();
                 } else {
@@ -514,6 +514,37 @@ public class XMLHandler {
 
         return result;
     }
+    public boolean findClientebyMail(XmlPullParser parser, String email, String fileName) {
+        boolean result = false;
+
+        File file = new File(Environment.getExternalStorageDirectory(), fileName );
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            parser.setInput(new InputStreamReader(fileInputStream));
+            parser.nextTag();
+            while(parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() == XmlPullParser.START_TAG) {
+                    if(parser.getName().equals(Constants.MAIL)){
+                        parser.next();
+                        if(parser.getText().equals(email)){
+                            result = true;
+                        }
+
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return result;
+    }
+
 
     public List<Cliente> parseClientes(XmlPullParser parser)  {
         List<Cliente> clientes = new ArrayList<>();
@@ -542,9 +573,9 @@ public class XMLHandler {
                             assert cliente != null;
                             cliente.setNome(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.ID)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.MAIL)) {
                             assert cliente != null;
-                            cliente.setId(Integer.parseInt(text));
+                            cliente.setEmail(text);
                         }
                         break;
                     default:
