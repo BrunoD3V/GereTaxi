@@ -99,8 +99,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
     }
 
     public void onClickTerminar(View v) throws Exception {
-
-
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler();
         String processo = editTextProcesso.getText().toString();
@@ -114,7 +112,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
                     XMLHandler parser = new XMLHandler();
 
                     try {
-
                         mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
 
                         if (mCapturedLocations.size() < 1) {

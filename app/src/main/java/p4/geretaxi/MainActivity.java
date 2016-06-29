@@ -23,10 +23,7 @@ public class MainActivity extends AppCompatActivity {
         switch (helper.checkAppStart()) {
             case NORMAL:
                if (Helper.isNetworkAvailable(this)) {
-
-
                    boolean res = Helper.attemptLogin();
-
                    if (res) {
                        Intent intent = new Intent(this, MenuActivity.class);
                        startActivity(intent);

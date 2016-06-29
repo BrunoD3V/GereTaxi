@@ -61,16 +61,20 @@ public class CoordenadasActivity extends FragmentActivity{
         System.out.println(location);
 
         if(!helper.isEmpty(location_tf)) {
+
             Geocoder geocoder = new Geocoder(this);
             try {
                 addressList = geocoder.getFromLocationName(location, 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Address address = addressList.get(0);//TODO verificar se está preenchida primeiro
-            latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            setUpMap(latLng);
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            if(addressList!=null){
+                Address address = addressList.get(0);//TODO verificar se está preenchida primeiro
+                latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                setUpMap(latLng);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            }
+
         }else{
             Toast.makeText(getApplicationContext(),"Por favor introduza um Endereço válido", Toast.LENGTH_LONG).show();
         }

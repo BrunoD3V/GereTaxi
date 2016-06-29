@@ -10,8 +10,6 @@ public class MenuActivity extends AppCompatActivity {
 
     Button btnGerirClientes;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +41,6 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void onClickGerirClientes(View v){
-
-
         Intent i = new Intent(this,GerirClientesActivity.class);
         startActivity(i);
     }
