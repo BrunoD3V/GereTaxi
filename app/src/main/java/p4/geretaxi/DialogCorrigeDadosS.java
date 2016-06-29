@@ -65,7 +65,7 @@ public class DialogCorrigeDadosS extends DialogFragment implements View.OnClickL
                        if (mNum<6) {
                            communicatorCorrige.onDialogMessage(editTextCorrige.getText().toString(), mNum);
                        } else if (mNum == 6){
-                           if (Helper.intergerTryParse(editTextCorrige.getText().toString())){
+                           if (Helper.integerTryParse(editTextCorrige.getText().toString())){
                                int i = Integer.parseInt(editTextCorrige.getText().toString());
                                if (i < 1 || i > 8){
                                    Toast.makeText(getActivity(), Constants.N_PASSAGEIROS_VALIDO, Toast.LENGTH_SHORT).show();

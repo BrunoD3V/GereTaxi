@@ -100,4 +100,11 @@ public class Cliente implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public String toString() {
+        return Constants.NOME_CLIENTE + nome + "\n" + "Morada : " + morada + "\n" + "Codigo Postal: " +
+               codigoPostal + "\n" + "NIF : " +  nif + "\n"  + "Contacto : " + contacto + "\n" +
+                "email :" + email + "\n" + "Tipo : " + tipo;
+    }
 }

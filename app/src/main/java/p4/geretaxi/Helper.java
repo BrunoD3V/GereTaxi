@@ -47,7 +47,7 @@ public class Helper {
         }
     }
 
-    public static boolean intergerTryParse(String text) {
+    public static boolean integerTryParse(String text) {
         try {
             Integer.parseInt(text);
             return true;

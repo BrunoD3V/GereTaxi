@@ -58,7 +58,8 @@
         <activity android:name=".CoordenadasActivity" />
         <activity android:name=".GerirClientesActivity" />
         <activity android:name=".ConsultarClientesActivity" />
-        <activity android:name=".InserirNovoClienteActivity"></activity>
+        <activity android:name=".InserirNovoClienteActivity" />
+        <activity android:name=".MostraClienteActivity"></activity>
     </application>
 
 </manifest>

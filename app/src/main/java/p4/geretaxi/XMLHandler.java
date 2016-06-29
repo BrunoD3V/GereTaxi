@@ -515,6 +515,52 @@ public class XMLHandler {
         return result;
     }
 
+    public List<Cliente> parseClientes(XmlPullParser parser)  {
+        List<Cliente> clientes = new ArrayList<>();
+        File file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
+        String text = null;
+        Cliente cliente = null;
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            parser.setInput(new InputStreamReader(fileInputStream));
+            parser.nextTag();
+            while(parser.getEventType() != XmlPullParser.END_DOCUMENT) {
+                switch (parser.getEventType()) {
+                    case XmlPullParser.START_TAG:
+                        if(parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                            cliente= new Cliente();
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = parser.getText();
+                        break;
+                    case  XmlPullParser.END_TAG:
+                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                            clientes.add(cliente);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.NOME)){
+                            assert cliente != null;
+                            cliente.setNome(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.ID)) {
+                            assert cliente != null;
+                            cliente.setId(Integer.parseInt(text));
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                parser.next();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
 
 
     public List<LatLng> loadGpxData(XmlPullParser parser, String processo)

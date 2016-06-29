@@ -67,5 +67,7 @@
     <string name="sat_litess">Satélite</string>
     <string name="moradass">Insira um Endereço</string>
     <string name="obter_localiza_o_autom_ssstica">Guardar Localização</string>
+    <string name="clientes">Clientes</string>
+    <string name="actualizar_dados_do_cliente">Actualizar dados do Cliente</string>
 
 </resources>

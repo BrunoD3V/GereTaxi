@@ -152,7 +152,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
             default:
                 break;
         }
-
+        //TODO: METODO ATUALIZAR SERVICO
         listItems.clear();
 
         //porque só mostra às vezes?
