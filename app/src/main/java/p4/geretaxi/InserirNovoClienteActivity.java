@@ -37,7 +37,6 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
         edtContacto= (EditText)findViewById(R.id.edtContacto);
         edtEmail= (EditText)findViewById(R.id.edtEmail);
         gereBD = new GereBD();
-
         cliente = new Cliente();
         sharedPreference= new SharedPreference();
         spinner = (Spinner) findViewById(R.id.spinnerTipoCliente);
@@ -61,7 +60,6 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     public void onClickInserirNovoCliente(View v){
 
         XMLHandler xmlHandler = new XMLHandler();
-
         if(Helper.isNetworkAvailable(getApplicationContext())){
 
             if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
@@ -91,15 +89,11 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                 if(!xmlHandler.writeClientes(cliente))
                     Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
-
-
             }
         }else{
-
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
             if(!xmlHandler.writenovoCliente(cliente) || !xmlHandler.writeClientes(cliente))
-                Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();;
-
+                Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(this, ConsultarClientesActivity.class);
         startActivity(intent);
