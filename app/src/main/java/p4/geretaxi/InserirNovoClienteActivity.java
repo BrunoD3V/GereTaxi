@@ -92,15 +92,16 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(this, ConsultarClientesActivity.class);
-                startActivity(intent);
+
             }
         }else{
 
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
-            if(!xmlHandler.writenovoCliente(cliente))
+            if(!xmlHandler.writenovoCliente(cliente) || !xmlHandler.writeClientes(cliente))
                 Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();;
 
         }
+        Intent intent = new Intent(this, ConsultarClientesActivity.class);
+        startActivity(intent);
     }
 }

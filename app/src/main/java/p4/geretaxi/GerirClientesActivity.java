@@ -19,7 +19,7 @@ public class GerirClientesActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void onClickListarClientes(View v){
-        Toast.makeText(getApplicationContext(),"TODO: onClickListarClientes - GerirClientesActivity",Toast.LENGTH_LONG).show();
+
         Intent i = new Intent(this, ConsultarClientesActivity.class);
         startActivity(i);
     }
