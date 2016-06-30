@@ -659,6 +659,7 @@ public class GereBD {
     }
 
     public boolean excluirCliente(final String nomeCliente, final int idMotorista){
+        result = false;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -695,10 +696,10 @@ public class GereBD {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    result = false;
+
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
-                    result = false;
+
                 }
             }
         }).start();
@@ -739,11 +740,33 @@ public class GereBD {
                 System.out.println("MethodName: " + METHOD_NAME);
                 try {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
+                    try {
+                        Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
-                    Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
-                    if(response != null) {
-                        for (SoapObject soapObject : response) {
+                        if (response != null) {
+                            for (SoapObject soapObject : response) {
+                                Cliente cliente = new Cliente();
+
+                                cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                                cliente.setNome(soapObject.getProperty("nome").toString());
+                                cliente.setMorada(soapObject.getProperty("morada").toString());
+                                cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
+                                cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
+                                cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
+                                cliente.setEmail(soapObject.getProperty("email").toString());
+                                cliente.setTipo(soapObject.getProperty("tipo").toString());
+
+                                listaClientes.add(cliente);
+                            }
+
+                        }
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                            SoapObject soapObject = (SoapObject) envelope.getResponse();
+                        if (soapObject != null) {
                             Cliente cliente = new Cliente();
 
                             cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
@@ -754,9 +777,9 @@ public class GereBD {
                             cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
                             cliente.setEmail(soapObject.getProperty("email").toString());
                             cliente.setTipo(soapObject.getProperty("tipo").toString());
-
-                            listaClientes.add(cliente);
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -808,7 +831,9 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapObject response = (SoapObject) envelope.getResponse();
-                    if(response!=null) {
+
+                    if(response != null) {
+
                         clienteGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
                         clienteGlobal.setNome(response.getProperty("nome").toString());
                         clienteGlobal.setMorada(response.getProperty("morada").toString());

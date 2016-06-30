@@ -1,13 +1,16 @@
 package p4.geretaxi;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Xml;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +36,31 @@ public class EliminaClienteActivity extends AppCompatActivity {
     }
 
     public void onClickButtonEliminar(View v) {
-
+        GereBD bd = new GereBD();
+        if (Helper.isNetworkAvailable(getApplicationContext())) {
+            boolean res = bd.excluirCliente(cliente.getNome(),
+                    SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+            if (res) {
+                XMLHandler parser = new XMLHandler();
+                List<Cliente> clientes = new ArrayList<>();
+                clientes = parser.parseClientes(Xml.newPullParser());
+                if (clientes.size()<1) {
+                    for (Cliente c : clientes) {
+                        if (c.getEmail().equalsIgnoreCase(cliente.getEmail())) {
+                            clientes.remove(c);
+                        }
+                    }
+                    File file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
+                    boolean deleted = file.delete();
+                    if (deleted) {
+                        for (Cliente c : clientes) {
+                            parser.writeClientes(c);
+                        }
+                        Toast.makeText(getApplicationContext(), "Cliente apagado com sucesso", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
     }
 
     public void onClickButtonPesquisar(View v) {
@@ -54,11 +81,11 @@ public class EliminaClienteActivity extends AppCompatActivity {
 
     private void populateListView() {
         listitems.add(Constants.NOME_CLIENTE + cliente.getNome());
-        listitems.add(Constants.MORADA + cliente.getMorada());
-        listitems.add(Constants.CODIGO_POSTAL + cliente.getCodigoPostal());
-        listitems.add(Constants.NIF + cliente.getNif());
-        listitems.add(Constants.CONTACTO + cliente.getContacto());
-        listitems.add(Constants.EMAIL + cliente.getEmail());
-        listitems.add(Constants.TIPO + cliente.getTipo());
+        listitems.add(Constants.MORADA +": "+ cliente.getMorada());
+        listitems.add(Constants.CODIGO_POSTAL +": "+ cliente.getCodigoPostal());
+        listitems.add(Constants.NIF +": "+ cliente.getNif());
+        listitems.add(Constants.CONTACTO +": "+ cliente.getContacto());
+        listitems.add(Constants.EMAIL +": "+ cliente.getEmail());
+        listitems.add(Constants.TIPO +": "+ cliente.getTipo());
     }
 }
