@@ -72,11 +72,16 @@ public class ServicoHandler {
             while ((line = reader.readLine()) != null) {
                 buffer.append(line + "\n");
             }
+            String readerString = buffer.toString();
             XMLHandler parser = new XMLHandler();
-            portagens =parser.getPortagem(Xml.newPullParser(), buffer.toString());
-            System.out.println("BUFFER " + buffer.toString()  );
-            distance = parser.parseDistance(buffer.toString());
-            return parser.parseDirections(Xml.newPullParser(), buffer.toString());
+
+            if(!parser.parseStatus(readerString)) {
+                return null;
+            }
+            portagens =parser.getPortagem(Xml.newPullParser(), readerString);
+
+            distance = parser.parseDistance(readerString);
+            return parser.parseDirections(Xml.newPullParser(), readerString);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
@@ -99,15 +104,18 @@ public class ServicoHandler {
         double dis = getDistance(mCapturedLocations);
 
         SharedPreference sharedPreference = new SharedPreference();
-        Double latPTaxi = Double.parseDouble(sharedPreference.getValueString(MyApplication.getAppContext(),Constants.LAT));
-        Double lonPTaxi = Double.parseDouble(sharedPreference.getValueString(MyApplication.getAppContext(), Constants.LON));
+        String latPTaxi = sharedPreference.getValueString(MyApplication.getAppContext(),Constants.LAT);
+        String lonPTaxi = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.LON);
 
-        LatLng ptaxis = new com.google.maps.model.LatLng(latPTaxi, lonPTaxi);
-        String origin = ptaxis.toString();
+
+        String origin = latPTaxi + "," + lonPTaxi;
         String destination = mCapturedLocations.get(0).toString();
         String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
-        System.out.println("Ponto capturado: " + mCapturedLocations.toString());
+
         routes = getDirections(origin, destination);
+        if(distance == 0) {
+            return mCapturedLocations;
+        }
         dis += distance;
         mCapturedLocations= ListUtils.union(routes,mCapturedLocations);
 
