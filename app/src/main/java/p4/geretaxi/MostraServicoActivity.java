@@ -54,8 +54,6 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     public void populateListView() {
 
         adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
-
-
         switch (servico.getTipo()) {
             case Constants.VIAGEM:
                 textViewMostraServico.setText(R.string.assistencia_em_viagem);
@@ -68,10 +66,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 break;
             default:
                 break;
-
         }
-
-
         servico = (Servico) getIntent().getSerializableExtra("ser");
 
         listItems.add(Constants.PROCESSO + servico.getProcesso());

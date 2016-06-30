@@ -59,7 +59,8 @@
         <activity android:name=".GerirClientesActivity" />
         <activity android:name=".ConsultarClientesActivity" />
         <activity android:name=".InserirNovoClienteActivity" />
-        <activity android:name=".MostraClienteActivity"></activity>
+        <activity android:name=".MostraClienteActivity" />
+        <activity android:name=".ConsultarServicosClienteActivity"></activity>
     </application>
 
 </manifest>

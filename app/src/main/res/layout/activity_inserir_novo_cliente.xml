@@ -54,7 +54,7 @@
         android:id="@+id/edtNif"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Número de Indetificação Fiscal (NIF) (*)"
+        android:hint="Número de Indentificação Fiscal (NIF) (*)"
         android:layout_below="@+id/edtCodigoPostal"
         android:layout_alignParentLeft="true" />
 

@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Xml;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.maps.GeoApiContext;
@@ -24,10 +27,13 @@ public class IniciaServicoActivity extends AppCompatActivity {
     EditText editTextProcesso;
     EditText editTextSeguradora;
     EditText editTextPassageiros;
+    Spinner spinner;
     private boolean portagens;
+    private String tipoServico;
+    GereBD gereBD;
+    ArrayList<String> clientesSpinner = new ArrayList<>();
 
 
-   // Helper helper= new Helper();
     GPSHandler gpsHandler = new GPSHandler(this);
     private Servico servico = new Servico();
 
@@ -36,17 +42,43 @@ public class IniciaServicoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assistencia_em_viagem);
 
-
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
         editTextProcesso = (EditText) findViewById(R.id.editTextProcesso);
         editTextSeguradora =(EditText) findViewById(R.id.editTextSeguradora);
         editTextPassageiros = (EditText) findViewById(R.id.editTextPassageiros);
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
-
-
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
         System.out.println(servico.getTipo());
+
+
+        gereBD = new GereBD();
+        List<Cliente> clientes;
+        SharedPreference sharedPreference = new SharedPreference();
+        clientes = gereBD.listarClientes(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+        for (Cliente c: clientes) {
+            clientesSpinner.add(c.getNome());
+        }
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,clientesSpinner);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Object item = parent.getItemAtPosition(pos);
+                tipoServico= item.toString();
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinner.setAdapter(adapter);
+
+
+
+
+
     }
 
     public void onClickIniciar(View v) {
@@ -102,23 +134,15 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
     public void onClickTerminar(View v) throws Exception {
 
-
         gpsHandler.listenerClose();
         ServicoHandler servicoHandler = new ServicoHandler();
         String processo = editTextProcesso.getText().toString();
 
         if(Helper.isNetworkAvailable(this)){
-
             SharedPreference preference = new SharedPreference();
-
-
-
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
-
-
-
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "lisboa");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
 
             if (mCapturedLocations.size() < 1) {
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -130,18 +154,13 @@ public class IniciaServicoActivity extends AppCompatActivity {
             GeocodingResult destino = servicoHandler.reverseGeocodeSnappedPoint(mContext, mCapturedLocations.get(mCapturedLocations.size() - 1));
             servico.setDestino(destino.formattedAddress);
             servico.setOrigem(origem.formattedAddress);
-
             mCapturedLocations = servicoHandler.mergeCapture(mCapturedLocations);
             mCapturedLocations = servicoHandler.getRoute(mCapturedLocations, mContext);
             double distance = servicoHandler.getDistance();
             servico.setDistancia(distance);
             portagens = servicoHandler.getPortagens();
 
-
-
-
             ArrayList<Double> lats = new ArrayList<>();
-
             ArrayList<Double> lngs = new ArrayList<>();
 
             for (int i = 0; i < mCapturedLocations.size(); i++) {
@@ -156,9 +175,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
             intent.putExtra(Constants.INTENT_SERVICO, servico);
             intent.putExtra("portagem", portagens);
             startActivity(intent);
-
-
-
         } else {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);

@@ -12,9 +12,7 @@ import java.util.ArrayList;
 public class MostraClienteActivity extends AppCompatActivity implements DialogAtualizaClienteFragment.CommunicatorCliente{
 
     ListView listView;
-
     private Cliente cliente;
-
     ArrayList<String> listitems = new ArrayList<>();
     ArrayAdapter<String> adapter;
 
@@ -27,7 +25,7 @@ public class MostraClienteActivity extends AppCompatActivity implements DialogAt
 
         cliente = (Cliente) getIntent().getSerializableExtra("cliente");
         populateList();
-        adapter = new ArrayAdapter<String>(this, R.layout.item_list, listitems);
+        adapter = new ArrayAdapter<>(this, R.layout.item_list, listitems);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {

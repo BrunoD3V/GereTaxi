@@ -25,6 +25,8 @@ public class GerirClientesActivity extends AppCompatActivity {
     }
     public void onClickServicoPorCliente(View v){
         Toast.makeText(getApplicationContext(),"TODO: onClickServicoPorCliente - GerirClientesActivity",Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, ConsultarServicosClienteActivity.class);
+        startActivity(i);
     }
     public void onClickEliminarCliente(View v){
         Toast.makeText(getApplicationContext(),"TODO: onClickEliminarCliente - GerirClientesActivity",Toast.LENGTH_LONG).show();

@@ -29,11 +29,14 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Tem que preencher todos os campos", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (Helper.isNetworkAvailable(this)){
             PasswordEncrypt passwordEncrypt = new PasswordEncrypt();
             String encrypted = passwordEncrypt.getEncrypted(editTextPassLogin.getText().toString());
             String email = editTextLoginMail.getText().toString();
+            if(!Helper.isValidEmail(email)){
+                Toast.makeText(getApplicationContext(), "Insira um email válido.", Toast.LENGTH_LONG).show();
+                return;
+            }
             SharedPreference sharedPreference = new SharedPreference();
             GereBD bd = new GereBD();
             switch (bd.checkLogin(email, encrypted.trim())) {

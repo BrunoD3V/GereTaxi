@@ -17,8 +17,6 @@ public class MenuActivity extends AppCompatActivity {
 
         btnGerirClientes = (Button) findViewById(R.id.btnGerirClientes);
         btnGerirClientes.setEnabled(false);
-
-
         if (Helper.isSessionEnabled()){
             btnGerirClientes.setEnabled(true);
         } else if (Helper.isNetworkAvailable(MyApplication.getAppContext())){
@@ -28,13 +26,10 @@ public class MenuActivity extends AppCompatActivity {
 
 
     }
-
-
     public void onClickIniciarServico(View v) {
         EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();
         dialogFragment.show(this.getFragmentManager(), "EscolheServico");
     }
-
     public void onClickGerirClientes(View v){
         Intent i = new Intent(this,GerirClientesActivity.class);
         startActivity(i);

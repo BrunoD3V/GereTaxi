@@ -64,6 +64,9 @@ public class DialogAtualizaClienteFragment extends DialogFragment implements Vie
                 if(!Helper.isEmpty(editTextCorrige)){
                     String dados = editTextCorrige.getText().toString();
                     if (mNum < 5){
+                        if(mNum==3 && !Helper.isValidEmail(dados)){
+                                Toast.makeText(MyApplication.getAppContext(),"Introduza um email válido.", Toast.LENGTH_LONG).show();
+                        }
                         communicatorCliente.onDialogMessage(dados,mNum);
                     } else {
                         if (Helper.integerTryParse(dados)) {
@@ -72,7 +75,6 @@ public class DialogAtualizaClienteFragment extends DialogFragment implements Vie
                             Toast.makeText(getActivity(), Constants.N_VALIDO, Toast.LENGTH_SHORT).show();
                             this.dismiss();
                         }
-
                     }
                 }
 
@@ -83,7 +85,6 @@ public class DialogAtualizaClienteFragment extends DialogFragment implements Vie
                 break;
         }
     }
-
     interface CommunicatorCliente {
         public void onDialogMessage(String dados, int num);
     }

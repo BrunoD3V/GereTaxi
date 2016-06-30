@@ -187,7 +187,6 @@ public class GereBD {
         return res;
     }
 
-
     public boolean inserirServico(final Servico servico){
         result = false;
         new Thread(new Runnable() {
@@ -304,7 +303,7 @@ public class GereBD {
     }
 
 
-    public boolean excluirServico(final String processo){
+    public boolean excluirServico(final String processo, final int idMotorista){
 
         new Thread(new Runnable() {
             @Override
@@ -318,7 +317,13 @@ public class GereBD {
                 processoP.setName("processo");
                 processoP.setValue(processo);
 
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
                 request.addProperty(processoP);
+                request.addProperty(motorista);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
@@ -349,13 +354,91 @@ public class GereBD {
         return result;
     }
 
-    public ArrayList<Servico> listarServico(){
+    public ArrayList<Servico> listarServico(final int idMotorista){
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 setMethodName("listarServicos");
                 SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
+                request.addProperty(motorista);
+
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+                envelope.setOutputSoapObject(request);
+
+                envelope.implicitTypes = true;
+
+                HttpTransportSE http = new HttpTransportSE(URL);
+
+                try {
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
+
+                    Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+
+                    for (SoapObject soapObject: response) {
+
+                        Servico servico = new Servico();
+
+                        servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                        servico.setProcesso(soapObject.getProperty("processo").toString());
+                        servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
+                        servico.setData(soapObject.getProperty("data").toString());
+                        servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
+                        servico.setOrigem(soapObject.getProperty("origem").toString());
+                        servico.setDestino(soapObject.getProperty("destino").toString());
+                        servico.setProcesso(soapObject.getProperty("processo").toString());
+                        servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                        servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
+                        servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
+                        servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
+                        servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
+
+                        lista.add(servico);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public ArrayList<Servico> pesquisarServicosPorCliente(final String nomeCliente, final int idMotorista){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("pesquisarServicosPorCliente");
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo nome = new PropertyInfo();
+                nome.type = PropertyInfo.STRING_CLASS;
+                nome.setName("nomeCliente");
+                nome.setValue(nomeCliente);
+
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
+                request.addProperty(motorista);
+
+                request.addProperty(nome);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
@@ -406,7 +489,7 @@ public class GereBD {
         return lista;
     }
 
-    public Servico pesquisarServico(final String processo){
+    public Servico pesquisarServico(final String processo, final int idMotorista){
 
         new Thread(new Runnable() {
             @Override
@@ -416,7 +499,19 @@ public class GereBD {
 
                 SoapObject pesquisarServico = new SoapObject(NAMESPACE,METHOD_NAME);
 
-                pesquisarServico.addProperty("processo", processo);
+
+                PropertyInfo processop = new PropertyInfo();
+                processop.type = PropertyInfo.STRING_CLASS;
+                processop.setName("processo");
+                processop.setValue(processo);
+
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
+                pesquisarServico.addProperty(motorista);
+                pesquisarServico.addProperty(processop);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
@@ -555,7 +650,7 @@ public class GereBD {
 
     }
 
-    public boolean excluirCliente(final String nomeCliente){
+    public boolean excluirCliente(final String nomeCliente, final int idMotorista){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -567,6 +662,12 @@ public class GereBD {
                 nome.setName("nome");
                 nome.setValue(nomeCliente);
 
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
+                request.addProperty(motorista);
                 request.addProperty(nome);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -602,18 +703,25 @@ public class GereBD {
         return result;
     }
 
-    public ArrayList<Cliente> listarClientes(){
+    public ArrayList<Cliente> listarClientes(final int idMotorista){
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 setMethodName("listarClientes");
 
-                SoapObject listarClientes = new SoapObject(NAMESPACE,METHOD_NAME);
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
+                request.addProperty(motorista);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-                envelope.setOutputSoapObject(listarClientes);
+                envelope.setOutputSoapObject(request);
 
                 envelope.implicitTypes = true;
 
@@ -654,13 +762,10 @@ public class GereBD {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
         return listaClientes;
     }
 
-    public Cliente pesquisarCliente(final String nomeC){
+    public Cliente pesquisarCliente(final String nomeC, final int idMotorista){
 
         new Thread(new Runnable() {
             @Override
@@ -668,11 +773,18 @@ public class GereBD {
                 setMethodName("pesquisarCliente");
 
                 SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
                 PropertyInfo nome = new PropertyInfo();
                 nome.type = PropertyInfo.STRING_CLASS;
                 nome.setName("nome");
                 nome.setValue(nomeC);
 
+                PropertyInfo motorista = new PropertyInfo();
+                motorista.type = PropertyInfo.INTEGER_CLASS;
+                motorista.setName("idMotorista");
+                motorista.setValue(idMotorista);
+
+                request.addProperty(motorista);
                 request.addProperty(nome);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

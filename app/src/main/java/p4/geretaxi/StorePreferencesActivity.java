@@ -26,22 +26,24 @@ public class StorePreferencesActivity extends AppCompatActivity {
 
     public void onClickbtnSubmeterInfo(View v) {
         if (Helper.isEmpty(edtEmail) || Helper.isEmpty(edtPassword) || Helper.isEmpty(edtConfirmPassword)) {
-            Toast.makeText(getApplicationContext(), "tem que preencher todos os campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Por favor, deverá preencher todos os campos.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String email = edtEmail.getText().toString();
+        if(!Helper.isValidEmail(email)){
+            Toast.makeText(getApplicationContext(), "Insira um email válido.", Toast.LENGTH_LONG).show();
+            return;
+        }
         String pass = edtPassword.getText().toString();
         String pass2 = edtConfirmPassword.getText().toString();
         if (pass.compareTo(pass2) != 0) {
-            Toast.makeText(getApplicationContext(), "As passwords têm que coincidir", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "As passwords devem coincidir.", Toast.LENGTH_SHORT).show();
             return;
         }
         PasswordValidator passwordValidator = new PasswordValidator();
 
-
-
-       if (!passwordValidator.validate(pass)){
+        if (!passwordValidator.validate(pass)){
 
             Toast.makeText(getApplicationContext(), "A password tem que conter pelo menos 1 dígito, " +
                     "1 mínuscula, 1 maiuscula, 1 caracter especial, não pode ter espaços em branco " +

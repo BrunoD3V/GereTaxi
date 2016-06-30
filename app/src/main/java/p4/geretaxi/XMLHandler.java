@@ -639,21 +639,17 @@ public class XMLHandler {
         XPath xPath = factory.newXPath();
         InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
         InputSource inputXML = new InputSource(inputStream);
-
         NodeList nodes = (NodeList) xPath.evaluate("/DirectionsResponse/route/leg/distance/value", inputXML, XPathConstants.NODESET);
         distance=Double.parseDouble(nodes.item(0).getTextContent());
-
-
-
         return distance;
     }
+
     public boolean getPortagem(XmlPullParser parser, String data) throws IOException, XmlPullParserException {
 
         String text;
         InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
         parser.setInput(new InputStreamReader(inputStream));
         parser.nextTag();
-
         while (parser.next() != XmlPullParser.END_DOCUMENT) {
             if (parser.getEventType() == XmlPullParser.START_TAG) {
                 if (parser.getName().equals("html_instructions")) {
@@ -664,8 +660,6 @@ public class XMLHandler {
                     }
                 }
             }
-
-
         }
         return false;
     }

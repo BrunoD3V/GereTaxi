@@ -61,25 +61,27 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
     public void onClickInserirNovoCliente(View v){
 
         XMLHandler xmlHandler = new XMLHandler();
-
-
-
         if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
             Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
             return;
-        }else{
+        }
+        else{
             cliente.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
             cliente.setNome(edtNome.getText().toString());
             cliente.setMorada(edtMorada.getText().toString());
             cliente.setNif(Integer.parseInt(edtNif.getText().toString()));
             cliente.setTipo(tipoCliente);
-
             if(!Helper.isEmpty(edtCodigoPostal))
                 cliente.setCodigoPostal(edtCodigoPostal.getText().toString());
             if(!Helper.isEmpty(edtContacto))
                 cliente.setContacto(Integer.parseInt(edtContacto.getText().toString()));
-            if(!Helper.isEmpty(edtEmail))
+            if(!Helper.isEmpty(edtEmail) && Helper.isValidEmail(edtEmail.getText().toString()))
                 cliente.setEmail(edtEmail.getText().toString());
+            else{
+                Toast.makeText(getApplicationContext(),"Verifique o email que tentou introduzir.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
 
         }
         if(!xmlHandler.writeClientes(cliente)){

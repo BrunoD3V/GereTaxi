@@ -23,18 +23,19 @@ public class ConsultarClientesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_clientes);
 
-        listViewListaClientes = (ListView) findViewById(R.id.listViewListaClientes);
+        listViewListaClientes = (ListView) findViewById(R.id.listView);
 
         if (Helper.isNetworkAvailable(getApplicationContext())) {
             GereBD bd = new GereBD();
-            clientes = bd.listarClientes();
-            adapter = new ArrayAdapter<Cliente>(this, R.layout.item_list, clientes);
+            SharedPreference sharedPreference = new SharedPreference();
+            clientes = bd.listarClientes(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+            adapter = new ArrayAdapter<>(this, R.layout.item_list, clientes);
             listViewListaClientes.setAdapter(adapter);
         }else {
             Toast.makeText(getApplicationContext(), "Como está offline só serão listados so clientes guardados localmente", Toast.LENGTH_LONG).show();
             XMLHandler parser = new  XMLHandler();
             clientes = parser.parseClientes(Xml.newPullParser());
-            adapter = new ArrayAdapter<Cliente>(this, R.layout.item_list, clientes);
+            adapter = new ArrayAdapter<>(this, R.layout.item_list, clientes);
             listViewListaClientes.setAdapter(adapter);
         }
 
