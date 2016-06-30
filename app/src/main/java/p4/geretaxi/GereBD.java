@@ -624,6 +624,7 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+
                     if(response != null) {
                         for (SoapObject soapObject : response) {
                             Cliente cliente = new Cliente();
