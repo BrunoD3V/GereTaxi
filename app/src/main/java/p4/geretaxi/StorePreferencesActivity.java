@@ -3,6 +3,9 @@ package p4.geretaxi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -92,5 +95,42 @@ public class StorePreferencesActivity extends AppCompatActivity {
     public void onClickLoginActivity(View v){
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.logout_id:
+                SharedPreference sharedPreference = new SharedPreference();
+                sharedPreference.save(getApplicationContext(), " ", Constants.EMAIL);
+                sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
+                sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
+                sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
+
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
+
+                break;
+
+            case R.id.inicio_id:
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
