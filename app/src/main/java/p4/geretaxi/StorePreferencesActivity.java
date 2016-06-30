@@ -65,7 +65,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
                     sharedPreference.save(getApplicationContext(), encrypted.trim(), Constants.PASS);
                     sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
                     sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
-
+                    sharedPreference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
                     Intent i = new Intent(getApplicationContext(), CoordenadasActivity.class);
                     startActivity(i);
                     break;

@@ -686,7 +686,7 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapObject response = (SoapObject) envelope.getResponse();
-
+                    
                     clienteGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
                     clienteGlobal.setNome(response.getProperty("nome").toString());
                     clienteGlobal.setMorada(response.getProperty("morada").toString());
