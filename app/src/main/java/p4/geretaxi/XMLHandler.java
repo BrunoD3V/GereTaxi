@@ -593,6 +593,29 @@ public class XMLHandler {
         return clientes;
     }
 
+    public List<Servico> parseServico(XmlPullParser parser) {
+        List<Servico> servicos = new ArrayList<>();
+        File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
+        String text = null;
+        Servico servico;
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            parser.setInput(new InputStreamReader(fileInputStream));
+            parser.nextTag();
+            while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
+                //TODO acabar este parser
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  servicos;
+    }
+
 
     public List<Cliente> parseNovosClientes(XmlPullParser parser) {
         List<Cliente> clientes = new ArrayList<>();

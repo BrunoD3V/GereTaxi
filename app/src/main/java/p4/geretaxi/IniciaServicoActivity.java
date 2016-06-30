@@ -127,7 +127,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
 
 
             if (mCapturedLocations.size() < 1) {

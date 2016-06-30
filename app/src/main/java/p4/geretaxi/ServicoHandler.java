@@ -74,7 +74,7 @@ public class ServicoHandler {
             }
             XMLHandler parser = new XMLHandler();
             portagens =parser.getPortagem(Xml.newPullParser(), buffer.toString());
-
+            System.out.println("BUFFER " + buffer.toString()  );
             distance = parser.parseDistance(buffer.toString());
             return parser.parseDirections(Xml.newPullParser(), buffer.toString());
         } catch (UnsupportedEncodingException e) {
@@ -101,11 +101,12 @@ public class ServicoHandler {
         SharedPreference sharedPreference = new SharedPreference();
         Double latPTaxi = Double.parseDouble(sharedPreference.getValueString(MyApplication.getAppContext(),Constants.LAT));
         Double lonPTaxi = Double.parseDouble(sharedPreference.getValueString(MyApplication.getAppContext(), Constants.LON));
-        LatLng ptaxis = new LatLng(latPTaxi, lonPTaxi);
+
+        LatLng ptaxis = new com.google.maps.model.LatLng(latPTaxi, lonPTaxi);
         String origin = ptaxis.toString();
         String destination = mCapturedLocations.get(0).toString();
         String termino = mCapturedLocations.get(mCapturedLocations.size()-1).toString();
-
+        System.out.println("Ponto capturado: " + mCapturedLocations.toString());
         routes = getDirections(origin, destination);
         dis += distance;
         mCapturedLocations= ListUtils.union(routes,mCapturedLocations);

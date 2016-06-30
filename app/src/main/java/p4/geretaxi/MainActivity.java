@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickMain(View v) {
 
-
+       
 
 
         Intent i = new Intent(this, MenuActivity.class);
