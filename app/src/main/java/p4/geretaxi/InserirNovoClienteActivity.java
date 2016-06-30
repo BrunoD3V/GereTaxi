@@ -90,17 +90,16 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
 
         if(Helper.isNetworkAvailable(getApplicationContext())){
             boolean res = gereBD.inserirCliente(cliente);
-
             if (!res){
                 Toast.makeText(getApplicationContext(), "Não foi possivel inserir o Cliente.", Toast.LENGTH_SHORT).show();
                 if(!xmlHandler.writenovoCliente(cliente)) {
                     Toast.makeText(getApplicationContext(), "O cliente já existe localmente", Toast.LENGTH_SHORT).show();
                 }
+                return;
             }else{
                 Toast.makeText(getApplicationContext(), "Cliente Inserido com Sucesso!", Toast.LENGTH_SHORT).show();
             }
         }else{
-
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
             if(!xmlHandler.writenovoCliente(cliente) || !xmlHandler.writeClientes(cliente))
                 Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();

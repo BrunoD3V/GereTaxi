@@ -25,11 +25,10 @@ public class IniciaServicoActivity extends AppCompatActivity {
     private GeoApiContext mContext;
     Button terminar;
     EditText editTextProcesso;
-    EditText editTextSeguradora;
     EditText editTextPassageiros;
     Spinner spinner;
     private boolean portagens;
-    private String tipoServico;
+    private String nomeCliente;
     GereBD gereBD;
     ArrayList<String> clientesSpinner = new ArrayList<>();
 
@@ -45,7 +44,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
         editTextProcesso = (EditText) findViewById(R.id.editTextProcesso);
-        editTextSeguradora =(EditText) findViewById(R.id.editTextSeguradora);
         editTextPassageiros = (EditText) findViewById(R.id.editTextPassageiros);
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
@@ -67,18 +65,13 @@ public class IniciaServicoActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 Object item = parent.getItemAtPosition(pos);
-                tipoServico= item.toString();
+                nomeCliente= item.toString();
             }
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
         spinner.setAdapter(adapter);
-
-
-
-
-
     }
 
     public void onClickIniciar(View v) {
@@ -88,13 +81,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
             toast.show();
             return;
         }
-
-        if (Helper.isEmpty(editTextSeguradora)) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir a seguradora", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-
         if (Helper.isEmpty(editTextPassageiros)) {
             Toast toast = Toast.makeText(getApplicationContext(), "Tem que inserir o número de passageiros", Toast.LENGTH_SHORT);
             toast.show();
@@ -108,16 +94,14 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
 
         editTextProcesso.setEnabled(false);
-        editTextSeguradora.setEnabled(false);
         editTextPassageiros.setEnabled(false);
 
         String processo = editTextProcesso.getText().toString();
         servico.setProcesso(processo);
         servico.setData(Helper.getDate());
         servico.setHoraDeInicio(Helper.getTime());
-        servico.setNomeCliente(editTextSeguradora.getText().toString());
+        servico.setNomeCliente(nomeCliente);
         servico.setNumPassageiros(i);
-
 
         boolean result=Helper.inicializarDados(processo);
         if (result) {
@@ -143,7 +127,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
 
 
             if (mCapturedLocations.size() < 1) {
@@ -173,7 +157,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat", lats);
             intent.putExtra("lng", lngs);
-
             intent.putExtra(Constants.INTENT_SERVICO, servico);
             intent.putExtra("portagem", portagens);
             startActivity(intent);

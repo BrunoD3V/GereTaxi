@@ -63,7 +63,8 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-                    loginID = Integer.valueOf(response.toString());
+                    if(response!=null)
+                        loginID = Integer.valueOf(response.toString());
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -121,8 +122,8 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
                     System.out.println(http.requestDump);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-
-                    res = Integer.parseInt(response.toString());
+                    if(response!=null)
+                        res = Integer.parseInt(response.toString());
                     System.out.println("RES DENTRO DA THREAD: " + res);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -169,8 +170,8 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
                     System.out.println(http.requestDump);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-
-                    res = Integer.parseInt(response.toString());
+                    if(response!=null)
+                        res = Integer.parseInt(response.toString());
                     System.out.println("RES DENTRO DA THREAD: " + res);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -283,7 +284,8 @@ public class GereBD {
                 try {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-                    result = Boolean.parseBoolean(response.toString());
+                    if(response!=null)
+                        result = Boolean.parseBoolean(response.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (XmlPullParserException e) {
@@ -336,7 +338,9 @@ public class GereBD {
                 try {
                     http.call(NAMESPACE+METHOD_NAME,envelope);
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-                    result = Boolean.parseBoolean(response.toString());
+
+                    if(response!=null)
+                        result = Boolean.parseBoolean(response.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                     result = false;
@@ -382,25 +386,27 @@ public class GereBD {
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
-                    for (SoapObject soapObject: response) {
+                    if(response!=null) {
+                        for (SoapObject soapObject : response) {
 
-                        Servico servico = new Servico();
+                            Servico servico = new Servico();
 
-                        servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                        servico.setProcesso(soapObject.getProperty("processo").toString());
-                        servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
-                        servico.setData(soapObject.getProperty("data").toString());
-                        servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
-                        servico.setOrigem(soapObject.getProperty("origem").toString());
-                        servico.setDestino(soapObject.getProperty("destino").toString());
-                        servico.setProcesso(soapObject.getProperty("processo").toString());
-                        servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
-                        servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                        servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
-                        servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
-                        servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
+                            servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                            servico.setProcesso(soapObject.getProperty("processo").toString());
+                            servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
+                            servico.setData(soapObject.getProperty("data").toString());
+                            servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
+                            servico.setOrigem(soapObject.getProperty("origem").toString());
+                            servico.setDestino(soapObject.getProperty("destino").toString());
+                            servico.setProcesso(soapObject.getProperty("processo").toString());
+                            servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                            servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
+                            servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
+                            servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
+                            servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
 
-                        lista.add(servico);
+                            lista.add(servico);
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -452,26 +458,27 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+                    if(response!=null) {
+                        for (SoapObject soapObject : response) {
 
-                    for (SoapObject soapObject: response) {
+                            Servico servico = new Servico();
 
-                        Servico servico = new Servico();
+                            servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                            servico.setProcesso(soapObject.getProperty("processo").toString());
+                            servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
+                            servico.setData(soapObject.getProperty("data").toString());
+                            servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
+                            servico.setOrigem(soapObject.getProperty("origem").toString());
+                            servico.setDestino(soapObject.getProperty("destino").toString());
+                            servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
+                            servico.setProcesso(soapObject.getProperty("processo").toString());
+                            servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                            servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
+                            servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
+                            servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
 
-                        servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                        servico.setProcesso(soapObject.getProperty("processo").toString());
-                        servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
-                        servico.setData(soapObject.getProperty("data").toString());
-                        servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
-                        servico.setOrigem(soapObject.getProperty("origem").toString());
-                        servico.setDestino(soapObject.getProperty("destino").toString());
-                        servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
-                        servico.setProcesso(soapObject.getProperty("processo").toString());
-                        servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
-                        servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                        servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
-                        servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
-
-                        lista.add(servico);
+                            lista.add(servico);
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -526,19 +533,20 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapObject response = (SoapObject) envelope.getResponse();
-
-                    servicoGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
-                    servicoGlobal.setProcesso(response.getProperty("processo").toString());
-                    servicoGlobal.setNomeCliente(response.getProperty("nomeCliente").toString());
-                    servicoGlobal.setData(response.getProperty("data").toString());
-                    servicoGlobal.setHoraDeInicio(response.getProperty("horaDeInicio").toString());
-                    servicoGlobal.setOrigem(response.getProperty("origem").toString());
-                    servicoGlobal.setDestino(response.getProperty("destino").toString());
-                    servicoGlobal.setHorasDeEspera(Double.parseDouble(response.getProperty("horasDeEspera").toString()));
-                    servicoGlobal.setProcesso(response.getProperty("processo").toString());
-                    servicoGlobal.setDistancia(Double.parseDouble(response.getProperty("distancia").toString()));
-                    servicoGlobal.setNumPassageiros(Integer.parseInt(response.getProperty("numPassageiros").toString()));
-                    servicoGlobal.setCustoPortagens(Double.parseDouble(response.getProperty("custoPortagens").toString()));
+                    if(response!=null) {
+                        servicoGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
+                        servicoGlobal.setProcesso(response.getProperty("processo").toString());
+                        servicoGlobal.setNomeCliente(response.getProperty("nomeCliente").toString());
+                        servicoGlobal.setData(response.getProperty("data").toString());
+                        servicoGlobal.setHoraDeInicio(response.getProperty("horaDeInicio").toString());
+                        servicoGlobal.setOrigem(response.getProperty("origem").toString());
+                        servicoGlobal.setDestino(response.getProperty("destino").toString());
+                        servicoGlobal.setHorasDeEspera(Double.parseDouble(response.getProperty("horasDeEspera").toString()));
+                        servicoGlobal.setProcesso(response.getProperty("processo").toString());
+                        servicoGlobal.setDistancia(Double.parseDouble(response.getProperty("distancia").toString()));
+                        servicoGlobal.setNumPassageiros(Integer.parseInt(response.getProperty("numPassageiros").toString()));
+                        servicoGlobal.setCustoPortagens(Double.parseDouble(response.getProperty("custoPortagens").toString()));
+                    }
                 }
                 catch (IOException e) {
                     e.printStackTrace();
@@ -629,8 +637,8 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-
-                    result = Boolean.parseBoolean(response.toString());
+                    if(response!=null)
+                        result = Boolean.parseBoolean(response.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                     result = false;
@@ -682,7 +690,8 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME,envelope);
 
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-                    result = Boolean.parseBoolean(response.toString());
+                    if(response!=null)
+                        result = Boolean.parseBoolean(response.toString());
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -799,15 +808,16 @@ public class GereBD {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
 
                     SoapObject response = (SoapObject) envelope.getResponse();
-                    
-                    clienteGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
-                    clienteGlobal.setNome(response.getProperty("nome").toString());
-                    clienteGlobal.setMorada(response.getProperty("morada").toString());
-                    clienteGlobal.setCodigoPostal(response.getProperty("codigoPostal").toString());
-                    clienteGlobal.setNif(Integer.parseInt(response.getProperty("nif").toString()));
-                    clienteGlobal.setContacto(Integer.parseInt(response.getProperty("contacto").toString()));
-                    clienteGlobal.setEmail(response.getProperty("email").toString());
-                    clienteGlobal.setTipo(response.getProperty("tipo").toString());
+                    if(response!=null) {
+                        clienteGlobal.setId(Integer.parseInt(response.getProperty("id").toString()));
+                        clienteGlobal.setNome(response.getProperty("nome").toString());
+                        clienteGlobal.setMorada(response.getProperty("morada").toString());
+                        clienteGlobal.setCodigoPostal(response.getProperty("codigoPostal").toString());
+                        clienteGlobal.setNif(Integer.parseInt(response.getProperty("nif").toString()));
+                        clienteGlobal.setContacto(Integer.parseInt(response.getProperty("contacto").toString()));
+                        clienteGlobal.setEmail(response.getProperty("email").toString());
+                        clienteGlobal.setTipo(response.getProperty("tipo").toString());
+                    }
                 }
                 catch (IOException e) {
                     e.printStackTrace();

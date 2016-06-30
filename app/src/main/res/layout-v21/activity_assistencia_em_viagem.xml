@@ -16,69 +16,66 @@
         android:inputType="text"
         android:hint="@string/processo"
         android:textAlignment="center"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp" />
+        android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <Spinner
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/iniciar_servico"
-        android:id="@+id/buttonIniciar"
-        android:layout_below="@+id/editTextProcesso"
-        android:layout_marginTop="81dp"
-        android:onClick="onClickIniciar"
-        android:textColor="#ffffff"
-        android:layout_alignRight="@+id/buttonTermina"
-        android:layout_alignEnd="@+id/buttonTermina"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryDark" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/terminar"
-        android:id="@+id/buttonTermina"
-        android:layout_alignBottom="@+id/buttonIniciar"
-        android:onClick="onClickTerminar"
-        android:textColor="#ffffff"
-        android:layout_alignRight="@+id/editTextProcesso"
-        android:layout_alignEnd="@+id/editTextProcesso"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@android:color/holo_red_dark" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextSeguradora"
-        android:inputType="text"
-        android:hint="@string/seguradora"
-        android:layout_below="@+id/editTextProcesso"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editTextProcesso"
-        android:layout_alignEnd="@+id/editTextProcesso"
-        android:textAlignment="center" />
+        android:id="@+id/spinner"
+        android:layout_below="@+id/txtCliente"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextPassageiros"
         android:hint="@string/n_mero_de_passageiros"
-        android:layout_above="@+id/buttonTermina"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:layout_below="@+id/spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editTextSeguradora"
-        android:layout_alignEnd="@+id/editTextSeguradora"
-        android:inputType="number"
-        android:textAlignment="center" />
-    <Spinner
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_centerVertical="true"
+        android:text="@string/iniciar_servico"
+        android:id="@+id/buttonIniciar"
+        android:onClick="onClickIniciar"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimaryDark"
+        android:layout_below="@+id/editTextPassageiros"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terminar"
+        android:id="@+id/buttonTermina"
+        android:onClick="onClickTerminar"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_red_dark"
+        android:layout_below="@+id/editTextPassageiros"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Cliente"
+        android:id="@+id/txtCliente"
+        android:layout_below="@+id/editTextProcesso"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
