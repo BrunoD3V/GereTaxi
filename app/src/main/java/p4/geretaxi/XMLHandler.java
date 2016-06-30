@@ -663,8 +663,6 @@ public class XMLHandler {
 
     public List<LatLng> loadGpxData(XmlPullParser parser, String processo)
     {
-
-
         List<LatLng> latLngs = new ArrayList<>();
         File file = new File(Environment.getExternalStorageDirectory(), processo+Constants.PONTO_XML);
         try {

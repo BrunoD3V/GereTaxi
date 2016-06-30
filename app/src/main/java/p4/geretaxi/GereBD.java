@@ -743,7 +743,6 @@ public class GereBD {
                     try {
                         Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
 
-
                         if (response != null) {
                             for (SoapObject soapObject : response) {
                                 Cliente cliente = new Cliente();
@@ -759,7 +758,6 @@ public class GereBD {
 
                                 listaClientes.add(cliente);
                             }
-
                         }
                     }catch (Exception e) {
                         e.printStackTrace();
