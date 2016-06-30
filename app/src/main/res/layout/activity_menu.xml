@@ -26,13 +26,26 @@
         android:layout_height="wrap_content"
         android:text="Gestão de Clientes"
         android:id="@+id/btnGerirClientes"
-        android:layout_below="@+id/buttonIniciaServico"
-        android:layout_marginTop="27dp"
-        android:layout_alignRight="@+id/buttonIniciaServico"
-        android:layout_alignEnd="@+id/buttonIniciaServico"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:background="@color/colorPrimaryDark"
         android:onClick="onClickGerirClientes"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/buttonIniciaServico"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/buttonIniciaServico"
+        android:layout_alignEnd="@+id/buttonIniciaServico" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestão de Serviços"
+        android:id="@+id/btnGestaoDeServicos"
+        android:layout_below="@+id/btnGerirClientes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnGerirClientes"
+        android:layout_alignEnd="@+id/btnGerirClientes"
+        android:onClick="onClickGerirServicos"
+        android:background="@color/colorPrimaryDark"
         android:textColor="#ffffff" />
 </RelativeLayout>

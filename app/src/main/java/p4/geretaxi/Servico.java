@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Servico implements Serializable{
 
-    private String tipo;
+
     private int id;
     private String nomeCliente;
     private String processo;
@@ -16,6 +16,7 @@ public class Servico implements Serializable{
     private String data;
     private String horaDeInicio;
     private Double horasDeEspera;
+    private String tipo;
     private String trajeto;
     private int idMotorista;
 
@@ -169,10 +170,10 @@ public class Servico implements Serializable{
     @Override
     public String toString() {
         return Constants.PROCESSO_TOSTRING + processo + "\n" + Constants.CLIENTE_TOSTRING + nomeCliente + "\n"
-                + Constants.DATA_TOSTRING + data + "\n" + Constants.HORA_DE_CHEGADA_TOSTRING + horaDeInicio + "\n" +
+                + Constants.DATA_TOSTRING + data + "\n" + Constants.HORA_DE_INICIO_TOSTRING + horaDeInicio + "\n" +
                 Constants.ORIGEM_TOSTRING + origem + "\n" + Constants.DESTINO_TOSTRING + destino + "\n" +
-                Constants.PASSAGEIROS + numPassageiros + "\n" + Constants.ESPERA_TOSTRNG + horasDeEspera + "\n" +
-                Constants.PORTAGENS_TOSTRING + custoPortagens + " €\n" + Constants.DISTANCIA_TOSTRING + distancia +
+                Constants.NUM_PASSAGEIROS_TOSTRING + numPassageiros + "\n" + Constants.HORAS_DE_ESPERA_TOSTRING + horasDeEspera + "\n" +
+                Constants.CUSTO_PORTAGENS_TOSTRING + custoPortagens + " €\n" + Constants.DISTANCIA_TOSTRING + distancia +
                 Constants.KMS_TOSTRING + "\n" +Constants.TIPO_SERVICO_TOSTRING + tipo;
     }
 }

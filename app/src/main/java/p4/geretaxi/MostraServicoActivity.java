@@ -45,12 +45,10 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         DialogFragment newFragment = DialogCorrigeDadosS.newInstance(position);
                         newFragment.show(fragmentTransaction, "dialog");
-
                     }
                 }
         );
     }
-
     public void populateListView() {
 
         adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
@@ -72,12 +70,12 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         listItems.add(Constants.PROCESSO_TOSTRING + servico.getProcesso());
         listItems.add(Constants.CLIENTE_TOSTRING + servico.getNomeCliente());
         listItems.add(Constants.DATA_TOSTRING + servico.getData());
-        listItems.add(Constants.HORA_DE_CHEGADA_TOSTRING + servico.getHoraDeInicio());
+        listItems.add(Constants.HORA_DE_INICIO_TOSTRING + servico.getHoraDeInicio());
         listItems.add(Constants.ORIGEM_TOSTRING + servico.getOrigem());
         listItems.add(Constants.DESTINO_TOSTRING + servico.getDestino());
-        listItems.add(Constants.PASSAGEIROS + servico.getNumPassageiros().toString());
-        listItems.add(Constants.PORTAGENS_TOSTRING + servico.getCustoPortagens().toString());
-        listItems.add(Constants.ESPERA_TOSTRNG + servico.getHorasDeEspera());
+        listItems.add(Constants.NUM_PASSAGEIROS_TOSTRING + servico.getNumPassageiros().toString());
+        listItems.add(Constants.CUSTO_PORTAGENS_TOSTRING + servico.getCustoPortagens().toString());
+        listItems.add(Constants.HORAS_DE_ESPERA_TOSTRING + servico.getHorasDeEspera());
         listItems.add(Constants.DISTANCIA_TOSTRING + String.valueOf(servico.getDistancia() + Constants.KMS_TOSTRING));
 
     }
@@ -154,15 +152,11 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         }
         //TODO: METODO ATUALIZAR SERVICO
         listItems.clear();
-
+        listViewMostraServico.setAdapter(null);
         //porque só mostra às vezes?
         adapter.notifyDataSetChanged();
         populateListView();
-
-
-
     }
-
     AsyncTask<Void, Void, Boolean> enviaMail =
             new AsyncTask<Void, Void, Boolean>() {
                 @Override

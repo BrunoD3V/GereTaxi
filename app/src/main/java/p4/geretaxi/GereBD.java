@@ -404,6 +404,7 @@ public class GereBD {
                             servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
                             servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
                             servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
+                            servico.setTipo(soapObject.getProperty("tipo").toString());
 
                             lista.add(servico);
                         }
@@ -553,7 +554,6 @@ public class GereBD {
 
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
-
                 }
             }
         }).start();
@@ -699,7 +699,6 @@ public class GereBD {
 
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
-
                 }
             }
         }).start();
@@ -781,7 +780,6 @@ public class GereBD {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 }

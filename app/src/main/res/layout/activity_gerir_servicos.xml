@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="p4.geretaxi.GerirServicosActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Gestão de Servicos"
+        android:id="@+id/txtGestaoDeServicos"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consultar Serviços"
+        android:id="@+id/btnConsultarServicos"
+        android:layout_below="@+id/txtGestaoDeServicos"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onClickConsultarServico"
+        android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alterar Serviços"
+        android:id="@+id/btnAlterarServicos"
+        android:layout_below="@+id/btnConsultarServicos"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onClickAlterarServic"
+        android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Serviços"
+        android:id="@+id/btnEliminarServicos"
+        android:layout_below="@+id/btnAlterarServicos"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onClickEliminarServico"
+        android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnAlterarServicos"
+        android:layout_alignEnd="@+id/btnAlterarServicos" />
+</RelativeLayout>

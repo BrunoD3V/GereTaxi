@@ -62,7 +62,11 @@
         <activity android:name=".MostraClienteActivity" />
         <activity android:name=".ConsultarServicosClienteActivity" />
         <activity android:name=".EliminaClienteActivity" />
-        <activity android:name=".TesteActivity"></activity>
+        <activity android:name=".TesteActivity" />
+        <activity android:name=".GerirServicosActivity" />
+        <activity android:name=".ConsultarServicosActivity" />
+        <activity android:name=".AlterarServicoActivity" />
+        <activity android:name=".EliminarServicoActivity"></activity>
     </application>
 
 </manifest>

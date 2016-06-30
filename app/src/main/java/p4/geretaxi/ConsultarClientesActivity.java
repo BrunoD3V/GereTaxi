@@ -32,7 +32,7 @@ public class ConsultarClientesActivity extends AppCompatActivity {
             adapter = new ArrayAdapter<>(this, R.layout.item_list, clientes);
             listViewListaClientes.setAdapter(adapter);
         }else {
-            Toast.makeText(getApplicationContext(), "Como está offline só serão listados so clientes guardados localmente", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "MODO OFFLINE: Serão apenas listados os Clientes guardados localmente.", Toast.LENGTH_LONG).show();
             XMLHandler parser = new  XMLHandler();
             clientes = parser.parseClientes(Xml.newPullParser());
             adapter = new ArrayAdapter<>(this, R.layout.item_list, clientes);

@@ -19,7 +19,7 @@ public class EliminaClienteActivity extends AppCompatActivity {
     EditText editTextEliminarCliente;
     ListView listViewEliminaCliente;
 
-    List<String> listitems;
+    List<String> listItems;
     ArrayAdapter<String> adapter;
     private Cliente cliente;
 
@@ -42,7 +42,7 @@ public class EliminaClienteActivity extends AppCompatActivity {
                     SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             if (res) {
                 XMLHandler parser = new XMLHandler();
-                List<Cliente> clientes = new ArrayList<>();
+                List<Cliente> clientes;
                 clientes = parser.parseClientes(Xml.newPullParser());
                 if (clientes.size()<1) {
                     for (Cliente c : clientes) {
@@ -56,36 +56,43 @@ public class EliminaClienteActivity extends AppCompatActivity {
                         for (Cliente c : clientes) {
                             parser.writeClientes(c);
                         }
-                        Toast.makeText(getApplicationContext(), "Cliente apagado com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Cliente apagado Localmente com Sucesso.", Toast.LENGTH_SHORT).show();
                     }
                 }
+                listViewEliminaCliente.setAdapter(null);
+                editTextEliminarCliente.setText("");
+                Toast.makeText(getApplicationContext(),"Cliente Apagado com Sucesso.", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Não foi possivel eliminar o Cliente que pretendia.", Toast.LENGTH_LONG).show();
             }
         }
+
+
+        //TODO: SO PODE APAGAR SE TIVER NET?
     }
 
     public void onClickButtonPesquisar(View v) {
         if(!Helper.isEmpty(editTextEliminarCliente)) {
             GereBD bd = new GereBD();
-            listitems= new ArrayList<>();
-            SharedPreference sharedPreference = new SharedPreference();
-            cliente= bd.pesquisarCliente(editTextEliminarCliente.getText().toString(), SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-            if (cliente != null) {
+            listItems= new ArrayList<>();
+            cliente = bd.pesquisarCliente(editTextEliminarCliente.getText().toString(), SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+            if (cliente.getNome().equals(editTextEliminarCliente.getText().toString())) {
                 populateListView();
-                adapter = new ArrayAdapter<String>(this, R.layout.item_list, listitems);
+                adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
                 listViewEliminaCliente.setAdapter(adapter);
             } else {
-                Toast.makeText(getApplicationContext(), "Não existem clientes com esse nome", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Não foi possivel encontrar o cliente que procurava.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void populateListView() {
-        listitems.add(Constants.CLIENTE_TOSTRING + cliente.getNome());
-        listitems.add(Constants.MORADA_XML +": "+ cliente.getMorada());
-        listitems.add(Constants.CODIGO_POSTAL_XML +": "+ cliente.getCodigoPostal());
-        listitems.add(Constants.NIF_XML +": "+ cliente.getNif());
-        listitems.add(Constants.CONTACTO_XML +": "+ cliente.getContacto());
-        listitems.add(Constants.EMAIL +": "+ cliente.getEmail());
-        listitems.add(Constants.TIPO_XML +": "+ cliente.getTipo());
+        listItems.add(Constants.CLIENTE_TOSTRING + cliente.getNome());
+        listItems.add(Constants.MORADA_TOSTRING + cliente.getMorada());
+        listItems.add(Constants.CODIGO_POSTAL_TOSTRING + cliente.getCodigoPostal());
+        listItems.add(Constants.NIF_TOSTRING + cliente.getNif());
+        listItems.add(Constants.CONTACTO_TOSTRING + cliente.getContacto());
+        listItems.add(Constants.EMAIL_TOSTRING + cliente.getEmail());
+        listItems.add(Constants.TIPO_CLIENTE_TOSTRING + cliente.getTipo());
     }
 }

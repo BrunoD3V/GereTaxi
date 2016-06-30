@@ -31,6 +31,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
     private String nomeCliente;
     GereBD gereBD;
     ArrayList<String> clientesSpinner = new ArrayList<>();
+    XMLHandler handler;
 
 
     GPSHandler gpsHandler = new GPSHandler(this);
@@ -48,20 +49,27 @@ public class IniciaServicoActivity extends AppCompatActivity {
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
         System.out.println(servico.getTipo());
+        handler = new XMLHandler();
 
 
         gereBD = new GereBD();
         List<Cliente> clientes;
 
-        clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-        for (Cliente c: clientes) {
-            clientesSpinner.add(c.getNome());
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+            for (Cliente c: clientes) {
+                clientesSpinner.add(c.getNome());
+            }
+        }else{
+            clientes = handler.parseClientes(Xml.newPullParser());
+            for (Cliente c: clientes) {
+                clientesSpinner.add(c.getNome());
+            }
         }
+
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,clientesSpinner);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 Object item = parent.getItemAtPosition(pos);

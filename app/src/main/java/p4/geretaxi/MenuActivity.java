@@ -23,8 +23,6 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
-
-
     }
     public void onClickIniciarServico(View v) {
         EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();
@@ -34,4 +32,11 @@ public class MenuActivity extends AppCompatActivity {
         Intent i = new Intent(this,GerirClientesActivity.class);
         startActivity(i);
     }
+
+    public void onClickGerirServicos(View v){
+        Intent i = new Intent(this,GerirServicosActivity.class);
+        startActivity(i);
+    }
+
+
 }
