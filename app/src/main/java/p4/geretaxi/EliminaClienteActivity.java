@@ -80,12 +80,12 @@ public class EliminaClienteActivity extends AppCompatActivity {
     }
 
     private void populateListView() {
-        listitems.add(Constants.NOME_CLIENTE + cliente.getNome());
-        listitems.add(Constants.MORADA +": "+ cliente.getMorada());
-        listitems.add(Constants.CODIGO_POSTAL +": "+ cliente.getCodigoPostal());
-        listitems.add(Constants.NIF +": "+ cliente.getNif());
-        listitems.add(Constants.CONTACTO +": "+ cliente.getContacto());
+        listitems.add(Constants.CLIENTE_TOSTRING + cliente.getNome());
+        listitems.add(Constants.MORADA_XML +": "+ cliente.getMorada());
+        listitems.add(Constants.CODIGO_POSTAL_XML +": "+ cliente.getCodigoPostal());
+        listitems.add(Constants.NIF_XML +": "+ cliente.getNif());
+        listitems.add(Constants.CONTACTO_XML +": "+ cliente.getContacto());
         listitems.add(Constants.EMAIL +": "+ cliente.getEmail());
-        listitems.add(Constants.TIPO +": "+ cliente.getTipo());
+        listitems.add(Constants.TIPO_XML +": "+ cliente.getTipo());
     }
 }

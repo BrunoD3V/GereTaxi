@@ -359,56 +359,56 @@ public class XMLHandler {
 
                 xmlSerializer.startDocument("UTF-8", true);
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                xmlSerializer.startTag(null, Constants.CLIENTE);
-                xmlSerializer.startTag(null, Constants.NOME);
+                xmlSerializer.startTag(null, Constants.CLIENTE_XML);
+                xmlSerializer.startTag(null, Constants.NOME_XML);
                 xmlSerializer.text(cliente.getNome());
-                xmlSerializer.endTag(null, Constants.NOME);
-                xmlSerializer.startTag(null, Constants.MORADA);
+                xmlSerializer.endTag(null, Constants.NOME_XML);
+                xmlSerializer.startTag(null, Constants.MORADA_XML);
                 xmlSerializer.text(cliente.getMorada());
-                xmlSerializer.endTag(null, Constants.MORADA);
-                xmlSerializer.startTag(null, Constants.CODIGO_POSTAL);
+                xmlSerializer.endTag(null, Constants.MORADA_XML);
+                xmlSerializer.startTag(null, Constants.CODIGO_POSTAL_XML);
                 xmlSerializer.text(cliente.getCodigoPostal());
-                xmlSerializer.endTag(null, Constants.CODIGO_POSTAL);
-                xmlSerializer.startTag(null, Constants.NIF);
+                xmlSerializer.endTag(null, Constants.CODIGO_POSTAL_XML);
+                xmlSerializer.startTag(null, Constants.NIF_XML);
                 xmlSerializer.text(String.valueOf(cliente.getNif()));
-                xmlSerializer.endTag(null, Constants.NIF);
-                xmlSerializer.startTag(null,Constants.CONTACTO);
+                xmlSerializer.endTag(null, Constants.NIF_XML);
+                xmlSerializer.startTag(null,Constants.CONTACTO_XML);
                 xmlSerializer.text(String.valueOf(cliente.getContacto()));
-                xmlSerializer.endTag(null, Constants.CONTACTO);
-                xmlSerializer.startTag(null, Constants.MAIL);
+                xmlSerializer.endTag(null, Constants.CONTACTO_XML);
+                xmlSerializer.startTag(null, Constants.MAIL_XML);
                 xmlSerializer.text(cliente.getEmail());
-                xmlSerializer.endTag(null, Constants.MAIL);
-                xmlSerializer.startTag(null, Constants.TIPO);
+                xmlSerializer.endTag(null, Constants.MAIL_XML);
+                xmlSerializer.startTag(null, Constants.TIPO_XML);
                 xmlSerializer.text(cliente.getTipo());
-                xmlSerializer.endTag(null, Constants.TIPO);
-                xmlSerializer.endTag(null, Constants.CLIENTE);
+                xmlSerializer.endTag(null, Constants.TIPO_XML);
+                xmlSerializer.endTag(null, Constants.CLIENTE_XML);
                 xmlSerializer.endDocument();
             } else {
                 if(!findCliente(Xml.newPullParser(), String.valueOf(cliente.getId()),"novocliente.xml")){
                     xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                    xmlSerializer.startTag(null, Constants.CLIENTE);
-                    xmlSerializer.startTag(null, Constants.NOME);
+                    xmlSerializer.startTag(null, Constants.CLIENTE_XML);
+                    xmlSerializer.startTag(null, Constants.NOME_XML);
                     xmlSerializer.text(cliente.getNome());
-                    xmlSerializer.endTag(null, Constants.NOME);
-                    xmlSerializer.startTag(null, Constants.MORADA);
+                    xmlSerializer.endTag(null, Constants.NOME_XML);
+                    xmlSerializer.startTag(null, Constants.MORADA_XML);
                     xmlSerializer.text(cliente.getMorada());
-                    xmlSerializer.endTag(null, Constants.MORADA);
-                    xmlSerializer.startTag(null, Constants.CODIGO_POSTAL);
+                    xmlSerializer.endTag(null, Constants.MORADA_XML);
+                    xmlSerializer.startTag(null, Constants.CODIGO_POSTAL_XML);
                     xmlSerializer.text(cliente.getCodigoPostal());
-                    xmlSerializer.endTag(null, Constants.CODIGO_POSTAL);
-                    xmlSerializer.startTag(null, Constants.NIF);
+                    xmlSerializer.endTag(null, Constants.CODIGO_POSTAL_XML);
+                    xmlSerializer.startTag(null, Constants.NIF_XML);
                     xmlSerializer.text(String.valueOf(cliente.getNif()));
-                    xmlSerializer.endTag(null, Constants.NIF);
-                    xmlSerializer.startTag(null,Constants.CONTACTO);
+                    xmlSerializer.endTag(null, Constants.NIF_XML);
+                    xmlSerializer.startTag(null,Constants.CONTACTO_XML);
                     xmlSerializer.text(String.valueOf(cliente.getContacto()));
-                    xmlSerializer.endTag(null, Constants.CONTACTO);
-                    xmlSerializer.startTag(null, Constants.MAIL);
+                    xmlSerializer.endTag(null, Constants.CONTACTO_XML);
+                    xmlSerializer.startTag(null, Constants.MAIL_XML);
                     xmlSerializer.text(cliente.getEmail());
-                    xmlSerializer.endTag(null, Constants.MAIL);
-                    xmlSerializer.startTag(null, Constants.TIPO);
+                    xmlSerializer.endTag(null, Constants.MAIL_XML);
+                    xmlSerializer.startTag(null, Constants.TIPO_XML);
                     xmlSerializer.text(cliente.getTipo());
-                    xmlSerializer.endTag(null, Constants.TIPO);
-                    xmlSerializer.endTag(null, Constants.CLIENTE);
+                    xmlSerializer.endTag(null, Constants.TIPO_XML);
+                    xmlSerializer.endTag(null, Constants.CLIENTE_XML);
                     xmlSerializer.endDocument();
                 } else {
                     Toast.makeText(MyApplication.getAppContext(), "Cliente já existe", Toast.LENGTH_SHORT).show();
@@ -442,26 +442,26 @@ public class XMLHandler {
 
                 xmlSerializer.startDocument("UTF-8", true);
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                xmlSerializer.startTag(null, Constants.CLIENTE);
-                xmlSerializer.startTag(null, Constants.NOME);
+                xmlSerializer.startTag(null, Constants.CLIENTE_XML);
+                xmlSerializer.startTag(null, Constants.NOME_XML);
                 xmlSerializer.text(cliente.getNome());
-                xmlSerializer.endTag(null, Constants.NOME);
-                xmlSerializer.startTag(null, Constants.MAIL);
+                xmlSerializer.endTag(null, Constants.NOME_XML);
+                xmlSerializer.startTag(null, Constants.MAIL_XML);
                 xmlSerializer.text(cliente.getEmail());
-                xmlSerializer.endTag(null, Constants.MAIL);
-                xmlSerializer.endTag(null, Constants.CLIENTE);
+                xmlSerializer.endTag(null, Constants.MAIL_XML);
+                xmlSerializer.endTag(null, Constants.CLIENTE_XML);
                 xmlSerializer.endDocument();
             } else {
                 if (!findClientebyMail(Xml.newPullParser(),cliente.getEmail(), Constants.CLIENTES +Constants.PONTO_XML)) {
                     xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                    xmlSerializer.startTag(null, Constants.CLIENTE);
-                    xmlSerializer.startTag(null, Constants.NOME);
+                    xmlSerializer.startTag(null, Constants.CLIENTE_XML);
+                    xmlSerializer.startTag(null, Constants.NOME_XML);
                     xmlSerializer.text(cliente.getNome());
-                    xmlSerializer.endTag(null, Constants.NOME);
-                    xmlSerializer.startTag(null, Constants.MAIL);
+                    xmlSerializer.endTag(null, Constants.NOME_XML);
+                    xmlSerializer.startTag(null, Constants.MAIL_XML);
                     xmlSerializer.text(cliente.getEmail());
-                    xmlSerializer.endTag(null, Constants.MAIL);
-                    xmlSerializer.endTag(null, Constants.CLIENTE);
+                    xmlSerializer.endTag(null, Constants.MAIL_XML);
+                    xmlSerializer.endTag(null, Constants.CLIENTE_XML);
                     xmlSerializer.endDocument();
                 } else {
 
@@ -494,7 +494,7 @@ public class XMLHandler {
             parser.nextTag();
             while(parser.next() != XmlPullParser.END_DOCUMENT) {
                 if (parser.getEventType() == XmlPullParser.START_TAG) {
-                    if(parser.getName().equals(Constants.ID)){
+                    if(parser.getName().equals(Constants.ID_XML)){
                         parser.next();
                         if(parser.getText().equals(id)){
                            result = true;
@@ -524,12 +524,11 @@ public class XMLHandler {
             parser.nextTag();
             while(parser.next() != XmlPullParser.END_DOCUMENT) {
                 if (parser.getEventType() == XmlPullParser.START_TAG) {
-                    if(parser.getName().equals(Constants.MAIL)){
+                    if(parser.getName().equals(Constants.MAIL_XML)){
                         parser.next();
                         if(parser.getText().equals(email)){
                             result = true;
                         }
-
                     }
                 }
             }
@@ -540,8 +539,6 @@ public class XMLHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return result;
     }
 
@@ -558,7 +555,7 @@ public class XMLHandler {
             while(parser.getEventType() != XmlPullParser.END_DOCUMENT) {
                 switch (parser.getEventType()) {
                     case XmlPullParser.START_TAG:
-                        if(parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                        if(parser.getName().equalsIgnoreCase(Constants.CLIENTE_XML)){
                             cliente= new Cliente();
                         }
                         break;
@@ -566,14 +563,14 @@ public class XMLHandler {
                         text = parser.getText();
                         break;
                     case  XmlPullParser.END_TAG:
-                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE_XML)){
                             clientes.add(cliente);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.NOME)){
+                        if (parser.getName().equalsIgnoreCase(Constants.NOME_XML)){
                             assert cliente != null;
                             cliente.setNome(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.MAIL)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.MAIL_XML)) {
                             assert cliente != null;
                             cliente.setEmail(text);
                         }
@@ -597,14 +594,83 @@ public class XMLHandler {
         List<Servico> servicos = new ArrayList<>();
         File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
         String text = null;
-        Servico servico;
+        Servico servico = null;
 
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             parser.setInput(new InputStreamReader(fileInputStream));
             parser.nextTag();
             while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
-                //TODO acabar este parser
+                switch (parser.getEventType()) {
+                    case XmlPullParser.START_TAG:
+                        if(parser.getName().equalsIgnoreCase(Constants.INTENT_SERVICO)){
+                            servico = new Servico();
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = parser.getText();
+                        break;
+                    case  XmlPullParser.END_TAG:
+                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE_XML)){
+                            servicos.add(servico);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.ID_XML)){
+                            assert servico != null;
+                            servico.setId(Integer.parseInt(text));
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.PROCESSO_XML)) {
+                            assert servico != null;
+                            servico.setProcesso(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.NOME_CLIENTE_XML)) {
+                            assert servico != null;
+                            servico.setNomeCliente(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.TIPO_XML)) {
+                            assert servico != null;
+                            servico.setTipo(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.HORA_DE_INICIO_XML)) {
+                            assert servico != null;
+                            servico.setHoraDeInicio(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.DATA_XML)) {
+                            assert servico != null;
+                            servico.setData(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.ORIGEM_XML)) {
+                            assert servico != null;
+                            servico.setOrigem(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.DESTINO_XML)) {
+                            assert servico != null;
+                            servico.setDestino(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.TRAJETO_XML)) {
+                            assert servico != null;
+                            servico.setTrajeto(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.DISTANCIA_XML)) {
+                            assert servico != null;
+                            servico.setDistancia(Double.parseDouble(text));
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.HORASDEESPERA_XML)) {
+                            assert servico != null;
+                            servico.setHorasDeEspera(Double.parseDouble(text));
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.NUM_PASSAGEIROS_XML)) {
+                            assert servico != null;
+                            servico.setNumPassageiros(Integer.parseInt(text));
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.CUSTO_PORTAGENS_XML)) {
+                            assert servico != null;
+                            servico.setCustoPortagens(Double.parseDouble(text));
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                parser.next();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -613,8 +679,9 @@ public class XMLHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return  servicos;
+        return servicos;
     }
+
 
 
     public List<Cliente> parseNovosClientes(XmlPullParser parser) {
@@ -629,7 +696,7 @@ public class XMLHandler {
             while(parser.getEventType() != XmlPullParser.END_DOCUMENT) {
                 switch (parser.getEventType()) {
                     case XmlPullParser.START_TAG:
-                        if(parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                        if(parser.getName().equalsIgnoreCase(Constants.CLIENTE_XML)){
                             cliente= new Cliente();
                         }
                         break;
@@ -637,34 +704,34 @@ public class XMLHandler {
                         text = parser.getText();
                         break;
                     case  XmlPullParser.END_TAG:
-                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE_XML)){
                             clientes.add(cliente);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.NOME)){
+                        if (parser.getName().equalsIgnoreCase(Constants.NOME_XML)){
                             assert cliente != null;
                             cliente.setNome(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.MAIL)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.MAIL_XML)) {
                             assert cliente != null;
                             cliente.setEmail(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.MORADA)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.MORADA_XML)) {
                             assert cliente != null;
                             cliente.setMorada(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.CODIGO_POSTAL)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.CODIGO_POSTAL_XML)) {
                             assert cliente != null;
                             cliente.setCodigoPostal(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.NIF)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.NIF_XML)) {
                             assert cliente != null;
                             cliente.setNif(Integer.parseInt(text));
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.TIPO)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.TIPO_XML)) {
                             assert cliente != null;
                             cliente.setTipo(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.CONTACTO)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.CONTACTO_XML)) {
                             assert cliente != null;
                             cliente.setContacto(Integer.parseInt(text));
                         }
@@ -698,7 +765,6 @@ public class XMLHandler {
                 if (parser.getEventType() != XmlPullParser.START_TAG) {
                     continue;
                 }
-
                 if (parser.getName().equals("wpt")) {
                     // Save the discovered lat/lon attributes in each <wpt>
                     latLngs.add(new LatLng(
@@ -707,7 +773,6 @@ public class XMLHandler {
                 }
                 // Otherwise, skip irrelevant data
             }
-
         } catch (XmlPullParserException e) {
             e.printStackTrace();
 

@@ -55,7 +55,7 @@ public class MostraClienteActivity extends AppCompatActivity implements DialogAt
         switch (num) {
             case 0:
                 cliente.setNome(dados);
-                //TODO: MUDAR O VALOR DA TAG NOME CORRESPONDENTE AO CLIENTE NO FICHEIRO CLIENTES.XML
+                //TODO: MUDAR O VALOR DA TAG NOMSE CORRESPONDENTE AO CLIENT NO FICHEIRO CLIENTES.XML
                 break;
             case 1:
                 cliente.setMorada(dados);
@@ -78,7 +78,7 @@ public class MostraClienteActivity extends AppCompatActivity implements DialogAt
             default:
                 break;
         }
-        //TODO: METODO ATUALIZAR CLIENTE
+        //TODO: METODO ATUALIZAR CLIENT
         listitems.clear();
         adapter.notifyDataSetChanged();
         populateList();

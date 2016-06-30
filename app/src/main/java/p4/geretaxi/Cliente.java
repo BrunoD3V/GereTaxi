@@ -103,8 +103,8 @@ public class Cliente implements Serializable{
 
     @Override
     public String toString() {
-        return Constants.NOME_CLIENTE + nome + "\n" + "Morada : " + morada + "\n" + "Codigo Postal: " +
-               codigoPostal + "\n" + "NIF : " +  nif + "\n"  + "Contacto : " + contacto + "\n" +
+        return Constants.CLIENTE_TOSTRING + nome + "\n" + "Morada : " + morada + "\n" + "Codigo Postal: " +
+               codigoPostal + "\n" + Constants.NIF_TOSTRING +  nif + "\n"  + "Contacto : " + contacto + "\n" +
                 "email :" + email + "\n" + "Tipo : " + tipo;
     }
 }

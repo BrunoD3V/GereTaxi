@@ -168,11 +168,11 @@ public class Servico implements Serializable{
 
     @Override
     public String toString() {
-        return Constants.PROCESSO + processo + "\n" + Constants.NOME_CLIENTE + nomeCliente + "\n"
-                + Constants.DATA + data + "\n" + Constants.HORA + horaDeInicio + "\n" +
-                Constants.ORIGEM + origem + "\n" + Constants.DESTINO + destino + "\n" +
-                Constants.PASSAGEIROS + numPassageiros + "\n" + Constants.ESPERA + horasDeEspera + "\n" +
-                Constants.PORTAGENS + custoPortagens + " €\n" + Constants.DISTANCIA + distancia +
-                Constants.KMS + "\n" +Constants.TIPO_SERVICO + tipo;
+        return Constants.PROCESSO_TOSTRING + processo + "\n" + Constants.CLIENTE_TOSTRING + nomeCliente + "\n"
+                + Constants.DATA_TOSTRING + data + "\n" + Constants.HORA_DE_CHEGADA_TOSTRING + horaDeInicio + "\n" +
+                Constants.ORIGEM_TOSTRING + origem + "\n" + Constants.DESTINO_TOSTRING + destino + "\n" +
+                Constants.PASSAGEIROS + numPassageiros + "\n" + Constants.ESPERA_TOSTRNG + horasDeEspera + "\n" +
+                Constants.PORTAGENS_TOSTRING + custoPortagens + " €\n" + Constants.DISTANCIA_TOSTRING + distancia +
+                Constants.KMS_TOSTRING + "\n" +Constants.TIPO_SERVICO_TOSTRING + tipo;
     }
 }

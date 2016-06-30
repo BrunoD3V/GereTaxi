@@ -26,7 +26,7 @@ public class ConsultarServicosClienteActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
     }
     public void onClickPesquisar(View v){
-        /*TODO: PESQUISAR SERVIÇOS POR CLIENTE
+        /*TODO: PESQUISAR SERVIÇOS POR CLIENTES
         1-Ler da edit text
         2-Verificar se existe internet
         se há net

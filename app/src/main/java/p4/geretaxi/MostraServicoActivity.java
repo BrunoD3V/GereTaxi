@@ -69,16 +69,16 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         }
         servico = (Servico) getIntent().getSerializableExtra("ser");
 
-        listItems.add(Constants.PROCESSO + servico.getProcesso());
-        listItems.add(Constants.NOME_CLIENTE + servico.getNomeCliente());
-        listItems.add(Constants.DATA + servico.getData());
-        listItems.add(Constants.HORA + servico.getHoraDeInicio());
-        listItems.add(Constants.ORIGEM + servico.getOrigem());
-        listItems.add(Constants.DESTINO + servico.getDestino());
+        listItems.add(Constants.PROCESSO_TOSTRING + servico.getProcesso());
+        listItems.add(Constants.CLIENTE_TOSTRING + servico.getNomeCliente());
+        listItems.add(Constants.DATA_TOSTRING + servico.getData());
+        listItems.add(Constants.HORA_DE_CHEGADA_TOSTRING + servico.getHoraDeInicio());
+        listItems.add(Constants.ORIGEM_TOSTRING + servico.getOrigem());
+        listItems.add(Constants.DESTINO_TOSTRING + servico.getDestino());
         listItems.add(Constants.PASSAGEIROS + servico.getNumPassageiros().toString());
-        listItems.add(Constants.PORTAGENS + servico.getCustoPortagens().toString());
-        listItems.add(Constants.ESPERA + servico.getHorasDeEspera());
-        listItems.add(Constants.DISTANCIA + String.valueOf(servico.getDistancia() + Constants.KMS));
+        listItems.add(Constants.PORTAGENS_TOSTRING + servico.getCustoPortagens().toString());
+        listItems.add(Constants.ESPERA_TOSTRNG + servico.getHorasDeEspera());
+        listItems.add(Constants.DISTANCIA_TOSTRING + String.valueOf(servico.getDistancia() + Constants.KMS_TOSTRING));
 
     }
 
