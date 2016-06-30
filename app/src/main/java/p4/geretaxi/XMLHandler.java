@@ -786,6 +786,40 @@ public class XMLHandler {
         return latLngs;
     }
 
+    public List<LatLng> loadTrajecto(XmlPullParser parser, String data)
+    {
+        List<LatLng> latLngs = new ArrayList<>();   // List<> as we need subList for paging later
+
+        try {
+            InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
+            parser.setInput(new InputStreamReader(inputStream));
+            parser.nextTag();
+
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() != XmlPullParser.START_TAG) {
+                    continue;
+                }
+                if (parser.getName().equals("wpt")) {
+                    // Save the discovered lat/lon attributes in each <wpt>
+                    latLngs.add(new LatLng(
+                            Double.valueOf(parser.getAttributeValue(null, "lat")),
+                            Double.valueOf(parser.getAttributeValue(null, "lon"))));
+                }
+                // Otherwise, skip irrelevant data
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return latLngs;
+    }
+
     public double parseDistance(String data) throws IOException, XPathExpressionException {
         Double distance = 0.0;
 

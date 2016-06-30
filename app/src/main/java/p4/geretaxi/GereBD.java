@@ -7,9 +7,9 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 public class GereBD {
@@ -410,6 +410,7 @@ public class GereBD {
                                 servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
                                 servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
                                 servico.setTipo(soapObject.getProperty("tipo").toString());
+                                servico.setTrajeto(soapObject.getProperty("trajeto").toString());
 
                                 lista.add(servico);
                             }

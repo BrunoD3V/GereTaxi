@@ -3,6 +3,7 @@ package p4.geretaxi;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Xml;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,7 +13,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.model.LatLng;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator{
@@ -30,14 +30,9 @@ public class MapsActivity3 extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        ArrayList<Double> lats = (ArrayList<Double>)  getIntent().getSerializableExtra("lat");
-        ArrayList<Double> lngs = (ArrayList<Double>) getIntent().getSerializableExtra("lng");
-
-        mCapturedLocations = new ArrayList<>();
-        for (int i = 0; i < lats.size(); i++) {
-            LatLng e = new LatLng(lats.get(i), lngs.get(i));
-            mCapturedLocations.add(i,e);
-        }
+        servico = (Servico) getIntent().getSerializableExtra("trajecto");
+        XMLHandler parser = new XMLHandler();
+        mCapturedLocations = parser.loadTrajecto(Xml.newPullParser(), servico.getTrajeto());
 
 
 

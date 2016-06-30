@@ -116,7 +116,9 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     }
 
     public void onClickVerTrajeto(View v) {
-        System.out.println(servico.getTrajeto());
+        Intent intent = new Intent(this, MapsActivity3.class);
+        intent.putExtra("trajecto", servico);
+        startActivity(intent);
     }
 
     @Override
