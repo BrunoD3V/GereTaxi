@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Dados do Serviço"
+        android:text="@string/dados_do_servi_o"
         android:id="@+id/textViewMostraServico"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -31,7 +31,7 @@
     <Button
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:text="Submeter Serviço"
+        android:text="@string/submeter_servi_o"
         android:id="@+id/buttonSubmeterServico"
         android:layout_alignParentBottom="true"
         android:onClick="onClickSubmeterServico"

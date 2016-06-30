@@ -35,8 +35,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
     GereBD gereBD;
     ArrayList<String> clientesSpinner = new ArrayList<>();
     XMLHandler handler;
-
-
     GPSHandler gpsHandler = new GPSHandler(this);
     private Servico servico = new Servico();
 
@@ -52,9 +50,8 @@ public class IniciaServicoActivity extends AppCompatActivity {
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
         System.out.println(servico.getTipo());
+
         handler = new XMLHandler();
-
-
         gereBD = new GereBD();
         List<Cliente> clientes;
 
@@ -69,7 +66,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
                 clientesSpinner.add(c.getNome());
             }
         }
-
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,clientesSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

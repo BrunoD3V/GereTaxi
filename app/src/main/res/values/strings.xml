@@ -75,6 +75,8 @@
     <string name="settings">Settings</string>
     <string name="definicoes">definições</string>
     <string name="logout">logout</string>
+    <string name="dados_do_servi_o">Dados do Serviço</string>
+    <string name="submeter_servi_o">Submeter Serviço</string>
 
 
 </resources>
