@@ -27,8 +27,8 @@ public class ConsultarClientesActivity extends AppCompatActivity {
 
         if (Helper.isNetworkAvailable(getApplicationContext())) {
             GereBD bd = new GereBD();
-            SharedPreference sharedPreference = new SharedPreference();
-            clientes = bd.listarClientes(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+
+            clientes = bd.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             adapter = new ArrayAdapter<>(this, R.layout.item_list, clientes);
             listViewListaClientes.setAdapter(adapter);
         }else {

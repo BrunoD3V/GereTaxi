@@ -464,7 +464,7 @@ public class XMLHandler {
                     xmlSerializer.endTag(null, Constants.CLIENTE);
                     xmlSerializer.endDocument();
                 } else {
-                    Toast.makeText(MyApplication.getAppContext(), "Cliente já existe", Toast.LENGTH_SHORT).show();
+
                     return result;
                 }
 
@@ -593,6 +593,73 @@ public class XMLHandler {
         return clientes;
     }
 
+
+    public List<Cliente> parseNovosClientes(XmlPullParser parser) {
+        List<Cliente> clientes = new ArrayList<>();
+        File file = new File(Environment.getExternalStorageDirectory(), "novocliente.xml");
+        String text = null;
+        Cliente cliente = null;
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            parser.setInput(new InputStreamReader(fileInputStream));
+            parser.nextTag();
+            while(parser.getEventType() != XmlPullParser.END_DOCUMENT) {
+                switch (parser.getEventType()) {
+                    case XmlPullParser.START_TAG:
+                        if(parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                            cliente= new Cliente();
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = parser.getText();
+                        break;
+                    case  XmlPullParser.END_TAG:
+                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE)){
+                            clientes.add(cliente);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.NOME)){
+                            assert cliente != null;
+                            cliente.setNome(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.MAIL)) {
+                            assert cliente != null;
+                            cliente.setEmail(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.MORADA)) {
+                            assert cliente != null;
+                            cliente.setMorada(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.CODIGO_POSTAL)) {
+                            assert cliente != null;
+                            cliente.setCodigoPostal(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.NIF)) {
+                            assert cliente != null;
+                            cliente.setNif(Integer.parseInt(text));
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.TIPO)) {
+                            assert cliente != null;
+                            cliente.setTipo(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.CONTACTO)) {
+                            assert cliente != null;
+                            cliente.setContacto(Integer.parseInt(text));
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                parser.next();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
 
     public List<LatLng> loadGpxData(XmlPullParser parser, String processo)
     {

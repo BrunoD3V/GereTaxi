@@ -54,8 +54,8 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
         gereBD = new GereBD();
         List<Cliente> clientes;
-        SharedPreference sharedPreference = new SharedPreference();
-        clientes = gereBD.listarClientes(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+
+        clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
         for (Cliente c: clientes) {
             clientesSpinner.add(c.getNome());
         }
@@ -142,7 +142,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
             SharedPreference preference = new SharedPreference();
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
+
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
+
 
             if (mCapturedLocations.size() < 1) {
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -179,11 +181,13 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            handler.writeTrajecto(mCapturedLocations, processo);
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "xxx");
-            servico.setOrigem(mCapturedLocations.get(0).toString());
-            servico.setDestino(mCapturedLocations.get(mCapturedLocations.size()-1).toString());
-            handler.writeServico(servico);
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), processo);
+            if(mCapturedLocations.size() > 1) {
+                handler.writeTrajecto(mCapturedLocations, processo);
+                servico.setOrigem(mCapturedLocations.get(0).toString());
+                servico.setDestino(mCapturedLocations.get(mCapturedLocations.size() - 1).toString());
+                handler.writeServico(servico);
+            }
         }
     }
 }

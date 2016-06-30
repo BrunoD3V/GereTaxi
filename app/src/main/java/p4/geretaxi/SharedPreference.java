@@ -16,6 +16,15 @@ public class SharedPreference {
         super();
     }
 
+    public static int getIdMotoristaSharedPreferences(Context context) {
+        SharedPreferences settings;
+        int value;
+
+        //settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        value = settings.getInt(Constants.ID_MOTORISTA, 0);
+        return value;
+    }
     public void save(Context context, String text, String key) {
         SharedPreferences settings;
         Editor editor;

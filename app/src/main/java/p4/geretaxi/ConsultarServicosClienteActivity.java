@@ -46,10 +46,10 @@ public class ConsultarServicosClienteActivity extends AppCompatActivity {
         String nomeCliente = edtProcurarPorCliente.getText().toString();
         if(Helper.isNetworkAvailable(getApplicationContext())){
             gereBD = new GereBD();
-            clienteGlobal = gereBD.pesquisarCliente(nomeCliente,Integer.parseInt(Constants.ID_MOTORISTA));
+            clienteGlobal = gereBD.pesquisarCliente(nomeCliente,SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             if(clienteGlobal!=null){
-                SharedPreference sharedPreference = new SharedPreference();
-                listaServicos = gereBD.pesquisarServicosPorCliente(nomeCliente,sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
+
+                listaServicos = gereBD.pesquisarServicosPorCliente(nomeCliente,SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
                 adapter = new ArrayAdapter<>(this, R.layout.item_list, listaServicos);
                 listView.setAdapter(adapter);
             }

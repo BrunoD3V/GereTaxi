@@ -71,5 +71,7 @@
     <string name="actualizar_dados_do_cliente">Actualizar dados do Cliente</string>
     <string name="pesquisar">Pesquisar</string>
     <string name="pesquise_pelo_nome_do_cliente">Pesquise pelo Nome do Cliente</string>
+    <string name="eliminar">Eliminar</string>
+
 
 </resources>
