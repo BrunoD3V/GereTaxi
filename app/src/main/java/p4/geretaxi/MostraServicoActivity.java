@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -113,6 +116,10 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         startActivity(intent);
     }
 
+    public void onClickVerTrajeto(View v) {
+        System.out.println(servico.getTrajeto());
+    }
+
     @Override
     public void onDialogMessage(String dados, int num) {
 
@@ -190,5 +197,40 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                     System.out.println("Apaga a captura" + deleted);
                 }
             };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.logout_id:
+                SharedPreference sharedPreference = new SharedPreference();
+                sharedPreference.save(getApplicationContext(), " ", Constants.EMAIL);
+                sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
+                sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
+                sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
+
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+
+                break;
+
+            case R.id.inicio_id:
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

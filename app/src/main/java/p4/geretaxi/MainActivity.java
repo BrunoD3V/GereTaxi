@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Xml;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Helper helper = new Helper();
-        SharedPreference sharedPreference = new SharedPreference();
+
         switch (helper.checkAppStart()) {
             case NORMAL:
 
@@ -51,36 +54,59 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case FIRST_TIME_VERSION:
-                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
-                break;
-            case FIRST_TIME:
+
                 Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, StorePreferencesActivity.class);
                 startActivity(i);
+                break;
+            case FIRST_TIME:
+
+                Intent intent = new Intent(this, StorePreferencesActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
         }
     }
 
-    public void onClickMostraCenas(View v){
-        Helper helper = new Helper();
-        switch (helper.checkAppStart()) {
-            case NORMAL:
-                Toast.makeText(getApplicationContext(), " NORMAL", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(this, StorePreferencesActivity.class);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.logout_id:
+                SharedPreference sharedPreference = new SharedPreference();
+                sharedPreference.save(getApplicationContext(), " ", Constants.EMAIL);
+                sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
+                sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
+                sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
+
+                Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
-            case FIRST_TIME_VERSION:
-                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ ESTA VERSÂO", Toast.LENGTH_SHORT).show();
+
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
+
                 break;
-            case FIRST_TIME:
-                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
+
+            case R.id.inicio_id:
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
         }
+        return super.onOptionsItemSelected(item);
     }
+
+
 
     public void onClickMain(View v) {
 
