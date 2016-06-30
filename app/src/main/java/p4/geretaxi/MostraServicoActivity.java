@@ -19,13 +19,12 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 
-public class MostraServicoActivity extends AppCompatActivity implements DialogCorrigeDadosS.CommunicatorCorrige{
+public class MostraServicoActivity extends AppCompatActivity implements DialogCorrigeDadosS.CommunicatorCorrige, DialogSpinner.CommunicatorCorrige{
 
     TextView textViewMostraServico;
     ListView listViewMostraServico;
     private Servico servico;
     Helper helper = new Helper();
-
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
 
@@ -46,8 +45,14 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        DialogFragment newFragment = DialogCorrigeDadosS.newInstance(position);
-                        newFragment.show(fragmentTransaction, "dialog");
+                        if(position==1){
+                            DialogFragment newFragment2 = DialogSpinner.newInstance(1);
+                            newFragment2.show(fragmentTransaction, "dialogo");
+                        }else{
+                            DialogFragment newFragment = DialogCorrigeDadosS.newInstance(position);
+                            newFragment.show(fragmentTransaction, "dialog");
+                        }
+
                     }
                 }
         );

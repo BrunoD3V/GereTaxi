@@ -709,7 +709,6 @@ public class GereBD {
                 }
             }
         }).start();
-
         try{
             Thread.sleep(1000);
         } catch (InterruptedException e) {
