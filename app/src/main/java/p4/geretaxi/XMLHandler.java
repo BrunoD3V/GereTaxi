@@ -725,6 +725,7 @@ public class XMLHandler {
 
     public double parseDistance(String data) throws IOException, XPathExpressionException {
         Double distance = 0.0;
+
         XPathFactory factory = XPathFactory.newInstance();
         XPath xPath = factory.newXPath();
         InputStream inputStream = IOUtils.toInputStream(data, "UTF-8");
@@ -732,6 +733,29 @@ public class XMLHandler {
         NodeList nodes = (NodeList) xPath.evaluate("/DirectionsResponse/route/leg/distance/value", inputXML, XPathConstants.NODESET);
         distance=Double.parseDouble(nodes.item(0).getTextContent());
         return distance;
+    }
+
+    public boolean parseStatus(String data) {
+        boolean result = false;
+        XPathFactory factory = XPathFactory.newInstance();
+        XPath xPath = factory.newXPath();
+        InputStream inputStream = null;
+        try {
+            inputStream = IOUtils.toInputStream(data, "UTF-8");
+            InputSource inputXML = new InputSource(inputStream);
+            NodeList nodes = (NodeList) xPath.evaluate("/DirectionsResponse/status", inputXML, XPathConstants.NODESET);
+            String status=nodes.item(0).getTextContent();
+            if(status.equalsIgnoreCase("OK")) {
+                result = true;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public boolean getPortagem(XmlPullParser parser, String data) throws IOException, XmlPullParserException {

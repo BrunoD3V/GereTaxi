@@ -114,8 +114,8 @@ public class CoordenadasActivity extends FragmentActivity{
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude,latLng.longitude)).title("MyLocation"));
         mMap.setMyLocationEnabled(true);
-        edtLongitude.setText(String.valueOf(latLng.latitude));
-        edtLatitude.setText(String.valueOf(latLng.longitude));
+        edtLongitude.setText(String.valueOf(latLng.longitude));
+        edtLatitude.setText(String.valueOf(latLng.latitude));
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
     }
     public void getLocationForMap(final Activity activity) {
