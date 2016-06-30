@@ -9,6 +9,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class GereBD {
@@ -377,36 +378,41 @@ public class GereBD {
 
                 envelope.setOutputSoapObject(request);
 
-                envelope.implicitTypes = true;
 
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
                     http.call(NAMESPACE+METHOD_NAME, envelope);
-
-                    Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+                    SoapObject response = (SoapObject) envelope.bodyIn;
 
                     if(response!=null) {
-                        for (SoapObject soapObject : response) {
+                        int i;
+                        int responseCount = response.getPropertyCount();
+                        System.out.println("RESPONSE COUNT" + responseCount);
+                        for (i = 0; i < responseCount; i++) {
+                            Object property = response.getProperty(i);
+                            if (property instanceof SoapObject) {
+                                SoapObject soapObject = (SoapObject) property;
 
-                            Servico servico = new Servico();
+                                Servico servico = new Servico();
 
-                            servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                            servico.setProcesso(soapObject.getProperty("processo").toString());
-                            servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
-                            servico.setData(soapObject.getProperty("data").toString());
-                            servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
-                            servico.setOrigem(soapObject.getProperty("origem").toString());
-                            servico.setDestino(soapObject.getProperty("destino").toString());
-                            servico.setProcesso(soapObject.getProperty("processo").toString());
-                            servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
-                            servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                            servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
-                            servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
-                            servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
-                            servico.setTipo(soapObject.getProperty("tipo").toString());
+                                servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                                servico.setProcesso(soapObject.getProperty("processo").toString());
+                                servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
+                                servico.setData(soapObject.getProperty("data").toString());
+                                servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
+                                servico.setOrigem(soapObject.getProperty("origem").toString());
+                                servico.setDestino(soapObject.getProperty("destino").toString());
+                                servico.setProcesso(soapObject.getProperty("processo").toString());
+                                servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                                servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
+                                servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
+                                servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
+                                servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
+                                servico.setTipo(soapObject.getProperty("tipo").toString());
 
-                            lista.add(servico);
+                                lista.add(servico);
+                            }
                         }
                     }
                 } catch (IOException e) {
@@ -421,7 +427,7 @@ public class GereBD {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        System.out.println(lista.toString());
         return lista;
     }
 
@@ -712,88 +718,74 @@ public class GereBD {
         return result;
     }
 
-    public ArrayList<Cliente> listarClientes(final int idMotorista){
+        public ArrayList<Cliente> listarClientes(final int idMotorista){
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                setMethodName("listarClientes");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setMethodName("listarClientes");
 
-                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+                        SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
 
-                PropertyInfo motorista = new PropertyInfo();
-                motorista.type = PropertyInfo.INTEGER_CLASS;
-                motorista.setName("idMotorista");
-                motorista.setValue(idMotorista);
+                        PropertyInfo motorista = new PropertyInfo();
+                        motorista.type = PropertyInfo.INTEGER_CLASS;
+                        motorista.setName("idMotorista");
+                        motorista.setValue(idMotorista);
 
-                request.addProperty(motorista);
+                        request.addProperty(motorista);
 
-                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-                envelope.setOutputSoapObject(request);
+                        envelope.setOutputSoapObject(request);
 
-                envelope.implicitTypes = true;
+                        envelope.implicitTypes = true;
 
-                HttpTransportSE http = new HttpTransportSE(URL);
+                        HttpTransportSE http = new HttpTransportSE(URL);
 
-                System.out.println("MethodName: " + METHOD_NAME);
-                try {
-                    http.call(NAMESPACE+METHOD_NAME, envelope);
-                    try {
-                        Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
+                        System.out.println("MethodName: " + METHOD_NAME);
+                        try {
+                            http.call(NAMESPACE + METHOD_NAME, envelope);
+                                SoapObject response = (SoapObject) envelope.bodyIn;
+                                if (response != null) {
+                                    int i;
+                                    int responseCount = response.getPropertyCount();
+                                    System.out.println("RESPONSE COUNT" + responseCount);
+                                    for (i = 0; i < responseCount; i++) {
+                                        Object property = response.getProperty(i);
+                                        if (property instanceof SoapObject) {
+                                            SoapObject soapObject = (SoapObject) property;
+                                            Cliente cliente = new Cliente();
 
-                        if (response != null) {
-                            for (SoapObject soapObject : response) {
-                                Cliente cliente = new Cliente();
+                                            cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                                            cliente.setNome(soapObject.getProperty("nome").toString());
+                                            cliente.setMorada(soapObject.getProperty("morada").toString());
+                                            cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
+                                            cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
+                                            cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
+                                            cliente.setEmail(soapObject.getProperty("email").toString());
+                                            cliente.setTipo(soapObject.getProperty("tipo").toString());
 
-                                cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                                cliente.setNome(soapObject.getProperty("nome").toString());
-                                cliente.setMorada(soapObject.getProperty("morada").toString());
-                                cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
-                                cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
-                                cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
-                                cliente.setEmail(soapObject.getProperty("email").toString());
-                                cliente.setTipo(soapObject.getProperty("tipo").toString());
-
-                                listaClientes.add(cliente);
+                                            listaClientes.add(cliente);
+                                        }
+                                    }
+                                }
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (XmlPullParserException e1) {
+                                e1.printStackTrace();
                             }
-                        }
-                    }catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                            SoapObject soapObject = (SoapObject) envelope.getResponse();
-                        if (soapObject != null) {
-                            Cliente cliente = new Cliente();
 
-                            cliente.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                            cliente.setNome(soapObject.getProperty("nome").toString());
-                            cliente.setMorada(soapObject.getProperty("morada").toString());
-                            cliente.setCodigoPostal(soapObject.getProperty("codigoPostal").toString());
-                            cliente.setNif(Integer.parseInt(soapObject.getProperty("nif").toString()));
-                            cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
-                            cliente.setEmail(soapObject.getProperty("email").toString());
-                            cliente.setTipo(soapObject.getProperty("tipo").toString());
-
-                            listaClientes.add(cliente);
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    }).start();
+                    try{
+                        Thread.sleep(1000);
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (XmlPullParserException e) {
+                    catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                return listaClientes;
+
             }
-        }).start();
-        try{
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return listaClientes;
-    }
 
     public Cliente pesquisarCliente(final String nomeC, final int idMotorista){
 

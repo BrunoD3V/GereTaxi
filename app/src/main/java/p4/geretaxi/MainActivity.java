@@ -100,18 +100,19 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+//TODO: FAZER O MESMO PARA OS SERVIÇOS
     private void sincronizaClientes() {
         XMLHandler parser = new XMLHandler();
         GereBD bd = new GereBD();
         boolean res = false;
-        List<Cliente> clientes = new ArrayList<>();
+        List<Cliente> clientes;
         SharedPreference shared = new SharedPreference();
         clientes = parser.parseNovosClientes(Xml.newPullParser());
 
         //envia os clientes gravados localmente para a BD
-        if(clientes != null) {
+        if(clientes.size() < 1) {
             for (Cliente c : clientes) {
-
                 c.setIdMotorista(shared.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA));
                 res = bd.inserirCliente(c);
                 if (res) {
@@ -126,15 +127,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
         // grava localmente clientes que estejam na BD mas não estejam no aparelho
-        if (clientes != null)
+        if (clientes.size() < 1)
             clientes.clear();
         clientes = bd.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-        if(clientes != null) {
-            List<Cliente> clientesLocais = new ArrayList<>();
+        if(clientes.size() < 1) {
+            List<Cliente> clientesLocais;
             clientesLocais = parser.parseClientes(Xml.newPullParser());
-            if (clientesLocais != null) {
+            if (clientesLocais.size() < 1) {
                 for (Cliente c : clientes) {
                     for (Cliente l: clientesLocais) {
                         if(!c.getEmail().equalsIgnoreCase(l.getEmail())){
