@@ -153,9 +153,10 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         //TODO: METODO ATUALIZAR SERVICO
         listItems.clear();
         listViewMostraServico.setAdapter(null);
-        //porque só mostra às vezes?
-        adapter.notifyDataSetChanged();
         populateListView();
+        listViewMostraServico.setAdapter(adapter);
+
+
     }
     AsyncTask<Void, Void, Boolean> enviaMail =
             new AsyncTask<Void, Void, Boolean>() {

@@ -774,6 +774,8 @@ public class GereBD {
                             cliente.setContacto(Integer.parseInt(soapObject.getProperty("contacto").toString()));
                             cliente.setEmail(soapObject.getProperty("email").toString());
                             cliente.setTipo(soapObject.getProperty("tipo").toString());
+
+                            listaClientes.add(cliente);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

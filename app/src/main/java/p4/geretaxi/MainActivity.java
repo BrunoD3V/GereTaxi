@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean res = Helper.attemptLogin();
 
                 if (res) {
-                    Intent intent = new Intent(this, CoordenadasActivity.class);
+                    Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);
                     sincronizar.execute();
 
