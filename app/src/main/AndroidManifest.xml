@@ -65,7 +65,6 @@
         <activity android:name=".TesteActivity" />
         <activity android:name=".GerirServicosActivity" />
         <activity android:name=".ConsultarServicosActivity" />
-        <activity android:name=".AlterarServicoActivity" />
         <activity android:name=".EliminarServicoActivity"></activity>
     </application>
 

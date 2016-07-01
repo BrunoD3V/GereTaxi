@@ -63,18 +63,24 @@ public class CoordenadasActivity extends FragmentActivity{
         List<Address> addressList = null;
         System.out.println(location);
 
+        //VERIFICA SE O USER ESCREVER ALGUM ENDEREÇO A PESQUISAR
         if(!helper.isEmpty(location_tf)) {
 
             Geocoder geocoder = new Geocoder(this);
             try {
+                //INICIALIZA A LOCALIZAÇÃO
                 addressList = geocoder.getFromLocationName(location, 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             if(addressList!=null){
-                Address address = addressList.get(0);//TODO verificar se está preenchida primeiro
+                //ESCREVE O ENDEREÇO
+                Address address = addressList.get(0);
+                //CONVERSAO PARA LATLNG
                 latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                //MARCA NO MAPA
                 setUpMap(latLng);
+                //FAZ FOCO NO PONTO MARCADO
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
             }
 
@@ -83,6 +89,7 @@ public class CoordenadasActivity extends FragmentActivity{
         }
     }
 
+    //MUDA O TIPO DE MAPA ENTRE MAPA NORMAL E MAPA SATÉLITE
     public void changeType(View view)
     {
         if(mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL)
@@ -95,15 +102,16 @@ public class CoordenadasActivity extends FragmentActivity{
             btnSateliteMap.setText("Satélite");
         }
     }
+
     private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
+
             if (mMap == null) {
-                    // Try to obtain the map from the SupportMapFragment.
                 mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                             .getMap();
             }
             getLocationForMap(this);
     }
+    //MARCA POSIÇOES NO MAPA
     private void setUpMap(Location newLocation){
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(new LatLng(newLocation.getLatitude(),newLocation.getLongitude())).title("MyLocation"));
@@ -121,6 +129,8 @@ public class CoordenadasActivity extends FragmentActivity{
         edtLatitude.setText(String.valueOf(latLng.latitude));
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
     }
+
+
     public void getLocationForMap(final Activity activity) {
         lManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         if(lManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
@@ -164,7 +174,8 @@ public class CoordenadasActivity extends FragmentActivity{
     public void onClickGuardarLocation(View v){
         handler.listenerClose();
         SharedPreference sharedPreference = new SharedPreference();
-        if(helper.isEmpty(edtLatitude) && helper.isEmpty(edtLongitude)){
+        if(Helper.isEmpty(edtLatitude) && Helper.isEmpty(edtLongitude)){
+            //GUARDA AS COORDENADAS NAS PREFERENCIAS
             sharedPreference.save(getApplicationContext(),String.valueOf(latLng.latitude), Constants.LAT);
             sharedPreference.save(getApplicationContext(), String.valueOf(latLng.longitude), Constants.LON);
         }else{

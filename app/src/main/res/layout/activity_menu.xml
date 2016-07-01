@@ -48,4 +48,13 @@
         android:onClick="onClickGerirServicos"
         android:background="@color/colorPrimaryDark"
         android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Menu Principal"
+        android:id="@+id/txtMenuPrincipal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

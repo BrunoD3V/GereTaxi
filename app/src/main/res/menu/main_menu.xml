@@ -2,27 +2,21 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <item
-        android:id="@+id/logout_id"
-        android:title="@string/logout"
+        android:id="@+id/inicio_id"
+        android:title="@string/iniciar"
         android:showAsAction="ifRoom"
         tools:ignore="AppCompatResource" />
-
     <item
         android:id="@+id/settings_id"
         android:title="@string/definicoes"
         android:showAsAction="ifRoom"
         tools:ignore="AppCompatResource" />
 
+
     <item
-        android:id="@+id/inicio_id"
-        android:title="@string/iniciar"
+        android:id="@+id/logout_id"
+        android:title="@string/logout"
         android:showAsAction="ifRoom"
         tools:ignore="AppCompatResource" />
-
-
-
-
-
 </menu>

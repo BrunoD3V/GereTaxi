@@ -30,29 +30,18 @@ public class ConsultarServicosClienteActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
     }
     public void onClickPesquisar(View v){
-        /*TODO: PESQUISAR SERVIÇOS POR CLIENTES
-        1-Ler da edit text
-        2-Verificar se existe internet
-        se há net
-        3-Pesquisar se Existe o cliente na base de dados
-        3.1-Se não existe
-             Toast
-        3.2-se existe Query dos serviços e disponibilizar na lista
-        se não há net
-        4-Pesquisar se Existe o cliente localmente
-        4.1-se nao existe
-             toast
-        4.2-se existe parse sericos do cliente e mostrar serviços na lista*/
+        //VERIFICA SE O USER ESCREVEU ALGUMA COISA PARA PESQUISAR
         if(Helper.isEmpty(edtProcurarPorCliente)){
             Toast.makeText(getApplicationContext(),"Insira o Nome do cliente.", Toast.LENGTH_LONG).show();
             return;
         }
         String nomeCliente = edtProcurarPorCliente.getText().toString();
+        //SE TEM INTERNET VAI PESQUISAR SE O CLIENTE EXISTE
         if(Helper.isNetworkAvailable(getApplicationContext())){
             gereBD = new GereBD();
             clienteGlobal = gereBD.pesquisarCliente(nomeCliente,SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             if(clienteGlobal!=null){
-
+                //SE O CLIENTE EXISTE PESQUISA TODOS OS SERVICOS DO CLIENTE ESPECIFICADO
                 listaServicos = gereBD.pesquisarServicosPorCliente(nomeCliente,SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
                 adapter = new ArrayAdapter<>(this, R.layout.item_list, listaServicos);
                 listView.setAdapter(adapter);

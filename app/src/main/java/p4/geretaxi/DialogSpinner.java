@@ -76,9 +76,7 @@ public class DialogSpinner extends DialogFragment implements View.OnClickListene
             }
         }
         spinner = (Spinner) view.findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(MyApplication.getAppContext(),android.R.layout.simple_spinner_item, clientesSpinner);
-        System.out.println("Spinner"+clientes.toString());
-        System.out.println("SpinnerContent" + clientesSpinner.toString());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MyApplication.getAppContext(),android.R.layout.simple_spinner_item, clientesSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -95,7 +93,17 @@ public class DialogSpinner extends DialogFragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.btn_yes:
+                communicatorCorrige.onDialogMessage(nomeCliente, mNum);
+                this.dismiss();
+                break;
+            case R.id.btn_no:
+                this.dismiss();
+                break;
+            default:
+                break;
+        }
 
     }
 

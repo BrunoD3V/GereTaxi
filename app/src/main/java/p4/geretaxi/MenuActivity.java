@@ -8,11 +8,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
     Button btnGerirClientes;
-
+    GereBD gereBD;
+    List<Cliente> listaClientes;
+    boolean permission = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,14 @@ public class MenuActivity extends AppCompatActivity {
         } else if (Helper.isNetworkAvailable(MyApplication.getAppContext())){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }
+
+        gereBD = new GereBD();
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            listaClientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+            if(listaClientes.size()>0){
+                permission = true;
+            }
         }
     }
 
@@ -52,7 +65,9 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 
@@ -64,8 +79,12 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void onClickIniciarServico(View v) {
-        EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();
-        dialogFragment.show(this.getFragmentManager(), "EscolheServico");
+        if(permission){
+            EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();
+            dialogFragment.show(this.getFragmentManager(), "EscolheServico");
+        }else{
+            Toast.makeText(getApplicationContext(),"Ainda não possui clientes, deverá inserir na opção Gestão de Clientes.", Toast.LENGTH_LONG).show();
+        }
     }
     public void onClickGerirClientes(View v){
         Intent i = new Intent(this,GerirClientesActivity.class);

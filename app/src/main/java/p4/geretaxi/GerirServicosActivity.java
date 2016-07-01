@@ -21,10 +21,6 @@ public class GerirServicosActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void onClickAlterarServic(View v){
-        Intent i = new Intent(this, AlterarServicoActivity.class);
-        startActivity(i);
-    }
     public void onClickEliminarServico(View v){
         Intent i = new Intent(this, EliminarServicoActivity.class);
         startActivity(i);

@@ -63,7 +63,6 @@ public class StorePreferencesActivity extends AppCompatActivity {
             switch (bd.checkLogin(email, encrypted.trim())) {
                 case -2:
                     Toast.makeText(getApplicationContext(), "Erro no registo tente mais tarde", Toast.LENGTH_LONG).show();
-
                     return;
                 case -1:
                     int res = bd.registarMotorista(email, encrypted);

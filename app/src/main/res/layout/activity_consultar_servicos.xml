@@ -23,5 +23,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/listViewServicos"
         android:layout_below="@+id/txtServicos"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btnMenuPrincipal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar ao Menu Principal"
+        android:id="@+id/btnMenuPrincipal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/listViewServicos"
+        android:layout_alignEnd="@+id/listViewServicos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onClickMenuPrincipal"
+        android:textColor="#ffffff" />
 </RelativeLayout>

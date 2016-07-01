@@ -33,10 +33,12 @@ public class IniciaServicoActivity extends AppCompatActivity {
     private boolean portagens;
     private String nomeCliente;
     GereBD gereBD;
-    ArrayList<String> clientesSpinner = new ArrayList<>();
+    ArrayList<String> clientesSpinnerParticular = new ArrayList<>();
+    ArrayList<String> clientesSpinnerCompanhia = new ArrayList<>();
     XMLHandler handler;
     GPSHandler gpsHandler = new GPSHandler(this);
     private Servico servico = new Servico();
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +60,27 @@ public class IniciaServicoActivity extends AppCompatActivity {
         if(Helper.isNetworkAvailable(getApplicationContext())){
             clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             for (Cliente c: clientes) {
-                clientesSpinner.add(c.getNome());
+                //SE FOR UM CLIENTE PARTICULAR INSERE NA LISTA DE CLIENTES PARTICULARES
+                if(c.getTipo().trim().equals(Constants.PARTICULAR)){
+                    clientesSpinnerParticular.add(c.getNome());
+                }else{//SE FOR UMA COMPANHIA INSERE NA LISTA DE COMPANHIAS
+                    clientesSpinnerCompanhia.add(c.getNome());
+                }
             }
         }else{
             clientes = handler.parseClientes(Xml.newPullParser());
             for (Cliente c: clientes) {
-                clientesSpinner.add(c.getNome());
+                clientesSpinnerParticular.add(c.getNome());
             }
         }
         spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,clientesSpinner);
+        if(servico.getTipo().trim().equals(Constants.PARTICULAR)){
+            //PREENCHE O SPINNER APENAS COM CLIENTES PARTICULARES
+            adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, clientesSpinnerParticular);
+        }else {//PREENCHE O SPINNER APENAS COM COMPANHIAS
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, clientesSpinnerCompanhia);
+        }
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -134,7 +147,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "x2");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "comPortagem");
 
 
             if (mCapturedLocations.size() < 1) {
@@ -160,7 +173,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
                 lats.add(i, mCapturedLocations.get(i).lat);
                 lngs.add(i, mCapturedLocations.get(i).lng);
             }
-
             Intent intent = new Intent(this, MapsActivity2.class);
             intent.putExtra("lat", lats);
             intent.putExtra("lng", lngs);
@@ -205,7 +217,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

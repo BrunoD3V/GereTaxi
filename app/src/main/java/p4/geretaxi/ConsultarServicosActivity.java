@@ -27,14 +27,14 @@ public class ConsultarServicosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_consultar_servicos);
 
         listViewServicos = (ListView) findViewById(R.id.listViewServicos);
-
+        //SE POSSUI INTERNET VAI TENTAR PREENCHER A LIST VIEW COM DADOS DA BASE DE DADOS
         if (Helper.isNetworkAvailable(getApplicationContext())) {
             GereBD bd = new GereBD();
 
             servicos = bd.listarServico(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             adapter = new ArrayAdapter<>(this, R.layout.item_list, servicos);
             listViewServicos.setAdapter(adapter);
-        }else {
+        }else {//SE NAO TEM INTERNET VAI PREENCHER COM OS CLIENTES QUE ESTÃO ARMAZENADOS LOCALMENTE NO TELEFONE
             Toast.makeText(getApplicationContext(), "MODO OFFLINE: Serão apenas listados os Serviços guardados localmente.", Toast.LENGTH_LONG).show();
             XMLHandler parser = new  XMLHandler();
             servicos = parser.parseServico(Xml.newPullParser());
@@ -50,6 +50,11 @@ public class ConsultarServicosActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void onClickMenuPrincipal(View v){
+        Intent i = new Intent(this, MenuActivity.class);
+        startActivity(i);
     }
 
     @Override

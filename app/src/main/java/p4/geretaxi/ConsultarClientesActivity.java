@@ -28,13 +28,14 @@ public class ConsultarClientesActivity extends AppCompatActivity {
 
         listViewListaClientes = (ListView) findViewById(R.id.listView);
 
+        //SE POSSUI INTERNET VAI TENTAR PREENCHER A LIST VIEW COM DADOS DA BASE DE DADOS
         if (Helper.isNetworkAvailable(getApplicationContext())) {
             GereBD bd = new GereBD();
 
             clientes = bd.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             adapter = new ArrayAdapter<>(this, R.layout.item_list, clientes);
             listViewListaClientes.setAdapter(adapter);
-        }else {
+        }else {//SE NAO TEM INTERNET VAI PREENCHER COM OS CLIENTES QUE ESTÃO ARMAZENADOS LOCALMENTE NO TELEFONE
             Toast.makeText(getApplicationContext(), "MODO OFFLINE: Serão apenas listados os Clientes guardados localmente.", Toast.LENGTH_LONG).show();
             XMLHandler parser = new  XMLHandler();
             clientes = parser.parseClientes(Xml.newPullParser());
@@ -51,6 +52,11 @@ public class ConsultarClientesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onClickMenuPrincipal(View v){
+        Intent i = new Intent(this, MenuActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -77,13 +83,17 @@ public class ConsultarClientesActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 
             case R.id.inicio_id:
                 Intent intent = new Intent(this, MenuActivity.class);
                 startActivity(intent);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

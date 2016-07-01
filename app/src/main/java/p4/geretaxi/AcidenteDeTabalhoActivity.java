@@ -52,7 +52,6 @@ public class AcidenteDeTabalhoActivity extends AppCompatActivity {
 
     }
 
-
     private List<LatLng> getDirections(String origin, String destination) {
         try {
             String urlOrigin = URLEncoder.encode(origin, "utf-8");

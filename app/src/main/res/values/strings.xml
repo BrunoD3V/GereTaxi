@@ -53,7 +53,7 @@
     <string name="passwordlogin">Password</string>
     <string name="login">Login</string>
     <string name="ou_registe_aqui">ou Registe-se AQUI</string>
-    <string name="iniciar">Iniciar</string>
+    <string name="iniciar">Menu Principal</string>
     <string name="defini_es_de_conta">Definições de Conta</string>
     <string name="coordenadas_da_pra_a_de_t_xis">Coordenadas da Praça de Táxis</string>
     <string name="infoPracaDeTaxis">Deverá introduzir as coordenadas da Praça de Táxis manualmente ou utilizar a Localização Automática</string>
@@ -73,8 +73,8 @@
     <string name="pesquise_pelo_nome_do_cliente">Pesquise pelo Nome do Cliente</string>
     <string name="eliminar">Eliminar</string>
     <string name="settings">Settings</string>
-    <string name="definicoes">definições</string>
-    <string name="logout">logout</string>
+    <string name="definicoes">Definições</string>
+    <string name="logout">Logout</string>
     <string name="dados_do_servi_o">Dados do Serviço</string>
     <string name="submeter_servi_o">Submeter Serviço</string>
 
