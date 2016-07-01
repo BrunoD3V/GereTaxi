@@ -1,20 +1,15 @@
 package p4.geretaxi;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 if (res) {
                     Intent intent = new Intent(this, MenuActivity.class);
                     startActivity(intent);
-                    sincronizar.execute();
+                    if(Helper.isNetworkAvailable(this)) {
 
+                    }
                 } else{
                     if (Helper.isNetworkAvailable(getApplicationContext())){
                         Intent intent = new Intent(this, LoginActivity.class);
@@ -107,67 +103,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickMain(View v) {
 
-
-
-
         Intent i = new Intent(this, MenuActivity.class);
         startActivity(i);
     }
 
-    AsyncTask<Void, Void, Void> sincronizar = new AsyncTask<Void, Void, Void>() {
-        @Override
-        protected Void doInBackground(Void... voids) {
-           sincronizaClientes();
-
-            return null;
-        }
-    };
 
 
-//TODO: FAZER O MESMO PARA OS SERVIÇOS
-    private void sincronizaClientes() {
-        XMLHandler parser = new XMLHandler();
-        GereBD bd = new GereBD();
-        boolean res = false;
-        List<Cliente> clientes;
-        SharedPreference shared = new SharedPreference();
-        clientes = parser.parseNovosClientes(Xml.newPullParser());
+    public void onClickbuttonLoginMain(View v) {
+        TarefaSincrona sincrona = new TarefaSincrona();
+        sincrona.sincronizar.execute();
 
-        //envia os clientes gravados localmente para a BD
-        if(clientes.size() < 1) {
-            for (Cliente c : clientes) {
-                c.setIdMotorista(shared.getValueInt(MyApplication.getAppContext(),Constants.ID_MOTORISTA));
-                res = bd.inserirCliente(c);
-                if (res) {
-                    clientes.remove(c);
-                }
-            }
-            File file = new File(Environment.getExternalStorageDirectory(), "novocliente.xml");
-            boolean deleted = file.delete();
-            if(deleted) {
-                for (Cliente c : clientes) {
-                    parser.writenovoCliente(c);
-                }
-            }
-        }
-        // grava localmente clientes que estejam na BD mas não estejam no aparelho
-        if (clientes.size() < 1)
-            clientes.clear();
-        clientes = bd.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-        if(clientes.size() < 1) {
-            List<Cliente> clientesLocais;
-            clientesLocais = parser.parseClientes(Xml.newPullParser());
-            if (clientesLocais.size() < 1) {
-                for (Cliente c : clientes) {
-                    for (Cliente l: clientesLocais) {
-                        if(!c.getEmail().equalsIgnoreCase(l.getEmail())){
-
-                            parser.writeClientes(c);
-                        }
-
-                    }
-                }
-            }
-        }
+       // Intent intent = new Intent(this, LoginActivity.class);
+       // startActivity(intent);
     }
+
+
 }

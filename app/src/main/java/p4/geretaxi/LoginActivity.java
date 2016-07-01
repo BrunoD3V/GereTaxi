@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                         sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
                         sharedPreference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
                         sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
+                        TarefaSincrona tarefa = new TarefaSincrona();
+                        tarefa.sincronizar.execute();
                         Intent intent = new Intent(this, MenuActivity.class);
                         startActivity(intent);
                     } else {
@@ -102,7 +104,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

@@ -24,9 +24,9 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/defini_es_de_conta"
-        android:id="@+id/button2"
-        android:onClick="onClickMostraCenas"
+        android:text="@string/login"
+        android:id="@+id/buttonLoginMain"
+        android:onClick="onClickbuttonLoginMain"
         android:background="@color/colorPrimaryDark"
         android:textColor="#ffffff"
         android:layout_below="@+id/button"
