@@ -12,13 +12,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".ClassesHelper.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,32 +40,32 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".IniciaServicoActivity" />
+        <activity android:name=".Activities.MenuActivity" />
+        <activity android:name=".Activities.IniciaServicoActivity" />
         <activity android:name=".AcidenteDeTabalhoActivity" />
         <activity android:name=".ParticularActivity" />
         <activity
-            android:name=".MapsActivity2"
+            android:name=".Activities.MostraServicoMapsActivity"
             android:label="@string/title_activity_maps2" />
         <activity
-            android:name=".MapsActivity3"
+            android:name=".Activities.MostraTrajectoMapsActivity"
             android:label="@string/title_activity_maps3" />
-        <activity android:name=".MostraServicoActivity" />
+        <activity android:name=".Activities.MostraServicoActivity" />
         <activity android:name=".TesteSoap" />
-        <activity android:name=".StorePreferencesActivity" />
-        <activity android:name=".FormularioDeServico" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CoordenadasActivity" />
-        <activity android:name=".GerirClientesActivity" />
-        <activity android:name=".ConsultarClientesActivity" />
-        <activity android:name=".InserirNovoClienteActivity" />
-        <activity android:name=".MostraClienteActivity" />
-        <activity android:name=".ConsultarServicosClienteActivity" />
-        <activity android:name=".EliminaClienteActivity" />
+        <activity android:name=".Activities.StorePreferencesActivity" />
+        <activity android:name=".Activities.FormularioDeServicoActivity" />
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.CoordenadasActivity" />
+        <activity android:name=".Activities.GerirClientesActivity" />
+        <activity android:name=".Activities.ConsultarClientesActivity" />
+        <activity android:name=".Activities.InserirNovoClienteActivity" />
+        <activity android:name=".Activities.MostraClienteActivity" />
+        <activity android:name=".Activities.ConsultarServicosClienteActivity" />
+        <activity android:name=".Activities.EliminaClienteActivity" />
         <activity android:name=".TesteActivity" />
-        <activity android:name=".GerirServicosActivity" />
-        <activity android:name=".ConsultarServicosActivity" />
-        <activity android:name=".EliminarServicoActivity"></activity>
+        <activity android:name=".Activities.GerirServicosActivity" />
+        <activity android:name=".Activities.ConsultarServicosActivity" />
+        <activity android:name=".Activities.EliminarServicoActivity"></activity>
     </application>
 
 </manifest>
