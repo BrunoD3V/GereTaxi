@@ -51,7 +51,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
         editTextPassageiros = (EditText) findViewById(R.id.editTextPassageiros);
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
-        System.out.println(servico.getTipo());
+
 
         handler = new XMLHandler();
         gereBD = new GereBD();
@@ -147,7 +147,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
 
             if (mCapturedLocations.size() < 1) {
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -180,13 +180,14 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "Cabanelas");//TODO a mudar depois dos testes
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "xxx");//TODO a mudar depois dos testes
             if(mCapturedLocations.size() > 1) {
-                handler.writeTrajecto(mCapturedLocations, processo);
+               servico.setTrajeto(handler.trajectoToString(mCapturedLocations));
                 servico.setOrigem(mCapturedLocations.get(0).toString());
                 servico.setDestino(mCapturedLocations.get(mCapturedLocations.size() - 1).toString());
+                servico.setDistancia(0.0);
                 if (handler.writeServico(servico))
-                    Toast.makeText(getApplicationContext(), "Servido inserido localmente", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Servido inserido localmente", Toast.LENGTH_SHORT).show();
             }
 
             Intent i = new Intent(this, MenuActivity.class);
