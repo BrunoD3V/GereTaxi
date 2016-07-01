@@ -44,13 +44,13 @@ public class TarefaSincronizar {
 
 
         if (file.exists()) {
-            System.out.println("AQUIIIIIIIIIIIIIIIIIIIII");
+
             servicos = parser.parseServico(Xml.newPullParser());
             System.out.println(servicos.get(0).toString());
             System.out.println("TAMANHO: " + servicos.size());
             if(servicos.size() >= 0) {
                 for (Servico s: servicos) {
-                    System.out.println(s.toString());
+
                     s = defineServico(s);
                     if(bd.inserirServico(s))
                         servicos.remove(s);
@@ -79,6 +79,7 @@ public class TarefaSincronizar {
             servico.setOrigem(origem.formattedAddress);
             mCapturedLocations = handler.mergeCapture(mCapturedLocations);
             mCapturedLocations = handler.getRoute(mCapturedLocations, mContext);
+            parser.trajectoToString(mCapturedLocations);
             double distance = handler.getDistance();
             servico.setDistancia(distance);
         } catch (Exception e) {

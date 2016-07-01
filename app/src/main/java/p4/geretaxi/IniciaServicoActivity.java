@@ -191,7 +191,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "xxx");//TODO a mudar depois dos testes
 
             if(mCapturedLocations.size() > 1) {
-               servico.setTrajeto(handler.trajectoToString(mCapturedLocations));
+                servico.setTrajeto(handler.trajectoToString(mCapturedLocations));
                 servico.setOrigem(mCapturedLocations.get(0).toString());
                 servico.setDestino(mCapturedLocations.get(mCapturedLocations.size() - 1).toString());
                 servico.setDistancia(0.0);

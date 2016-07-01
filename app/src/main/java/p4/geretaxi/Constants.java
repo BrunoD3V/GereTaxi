@@ -40,18 +40,20 @@ public class Constants {
     public static final String CONTACTO_XML = "contacto";
     public static final String MAIL_XML = "email";
     public static final String TIPO_XML = "tipo";
-    public static final String NOME_CLIENTE_XML = "nomeCliente";
-    public static final String HORA_DE_INICIO_XML = "horaDeInicio";
+    public static final String TIPO_SERVICO_XML = "tipo-servico";
+    public static final String NOME_CLIENTE_XML = "nome-cliente";
+    public static final String HORA_DE_INICIO_XML = "hora-de-inicio";
     public static final String TRAJETO_SOAP_XML = "trajeto";
-    public static final String NUM_PASSAGEIROS_XML = "numPassageiros";
-    public static final String CUSTO_PORTAGENS_XML = "custoPortanges";
+    public static final String NUM_PASSAGEIROS_XML = "numero-passageiros";
+    public static final String CUSTO_PORTAGENS_XML = "custo-portangens";
     public static final String ORIGEM_XML = "origem";
     public static final String DESTINO_XML = "destino";
     public static final String TRAJETO_XML = "trajeto";
     public static final String DISTANCIA_XML = "distancia";
-    public static final String HORASDEESPERA_XML = "horasDeEspera";
+    public static final String HORASDEESPERA_XML = "horas-de-espera";
     public static final String DATA_XML = "data";
     public static final String PROCESSO_XML = "processo";
+    public static final String SERVICO_XML = "servico";
 
     //MENSAGENS
     public static final String N_PASSAGEIROS_VALIDO = "Insira um número válido de passageiros";

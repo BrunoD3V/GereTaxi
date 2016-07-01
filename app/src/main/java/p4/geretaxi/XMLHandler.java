@@ -137,9 +137,9 @@ public class XMLHandler {
                     xmlSerializer.text(servico.getTrajeto());
                     xmlSerializer.endTag(null, "trajeto");
 
-                    xmlSerializer.startTag(null, "tipoServico");
+                    xmlSerializer.startTag(null, "tipo-servico");
                     xmlSerializer.text(servico.getTipo());
-                    xmlSerializer.endTag(null, "tipoServico");
+                    xmlSerializer.endTag(null, "tipo-servico");
 
                 xmlSerializer.endTag(null, "servico");
                 xmlSerializer.endDocument();
@@ -603,7 +603,7 @@ public class XMLHandler {
         File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
         String text = null;
         Servico servico = null;
-        int i=1;
+
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             parser.setInput(new InputStreamReader(fileInputStream));
@@ -611,7 +611,7 @@ public class XMLHandler {
             while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
                 switch (parser.getEventType()) {
                     case XmlPullParser.START_TAG:
-                        if(parser.getName().equalsIgnoreCase(Constants.INTENT_SERVICO)){
+                        if(parser.getName().equalsIgnoreCase(Constants.SERVICO_XML)){
                             servico = new Servico();
                         }
                         break;
@@ -619,7 +619,7 @@ public class XMLHandler {
                         text = parser.getText();
                         break;
                     case  XmlPullParser.END_TAG:
-                        if (parser.getName().equalsIgnoreCase(Constants.CLIENTE_XML)){
+                        if (parser.getName().equalsIgnoreCase(Constants.SERVICO_XML)){
                             servicos.add(servico);
                         }
                         if (parser.getName().equalsIgnoreCase(Constants.ID_XML)){
@@ -634,7 +634,7 @@ public class XMLHandler {
                             assert servico != null;
                             servico.setNomeCliente(text);
                         }
-                        if (parser.getName().equalsIgnoreCase(Constants.TIPO_XML)) {
+                        if (parser.getName().equalsIgnoreCase(Constants.TIPO_SERVICO_XML)) {
                             assert servico != null;
                             servico.setTipo(text);
                         }
@@ -656,13 +656,11 @@ public class XMLHandler {
                         }
                         if (parser.getName().equalsIgnoreCase(Constants.TRAJETO_XML)) {
                             assert servico != null;
+
                             servico.setTrajeto(text);
                         }
                         if (parser.getName().equalsIgnoreCase(Constants.DISTANCIA_XML)) {
                             assert servico != null;
-
-                            System.out.println("DDDD "+text + "vezes " + i);
-                            i++;
                             servico.setDistancia(Double.parseDouble(text));
                         }
                         if (parser.getName().equalsIgnoreCase(Constants.HORASDEESPERA_XML)) {

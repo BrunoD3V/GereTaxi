@@ -38,6 +38,12 @@ public class ConsultarServicosActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "MODO OFFLINE: Serão apenas listados os Serviços guardados localmente.", Toast.LENGTH_LONG).show();
             XMLHandler parser = new  XMLHandler();
             servicos = parser.parseServico(Xml.newPullParser());
+            int i = 1;
+            for(Servico s: servicos) {
+                System.out.println(i);
+                System.out.println(s.getTrajeto());
+                i++;
+            }
             adapter = new ArrayAdapter<>(this, R.layout.item_list, servicos);
             listViewServicos.setAdapter(adapter);
         }

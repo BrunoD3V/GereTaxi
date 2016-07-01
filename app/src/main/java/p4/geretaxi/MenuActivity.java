@@ -37,12 +37,13 @@ public class MenuActivity extends AppCompatActivity {
         gereBD = new GereBD();
         if(Helper.isNetworkAvailable(getApplicationContext())){
             listaClientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-            if(listaClientes.size()>0) {
+            if(listaClientes.size()>=0) {
                 permission = true;
             }
         }else{
             handler = new XMLHandler();
             listaClientes = handler.parseClientes(Xml.newPullParser());
+            System.out.println("CLIENTES: " + listaClientes.size());
             if(listaClientes.size()>0)
                 permission = true;
         }
