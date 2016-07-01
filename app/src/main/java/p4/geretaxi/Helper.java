@@ -192,13 +192,28 @@ public class Helper {
         String pass = sharedPreference.getValueString(MyApplication.getAppContext(), Constants.PASS);
         if(Helper.isNetworkAvailable(MyApplication.getAppContext())){
             int res = bd.checkLogin(email, pass.trim());
-            if (res == 1) {
+            switch (res) {
+                case -2:
+                    if (!isExpired(sharedPreference.getValueString(MyApplication.getAppContext(),Constants.VALIDADE))) {
+                        sharedPreference.save(MyApplication.getAppContext(), Constants.TRUE, Constants.SESSION);
+                        result = true;
+                    }
+                    break;
+                case 1:
+                    sharedPreference.save(MyApplication.getAppContext(), Constants.TRUE, Constants.SESSION);
+                    sharedPreference.save(MyApplication.getAppContext(), getExpirationDate(), Constants.VALIDADE);
+                    result = true;
+                    break;
+                default:
+                    sharedPreference.save(MyApplication.getAppContext(), Constants.FALSE, Constants.SESSION);
+            }
+            /*if (res == 1) {
                 sharedPreference.save(MyApplication.getAppContext(), Constants.TRUE, Constants.SESSION);
                 sharedPreference.save(MyApplication.getAppContext(), getExpirationDate(), Constants.VALIDADE);
                 result = true;
             } else {
                 sharedPreference.save(MyApplication.getAppContext(), Constants.FALSE, Constants.SESSION);
-            }
+            }*/
         }else {
             if (!isExpired(sharedPreference.getValueString(MyApplication.getAppContext(),Constants.VALIDADE))){
                 sharedPreference.save(MyApplication.getAppContext(), Constants.TRUE, Constants.SESSION);
