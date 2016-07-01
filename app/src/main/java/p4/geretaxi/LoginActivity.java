@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                         sharedPreference.save(getApplicationContext(), res, Constants.ID_MOTORISTA);
                         sharedPreference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
                         sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
-                        TarefaSincrona tarefa = new TarefaSincrona();
+                        TarefaSincronizar tarefa = new TarefaSincronizar();
                         tarefa.sincronizar.execute();
                         Intent intent = new Intent(this, MenuActivity.class);
                         startActivity(intent);

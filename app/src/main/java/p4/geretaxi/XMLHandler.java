@@ -603,7 +603,7 @@ public class XMLHandler {
         File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
         String text = null;
         Servico servico = null;
-
+        int i=1;
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             parser.setInput(new InputStreamReader(fileInputStream));
@@ -660,6 +660,9 @@ public class XMLHandler {
                         }
                         if (parser.getName().equalsIgnoreCase(Constants.DISTANCIA_XML)) {
                             assert servico != null;
+
+                            System.out.println("DDDD "+text + "vezes " + i);
+                            i++;
                             servico.setDistancia(Double.parseDouble(text));
                         }
                         if (parser.getName().equalsIgnoreCase(Constants.HORASDEESPERA_XML)) {

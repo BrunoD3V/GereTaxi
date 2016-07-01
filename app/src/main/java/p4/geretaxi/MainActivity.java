@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickbuttonLoginMain(View v) {
-        TarefaSincrona sincrona = new TarefaSincrona();
+        TarefaSincronizar sincrona = new TarefaSincronizar();
         sincrona.sincronizar.execute();
 
        // Intent intent = new Intent(this, LoginActivity.class);
