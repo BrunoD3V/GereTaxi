@@ -60,7 +60,6 @@ public class DialogSpinner extends DialogFragment implements View.OnClickListene
         spinner = (Spinner) view.findViewById(R.id.spinner);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
-
         handler = new XMLHandler();
         gereBD = new GereBD();
         List<Cliente> clientes;
@@ -77,7 +76,9 @@ public class DialogSpinner extends DialogFragment implements View.OnClickListene
             }
         }
         spinner = (Spinner) view.findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(MyApplication.getAppContext(),android.R.layout.simple_spinner_item,clientesSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MyApplication.getAppContext(),android.R.layout.simple_spinner_item, clientesSpinner);
+        System.out.println("Spinner"+clientes.toString());
+        System.out.println("SpinnerContent" + clientesSpinner.toString());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -85,7 +86,6 @@ public class DialogSpinner extends DialogFragment implements View.OnClickListene
                 nomeCliente= item.toString();
             }
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         spinner.setAdapter(adapter);

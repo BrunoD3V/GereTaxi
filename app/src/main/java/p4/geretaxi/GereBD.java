@@ -103,8 +103,6 @@ public class GereBD {
                 pass.setName("password");
                 pass.setValue(password);
 
-
-
                 request.addProperty(mail);
 
                 request.addProperty(pass);
