@@ -90,113 +90,112 @@ public class XMLHandler {
             if (file.length() == 0) {
                 xmlSerializer.startDocument("UTF-8", true);
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                xmlSerializer.startTag(null, "servico");
+                xmlSerializer.startTag(null, Constants.SERVICO_XML);
 
-                    xmlSerializer.startTag(null , "processo");
+                    xmlSerializer.startTag(null , Constants.PROCESSO_XML);
                     xmlSerializer.text(servico.getProcesso());
-                    xmlSerializer.endTag(null, "processo");
+                    xmlSerializer.endTag(null, Constants.PROCESSO_XML);
 
-                    xmlSerializer.startTag(null, "nome-cliente");
+                    xmlSerializer.startTag(null, Constants.NOME_CLIENTE_XML);
                     xmlSerializer.text(servico.getNomeCliente());
-                    xmlSerializer.endTag(null, "nome-cliente");
+                    xmlSerializer.endTag(null, Constants.NOME_CLIENTE_XML);
 
 
-                    xmlSerializer.startTag(null, "data");
+                    xmlSerializer.startTag(null, Constants.DATA_XML);
                     xmlSerializer.text(servico.getData());
-                    xmlSerializer.endTag(null, "data");
+                    xmlSerializer.endTag(null, Constants.DATA_XML);
 
-                    xmlSerializer.startTag(null, "hora-de-inicio");
+                    xmlSerializer.startTag(null, Constants.HORA_DE_INICIO_XML);
                     xmlSerializer.text(servico.getHoraDeInicio());
-                    xmlSerializer.endTag(null, "hora-de-inicio");
+                    xmlSerializer.endTag(null, Constants.HORA_DE_INICIO_XML);
 
-                    xmlSerializer.startTag(null, "numero-passageiros");
+                    xmlSerializer.startTag(null, Constants.NUM_PASSAGEIROS_XML);
                     xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
-                    xmlSerializer.endTag(null, "numero-passageiros");
+                    xmlSerializer.endTag(null, Constants.NUM_PASSAGEIROS_XML);
 
-                    xmlSerializer.startTag(null, "origem");
+                    xmlSerializer.startTag(null, Constants.ORIGEM_XML);
                     xmlSerializer.text(servico.getOrigem());
-                    xmlSerializer.endTag(null,"origem");
+                    xmlSerializer.endTag(null,Constants.ORIGEM_XML);
 
-                    xmlSerializer.startTag(null, "destino");
+                    xmlSerializer.startTag(null, Constants.DESTINO_XML);
                     xmlSerializer.text(servico.getDestino());
-                    xmlSerializer.endTag(null, "destino");
+                    xmlSerializer.endTag(null, Constants.DESTINO_XML);
 
-                    xmlSerializer.startTag(null, "custoPortagens");
+                    xmlSerializer.startTag(null, Constants.CUSTO_PORTAGENS_XML);
                     xmlSerializer.text(servico.getDestino());
-                    xmlSerializer.endTag(null, "custoPortagens");
+                    xmlSerializer.endTag(null, Constants.CUSTO_PORTAGENS_XML);
 
-                    xmlSerializer.startTag(null, "distancia");
+                    xmlSerializer.startTag(null, Constants.DISTANCIA_XML);
                     xmlSerializer.text(String.valueOf(servico.getDistancia()));
-                    xmlSerializer.endTag(null, "distancia");
+                    xmlSerializer.endTag(null, Constants.DISTANCIA_XML);
 
-                    xmlSerializer.startTag(null, "horasDeEspera");
+                    xmlSerializer.startTag(null, Constants.HORASDEESPERA_XML);
                     xmlSerializer.text(String.valueOf(servico.getHorasDeEspera()));
-                    xmlSerializer.endTag(null, "horasDeEspera");
+                    xmlSerializer.endTag(null, Constants.HORASDEESPERA_XML);
 
-                    xmlSerializer.startTag(null, "trajeto");
+                    xmlSerializer.startTag(null, Constants.TRAJETO_XML);
                     xmlSerializer.text(servico.getTrajeto());
-                    xmlSerializer.endTag(null, "trajeto");
+                    xmlSerializer.endTag(null, Constants.TRAJETO_XML);
 
-                    xmlSerializer.startTag(null, "tipo-servico");
+                    xmlSerializer.startTag(null, Constants.TIPO_SERVICO_XML);
                     xmlSerializer.text(servico.getTipo());
-                    xmlSerializer.endTag(null, "tipo-servico");
+                    xmlSerializer.endTag(null, Constants.TIPO_SERVICO_XML);
 
-                xmlSerializer.endTag(null, "servico");
+                xmlSerializer.endTag(null, Constants.SERVICO_XML);
                 xmlSerializer.endDocument();
-
             } else {
                 if (verificaProcesso(Xml.newPullParser(), servico.getProcesso()))
                     return false;
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                xmlSerializer.startTag(null, "servico");
-                xmlSerializer.startTag(null , "processo");
+                xmlSerializer.startTag(null, Constants.SERVICO_XML);
+                xmlSerializer.startTag(null , Constants.PROCESSO_XML);
                 xmlSerializer.text(servico.getProcesso());
-                xmlSerializer.endTag(null, "processo");
+                xmlSerializer.endTag(null, Constants.PROCESSO_XML);
 
-                xmlSerializer.startTag(null, "nome-cliente");
+                xmlSerializer.startTag(null, Constants.NOME_CLIENTE_XML);
                 xmlSerializer.text(servico.getNomeCliente());
-                xmlSerializer.endTag(null, "nome-cliente");
+                xmlSerializer.endTag(null, Constants.NOME_CLIENTE_XML);
 
-                xmlSerializer.startTag(null, "data");
+                xmlSerializer.startTag(null, Constants.DATA_XML);
                 xmlSerializer.text(servico.getData());
-                xmlSerializer.endTag(null, "data");
+                xmlSerializer.endTag(null, Constants.DATA_XML);
 
-                xmlSerializer.startTag(null, "hora-de-inicio");
+                xmlSerializer.startTag(null, Constants.HORA_DE_INICIO_XML);
                 xmlSerializer.text(servico.getHoraDeInicio());
-                xmlSerializer.endTag(null, "hora-de-inicio");
+                xmlSerializer.endTag(null, Constants.HORA_DE_INICIO_XML);
 
-                xmlSerializer.startTag(null, "numero-passageiros");
+                xmlSerializer.startTag(null, Constants.NUM_PASSAGEIROS_XML);
                 xmlSerializer.text(String.valueOf(servico.getNumPassageiros()));
-                xmlSerializer.endTag(null, "numero-passageiros");
+                xmlSerializer.endTag(null, Constants.NUM_PASSAGEIROS_XML);
 
-                xmlSerializer.startTag(null, "origem");
+                xmlSerializer.startTag(null, Constants.ORIGEM_XML);
                 xmlSerializer.text(servico.getOrigem());
-                xmlSerializer.endTag(null,"origem");
+                xmlSerializer.endTag(null,Constants.ORIGEM_XML);
 
-                xmlSerializer.startTag(null, "destino");
+                xmlSerializer.startTag(null, Constants.DESTINO_XML);
                 xmlSerializer.text(servico.getDestino());
-                xmlSerializer.endTag(null, "destino");
+                xmlSerializer.endTag(null, Constants.DESTINO_XML);
 
-                xmlSerializer.startTag(null, "custoPortagens");
+                xmlSerializer.startTag(null, Constants.CUSTO_PORTAGENS_XML);
                 xmlSerializer.text(servico.getDestino());
-                xmlSerializer.endTag(null, "custoPortagens");
+                xmlSerializer.endTag(null, Constants.CUSTO_PORTAGENS_XML);
 
-                xmlSerializer.startTag(null, "distancia");
+                xmlSerializer.startTag(null, Constants.DISTANCIA_XML);
                 xmlSerializer.text(String.valueOf(servico.getDistancia()));
-                xmlSerializer.endTag(null, "distancia");
+                xmlSerializer.endTag(null, Constants.DISTANCIA_XML);
 
-                xmlSerializer.startTag(null, "horasDeEspera");
+                xmlSerializer.startTag(null, Constants.HORASDEESPERA_XML);
                 xmlSerializer.text(String.valueOf(servico.getHorasDeEspera()));
-                xmlSerializer.endTag(null, "horasDeEspera");
+                xmlSerializer.endTag(null, Constants.HORASDEESPERA_XML);
 
-                xmlSerializer.startTag(null, "trajeto");
+                xmlSerializer.startTag(null, Constants.TRAJETO_XML);
                 xmlSerializer.text(servico.getTrajeto());
-                xmlSerializer.endTag(null, "trajeto");
+                xmlSerializer.endTag(null, Constants.TRAJETO_XML);
 
-                xmlSerializer.startTag(null, "tipoServico");
+                xmlSerializer.startTag(null, Constants.TIPO_SERVICO_XML);
                 xmlSerializer.text(servico.getTipo());
-                xmlSerializer.endTag(null, "tipoServico");
-                xmlSerializer.endTag(null, "servico");
+                xmlSerializer.endTag(null, Constants.TIPO_SERVICO_XML);
+                xmlSerializer.endTag(null, Constants.SERVICO_XML);
                 xmlSerializer.endDocument();
             }
             xmlSerializer.flush();
@@ -283,7 +282,7 @@ public class XMLHandler {
             parser.nextTag();
             while(parser.next() != XmlPullParser.END_DOCUMENT) {
                 if(parser.getEventType() == XmlPullParser.START_TAG) {
-                    if (parser.getName().equals("processo")) {
+                    if (parser.getName().equals(Constants.PROCESSO_XML)) {
                         parser.next();
                         if (parser.getText().equals(processo))
                             return true;
@@ -341,7 +340,6 @@ public class XMLHandler {
             e.printStackTrace();
         }
         return result;
-
     }
 
     public boolean writenovoCliente(Cliente cliente) {

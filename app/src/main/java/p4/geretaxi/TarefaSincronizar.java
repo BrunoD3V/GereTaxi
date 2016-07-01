@@ -36,12 +36,8 @@ public class TarefaSincronizar {
 
     private void sincronzaServicos() {
 
-
-
-
         file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
         GereBD bd = new GereBD();
-
 
         if (file.exists()) {
 
@@ -59,13 +55,6 @@ public class TarefaSincronizar {
                     file.delete();
             }
         }
-
-
-
-
-
-
-
     }
 
     private Servico defineServico(Servico servico) {
@@ -81,6 +70,7 @@ public class TarefaSincronizar {
             mCapturedLocations = handler.getRoute(mCapturedLocations, mContext);
             parser.trajectoToString(mCapturedLocations);
             double distance = handler.getDistance();
+            servico.setIdMotorista(SharedPreference.getIdMotoristaSharedPreferences(MyApplication.getAppContext()));
             servico.setDistancia(distance);
         } catch (Exception e) {
             e.printStackTrace();

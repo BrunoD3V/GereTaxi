@@ -57,6 +57,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             editTextProcesso.setText("SPD"+Helper.getDate()+"H"+Helper.getTime());
             editTextProcesso.setEnabled(false);
         }
+
         handler = new XMLHandler();
         gereBD = new GereBD();
         List<Cliente> clientes;
