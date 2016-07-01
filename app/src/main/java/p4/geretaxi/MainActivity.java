@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (helper.checkAppStart()) {
             case NORMAL:
-
-
-
                 boolean res = Helper.attemptLogin();
 
                 if (res) {

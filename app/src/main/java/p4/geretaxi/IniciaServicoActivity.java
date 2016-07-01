@@ -61,7 +61,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));//listar clientes está a mostrar todos
             for (Cliente c: clientes) {
                 //SE FOR UM CLIENTE PARTICULAR INSERE NA LISTA DE CLIENTES PARTICULARES
-                if(c.getTipo().trim().equals(Constants.PARTICULAR)){
+                if(c.getTipo().trim().equals("Particular")){
                     clientesSpinnerParticular.add(c.getNome());
                 }else{//SE FOR UMA COMPANHIA INSERE NA LISTA DE COMPANHIAS
                     clientesSpinnerCompanhia.add(c.getNome());
