@@ -19,14 +19,15 @@ public class MenuActivity extends AppCompatActivity {
     GereBD gereBD;
     XMLHandler handler;
     List<Cliente> listaClientes;
-    boolean permission = false;
+    boolean permission;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
         btnGerirClientes = (Button) findViewById(R.id.btnGerirClientes);
         btnGerirClientes.setEnabled(false);
+        permission = false;
         if (Helper.isSessionEnabled()){
             btnGerirClientes.setEnabled(true);
         } else if (Helper.isNetworkAvailable(MyApplication.getAppContext())){
@@ -34,19 +35,6 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        gereBD = new GereBD();
-        if(Helper.isNetworkAvailable(getApplicationContext())){
-            listaClientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-            if(listaClientes.size()>=0) {
-                permission = true;
-            }
-        }else{
-            handler = new XMLHandler();
-            listaClientes = handler.parseClientes(Xml.newPullParser());
-            System.out.println("CLIENTES: " + listaClientes.size());
-            if(listaClientes.size()>0)
-                permission = true;
-        }
     }
 
     @Override
@@ -87,11 +75,23 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void onClickIniciarServico(View v) {
+        gereBD = new GereBD();
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            listaClientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+            if(listaClientes.size()>0) {
+                permission = true;
+            }
+        }else{
+            handler = new XMLHandler();
+            listaClientes = handler.parseClientes(Xml.newPullParser());
+            if(listaClientes.size()>0)
+                permission = true;
+        }
         if(permission){
             EscolherServicoDialogFragment dialogFragment = EscolherServicoDialogFragment.newInstance();
             dialogFragment.show(this.getFragmentManager(), "EscolheServico");
         }else{
-            Toast.makeText(getApplicationContext(),"Ainda não possui clientes, deverá inserir na opção Gestão de Clientes.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Ainda não possui clientes ou deverá reiniciar a aplicação para sincronizar os seus Clientes.", Toast.LENGTH_LONG).show();
         }
     }
     public void onClickGerirClientes(View v){

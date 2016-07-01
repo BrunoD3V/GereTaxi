@@ -52,7 +52,11 @@ public class IniciaServicoActivity extends AppCompatActivity {
         mContext = new GeoApiContext().setApiKey(getString(R.string.google_maps_web_services_key));
         servico = (Servico) getIntent().getSerializableExtra(Constants.INTENT_SERVICO);
 
-
+        //CASO SEJA UM SERVIÇO PARTICULAR O NUMERO DO SERVIÇO É GERADO PELA CONCATENAÇÃO SP+DATA+HORA E NAO PERMITE AO USER MODIFICAR O NUMERO DO PROCESSO
+        if(servico.getTipo().equals("Serviço Particular")){
+            editTextProcesso.setText("SPD"+Helper.getDate()+"H"+Helper.getTime());
+            editTextProcesso.setEnabled(false);
+        }
         handler = new XMLHandler();
         gereBD = new GereBD();
         List<Cliente> clientes;
@@ -67,7 +71,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
                     clientesSpinnerCompanhia.add(c.getNome());
                 }
             }
-
         }else{
             clientes = handler.parseClientes(Xml.newPullParser());
             for (Cliente c: clientes) {
@@ -86,6 +89,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, clientesSpinnerCompanhia);
         }
 
+        //AO CLICAR NO SPINNER É ESCOLHIDO O CLIENTE
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -93,7 +97,6 @@ public class IniciaServicoActivity extends AppCompatActivity {
                 nomeCliente= item.toString();
             }
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         spinner.setAdapter(adapter);
@@ -117,9 +120,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
             return;
         }
 
-
         editTextProcesso.setEnabled(false);
         editTextPassageiros.setEnabled(false);
+        spinner.setEnabled(false);
 
         String processo = editTextProcesso.getText().toString();
         servico.setProcesso(processo);
