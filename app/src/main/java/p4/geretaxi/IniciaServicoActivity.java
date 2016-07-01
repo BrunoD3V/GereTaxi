@@ -54,7 +54,13 @@ public class IniciaServicoActivity extends AppCompatActivity {
 
         //CASO SEJA UM SERVIÇO PARTICULAR O NUMERO DO SERVIÇO É GERADO PELA CONCATENAÇÃO SP+DATA+HORA E NAO PERMITE AO USER MODIFICAR O NUMERO DO PROCESSO
         if(servico.getTipo().equals("Serviço Particular")){
-            editTextProcesso.setText("SPD"+Helper.getDate()+"H"+Helper.getTime());
+
+            String numProcesso = "SPD"+Helper.getDate()+"H"+Helper.getTime();
+            StringBuilder sb = new StringBuilder(numProcesso);
+            sb.deleteCharAt(16);
+            numProcesso = sb.toString();
+
+            editTextProcesso.setText(numProcesso);
             editTextProcesso.setEnabled(false);
         }
         handler = new XMLHandler();
@@ -130,6 +136,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
         servico.setHoraDeInicio(Helper.getTime());
         servico.setNomeCliente(nomeCliente);
         servico.setNumPassageiros(i);
+        servico.setIdMotorista(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
 
         boolean result=Helper.inicializarDados(processo);
         if (result) {
