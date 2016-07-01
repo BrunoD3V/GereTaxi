@@ -101,7 +101,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         listItems.add(Constants.HORAS_DE_ESPERA_TOSTRING + servico.getHorasDeEspera());
         listItems.add(Constants.DISTANCIA_TOSTRING + String.valueOf(servico.getDistancia() + Constants.KMS_TOSTRING));
     }
-    
+
     public void onClickAtualizar(View v){
 
     }
