@@ -8,13 +8,9 @@ import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,16 +75,7 @@ public class DialogSpinner extends DialogFragment implements View.OnClickListene
         spinner = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MyApplication.getAppContext(),android.R.layout.simple_spinner_item,clientesSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Object item = parent.getItemAtPosition(pos);
-                nomeCliente= item.toString();
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        spinner.setAdapter(adapter);
 
         return view;
     }
