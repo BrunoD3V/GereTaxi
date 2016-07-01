@@ -63,6 +63,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
 
     public void onClickInserirNovoCliente(View v){
 
+        System.out.println(cliente.toString());
         XMLHandler xmlHandler = new XMLHandler();
         if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
             Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();

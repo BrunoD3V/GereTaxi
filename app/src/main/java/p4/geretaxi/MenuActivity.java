@@ -3,6 +3,7 @@ package p4.geretaxi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ public class MenuActivity extends AppCompatActivity {
 
     Button btnGerirClientes;
     GereBD gereBD;
+    XMLHandler handler;
     List<Cliente> listaClientes;
     boolean permission = false;
     @Override
@@ -35,9 +37,14 @@ public class MenuActivity extends AppCompatActivity {
         gereBD = new GereBD();
         if(Helper.isNetworkAvailable(getApplicationContext())){
             listaClientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-            if(listaClientes.size()>0){
+            if(listaClientes.size()>0) {
                 permission = true;
             }
+        }else{
+            handler = new XMLHandler();
+            listaClientes = handler.parseClientes(Xml.newPullParser());
+            if(listaClientes.size()>0)
+                permission = true;
         }
     }
 

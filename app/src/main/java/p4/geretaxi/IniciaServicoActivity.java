@@ -67,10 +67,15 @@ public class IniciaServicoActivity extends AppCompatActivity {
                     clientesSpinnerCompanhia.add(c.getNome());
                 }
             }
+
         }else{
             clientes = handler.parseClientes(Xml.newPullParser());
             for (Cliente c: clientes) {
-                clientesSpinnerParticular.add(c.getNome());
+                if(c.getTipo().trim().equals("Particular")){
+                    clientesSpinnerParticular.add(c.getNome());
+                }else{//SE FOR UMA COMPANHIA INSERE NA LISTA DE COMPANHIAS
+                    clientesSpinnerCompanhia.add(c.getNome());
+                }
             }
         }
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -147,7 +152,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
+
             mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
+
 
             if (mCapturedLocations.size() < 1) {
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -180,7 +187,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
+
             mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "xxx");//TODO a mudar depois dos testes
+
             if(mCapturedLocations.size() > 1) {
                servico.setTrajeto(handler.trajectoToString(mCapturedLocations));
                 servico.setOrigem(mCapturedLocations.get(0).toString());

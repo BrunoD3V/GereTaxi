@@ -49,7 +49,7 @@
 
         <Button
             android:id="@+id/btn_yes"
-            android:layout_width="170dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:clickable="true"
@@ -59,7 +59,7 @@
 
         <Button
             android:id="@+id/btn_no"
-            android:layout_width="170dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:background="@android:color/holo_red_dark"

@@ -449,6 +449,9 @@ public class XMLHandler {
                 xmlSerializer.startTag(null, Constants.MAIL_XML);
                 xmlSerializer.text(cliente.getEmail());
                 xmlSerializer.endTag(null, Constants.MAIL_XML);
+                xmlSerializer.startTag(null, Constants.TIPO_XML);
+                xmlSerializer.text(cliente.getTipo());
+                xmlSerializer.endTag(null, Constants.TIPO_XML);
                 xmlSerializer.endTag(null, Constants.CLIENTE_XML);
                 xmlSerializer.endDocument();
             } else {
@@ -461,6 +464,9 @@ public class XMLHandler {
                     xmlSerializer.startTag(null, Constants.MAIL_XML);
                     xmlSerializer.text(cliente.getEmail());
                     xmlSerializer.endTag(null, Constants.MAIL_XML);
+                    xmlSerializer.startTag(null, Constants.TIPO_XML);
+                    xmlSerializer.text(cliente.getTipo());
+                    xmlSerializer.endTag(null, Constants.TIPO_XML);
                     xmlSerializer.endTag(null, Constants.CLIENTE_XML);
                     xmlSerializer.endDocument();
                 } else {
@@ -510,8 +516,6 @@ public class XMLHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return result;
     }
     public boolean findClientebyMail(XmlPullParser parser, String email, String fileName) {
@@ -573,6 +577,10 @@ public class XMLHandler {
                         if (parser.getName().equalsIgnoreCase(Constants.MAIL_XML)) {
                             assert cliente != null;
                             cliente.setEmail(text);
+                        }
+                        if (parser.getName().equalsIgnoreCase(Constants.TIPO_XML)){
+                            assert cliente != null;
+                            cliente.setTipo(text);
                         }
                         break;
                     default:

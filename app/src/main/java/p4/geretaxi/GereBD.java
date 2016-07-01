@@ -953,6 +953,127 @@ public class GereBD {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public boolean atualizarServico(final Servico servico){
+        result = false;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("atualizarServico");
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo idServico = new PropertyInfo();
+                idServico.type = PropertyInfo.INTEGER_CLASS;
+                idServico.setName("id");
+                idServico.setValue(servico.getId());
+
+                PropertyInfo processo = new PropertyInfo();
+                processo.type = PropertyInfo.STRING_CLASS;
+                processo.setName("processo");
+                processo.setValue(servico.getProcesso());
+
+                PropertyInfo custoPortagens = new PropertyInfo();
+                custoPortagens.type = PropertyInfo.STRING_CLASS;
+                custoPortagens.setName("custoPortagens");
+                custoPortagens.setValue(servico.getCustoPortagens().toString());
+
+                PropertyInfo data = new PropertyInfo();
+                data.type = PropertyInfo.STRING_CLASS;
+                data.setName("data");
+                data.setValue(servico.getData());
+
+                PropertyInfo destino = new PropertyInfo();
+                destino.type = PropertyInfo.STRING_CLASS;
+                destino.setName("destino");
+                destino.setValue(servico.getDestino());
+
+                PropertyInfo distancia = new PropertyInfo();
+                distancia.type = PropertyInfo.STRING_CLASS;
+                distancia.setName("distancia");
+                distancia.setValue(servico.getDistancia().toString());
+
+                PropertyInfo horaDeInicio = new PropertyInfo();
+                horaDeInicio.type = PropertyInfo.STRING_CLASS;
+                horaDeInicio.setName("horaDeInicio");
+                horaDeInicio.setValue(servico.getHoraDeInicio());
+
+                PropertyInfo horasDeEspera = new PropertyInfo();
+                horasDeEspera.type = PropertyInfo.STRING_CLASS;
+                horasDeEspera.setName("horasDeEspera");
+                horasDeEspera.setValue(servico.getHorasDeEspera().toString());
+
+                PropertyInfo nomeCliente = new PropertyInfo();
+                nomeCliente.type = PropertyInfo.STRING_CLASS;
+                nomeCliente.setName("nomeCliente");
+                nomeCliente.setValue(servico.getNomeCliente());
+
+                PropertyInfo numPassageiros = new PropertyInfo();
+                numPassageiros.type = PropertyInfo.INTEGER_CLASS;
+                numPassageiros.setName("numPassageiros");
+                numPassageiros.setValue(servico.getNumPassageiros());
+
+                PropertyInfo origem = new PropertyInfo();
+                origem.type = PropertyInfo.STRING_CLASS;
+                origem.setName("origem");
+                origem.setValue(servico.getOrigem());
+
+                PropertyInfo tipo = new PropertyInfo();
+                tipo.type = PropertyInfo.STRING_CLASS;
+                tipo.setName("tipo");
+                tipo.setValue(servico.getTipo());
+
+                PropertyInfo trajeto = new PropertyInfo();
+                trajeto.type = PropertyInfo.STRING_CLASS;
+                trajeto.setName("trajeto");
+                trajeto.setValue(servico.getTrajeto());
+
+                PropertyInfo idMotorista = new PropertyInfo();
+                idMotorista.type = PropertyInfo.INTEGER_CLASS;
+                idMotorista.setName("idMotorista");
+                idMotorista.setValue(SharedPreference.getIdMotoristaSharedPreferences(MyApplication.getAppContext()));
+
+                request.addProperty(processo);
+                request.addProperty(custoPortagens);
+                request.addProperty(data);
+                request.addProperty(destino);
+                request.addProperty(distancia);
+                request.addProperty(horaDeInicio);
+                request.addProperty(horasDeEspera);
+                request.addProperty(nomeCliente);
+                request.addProperty(numPassageiros);
+                request.addProperty(origem);
+                request.addProperty(tipo);
+                request.addProperty(trajeto);
+                request.addProperty(idMotorista);
+                request.addProperty(idServico);
+
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+                envelope.setOutputSoapObject(request);
+
+                HttpTransportSE http = new HttpTransportSE(URL);
+
+                try {
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
+                    SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                    if(response!=null)
+                        result = Boolean.parseBoolean(response.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return result;
 
     }
 
