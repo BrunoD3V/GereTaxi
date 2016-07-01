@@ -77,16 +77,40 @@ public class EliminaClienteActivity extends AppCompatActivity {
 
     public void onClickButtonPesquisar(View v) {
         if(!Helper.isEmpty(editTextEliminarCliente)) {
-            GereBD bd = new GereBD();
             listItems= new ArrayList<>();
-            cliente = bd.pesquisarCliente(editTextEliminarCliente.getText().toString(), SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
-            if (cliente.getNome().equals(editTextEliminarCliente.getText().toString())) {
-                populateListView();
-                adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
-                listViewEliminaCliente.setAdapter(adapter);
-            } else {
-                Toast.makeText(getApplicationContext(), "Não foi possivel encontrar o cliente que procurava.", Toast.LENGTH_SHORT).show();
-            }
+           if(Helper.isNetworkAvailable(this)){
+               GereBD bd = new GereBD();
+
+               cliente = bd.pesquisarCliente(editTextEliminarCliente.getText().toString(), SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+               if (cliente.getNome().equals(editTextEliminarCliente.getText().toString())) {
+                   populateListView();
+                   adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
+                   listViewEliminaCliente.setAdapter(adapter);
+               } else {
+                   Toast.makeText(getApplicationContext(), "Não foi possivel encontrar o cliente que procurava.", Toast.LENGTH_SHORT).show();
+               }
+           }else {
+               XMLHandler parser = new XMLHandler();
+               List<Cliente> clientes;
+               clientes = new ArrayList<>();
+               List<Cliente> clientesFinais;
+               clientesFinais = new ArrayList<>();
+               clientes = parser.parseClientes(Xml.newPullParser());
+
+               for(Cliente c: clientes) {
+                   if(!c.getNome().equalsIgnoreCase(cliente.getNome())) {
+                        clientesFinais.add(c);
+                   }
+               }
+               File file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
+               boolean deleted = file.delete();
+               if(deleted) {
+                   for( Cliente c: clientesFinais){
+                       parser.writeClientes(c);
+                   }
+               }
+           }
+
         }
     }
 
@@ -124,7 +148,9 @@ public class EliminaClienteActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

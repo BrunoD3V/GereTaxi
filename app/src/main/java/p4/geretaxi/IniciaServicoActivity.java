@@ -56,7 +56,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
         List<Cliente> clientes;
 
         if(Helper.isNetworkAvailable(getApplicationContext())){
-            clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
+            clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));//listar clientes está a mostrar todos
             for (Cliente c: clientes) {
                 clientesSpinner.add(c.getNome());
             }
@@ -134,7 +134,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "Eivados");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "Veiga");
 
 
             if (mCapturedLocations.size() < 1) {
@@ -171,13 +171,17 @@ public class IniciaServicoActivity extends AppCompatActivity {
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), processo);
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "Cabanelas");//TODO a mudar depois dos testes
             if(mCapturedLocations.size() > 1) {
                 handler.writeTrajecto(mCapturedLocations, processo);
                 servico.setOrigem(mCapturedLocations.get(0).toString());
                 servico.setDestino(mCapturedLocations.get(mCapturedLocations.size() - 1).toString());
-                handler.writeServico(servico);
+                if (handler.writeServico(servico))
+                    Toast.makeText(getApplicationContext(), "Servido inserido localmente", Toast.LENGTH_SHORT);
             }
+
+            Intent i = new Intent(this, MenuActivity.class);
+            startActivity(i);
         }
     }
 
