@@ -52,4 +52,18 @@
         android:textColor="#ffffff"
         android:onClick="onClickVerTrajeto" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atualizar"
+        android:id="@+id/btnAtualizarServico"
+        android:layout_below="@+id/listViewMostraServico"
+        android:layout_alignRight="@+id/listViewMostraServico"
+        android:layout_alignEnd="@+id/listViewMostraServico"
+        android:layout_alignLeft="@+id/buttonSubmeterServico"
+        android:layout_alignStart="@+id/buttonSubmeterServico"
+        android:onClick="onClickAtualizar"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#ffffff" />
+
 </RelativeLayout>

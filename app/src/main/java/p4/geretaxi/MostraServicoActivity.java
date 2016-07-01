@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,17 +28,27 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     Helper helper = new Helper();
     ArrayList<String> listItems = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    boolean atualiza;
+    Button btnSubmeter;
+    Button btnAtualizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostra_servico);
-
+        btnSubmeter = (Button) findViewById(R.id.btnSubmeterInfo);
+        btnAtualizar = (Button) findViewById(R.id.btnAtualizarServico);
         listViewMostraServico = (ListView) findViewById(R.id.listViewMostraServico);
         textViewMostraServico = (TextView) findViewById(R.id.textViewMostraServico);
         servico = (Servico)getIntent().getSerializableExtra("ser");
-
+        atualiza = getIntent().getBooleanExtra("atualiza",false);
         populateListView();
+
+        if(atualiza){
+            btnSubmeter.setVisibility(View.INVISIBLE);
+        }else{
+            btnAtualizar.setVisibility(View.INVISIBLE);
+        }
 
         listViewMostraServico.setAdapter(adapter);
         listViewMostraServico.setOnItemClickListener(
@@ -57,6 +68,10 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 }
         );
     }
+
+
+
+
     public void populateListView() {
 
         adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
@@ -87,6 +102,9 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
         listItems.add(Constants.DISTANCIA_TOSTRING + String.valueOf(servico.getDistancia() + Constants.KMS_TOSTRING));
     }
     
+    public void onClickAtualizar(View v){
+
+    }
     public void onClickSubmeterServico(View v) {
 
         if(helper.isNetworkAvailable(getApplicationContext())){

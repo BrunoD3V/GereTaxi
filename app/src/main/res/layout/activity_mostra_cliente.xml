@@ -23,5 +23,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/listView"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btnAtualizar" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atualizar Cliente"
+        android:id="@+id/btnAtualizar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/listView"
+        android:layout_alignEnd="@+id/listView"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#ffffff"
+        android:onClick="onClickAtualizar" />
 </RelativeLayout>

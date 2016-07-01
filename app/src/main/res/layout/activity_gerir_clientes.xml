@@ -50,29 +50,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Consultar Serviços por Cliente"
-        android:id="@+id/btnServicoPorCliente"
-        android:layout_below="@+id/btnListarClientes"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnListarClientes"
-        android:layout_alignEnd="@+id/btnListarClientes"
-        android:textColor="#ffffff"
-        android:onClick="onClickServicoPorCliente"
-        android:background="@color/colorPrimaryDark" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Eliminar Cliente"
         android:id="@+id/btnEliminarCliente"
-        android:layout_below="@+id/btnServicoPorCliente"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnServicoPorCliente"
-        android:layout_alignEnd="@+id/btnServicoPorCliente"
         android:background="@color/colorPrimaryDark"
         android:onClick="onClickEliminarCliente"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:layout_below="@+id/btnListarClientes"
+        android:layout_alignRight="@+id/btnListarClientes"
+        android:layout_alignEnd="@+id/btnListarClientes" />
 
 </RelativeLayout>

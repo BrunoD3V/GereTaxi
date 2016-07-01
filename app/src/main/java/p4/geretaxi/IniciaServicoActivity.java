@@ -147,7 +147,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             preference.save(getApplicationContext(), Constants.TRUE, Constants.SESSION);
             XMLHandler parser = new XMLHandler();
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "Veiga");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "semPortagem");
 
             if (mCapturedLocations.size() < 1) {
                 Toast.makeText(getApplicationContext(), "Erro na captura ou directions API", Toast.LENGTH_SHORT).show();
@@ -164,10 +164,8 @@ public class IniciaServicoActivity extends AppCompatActivity {
             double distance = servicoHandler.getDistance();
             servico.setDistancia(distance);
             portagens = servicoHandler.getPortagens();
-
             ArrayList<Double> lats = new ArrayList<>();
             ArrayList<Double> lngs = new ArrayList<>();
-
             for (int i = 0; i < mCapturedLocations.size(); i++) {
                 lats.add(i, mCapturedLocations.get(i).lat);
                 lngs.add(i, mCapturedLocations.get(i).lng);

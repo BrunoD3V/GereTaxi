@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class GerirServicosActivity extends AppCompatActivity {
 
@@ -23,6 +24,11 @@ public class GerirServicosActivity extends AppCompatActivity {
 
     public void onClickEliminarServico(View v){
         Intent i = new Intent(this, EliminarServicoActivity.class);
+        startActivity(i);
+    }
+
+    public void onClickServicoPorCliente(View v){
+        Intent i = new Intent(this, ConsultarServicosClienteActivity.class);
         startActivity(i);
     }
 

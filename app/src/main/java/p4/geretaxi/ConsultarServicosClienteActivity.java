@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -50,6 +51,17 @@ public class ConsultarServicosClienteActivity extends AppCompatActivity {
             //SEM INTERNET
             Toast.makeText(getApplicationContext(), "TODO: PESQUISAR SEM NET", Toast.LENGTH_LONG).show();
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), MostraServicoActivity.class);
+                intent.putExtra("ser", listaServicos.get(i));
+                boolean atualizar = true;
+                intent.putExtra("atualiza", atualizar);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

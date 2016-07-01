@@ -5,6 +5,7 @@ import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -436,7 +437,7 @@ public class GereBD {
             @Override
             public void run() {
                 setMethodName("pesquisarServicosPorCliente");
-                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+                SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
                 PropertyInfo nome = new PropertyInfo();
                 nome.type = PropertyInfo.STRING_CLASS;
@@ -461,38 +462,48 @@ public class GereBD {
                 HttpTransportSE http = new HttpTransportSE(URL);
 
                 try {
-                    http.call(NAMESPACE+METHOD_NAME, envelope);
+                    http.call(NAMESPACE + METHOD_NAME, envelope);
 
-                    Vector<SoapObject> response = (Vector<SoapObject>) envelope.getResponse();
-                    if(response!=null) {
-                        for (SoapObject soapObject : response) {
+                    SoapObject response = (SoapObject) envelope.bodyIn;
+                    if (response != null) {
+                        int i;
+                        int responseCount = response.getPropertyCount();
+                        System.out.println("RESPONSE COUNT" + responseCount);
+                        for (i = 0; i < responseCount; i++) {
+                            Object property = response.getProperty(i);
+                            if (property instanceof SoapObject) {
+                                SoapObject soapObject = (SoapObject) property;
 
-                            Servico servico = new Servico();
+                                Servico servico = new Servico();
 
-                            servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
-                            servico.setProcesso(soapObject.getProperty("processo").toString());
-                            servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
-                            servico.setData(soapObject.getProperty("data").toString());
-                            servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
-                            servico.setOrigem(soapObject.getProperty("origem").toString());
-                            servico.setDestino(soapObject.getProperty("destino").toString());
-                            servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
-                            servico.setProcesso(soapObject.getProperty("processo").toString());
-                            servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
-                            servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
-                            servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
-                            servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
+                                servico.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+                                servico.setProcesso(soapObject.getProperty("processo").toString());
+                                servico.setNomeCliente(soapObject.getProperty("nomeCliente").toString());
+                                servico.setData(soapObject.getProperty("data").toString());
+                                servico.setHoraDeInicio(soapObject.getProperty("horaDeInicio").toString());
+                                servico.setOrigem(soapObject.getProperty("origem").toString());
+                                servico.setDestino(soapObject.getProperty("destino").toString());
+                                servico.setProcesso(soapObject.getProperty("processo").toString());
+                                servico.setDistancia(Double.parseDouble(soapObject.getProperty("distancia").toString()));
+                                servico.setNumPassageiros(Integer.parseInt(soapObject.getProperty("numPassageiros").toString()));
+                                servico.setIdMotorista(Integer.parseInt(soapObject.getProperty("idMotorista").toString()));
+                                servico.setCustoPortagens(Double.parseDouble(soapObject.getProperty("custoPortagens").toString()));
+                                servico.setHorasDeEspera(Double.parseDouble(soapObject.getProperty("horasDeEspera").toString()));
+                                servico.setTipo(soapObject.getProperty("tipo").toString());
 
-                            lista.add(servico);
+                                lista.add(servico);
+                            }
                         }
                     }
-                } catch (IOException e) {
+                } catch (HttpResponseException e) {
                     e.printStackTrace();
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-        }).start();
+            }).start();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -847,4 +858,102 @@ public class GereBD {
         }
         return clienteGlobal;
     }
+    public boolean atualizarCliente(final Cliente clientes){
+
+        result = false;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setMethodName("atualizarCliente");
+
+                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+
+                PropertyInfo idCliente = new PropertyInfo();
+                idCliente.type = PropertyInfo.INTEGER_CLASS;
+                idCliente.setName("id");
+                idCliente.setValue(clientes.getId());
+
+                PropertyInfo nome = new PropertyInfo();
+                nome.type = PropertyInfo.STRING_CLASS;
+                nome.setName("nome");
+                nome.setValue(clientes.getNome());
+
+                PropertyInfo morada = new PropertyInfo();
+                morada.type = PropertyInfo.STRING_CLASS;
+                morada.setName("morada");
+                morada.setValue(clientes.getMorada());
+
+                PropertyInfo codigoPostal = new PropertyInfo();
+                codigoPostal.type = PropertyInfo.INTEGER_CLASS;
+                codigoPostal.setName("codigoPostal");
+                codigoPostal.setValue(clientes.getCodigoPostal());
+
+                PropertyInfo nif = new PropertyInfo();
+                nif.type = PropertyInfo.INTEGER_CLASS;
+                nif.setName("nif");
+                nif.setValue(clientes.getNif());
+
+                PropertyInfo contacto = new PropertyInfo();
+                contacto.type = PropertyInfo.INTEGER_CLASS;
+                contacto.setName("contacto");
+                contacto.setValue(clientes.getContacto());
+
+                PropertyInfo email = new PropertyInfo();
+                email.type = PropertyInfo.STRING_CLASS;
+                email.setName("email");
+                email.setValue(clientes.getEmail());
+
+                PropertyInfo tipo = new PropertyInfo();
+                tipo.type = PropertyInfo.STRING_CLASS;
+                tipo.setName("tipo");
+                tipo.setValue(clientes.getTipo());
+
+                PropertyInfo idMotorista = new PropertyInfo();
+                idMotorista.type = PropertyInfo.INTEGER_CLASS;
+                idMotorista.setName("idMotorista");
+                idMotorista.setValue(SharedPreference.getIdMotoristaSharedPreferences(MyApplication.getAppContext()));
+
+                request.addProperty(nif);
+                request.addProperty(nome);
+                request.addProperty(morada);
+                request.addProperty(codigoPostal);
+                request.addProperty(contacto);
+                request.addProperty(email);
+                request.addProperty(tipo);
+                request.addProperty(idMotorista);
+                request.addProperty(idCliente);
+
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+                envelope.setOutputSoapObject(request);
+
+                envelope.implicitTypes = true;
+
+                HttpTransportSE http = new HttpTransportSE(URL);
+
+                try {
+                    http.call(NAMESPACE+METHOD_NAME, envelope);
+
+                    SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                    if(response!=null)
+                        result = Boolean.parseBoolean(response.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    result = false;
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                    result = false;
+                }
+            }
+        }).start();
+
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return result;
+
+    }
+
 }

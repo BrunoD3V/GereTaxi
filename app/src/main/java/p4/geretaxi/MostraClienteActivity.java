@@ -10,15 +10,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MostraClienteActivity extends AppCompatActivity implements DialogAtualizaClienteFragment.CommunicatorCliente{
 
     ListView listView;
-    private Cliente cliente;
+    Cliente cliente;
     ArrayList<String> listitems = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    GereBD gereBD;
+    Cliente clienteGlobal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class MostraClienteActivity extends AppCompatActivity implements DialogAt
                     }
                 }
         );
+
     }
 
     private void populateList() {
@@ -54,10 +59,33 @@ public class MostraClienteActivity extends AppCompatActivity implements DialogAt
         listitems.add(String.valueOf(cliente.getContacto()));
     }
 
+    public void onClickAtualizar(View v){
+        gereBD = new GereBD();
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            System.out.println("Cliente a Enviar: " + cliente.toString());
+            System.out.println("IDMOTORISTA: " + cliente.getIdMotorista());
+            boolean result = gereBD.atualizarCliente(cliente);
+            if(result){
+                Toast.makeText(getApplicationContext(),"Cliente Atualizado com Sucesso.", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"Não foi possivel atualizar o cliente.", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Não está ligado a Internet.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent i = new Intent(this, GerirClientesActivity.class);
+        startActivity(i);
+
+    }
+
     @Override
     public void onDialogMessage(String dados, int num) {
         switch (num) {
             case 0:
+
                 cliente.setNome(dados);
                 //TODO: MUDAR O VALOR DA TAG NOMSE CORRESPONDENTE AO CLIENT NO FICHEIRO CLIENTES.XML
                 break;
