@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by belchior on 01/07/2016.
  */
-public class TarefaSincrona {
+public class TarefaSincronizar {
 
     AsyncTask<Void, Void, Void> sincronizar = new AsyncTask<Void, Void, Void>() {
         @Override
@@ -27,7 +27,7 @@ public class TarefaSincrona {
         XMLHandler parser = new XMLHandler();
         GereBD bd = new GereBD();
         boolean res = false;
-        boolean deleted = false;
+
         File file;
         List<Cliente> clientes;
         SharedPreference shared = new SharedPreference();
@@ -45,14 +45,15 @@ public class TarefaSincrona {
                     }
                 }
             }
-
+            if(clientes.size() < 1)
+                file.delete();
         }
         //vai buscar os clientes a bd
         file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
-        deleted = file.delete();
+        file.delete();
 
         clientes = bd.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(MyApplication.getAppContext()));
-        System.out.println("AQUIIIIIIIIIIIIIIIIIIIIII" + clientes.get(0).toString());
+
         if (clientes.size() > 0) {
             for (Cliente c : clientes) {
                 parser.writeClientes(c);
