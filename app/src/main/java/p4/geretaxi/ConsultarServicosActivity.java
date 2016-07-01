@@ -47,6 +47,8 @@ public class ConsultarServicosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), MostraServicoActivity.class);
                 intent.putExtra("ser", servicos.get(i));
+                boolean atualizar = true;
+                intent.putExtra("atualiza", atualizar);
                 startActivity(intent);
             }
         });

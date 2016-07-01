@@ -64,6 +64,7 @@
         android:layout_alignStart="@+id/buttonSubmeterServico"
         android:onClick="onClickAtualizar"
         android:background="@color/colorPrimaryDark"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:visibility="invisible" />
 
 </RelativeLayout>

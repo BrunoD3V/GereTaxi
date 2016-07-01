@@ -31,23 +31,27 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     boolean atualiza;
     Button btnSubmeter;
     Button btnAtualizar;
+    GereBD gereBD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostra_servico);
-        btnSubmeter = (Button) findViewById(R.id.btnSubmeterInfo);
+        btnSubmeter = (Button) findViewById(R.id.buttonSubmeterServico);
         btnAtualizar = (Button) findViewById(R.id.btnAtualizarServico);
         listViewMostraServico = (ListView) findViewById(R.id.listViewMostraServico);
         textViewMostraServico = (TextView) findViewById(R.id.textViewMostraServico);
         servico = (Servico)getIntent().getSerializableExtra("ser");
         atualiza = getIntent().getBooleanExtra("atualiza",false);
+
         populateListView();
 
         if(atualiza){
             btnSubmeter.setVisibility(View.INVISIBLE);
+            btnAtualizar.setVisibility(View.VISIBLE);
         }else{
             btnAtualizar.setVisibility(View.INVISIBLE);
+            btnSubmeter.setVisibility(View.VISIBLE);
         }
 
         listViewMostraServico.setAdapter(adapter);
@@ -70,9 +74,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     }
 
 
-
-
-    public void populateListView() {
+ public void populateListView() {
 
         adapter = new ArrayAdapter<>(this, R.layout.item_list, listItems);
         switch (servico.getTipo()) {
@@ -103,6 +105,23 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
     }
 
     public void onClickAtualizar(View v){
+        gereBD = new GereBD();
+        if(Helper.isNetworkAvailable(getApplicationContext())){
+            System.out.println("SERVICO: " + servico.getTrajeto());
+            boolean result = gereBD.atualizarServico(servico);
+            if(result){
+                Toast.makeText(getApplicationContext(),"Serviço Atualizado com Sucesso.", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"Não foi possivel atualizar o Serviço.", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Não está ligado a Internet.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent i = new Intent(this, GerirClientesActivity.class);
+        startActivity(i);
 
     }
     public void onClickSubmeterServico(View v) {
@@ -116,7 +135,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
             SharedPreference sharedPreference = new SharedPreference();
             servico.setIdMotorista(sharedPreference.getValueInt(this, Constants.ID_MOTORISTA));
 
-            GereBD gereBD = new GereBD();
+            gereBD = new GereBD();
             boolean res = gereBD.inserirServico(servico);
             if (!res){
                 Toast.makeText(getApplicationContext(), "Erro na inserção", Toast.LENGTH_SHORT).show();
