@@ -1,4 +1,4 @@
-package p4.geretaxi.Fragments;
+package p4.geretaxi.DialogFragments;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -41,7 +41,7 @@ public class DialogCustoPortagemFragment extends DialogFragment implements View.
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_yes:
+            case R.id.btn_yes://coloca o valor da portagem e o atributo confirm a um de modo a indicar que a aplicação pode prosseguir
                 communicator.onDialogMessage(editTextPortagem.getText().toString(),1);
                 this.dismiss();
                 break;

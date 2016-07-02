@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.Constantes.Constants;
 import p4.geretaxi.R;
 import p4.geretaxi.ClassesHelper.SharedPreference;
@@ -54,12 +55,14 @@ public class GerirServicosActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

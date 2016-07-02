@@ -20,13 +20,13 @@ import java.util.List;
 
 import p4.geretaxi.ClassesDados.Cliente;
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.R;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.ClassesHelper.XMLHandler;
 
-public class EliminaClienteActivity extends AppCompatActivity {
+public class EliminarClienteActivity extends AppCompatActivity {
 
     EditText editTextEliminarCliente;
     ListView listViewEliminaCliente;
@@ -53,34 +53,37 @@ public class EliminaClienteActivity extends AppCompatActivity {
             boolean res = bd.excluirCliente(cliente.getNome(),
                     SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             if (res) {
-                XMLHandler parser = new XMLHandler();
-                List<Cliente> clientes;
-                clientes = parser.parseClientes(Xml.newPullParser());
-                if (clientes.size()<1) {
-                    for (Cliente c : clientes) {
-                        if (c.getEmail().equalsIgnoreCase(cliente.getEmail())) {
-                            clientes.remove(c);
-                        }
-                    }
-                    File file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
-                    boolean deleted = file.delete();
-                    if (deleted) {
+                File file = new File(Environment.getExternalStorageDirectory(), "clientes.xml");
+                if (file.exists()) {
+                    XMLHandler parser = new XMLHandler();
+                    List<Cliente> clientes;
+                    clientes = parser.parseClientes(Xml.newPullParser());
+                    if (clientes.size() < 1) {
                         for (Cliente c : clientes) {
-                            parser.writeClientes(c);
+                            if (c.getEmail().equalsIgnoreCase(cliente.getEmail())) {
+                                clientes.remove(c);
+                            }
                         }
-                        Toast.makeText(getApplicationContext(), "Cliente apagado Localmente com Sucesso.", Toast.LENGTH_SHORT).show();
+
+                        boolean deleted = file.delete();
+                        if (deleted) {
+                            for (Cliente c : clientes) {
+                                parser.writeClientes(c);
+                            }
+                            Toast.makeText(getApplicationContext(), "Cliente apagado Localmente com Sucesso.", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    listViewEliminaCliente.setAdapter(null);
+                    editTextEliminarCliente.setText("");
+                    Toast.makeText(getApplicationContext(), "Cliente Apagado com Sucesso.", Toast.LENGTH_LONG).show();
                 }
-                listViewEliminaCliente.setAdapter(null);
-                editTextEliminarCliente.setText("");
-                Toast.makeText(getApplicationContext(),"Cliente Apagado com Sucesso.", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getApplicationContext(), "Não foi possivel eliminar o Cliente que pretendia.", Toast.LENGTH_LONG).show();
             }
         }
 
 
-        //TODO: SO PODE APAGAR SE TIVER NET?
+
     }
 
     public void onClickButtonPesquisar(View v) {
@@ -151,7 +154,7 @@ public class EliminaClienteActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

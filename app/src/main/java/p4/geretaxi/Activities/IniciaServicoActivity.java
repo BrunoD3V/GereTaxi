@@ -25,7 +25,7 @@ import java.util.List;
 import p4.geretaxi.ClassesDados.Cliente;
 import p4.geretaxi.Constantes.Constants;
 import p4.geretaxi.ClassesHelper.GPSHandler;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.R;
 import p4.geretaxi.ClassesDados.Servico;
@@ -54,7 +54,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assistencia_em_viagem);
+        setContentView(R.layout.activity_inicia_servico);
 
         terminar = (Button) findViewById(R.id.buttonTermina);
         terminar.setVisibility(View.INVISIBLE);
@@ -67,9 +67,9 @@ public class IniciaServicoActivity extends AppCompatActivity {
         if(servico.getTipo().equals("Serviço Particular")){
 
             String numProcesso = "SPD"+ Helper.getDate()+"H"+Helper.getTime();
-            StringBuilder sb = new StringBuilder(numProcesso);
-            sb.deleteCharAt(16);
-            numProcesso = sb.toString();
+            numProcesso = numProcesso.replace(':','.');
+
+
 
             editTextProcesso.setText(numProcesso);
             editTextProcesso.setEnabled(false);
@@ -175,7 +175,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             XMLHandler parser = new XMLHandler();
 
 
-            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), "xxx");
+            mCapturedLocations = parser.loadGpxData(Xml.newPullParser(), processo);
 
 
             if (mCapturedLocations.size() < 1) {
@@ -210,7 +210,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
             helper.displayPromptEnableWifi(this);
             XMLHandler handler = new XMLHandler();
 
-            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), "xxx");//TODO a mudar depois dos testes
+            mCapturedLocations = handler.loadGpxData(Xml.newPullParser(), processo);
 
             if(mCapturedLocations.size() > 1) {
                 servico.setTrajeto(handler.trajectoToString(mCapturedLocations));
@@ -245,7 +245,7 @@ public class IniciaServicoActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

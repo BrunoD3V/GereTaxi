@@ -1,4 +1,4 @@
-package p4.geretaxi.Fragments;
+package p4.geretaxi.DialogFragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

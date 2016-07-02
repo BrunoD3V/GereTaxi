@@ -1,4 +1,4 @@
-package p4.geretaxi.KSoapClass;
+package p4.geretaxi.WebServiceClass;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -129,7 +129,7 @@ public class GereBD {
                     SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                     if(response!=null)
                         res = Integer.parseInt(response.toString());
-                    System.out.println("RES DENTRO DA THREAD: " + res);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (XmlPullParserException e) {
@@ -392,7 +392,7 @@ public class GereBD {
                     if(response!=null) {
                         int i;
                         int responseCount = response.getPropertyCount();
-                        System.out.println("RESPONSE COUNT" + responseCount);
+
                         for (i = 0; i < responseCount; i++) {
                             Object property = response.getProperty(i);
                             if (property instanceof SoapObject) {

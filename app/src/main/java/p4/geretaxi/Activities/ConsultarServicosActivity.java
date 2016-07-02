@@ -1,8 +1,9 @@
 package p4.geretaxi.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,15 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.List;
 
-import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
-import p4.geretaxi.ClassesHelper.Helper;
-import p4.geretaxi.R;
 import p4.geretaxi.ClassesDados.Servico;
+import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.ClassesHelper.XMLHandler;
+import p4.geretaxi.Constantes.Constants;
+import p4.geretaxi.R;
+import p4.geretaxi.WebServiceClass.GereBD;
 
 public class ConsultarServicosActivity extends AppCompatActivity {
 
@@ -45,15 +47,13 @@ public class ConsultarServicosActivity extends AppCompatActivity {
         }else {//SE NAO TEM INTERNET VAI PREENCHER COM OS CLIENTES QUE ESTÃO ARMAZENADOS LOCALMENTE NO TELEFONE
             Toast.makeText(getApplicationContext(), "MODO OFFLINE: Serão apenas listados os Serviços guardados localmente.", Toast.LENGTH_LONG).show();
             XMLHandler parser = new  XMLHandler();
-            servicos = parser.parseServico(Xml.newPullParser());
-            int i = 1;
-            for(Servico s: servicos) {
-                System.out.println(i);
-                System.out.println(s.getTrajeto());
-                i++;
+            File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
+            if(file.exists()) {
+                servicos = parser.parseServico(Xml.newPullParser());
+
+                adapter = new ArrayAdapter<>(this, R.layout.item_list, servicos);
+                listViewServicos.setAdapter(adapter);
             }
-            adapter = new ArrayAdapter<>(this, R.layout.item_list, servicos);
-            listViewServicos.setAdapter(adapter);
         }
 
         listViewServicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,7 +92,7 @@ public class ConsultarServicosActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

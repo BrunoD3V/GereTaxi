@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.R;
 import p4.geretaxi.ClassesDados.Servico;
@@ -50,33 +50,36 @@ public class EliminarServicoActivity extends AppCompatActivity {
             boolean res = bd.excluirServico(servico.getProcesso(),
                     SharedPreference.getIdMotoristaSharedPreferences(getApplicationContext()));
             if (res) {
-                XMLHandler parser = new XMLHandler();
-                List<Servico> servicos;
-                servicos = parser.parseServico(Xml.newPullParser());
-                if (servicos.size()<1) {
-                    for (Servico s : servicos) {
-                        if (s.getProcesso().equalsIgnoreCase(servico.getProcesso())) {
-                            servicos.remove(s);
-                        }
-                    }
-                    File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
-                    boolean deleted = file.delete();
-                    if (deleted) {
+                File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
+                if(file.exists()) {
+                    XMLHandler parser = new XMLHandler();
+                    List<Servico> servicos;
+                    servicos = parser.parseServico(Xml.newPullParser());
+                    if (servicos.size() < 1) {
                         for (Servico s : servicos) {
-
-                            parser.writeServico(s);
+                            if (s.getProcesso().equalsIgnoreCase(servico.getProcesso())) {
+                                servicos.remove(s);
+                            }
                         }
-                        Toast.makeText(getApplicationContext(), "Serviço apagado com Sucesso.", Toast.LENGTH_SHORT).show();
+
+                        boolean deleted = file.delete();
+                        if (deleted) {
+                            for (Servico s : servicos) {
+
+                                parser.writeServico(s);
+                            }
+                            Toast.makeText(getApplicationContext(), "Serviço apagado com Sucesso.", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    listViewResultados.setAdapter(null);
+                    edtPesquisarServico.setText("");
+                    Toast.makeText(getApplicationContext(), "Serviço Apagado com Sucesso.", Toast.LENGTH_LONG).show();
                 }
-                listViewResultados.setAdapter(null);
-                edtPesquisarServico.setText("");
-                Toast.makeText(getApplicationContext(),"Serviço Apagado com Sucesso.", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getApplicationContext(),"Não foi possivel eliminar o Serviço que pretendia.", Toast.LENGTH_LONG).show();
             }
         }
-        //TODO: SO PODE APAGAR SE TIVER NET?
+
     }
     public void onClickProcurarServico(View v) {
         if(!Helper.isEmpty(edtPesquisarServico)) {
@@ -126,12 +129,14 @@ public class EliminarServicoActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import p4.geretaxi.ClassesDados.Cliente;
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.R;
 import p4.geretaxi.ClassesHelper.SharedPreference;
@@ -71,7 +71,6 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
 
     public void onClickInserirNovoCliente(View v){
 
-        System.out.println(cliente.toString());
         XMLHandler xmlHandler = new XMLHandler();
         if(Helper.isEmpty(edtNome) || Helper.isEmpty(edtMorada) || Helper.isEmpty(edtNif) ){
             Toast.makeText(getApplicationContext(), "Deverá preencher todos os campos antes de enviar.", Toast.LENGTH_LONG).show();
@@ -104,7 +103,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
             boolean res = gereBD.inserirCliente(cliente);
             if (!res){
                 Toast.makeText(getApplicationContext(), "Não foi possivel inserir o Cliente.", Toast.LENGTH_SHORT).show();
-                if(!xmlHandler.writenovoCliente(cliente)) {
+                if(!xmlHandler.writeNovoCliente(cliente)) {
                     Toast.makeText(getApplicationContext(), "O cliente já existe localmente", Toast.LENGTH_SHORT).show();
                 }
                 return;
@@ -113,7 +112,7 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
             }
         }else{
             Toast.makeText(getApplicationContext(), "Cliente inserido localmente.",Toast.LENGTH_LONG).show();
-            if(!xmlHandler.writenovoCliente(cliente) || !xmlHandler.writeClientes(cliente))
+            if(!xmlHandler.writeNovoCliente(cliente) || !xmlHandler.writeClientes(cliente))
                 Toast.makeText(getApplicationContext(),"Erro na gravação local do cliente", Toast.LENGTH_SHORT).show();
 
         }
@@ -140,12 +139,14 @@ public class InserirNovoClienteActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

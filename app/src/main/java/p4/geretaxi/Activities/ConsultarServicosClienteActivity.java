@@ -1,8 +1,10 @@
 package p4.geretaxi.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,15 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.File;
 import java.util.List;
 
 import p4.geretaxi.ClassesDados.Cliente;
-import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
-import p4.geretaxi.ClassesHelper.Helper;
-import p4.geretaxi.R;
 import p4.geretaxi.ClassesDados.Servico;
+import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.SharedPreference;
+import p4.geretaxi.ClassesHelper.XMLHandler;
+import p4.geretaxi.Constantes.Constants;
+import p4.geretaxi.R;
+import p4.geretaxi.WebServiceClass.GereBD;
 
 public class ConsultarServicosClienteActivity extends AppCompatActivity {
 
@@ -56,8 +61,14 @@ public class ConsultarServicosClienteActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         }else{
-            //SEM INTERNET
-            Toast.makeText(getApplicationContext(), "TODO: PESQUISAR SEM NET", Toast.LENGTH_LONG).show();
+            File file = new File(Environment.getExternalStorageDirectory(), "servicos.xml");
+            if(file.exists()){
+                XMLHandler parser = new XMLHandler();
+                listaServicos = parser.parseServico(Xml.newPullParser());
+                adapter = new ArrayAdapter<>(this, R.layout.item_list, listaServicos);
+                listView.setAdapter(adapter);
+            }
+
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,7 +102,7 @@ public class ConsultarServicosClienteActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

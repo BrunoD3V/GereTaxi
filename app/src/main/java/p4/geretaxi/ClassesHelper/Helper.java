@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 
 public class Helper {
 

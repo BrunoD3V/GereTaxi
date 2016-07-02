@@ -14,14 +14,13 @@ import android.widget.Toast;
 import java.util.List;
 
 import p4.geretaxi.ClassesDados.Cliente;
-import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.Fragments.EscolherServicoDialogFragment;
-import p4.geretaxi.KSoapClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
-import p4.geretaxi.ClassesHelper.MyApplication;
-import p4.geretaxi.R;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.ClassesHelper.XMLHandler;
+import p4.geretaxi.Constantes.Constants;
+import p4.geretaxi.DialogFragments.EscolherServicoDialogFragment;
+import p4.geretaxi.R;
+import p4.geretaxi.WebServiceClass.GereBD;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -40,7 +39,7 @@ public class MenuActivity extends AppCompatActivity {
         permission = false;
         if (SharedPreference.isSessionEnabled()){
             btnGerirClientes.setEnabled(true);
-        } else if (Helper.isNetworkAvailable(MyApplication.getAppContext())){
+        } else if (Helper.isNetworkAvailable(this)){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
@@ -66,7 +65,7 @@ public class MenuActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

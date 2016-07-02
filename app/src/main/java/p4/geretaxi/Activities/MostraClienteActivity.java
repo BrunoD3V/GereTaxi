@@ -18,8 +18,8 @@ import p4.geretaxi.ClassesDados.Cliente;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.Fragments.DialogAtualizaClienteFragment;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.DialogFragments.DialogAtualizaClienteFragment;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.R;
 
 public class MostraClienteActivity extends AppCompatActivity implements DialogAtualizaClienteFragment.CommunicatorCliente {
@@ -143,12 +143,14 @@ public class MostraClienteActivity extends AppCompatActivity implements DialogAt
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

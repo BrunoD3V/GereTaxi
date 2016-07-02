@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,9 +26,11 @@ import java.util.Calendar;
 
 import p4.geretaxi.ClassesDados.Servico;
 import p4.geretaxi.ClassesHelper.Helper;
-import p4.geretaxi.Fragments.DatePickerFragment;
+import p4.geretaxi.ClassesHelper.SharedPreference;
+import p4.geretaxi.Constantes.Constants;
+import p4.geretaxi.DialogFragments.DatePickerFragment;
 import p4.geretaxi.R;
-import p4.geretaxi.Fragments.TimePickerFragment;
+import p4.geretaxi.DialogFragments.TimePickerFragment;
 
 public class FormularioDeServicoActivity extends AppCompatActivity{
 
@@ -131,8 +136,8 @@ public class FormularioDeServicoActivity extends AppCompatActivity{
 
         Helper helper = new Helper();
 
-        if(!helper.isEmpty(edtProcesso) || !helper.isEmpty(edtCliente) || !helper.isEmpty(edtOrigem) || !helper.isEmpty(edtDestino) ||
-                !helper.isEmpty(edtDistanciaPercorrida) || !helper.isEmpty(edtTrajeto)){
+        if(!Helper.isEmpty(edtProcesso) || !Helper.isEmpty(edtCliente) || !Helper.isEmpty(edtOrigem) || !Helper.isEmpty(edtDestino) ||
+                !Helper.isEmpty(edtDistanciaPercorrida) || !helper.isEmpty(edtTrajeto)){
 
             servico.setProcesso(edtProcesso.getText().toString());
             servico.setNomeCliente(edtCliente.getText().toString());
@@ -163,5 +168,42 @@ public class FormularioDeServicoActivity extends AppCompatActivity{
         }
 
         Log.d("onClickInserirServico: ", servico.toString());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.logout_id:
+                SharedPreference sharedPreference = new SharedPreference();
+                sharedPreference.save(getApplicationContext(), " ", Constants.EMAIL);
+                sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
+                sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
+                sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
+
+                break;
+
+            case R.id.inicio_id:
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

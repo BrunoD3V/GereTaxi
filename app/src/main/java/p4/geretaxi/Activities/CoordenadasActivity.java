@@ -8,28 +8,27 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.IOException;
 import java.util.List;
 
-import p4.geretaxi.Constantes.Constants;
 import p4.geretaxi.ClassesHelper.GPSHandler;
 import p4.geretaxi.ClassesHelper.Helper;
-import p4.geretaxi.R;
 import p4.geretaxi.ClassesHelper.SharedPreference;
+import p4.geretaxi.Constantes.Constants;
+import p4.geretaxi.R;
 
 public class CoordenadasActivity extends FragmentActivity{
 
@@ -67,10 +66,10 @@ public class CoordenadasActivity extends FragmentActivity{
         location_tf = (EditText)findViewById(R.id.edtSearch);
         String location = location_tf.getText().toString();
         List<Address> addressList = null;
-        System.out.println(location);
+
 
         //VERIFICA SE O USER ESCREVER ALGUM ENDEREÇO A PESQUISAR
-        if(!helper.isEmpty(location_tf)) {
+        if(!Helper.isEmpty(location_tf)) {
 
             Geocoder geocoder = new Geocoder(this);
             try {
@@ -181,6 +180,7 @@ public class CoordenadasActivity extends FragmentActivity{
         handler.listenerClose();
         SharedPreference sharedPreference = new SharedPreference();
         if(Helper.isEmpty(edtLatitude) && Helper.isEmpty(edtLongitude)){
+
             //GUARDA AS COORDENADAS NAS PREFERENCIAS
             sharedPreference.save(getApplicationContext(),String.valueOf(latLng.latitude), Constants.LAT);
             sharedPreference.save(getApplicationContext(), String.valueOf(latLng.longitude), Constants.LON);
@@ -192,38 +192,4 @@ public class CoordenadasActivity extends FragmentActivity{
         startActivity(i);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()) {
-            case R.id.logout_id:
-                SharedPreference sharedPreference = new SharedPreference();
-                sharedPreference.save(getApplicationContext(), " ", Constants.EMAIL);
-                sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
-                sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
-                sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
-                Intent i = new Intent(this, LoginActivity.class);
-                startActivity(i);
-                break;
-
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
-
-                break;
-
-            case R.id.inicio_id:
-                Intent intent = new Intent(this, MenuActivity.class);
-                startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

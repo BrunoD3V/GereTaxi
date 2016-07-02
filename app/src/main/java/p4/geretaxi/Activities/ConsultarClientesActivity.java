@@ -17,7 +17,7 @@ import java.util.List;
 
 import p4.geretaxi.ClassesDados.Cliente;
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.R;
 import p4.geretaxi.ClassesHelper.SharedPreference;
@@ -86,7 +86,7 @@ public class ConsultarClientesActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

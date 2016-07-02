@@ -45,7 +45,7 @@ public class Constants {
     public static final String HORA_DE_INICIO_XML = "hora-de-inicio";
     public static final String TRAJETO_SOAP_XML = "trajeto";
     public static final String NUM_PASSAGEIROS_XML = "numero-passageiros";
-    public static final String CUSTO_PORTAGENS_XML = "custo-portangens";
+    public static final String CUSTO_PORTAGENS_XML = "custo-portagens";
     public static final String ORIGEM_XML = "origem";
     public static final String DESTINO_XML = "destino";
     public static final String TRAJETO_XML = "trajeto";

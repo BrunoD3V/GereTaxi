@@ -1,4 +1,4 @@
-package p4.geretaxi.Fragments;
+package p4.geretaxi.DialogFragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.MyApplication;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.ClassesHelper.XMLHandler;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.R;
 
 public class DialogSpinnerFragment extends DialogFragment implements View.OnClickListener {
@@ -69,13 +69,13 @@ public class DialogSpinnerFragment extends DialogFragment implements View.OnClic
         gereBD = new GereBD();
         List<Cliente> clientes;
 
-        if(Helper.isNetworkAvailable(MyApplication.getAppContext())){
+        if(Helper.isNetworkAvailable(MyApplication.getAppContext())){//vai buscar os clientes à base de dados
             clientes = gereBD.listarClientes(SharedPreference.getIdMotoristaSharedPreferences(MyApplication.getAppContext()));
             for (Cliente c: clientes) {
                 clientesSpinner.add(c.getNome());
             }
         }else{
-            clientes = handler.parseClientes(Xml.newPullParser());
+            clientes = handler.parseClientes(Xml.newPullParser());//vai buscar os clientes armazenados localmente
             for (Cliente c: clientes) {
                 clientesSpinner.add(c.getNome());
             }

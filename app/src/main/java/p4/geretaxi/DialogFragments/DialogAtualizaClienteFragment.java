@@ -1,4 +1,4 @@
-package p4.geretaxi.Fragments;
+package p4.geretaxi.DialogFragments;
 
 import android.app.Activity;
 import android.support.v4.app.DialogFragment;
@@ -29,7 +29,7 @@ public class DialogAtualizaClienteFragment extends DialogFragment implements Vie
     public static DialogAtualizaClienteFragment newInstance(int num) {
         DialogAtualizaClienteFragment f = new DialogAtualizaClienteFragment();
         Bundle args = new Bundle();
-        args.putInt("num", num);
+        args.putInt("num", num);//envia o int num para si próprio
         f.setArguments(args);
 
         return f;
@@ -38,13 +38,13 @@ public class DialogAtualizaClienteFragment extends DialogFragment implements Vie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNum = getArguments().getInt("num");
+        mNum = getArguments().getInt("num");// recebe o int num
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        communicatorCliente = (CommunicatorCliente) activity;
+        communicatorCliente = (CommunicatorCliente) activity;//instancia a interface
     }
 
     @Nullable
@@ -68,13 +68,13 @@ public class DialogAtualizaClienteFragment extends DialogFragment implements Vie
             case R.id.btn_yes:
                 if(!Helper.isEmpty(editTextCorrige)){
                     String dados = editTextCorrige.getText().toString();
-                    if (mNum < 5){
+                    if (mNum < 5){//altera atributos do tipo string
                         if(mNum==3 && !Helper.isValidEmail(dados)){
                                 Toast.makeText(MyApplication.getAppContext(),"Introduza um email válido.", Toast.LENGTH_LONG).show();
                         }
                         communicatorCliente.onDialogMessage(dados,mNum);
                     } else {
-                        if (Helper.integerTryParse(dados)) {
+                        if (Helper.integerTryParse(dados)) {//altera atributos do tipo int
                             communicatorCliente.onDialogMessage(dados, mNum);
                         } else {
                             Toast.makeText(getActivity(), Constants.N_VALIDO, Toast.LENGTH_SHORT).show();

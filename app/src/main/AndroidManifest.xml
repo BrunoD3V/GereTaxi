@@ -61,7 +61,7 @@
         <activity android:name=".Activities.InserirNovoClienteActivity" />
         <activity android:name=".Activities.MostraClienteActivity" />
         <activity android:name=".Activities.ConsultarServicosClienteActivity" />
-        <activity android:name=".Activities.EliminaClienteActivity" />
+        <activity android:name=".Activities.EliminarClienteActivity" />
         <activity android:name=".TesteActivity" />
         <activity android:name=".Activities.GerirServicosActivity" />
         <activity android:name=".Activities.ConsultarServicosActivity" />

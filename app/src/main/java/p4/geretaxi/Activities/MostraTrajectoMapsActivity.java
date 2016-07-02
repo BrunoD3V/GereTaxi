@@ -1,9 +1,13 @@
 package p4.geretaxi.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Xml;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,8 +20,11 @@ import com.google.maps.model.LatLng;
 import java.util.List;
 
 import p4.geretaxi.ClassesDados.Servico;
+import p4.geretaxi.ClassesHelper.Helper;
+import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.ClassesHelper.XMLHandler;
-import p4.geretaxi.Fragments.DialogCustoPortagemFragment;
+import p4.geretaxi.Constantes.Constants;
+import p4.geretaxi.DialogFragments.DialogCustoPortagemFragment;
 import p4.geretaxi.R;
 
 public class MostraTrajectoMapsActivity extends FragmentActivity implements OnMapReadyCallback, DialogCustoPortagemFragment.Communicator {
@@ -76,5 +83,42 @@ public class MostraTrajectoMapsActivity extends FragmentActivity implements OnMa
     @Override
     public void onDialogMessage(String portagem, int confirm) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.logout_id:
+                SharedPreference sharedPreference = new SharedPreference();
+                sharedPreference.save(getApplicationContext(), " ", Constants.EMAIL);
+                sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
+                sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
+                sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
+
+                break;
+
+            case R.id.inicio_id:
+                Intent intent = new Intent(this, MenuActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

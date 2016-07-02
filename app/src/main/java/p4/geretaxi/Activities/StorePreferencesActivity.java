@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.PasswordEncrypt;
 import p4.geretaxi.ClassesHelper.PasswordValidator;
@@ -96,7 +96,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
             }
         }
         else {
-            //Toast.makeText(getApplicationContext(), "Necessita de net para fazer o registo", Toast.LENGTH_LONG).show();
+
             Helper helper = new Helper();
             helper.displayPromptEnableWifi(this);
         }
@@ -126,7 +126,7 @@ public class StorePreferencesActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

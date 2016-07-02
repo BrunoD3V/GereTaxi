@@ -1,16 +1,17 @@
 package p4.geretaxi.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import p4.geretaxi.ClassesHelper.Helper;
+import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.Constantes.Constants;
 import p4.geretaxi.R;
-import p4.geretaxi.ClassesHelper.SharedPreference;
 
 public class GerirClientesActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class GerirClientesActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void onClickEliminarCliente(View v){
-        Intent intent = new Intent(this, EliminaClienteActivity.class);
+        Intent intent = new Intent(this, EliminarClienteActivity.class);
         startActivity(intent);
     }
 
@@ -53,12 +54,14 @@ public class GerirClientesActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
 
-            case R.id.settings_id:                 Intent in = new Intent(this, CoordenadasActivity.class);                 startActivity(in);
+            case R.id.settings_id:
+                Intent in = new Intent(this, CoordenadasActivity.class);
+                startActivity(in);
 
                 break;
 

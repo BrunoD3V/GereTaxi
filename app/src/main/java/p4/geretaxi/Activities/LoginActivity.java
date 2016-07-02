@@ -14,7 +14,7 @@ import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.PasswordEncrypt;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.R;
 import p4.geretaxi.TarefasAssincronas.TarefaSincronizar;
 
@@ -41,13 +41,15 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         if (Helper.isNetworkAvailable(this)){
-            PasswordEncrypt passwordEncrypt = new PasswordEncrypt();
-            String encrypted = passwordEncrypt.getEncrypted(editTextPassLogin.getText().toString());
             String email = editTextLoginMail.getText().toString();
             if(!Helper.isValidEmail(email)){
                 Toast.makeText(getApplicationContext(), "Insira um email válido.", Toast.LENGTH_LONG).show();
                 return;
             }
+            PasswordEncrypt passwordEncrypt = new PasswordEncrypt();
+            String encrypted = passwordEncrypt.getEncrypted(editTextPassLogin.getText().toString());
+
+
             SharedPreference sharedPreference = new SharedPreference();
             GereBD bd = new GereBD();
             switch (bd.checkLogin(email, encrypted.trim())) {
@@ -107,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

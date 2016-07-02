@@ -26,9 +26,9 @@ import p4.geretaxi.ClassesHelper.Mail;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.ClassesHelper.XMLHandler;
 import p4.geretaxi.Constantes.Constants;
-import p4.geretaxi.Fragments.DialogCorrigeDadosFragment;
-import p4.geretaxi.Fragments.DialogSpinnerFragment;
-import p4.geretaxi.KSoapClass.GereBD;
+import p4.geretaxi.DialogFragments.DialogCorrigeDadosFragment;
+import p4.geretaxi.DialogFragments.DialogSpinnerFragment;
+import p4.geretaxi.WebServiceClass.GereBD;
 import p4.geretaxi.R;
 
 public class MostraServicoActivity extends AppCompatActivity implements DialogCorrigeDadosFragment.CommunicatorCorrige, DialogSpinnerFragment.CommunicatorCorrige {
@@ -271,7 +271,7 @@ public class MostraServicoActivity extends AppCompatActivity implements DialogCo
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;

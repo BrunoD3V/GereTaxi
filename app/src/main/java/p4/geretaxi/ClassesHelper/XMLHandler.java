@@ -56,8 +56,6 @@ public class XMLHandler {
                 xmlSerializer.endDocument();
                 xmlSerializer.flush();
 
-
-
             } else {
                 xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 xmlSerializer.startTag(null, "wpt");
@@ -126,7 +124,7 @@ public class XMLHandler {
                     xmlSerializer.endTag(null, Constants.DESTINO_XML);
 
                     xmlSerializer.startTag(null, Constants.CUSTO_PORTAGENS_XML);
-                    xmlSerializer.text(servico.getDestino());
+                    xmlSerializer.text(String.valueOf(servico.getCustoPortagens()));
                     xmlSerializer.endTag(null, Constants.CUSTO_PORTAGENS_XML);
 
                     xmlSerializer.startTag(null, Constants.DISTANCIA_XML);
@@ -181,7 +179,7 @@ public class XMLHandler {
                 xmlSerializer.endTag(null, Constants.DESTINO_XML);
 
                 xmlSerializer.startTag(null, Constants.CUSTO_PORTAGENS_XML);
-                xmlSerializer.text(servico.getDestino());
+                xmlSerializer.text(String.valueOf(servico.getCustoPortagens()));
                 xmlSerializer.endTag(null, Constants.CUSTO_PORTAGENS_XML);
 
                 xmlSerializer.startTag(null, Constants.DISTANCIA_XML);
@@ -346,7 +344,7 @@ public class XMLHandler {
         return result;
     }
 
-    public boolean writenovoCliente(Cliente cliente) {
+    public boolean writeNovoCliente(Cliente cliente) {
 
         boolean result = false;
 

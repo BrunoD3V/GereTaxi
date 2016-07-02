@@ -9,7 +9,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import p4.geretaxi.Constantes.Constants;
 
@@ -44,19 +43,18 @@ public class SharedPreference {
                 .getDefaultSharedPreferences(MyApplication.getAppContext());
         AppStart appStart = AppStart.NORMAL;
         try {
-
+                //vai buscar a última versão da aplicação
             pInfo = MyApplication.getAppContext().getPackageManager().getPackageInfo(MyApplication.getAppContext().getApplicationContext().getPackageName(), 0);
             int lastVersionCode = sharedPreferences
-                    .getInt(LAST_APP_VERSION, -1);
+                    .getInt(LAST_APP_VERSION, -1);  //vai buscar a versão que foi guardada, nas shared preferences, na última vez que a aplicação foi iniciada
 
             int currentVersionCode = pInfo.versionCode;
-            appStart = checkAppStart(currentVersionCode, lastVersionCode);
+            appStart = checkAppStart(currentVersionCode, lastVersionCode); //compara as versões
             // Update version in preferences
             sharedPreferences.edit()
-                    .putInt(LAST_APP_VERSION, currentVersionCode).commit();
+                    .putInt(LAST_APP_VERSION, currentVersionCode).commit(); // guarda a última versão nas shared preferences
         } catch (PackageManager.NameNotFoundException e) {
-            Log.w(Constants.LOG,
-                    "Unable to determine current app version from pacakge manager. Defenisvely assuming normal app start.");
+
         }
         return appStart;
     }
@@ -67,10 +65,6 @@ public class SharedPreference {
         } else if (lastVersionCode < currentVersionCode) {
             return AppStart.FIRST_TIME_VERSION;
         } else if (lastVersionCode > currentVersionCode) {
-            Log.w(Constants.LOG, "Current version code (" + currentVersionCode
-                    + ") is less then the one recognized on last startup ("
-                    + lastVersionCode
-                    + "). Defenisvely assuming normal app start.");
             return AppStart.NORMAL;
         } else {
             return AppStart.NORMAL;
@@ -137,36 +131,6 @@ public class SharedPreference {
         return value;
     }
 
-    public boolean findValue(Context context, String key) {
-        SharedPreferences settings;
-        Editor editor;
 
-        //settings = PreferenceManager.getDefaultSharedPreferences(context);
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return settings.contains(key);
 
-    }
-
-    public void clearSharedPreference(Context context) {
-        SharedPreferences settings;
-        Editor editor;
-
-        //settings = PreferenceManager.getDefaultSharedPreferences(context);
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        editor = settings.edit();
-
-        editor.clear();
-        editor.commit();
-    }
-
-    public void removeValue(Context context, String key) {
-        SharedPreferences settings;
-        Editor editor;
-
-        settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        editor = settings.edit();
-
-        editor.remove(key);
-        editor.commit();
-    }
 }

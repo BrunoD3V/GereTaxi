@@ -9,9 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import p4.geretaxi.ClassesDados.Servico;
 import p4.geretaxi.ClassesHelper.Helper;
 import p4.geretaxi.ClassesHelper.SharedPreference;
 import p4.geretaxi.Constantes.Constants;
@@ -20,15 +17,14 @@ import p4.geretaxi.TarefasAssincronas.TarefaSincronizar;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Servico> lista;
-    Boolean resultado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Helper helper = new Helper();
+
         SharedPreference sharedPreference= new SharedPreference();
 
         switch (sharedPreference.checkAppStart()) {
@@ -56,13 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case FIRST_TIME_VERSION:
-
-                Toast.makeText(getApplicationContext(), " PRIMEIRA VEZ", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, StorePreferencesActivity.class);
                 startActivity(i);
                 break;
             case FIRST_TIME:
-
                 Intent intent = new Intent(this, StorePreferencesActivity.class);
                 startActivity(intent);
                 break;
@@ -90,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 sharedPreference.save(getApplicationContext(), " ", Constants.PASS);
                 sharedPreference.save(getApplicationContext(), -1, Constants.ID_MOTORISTA);
                 sharedPreference.save(getApplicationContext(), Constants.FALSE, Constants.SESSION);
-
+                sharedPreference.save(getApplicationContext(), Helper.getExpirationDate(), Constants.VALIDADE);
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
                 break;
@@ -119,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickbuttonLoginMain(View v) {
-
 
        Intent intent = new Intent(this, LoginActivity.class);
        startActivity(intent);
