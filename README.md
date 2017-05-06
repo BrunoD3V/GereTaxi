@@ -2,7 +2,7 @@
 
 This app is the final project of the course Programação 4 of Informatics and Communications of IPB.
 It's an android project that:
-  -To record points of GPS coordinates that faithfully represent the route taken by the taxi;
+  -record points of GPS coordinates that faithfully represent the route taken by the taxi;
   -store the number of passengers transported;
   -store the process number for the service if it is a service requested by an insurance company;
   -store the name of the customer who requested the service;
@@ -17,6 +17,8 @@ It's an android project that:
   -consult and modify data of the services performed;
   -send information about the service to the user's email;
   -data protection.
+  
+  The detailed documentatios is int the file Relatório-GereTáxi.
   
   
 
